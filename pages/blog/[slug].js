@@ -1,39 +1,50 @@
+import {createClient} from 'contentful';
+import Image from 'next/image';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+
+const client = createClient({
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_KEY,
+});
+
 export const getStaticPaths = async () => {
-  const res = await fetch(/** fetch url for indiv blog post. */);
-  const data = await res.json();
+  const res = await client.getEntries({content_type: 'blog'})
+
+  const paths = res.items.map(item => {
+    return {
+      params: { slug: item.fields.slug }
+    }
+  })
 
   return {
-    /**
-     * map through data to get list of paths
-     * const paths = data.map(blog => {
-     *  return {
-     *    params: { id: blog.id }
-     *  }
-     * })
-     * 
-     * return {
-     *  paths,
-     * fallback: false
-     * }
-     */
+    paths,
+    fallback: false,
   }
 }
 
-export const getStaticProps = async (context) => {
-  const id = context.params.id;
-
-  const res = await fetch(/** url */);
-  const data = await res.json();
+export const getStaticProps = async ({ params }) => {
+  const {items} = await client.getEntries({ 
+    content_type: 'blog',
+    'fields.slug': params.slug,
+  });
 
   return {
-    props: { blogInfo: data }
+    props: { blog: items[0]}
   }
 }
 
-const BlogPost = ({ blogInfo }) => {
+const BlogPost = ({ blog }) => {
+  console.log('blog: ', blog);
+  const {blogTitle, heroImage, blogContent, } = blog.fields;
   return (
-    <div>
-      <h1>Individual Blog Post</h1>
+    <div className="blog-content">
+      <Image  
+        src={`https:${heroImage.fields.file.url}`}
+        width={heroImage.fields.file.details.image.width}
+        height={heroImage.fields.file.details.image.height}
+      />
+      <h2>{blogTitle}</h2>
+      {documentToReactComponents(blogContent)}
     </div>
   );
 }
