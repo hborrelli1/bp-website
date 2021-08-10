@@ -26,7 +26,8 @@ export const getStaticProps = async (context) => {
   const data = await res.json();
 
   return {
-    props: { blogInfo: data }
+    props: { blog: items[0]},
+    revalidate: 1,
   }
 }
 
