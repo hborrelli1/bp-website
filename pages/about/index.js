@@ -1,6 +1,27 @@
 import Head from 'next/head';
+import {createClient} from 'contentful';
 
-const About = () => {
+// Runs at build time
+// Used to fetch data from Blog section.
+export const getStaticProps = async () => {
+
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
+  });
+
+  const res = await client.getEntries({ content_type: 'themeConfig' });
+
+  return {
+    props: {
+      themeConfig: res.items
+    },
+    revalidate: 1,
+  }
+}
+
+const About = ({themeConfig}) => {
+  console.log('themeConfig:', themeConfig);
   return (
     <>
       <Head>

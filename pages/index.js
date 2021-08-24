@@ -1,17 +1,63 @@
 import Head from 'next/head';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import homepageData from '../contentfulApi/homepage-data.preval';
+import servicesData from '../contentfulApi/services-data.preval';
+import themeConfigData from '../contentfulApi/contentful-data.preval'; 
+import { useEffect, useState } from 'react';
 
-export default function Home() {
+export default function Home(props) {
+  console.log('servicesData:', servicesData);
+  const {
+    heroImage, 
+    heroImageText, 
+    heroImageTitle, 
+    whyBpDescription, 
+    whyBpTitle
+  } = homepageData.homePageCollection.items[0];
+  const {
+    backgroundTexture
+  } = themeConfigData.themeConfigCollection.items[0];
+  const {
+    items 
+  } = servicesData.servicesCollection.items;
+
+  useEffect(() => {
+    setServices(items);
+  },[])
+  
+  const [services, setServices] = useState([]);
+  const [activeService, setActiveService] = useState(0);
+
   return (
     <>
       <Head>
         <title>Borrelli + Partners | Home</title>
         <meta name="keywords" content="Architect" />
+        <link rel="stylesheet" href="https://use.typekit.net/rrc4xhb.css"></link>
       </Head>
       <div className={"home"}>
-        <h1>Hello, yall!</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cursus turpis massa tincidunt dui ut ornare lectus. Phasellus faucibus scelerisque eleifend donec pretium vulputate. Pellentesque sit amet porttitor eget dolor. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Habitasse platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim. Sed odio morbi quis commodo odio aenean sed adipiscing diam. Lectus urna duis convallis convallis tellus id. Ac tincidunt vitae semper quis lectus nulla at volutpat diam. Nisi porta lorem mollis aliquam ut porttitor. Pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat.</p>
-        <p>Eu mi bibendum neque egestas congue quisque. Amet nisl suscipit adipiscing bibendum est ultricies. Sed sed risus pretium quam vulputate. Netus et malesuada fames ac turpis egestas integer eget aliquet. A pellentesque sit amet porttitor eget. Nunc eget lorem dolor sed. Velit euismod in pellentesque massa placerat duis ultricies lacus. Massa id neque aliquam vestibulum morbi blandit cursus. Tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras. Sodales ut eu sem integer vitae justo eget. Ut tristique et egestas quis ipsum.</p>
+        <div className="home-hero-banner w-screen h-screen flex items-center px-20 py-4" style={{backgroundImage: heroImage.url}}>
+          <div className="flex items-top max-w-3/4 center">
+            <h1 className="w-1/2 font-din text-5xl text-white font-regular tracking-wide">{heroImageTitle}</h1>
+            <div className="w-1/2 font-muli text-white text-sm tracking-wide leading-relaxed">{documentToReactComponents(heroImageText.json)}</div>
+          </div>
+        </div>
+        <div className="services">
+          <div>test</div>
+        </div>
       </div>
+      <style jsx>{`
+        .home-hero-banner {
+          background-image: url(${heroImage.url});
+          background-size: cover;
+          background-position: center;
+        }
+        .services {
+          background-image: url(${backgroundTexture.url});
+          background-size: cover;
+          background-position: center;
+        }
+      `}</style>
     </>
   )
 }

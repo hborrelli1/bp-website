@@ -4,6 +4,16 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  body {
+    overflow: hidden;
+    overflow-y: auto;
+  }
   h1 {
     @apply text-2xl;
   }
@@ -19,5 +29,11 @@
     font-family: Proxima Nova;
     font-weight: 500;
     src: url(/fonts/proxima-nova/500-medium.woff) format("woff");
+  }
+}
+
+@layer components {
+  .nav-item {
+    @apply font-din tracking-widest pl-4;
   }
 }
