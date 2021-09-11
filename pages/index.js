@@ -23,7 +23,7 @@ export default function Home(props) {
 
   const {
     items, 
-  } = servicesData.servicesCollection.items[0];
+  } = servicesData.servicesCollection;
 
   const [services, setServices] = useState([]);
   const [activeService, setActiveService] = useState({});
@@ -32,10 +32,10 @@ export default function Home(props) {
   console.log('ourServicesDescription:', ourServicesDescription);
   console.log('homepageData:', homepageData);
 
-  // useEffect(() => {
-  //   setServices(items);
-  //   setActiveService(items[0]);
-  // },[])
+  useEffect(() => {
+    setServices(items);
+    setActiveService(items[0]);
+  },[])
 
   // useEffect(() => {
   //   if (services) {
@@ -69,7 +69,7 @@ export default function Home(props) {
           <div className="w-screen flex justify-center max-w-900">
             <div className="content-column w-1/2">
               <h3 className="font-din">{ourServicesTitle}</h3>
-              {/* {documentToReactComponents(ourServicesDescription.json)} */}
+              {documentToReactComponents(ourServicesDescription.json)}
             </div>
             <div className="services-column w-1/2 flex flex-col items-start pl-10">{
               services && services.map(service => (
