@@ -23,6 +23,10 @@ async function getHomepageData() {
               title
               url
             }
+            ourServicesTitle
+            ourServicesDescription {
+              json
+            }
             whyBpTitle
             whyBpDescription {
               json
