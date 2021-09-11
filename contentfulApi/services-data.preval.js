@@ -1,5 +1,4 @@
 import preval from 'next-plugin-preval';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 async function getServices() {
   const res = await fetch('https://graphql.contentful.com/content/v1/spaces/7obzj0odnsj4',
@@ -16,10 +15,10 @@ async function getServices() {
       {
         servicesCollection {
           items {
-            service
-            serviceShortDescription {
-              json
+            sys {
+              id
             }
+            service
           } 
         }
       }
