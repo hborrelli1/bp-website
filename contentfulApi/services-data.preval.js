@@ -7,6 +7,7 @@ async function getServices() {
     headers: {
       'content-type': 'application/json',
       authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_KEY}`, // add our access token header
+      'User-Agent': '*',
     },
     // send the query we wrote in GraphiQL as a string
     body: JSON.stringify({
