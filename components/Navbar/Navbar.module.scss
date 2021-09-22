@@ -1,0 +1,17 @@
+.navbar {
+  background-color: #172439;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+
+  .nav-items {
+    .nav-item {
+      color: #fff;
+      margin-left: 10px;
+      font-family: 'Din 2014';
+      text-decoration: none;
+      font-weight: 300;
+    }
+  }
+}
