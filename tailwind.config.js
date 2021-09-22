@@ -13,7 +13,7 @@ module.exports = {
     colors: {
       white: colors.white,
       gray: colors.coolGray,
-      blue: colors.lightBlue,
+      blue: colors.sky,
       red: colors.rose,
       pink: colors.fuchsia,
       'bpBlue': '#172439',
