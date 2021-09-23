@@ -4,8 +4,6 @@ import themeConfig from '../contentfulApi/contentful-data.preval';
 
 const Footer = () => {
 
-  // themeConfig.then(data => console.log('data:', data))
-  console.log('themeConfig:', themeConfig);
   return (
     <footer className="bg-bpBlue">
       <div className="logo-block">
