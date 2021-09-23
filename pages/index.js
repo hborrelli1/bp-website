@@ -84,7 +84,7 @@ export default function Home(props) {
           </div>
         </div>
       </div>
-      <style jsx>{`
+      {/* <style jsx>{`
         .home-hero-banner {
           background-image: url(${heroImage.url});
           background-size: cover;
@@ -95,7 +95,7 @@ export default function Home(props) {
           background-size: cover;
           background-position: bottom;
         }
-      `}</style>
+      `}</style> */}
     </>
   )
 }
