@@ -59,27 +59,27 @@ export default function Home(props) {
         <link rel="stylesheet" href="https://use.typekit.net/rrc4xhb.css"></link>
       </Head>
       <div className={"home"}>
-        <div className="home-hero-banner w-screen h-screen flex items-center justify-center px-20 py-4" style={{backgroundImage: heroImage.url}}>
+        {/* <div className="home-hero-banner w-screen h-screen flex items-center justify-center px-20 py-4" style={{backgroundImage: heroImage.url}}>
           <div className="flex items-top max-w-900 center">
             <h1 className="w-1/2 font-din text-5xl text-white font-regular tracking-wide">{heroImageTitle}</h1>
             <div className="w-1/2 font-muli text-white text-sm tracking-wide leading-relaxed">{documentToReactComponents(heroImageText.json)}</div>
           </div>
-        </div>
+        </div> */}
         <div className="services w-screen flex justify-center p-20">
           <div className="w-screen flex justify-center max-w-900">
             <div className="content-column w-1/2">
-              <h3 className="font-din">{ourServicesTitle}</h3>
-              {documentToReactComponents(ourServicesDescription.json)}
+              {/* <h3 className="font-din">{ourServicesTitle}</h3>
+              {documentToReactComponents(ourServicesDescription.json)} */}
             </div>
             <div className="services-column w-1/2 flex flex-col items-start pl-10">{
-              services && services.map(service => (
-                <button 
-                  type="button" 
-                  className={service === activeService ? 'active' : ''}
-                  key={service.sys.id}
-                  onClick={() => handleServiceUpdate(service.sys.id)}
-                >{service.service}</button>
-              ))
+              // services && services.map(service => (
+              //   <button 
+              //     type="button" 
+              //     className={service === activeService ? 'active' : ''}
+              //     key={service.sys.id}
+              //     onClick={() => handleServiceUpdate(service.sys.id)}
+              //   >{service.service}</button>
+              // ))
             }</div>
           </div>
         </div>
