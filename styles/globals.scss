@@ -31,16 +31,141 @@
 html {
   box-sizing: border-box;
 }
-// *, *:before, *:after {
-//   box-sizing: border-box;
-// }
-// body {
-//   overflow: hidden;
-//   overflow-y: auto;
-//   margin: 0;
-// }
-// .home {
-//   h1 {
-//     margin: 0;
-//   }
-// }
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+body {
+  overflow: hidden;
+  overflow-y: auto;
+  margin: 0;
+}
+
+p, a, span, button, li {
+  font-family: muli, sans-serif;
+  line-height: 24px;
+  letter-spacing: .5px;
+}
+
+h1 {
+  font-family: din-2014, sans-serif;
+  font-size: 50px;
+  font-weight: 600;
+  line-height: 60px;
+}
+h2 {
+  font-family: din-2014, sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 46px;
+}
+h3 {
+  font-family: din-2014, sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+}
+h4 {
+  font-family: din-2014, sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+}
+h5 {
+  font-family: din-2014, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+}
+
+
+.home {
+  .home-hero-banner {
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 30px;
+
+    .content {
+      display: flex;
+      justify-content: center;
+      max-width: 900px;
+      margin: 0 auto;
+      
+      h1 {
+        margin: 0;
+        width: 50%;
+        color: #fff;
+      }
+      .description {
+        width: 50%;
+        color: #fff;
+        font-weight: 300;
+        font-size: .875rem;
+        letter-spacing: 1px;
+        line-height: 24px;
+      }
+    }
+  }
+  .services {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    padding: 100px 30px;
+    
+    .content {
+      max-width: 1200px;
+      display: flex;
+      justify-content: space-between;;
+
+      .content-column {
+        width: 50%;
+        max-width: 450px;
+        h2 {
+          font-size: 24px;
+          line-height: 32px;
+          font-weight: 600;
+          letter-spacing: 1.5px;
+        }
+      }
+      
+      .services-column {
+        width: 50%;
+        padding-left: 10px;
+        max-width: 320px;
+        
+        h3 {
+          text-transform: uppercase;
+          font-size: 17px;
+          font-weight: 600;
+          letter-spacing: 2px;
+        }
+
+        .links {
+        }
+      }
+
+    }
+  }
+  .why-bp {
+    background-color: #172439;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    padding: 100px 30px;
+
+    .content {
+      max-width: 900px;
+      color: #fff;
+    }
+    
+    .content-column {
+      width: 40%;
+    }
+
+    // .image-column {
+
+    // }
+  }
+}

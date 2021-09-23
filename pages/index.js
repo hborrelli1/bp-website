@@ -1,55 +1,59 @@
 import Head from 'next/head';
+import {createClient} from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { useEffect, useState } from 'react';
+import _ from 'lodash';
+import Link from 'next/link';
+
 // import homepageData from '../contentfulApi/homepage-data.preval';
 // import servicesData from '../contentfulApi/services-data.preval';
 // import themeConfigData from '../contentfulApi/contentful-data.preval'; 
-import { useEffect, useState } from 'react';
-import _ from 'lodash';
 
-export default function Home(props) {
-  // const {
-  //   heroImage, 
-  //   heroImageText, 
-  //   heroImageTitle, 
-  //   ourServicesTitle,
-  //   ourServicesDescription,
-  //   whyBpDescription, 
-  //   whyBpTitle
-  // } = homepageData.homePageCollection.items[0];
 
-  // const {
-  //   backgroundTexture
-  // } = themeConfigData.themeConfigCollection.items[0];
+// Runs at build time
+// Used to fetch data from Blog section.
+export const getStaticProps = async () => {
+  // const res = await fetch(/** contentful api here */);
+  // const data = await res.json();
 
-  // const {
-  //   items, 
-  // } = servicesData.servicesCollection;
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
+  });
 
-  const [services, setServices] = useState([]);
-  const [activeService, setActiveService] = useState({});
+  const res = await client.getEntries({ content_type: 'homePage' });
+  const res2 = await client.getEntries({ content_type: 'themeConfig' });
+  console.log('res:', res);
 
-  // console.log('ourServicesTitle:', ourServicesTitle);
-  // console.log('ourServicesDescription:', ourServicesDescription);
-  // console.log('homepageData:', homepageData);
+  return {
+    props: {
+      homePageData: res.items,
+      themeConfig: res2.items,
+    },
+    revalidate: 1,
+  }
+}
 
-  // useEffect(() => {
-  //   setServices(items);
-  //   setActiveService(items[0]);
-  // },[])
+export default function Home({homePageData, themeConfig}) {
+  console.log('themeConfig:', themeConfig);
+  console.log('homePageData:', homePageData);
+  const {fields} = homePageData[0];
+  const [navHeight, setNavHeight] = useState(60);
 
-  // useEffect(() => {
-  //   if (services) {
-  //     setActiveService(services[0])
-  //   }
-  // }, services)
+  useEffect(() => {
+    const navElement = document.getElementById('Navbar');
+    const navHeight = navElement.clientHeight;
+    setNavHeight(navHeight);
+  },[])
 
-  // console.log('services: ', services);
+  const heroSectionStyles = {
+    backgroundImage: `url(https:${fields.heroImage.fields.file.url})`,
+    height: `calc(100vh - ${navHeight}px)`,
+  }
 
-  // const handleServiceUpdate = (id) => {
-  //   const newActiveService = services.find(service => service.sys.id === id);
-  //   setActiveService(newActiveService);
-  // }
-  // console.log('activeService:', activeService);
+  const backgroundSectionStyles = {
+    backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})`,
+  }
 
   return (
     <>
@@ -59,28 +63,42 @@ export default function Home(props) {
         <link rel="stylesheet" href="https://use.typekit.net/rrc4xhb.css"></link>
       </Head>
       <div className={"home"}>
-        {/* <div className="home-hero-banner w-screen h-screen flex items-center justify-center px-20 py-4" style={{backgroundImage: heroImage.url}}>
-          <div className="flex items-top max-w-900 center">
-            <h1 className="w-1/2 font-din text-5xl text-white font-regular tracking-wide">{heroImageTitle}</h1>
-            <div className="w-1/2 font-muli text-white text-sm tracking-wide leading-relaxed">{documentToReactComponents(heroImageText.json)}</div>
+        <div className="home-hero-banner" style={heroSectionStyles}>
+          <div className="content">
+            <h1>{fields.heroImageTitle}</h1>
+            <div className="description">{documentToReactComponents(fields.heroImageText)}</div>
           </div>
-        </div> */}
-        <div className="services w-screen flex justify-center p-20">
-          <div className="w-screen flex justify-center max-w-900">
-            <div className="content-column w-1/2">
-              {/* <h3 className="font-din">{ourServicesTitle}</h3>
-              {documentToReactComponents(ourServicesDescription.json)} */}
+        </div>
+        <div className="services" style={backgroundSectionStyles}>
+          <div className="content">
+            <div className="content-column">
+              <h2>{fields.ourServicesTitle}</h2>
+              {documentToReactComponents(fields.ourServicesDescription)}
             </div>
-            <div className="services-column w-1/2 flex flex-col items-start pl-10">{
-              // services && services.map(service => (
-              //   <button 
-              //     type="button" 
-              //     className={service === activeService ? 'active' : ''}
-              //     key={service.sys.id}
-              //     onClick={() => handleServiceUpdate(service.sys.id)}
-              //   >{service.service}</button>
-              // ))
-            }</div>
+            <div className="services-column">
+              <h3>Our Services</h3>
+              <div className="links">
+                <Link href="/services/architecture"><a>Architecture</a></Link>
+                <Link href="/services/construction-management"><a>Construction Management</a></Link>
+                <Link href="/services/interior-design"><a>Interior Design</a></Link>
+                <Link href="/services/landscape-architect-recreation-design"><a>Landscape Architect &amp; Recreation Design</a></Link>
+                <Link href="/services/restoration-adaptive-re-use"><a>Resoration/Adaptive Re-Use</a></Link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="featured-products">
+          Featured Projects
+        </div>
+        <div className="why-bp" style={backgroundSectionStyles}>
+          <div className="content">
+            <div className="content-column">
+              <h2>{fields.whyBpTitle}</h2>
+              {documentToReactComponents(fields.whyBpDescription)}
+            </div>
+            <div className="image-column">
+              
+            </div>
           </div>
         </div>
       </div>

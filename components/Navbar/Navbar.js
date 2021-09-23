@@ -5,7 +5,7 @@ console.log('styles:', styles);
 
 const Navbar = () => {
   return (
-    <nav className={styles.navbar}>
+    <nav className={styles.navbar} id="Navbar">
       <div className="logo">
         <Image 
           src="/assets/logos/bp-main-logo@2x.png" 
