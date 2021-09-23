@@ -1,8 +1,8 @@
 import Head from 'next/head';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import homepageData from '../contentfulApi/homepage-data.preval';
-import servicesData from '../contentfulApi/services-data.preval';
-import themeConfigData from '../contentfulApi/contentful-data.preval'; 
+// import homepageData from '../contentfulApi/homepage-data.preval';
+// import servicesData from '../contentfulApi/services-data.preval';
+// import themeConfigData from '../contentfulApi/contentful-data.preval'; 
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 
