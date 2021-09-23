@@ -7,23 +7,23 @@ import { useEffect, useState } from 'react';
 import _ from 'lodash';
 
 export default function Home(props) {
-  const {
-    heroImage, 
-    heroImageText, 
-    heroImageTitle, 
-    ourServicesTitle,
-    ourServicesDescription,
-    whyBpDescription, 
-    whyBpTitle
-  } = homepageData.homePageCollection.items[0];
+  // const {
+  //   heroImage, 
+  //   heroImageText, 
+  //   heroImageTitle, 
+  //   ourServicesTitle,
+  //   ourServicesDescription,
+  //   whyBpDescription, 
+  //   whyBpTitle
+  // } = homepageData.homePageCollection.items[0];
 
-  const {
-    backgroundTexture
-  } = themeConfigData.themeConfigCollection.items[0];
+  // const {
+  //   backgroundTexture
+  // } = themeConfigData.themeConfigCollection.items[0];
 
-  const {
-    items, 
-  } = servicesData.servicesCollection;
+  // const {
+  //   items, 
+  // } = servicesData.servicesCollection;
 
   const [services, setServices] = useState([]);
   const [activeService, setActiveService] = useState({});
