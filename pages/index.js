@@ -28,14 +28,14 @@ export default function Home(props) {
   const [services, setServices] = useState([]);
   const [activeService, setActiveService] = useState({});
 
-  console.log('ourServicesTitle:', ourServicesTitle);
-  console.log('ourServicesDescription:', ourServicesDescription);
-  console.log('homepageData:', homepageData);
+  // console.log('ourServicesTitle:', ourServicesTitle);
+  // console.log('ourServicesDescription:', ourServicesDescription);
+  // console.log('homepageData:', homepageData);
 
-  useEffect(() => {
-    setServices(items);
-    setActiveService(items[0]);
-  },[])
+  // useEffect(() => {
+  //   setServices(items);
+  //   setActiveService(items[0]);
+  // },[])
 
   // useEffect(() => {
   //   if (services) {
@@ -43,13 +43,13 @@ export default function Home(props) {
   //   }
   // }, services)
 
-  console.log('services: ', services);
+  // console.log('services: ', services);
 
-  const handleServiceUpdate = (id) => {
-    const newActiveService = services.find(service => service.sys.id === id);
-    setActiveService(newActiveService);
-  }
-  console.log('activeService:', activeService);
+  // const handleServiceUpdate = (id) => {
+  //   const newActiveService = services.find(service => service.sys.id === id);
+  //   setActiveService(newActiveService);
+  // }
+  // console.log('activeService:', activeService);
 
   return (
     <>
