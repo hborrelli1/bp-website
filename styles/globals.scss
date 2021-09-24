@@ -1,33 +1,5 @@
-/* ./styles/globals.css */
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './variables';
 
-@layer base {
-  html {
-    box-sizing: border-box;
-  }
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }
-  body {
-    overflow: hidden;
-    overflow-y: auto;
-  }
-  h1 {
-    @apply text-2xl;
-  }
-  h2 {
-    @apply text-xl;
-  }
-  
-}
-
-@layer components {
-  .nav-item {
-    @apply font-din tracking-widest pl-4;
-  }
-} */
 html {
   box-sizing: border-box;
 }
@@ -148,7 +120,7 @@ h5 {
     }
   }
   .why-bp {
-    background-color: #172439;
+    background-color: $bp-blue;
     background-size: cover;
     background-position: center;
     display: flex;

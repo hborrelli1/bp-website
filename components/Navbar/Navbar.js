@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Navbar.module.scss'
+
 console.log('styles:', styles);
 
 const Navbar = () => {
