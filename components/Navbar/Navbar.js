@@ -7,14 +7,16 @@ console.log('styles:', styles);
 const Navbar = () => {
   return (
     <nav className={styles.navbar} id="Navbar">
-      <div className="logo">
-        <Image 
-          src="/assets/logos/bp-main-logo@2x.png" 
-          alt="Borrelli+Partners Logo" 
-          width="261px"
-          height="36.16px"
-        />
-      </div>
+      <Link className="logo" href="/">
+        <a>
+          <Image 
+            src="/assets/logos/bp-main-logo@2x.png" 
+            alt="Borrelli+Partners Logo" 
+            width="261px"
+            height="36.16px"
+          />
+        </a>
+      </Link>
       <div className={styles['nav-items']}>
         <Link href="/"><a className={styles["nav-item"]}>Home</a></Link>
         <Link href="/services"><a className={styles["nav-item"]}>Services</a></Link>
