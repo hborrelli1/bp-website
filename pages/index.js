@@ -4,6 +4,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // import homepageData from '../contentfulApi/homepage-data.preval';
 // import servicesData from '../contentfulApi/services-data.preval';
@@ -21,14 +22,15 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const res = await client.getEntries({ content_type: 'homePage' });
-  const res2 = await client.getEntries({ content_type: 'themeConfig' });
-  console.log('res:', res);
+  const homePageData = await client.getEntries({ content_type: 'homePage' });
+  const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
+  console.log('homePageData:', homePageData);
+  console.log('themeConfig:', themeConfig);
 
   return {
     props: {
-      homePageData: res.items,
-      themeConfig: res2.items,
+      homePageData: homePageData.items,
+      themeConfig: themeConfig.items,
     },
     revalidate: 1,
   }
@@ -55,6 +57,8 @@ export default function Home({homePageData, themeConfig}) {
     backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})`,
   }
 
+  console.log('fields:', fields)
+
   return (
     <>
       <Head>
@@ -78,11 +82,9 @@ export default function Home({homePageData, themeConfig}) {
             <div className="services-column">
               <h3>Our Services</h3>
               <div className="links">
-                <Link href="/services/architecture"><a>Architecture</a></Link>
-                <Link href="/services/construction-management"><a>Construction Management</a></Link>
-                <Link href="/services/interior-design"><a>Interior Design</a></Link>
-                <Link href="/services/landscape-architect-recreation-design"><a>Landscape Architect &amp; Recreation Design</a></Link>
-                <Link href="/services/restoration-adaptive-re-use"><a>Resoration/Adaptive Re-Use</a></Link>
+                {fields.ourServicesLinks.map(link => (
+                  <Link href={`${link.fields.servicesUrl}`} key={link.sys.id}><a>{link.fields.service}</a></Link>
+                ))}
               </div>
             </div>
           </div>
@@ -91,13 +93,31 @@ export default function Home({homePageData, themeConfig}) {
           Featured Projects
         </div>
         <div className="why-bp" style={backgroundSectionStyles}>
+          <div className="why-bp-title">WHY B+P</div>
           <div className="content">
             <div className="content-column">
               <h2>{fields.whyBpTitle}</h2>
               {documentToReactComponents(fields.whyBpDescription)}
             </div>
             <div className="image-column">
-              
+              <Image 
+                src={`https:${fields.whyBpImage.fields.file.url}`}
+                width={fields.whyBpImage.fields.file.details.image.width}
+                height={fields.whyBpImage.fields.file.details.image.height}
+              />
+              <Link href={fields.whyBpLink.fields.slug}>
+                <a className="image-button">
+                  <span className="link-text">{fields.whyBpLinkTitle}</span>
+                  <span className="link-icon">
+                    <Image 
+                      src="/assets/icons/arrow-with-circle@2x.png" 
+                      width="34" 
+                      height="34" 
+                      layout="fixed"
+                    />
+                  </span>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
