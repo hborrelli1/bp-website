@@ -2,16 +2,25 @@
 
 .footer {
   background-color: $bp-blue;
-  padding: 100px 30px;
+  padding: 80px 30px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .top-bar {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    margin-bottom: 50px;
+    max-width: 1300px;
+    align-items: center;
 
     .logo-block {
       display: flex;
-      padding-right: 100px;
-
+      justify-content: flex-end;
+      padding: 20px 70px 20px 0px;
+      border-right: 1px solid rgba(255,255,255,.5);
+      width: 33%;
 
       // .img-icon {
       //   margin-right: 75px;
@@ -19,19 +28,100 @@
 
       .address {
         margin-left: 75px;
-
+        font-style: normal;
+        font-size: 14px;
+        color: rgba(255,255,255,.55);
+        
         h5 {
           margin: 0;
+          font-size: 14px;
+          letter-spacing: 1px;
+        }
+        
+        p {
+          letter-spacing: 1px;
+          font-size: 13px;
+          line-height: 18px;
+        }
+
+        a {
+          color: rgba(255,255,255,.55);
+          text-decoration: none;
+        }
+
+        .phone {
+          margin-bottom: 0;
+        }
+        .fax {
+          margin-top: 0px;
         }
       }
     }
 
     .footer-section {
+      width: 67%;
+      padding: 20px 50px 20px 70px;
 
+
+      nav {
+        display: flex;
+        margin-bottom: 30px;
+        a {
+          color: $bp-light-gray;
+          text-decoration: none;
+          text-transform: uppercase;
+          font-family: din-2014, sans-serif;
+          font-weight: 400;
+          font-size: 14px;
+          letter-spacing: 1px;
+          margin-right: 50px;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      .form-box {
+        display: flex;
+        align-items: center;
+
+        p {
+          border-bottom: 1px solid $bp-light-gray;
+          max-width: 200px;
+          color: $bp-light-gray;
+          font-size: 14px;
+          width: 60%;
+        }
+        .sub-nav {
+          width: 40%;
+          text-align: right;
+
+          a {
+            margin-left: 10px;
+            color: $bp-light-gray;
+            text-decoration: none;
+            font-size: 14px;
+
+            &:hover {
+              text-decoration: underline;
+            }
+
+            &:first-of-type {
+              padding-right: 10px;
+              margin-right: 0px;
+              border-right: 1px solid $bp-light-gray;
+            }
+          }
+        }
+      }
     }
   }
 
   .bottom-bar {
-    border-top: .5px solid $white-border;
+    border-top: .5px solid rgba(255,255,255,.5);
+    color: rgba(255,255,255,.5);
+    font-size: 14px;
+    width: 100%;
   }
 }
