@@ -1,19 +1,27 @@
 @import '../../styles/variables';
 
 .navbar {
-  background-color: $bp-blue;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  z-index: 9999;
 
   .nav-items {
     .nav-item {
       color: #fff;
-      margin-left: 10px;
+      margin-left: 30px;
       font-family: 'Din 2014';
       text-decoration: none;
       font-weight: 300;
+
+      &:hover {
+        border-bottom: 1px solid $bp-light-gray;
+      }
     }
   }
 }
