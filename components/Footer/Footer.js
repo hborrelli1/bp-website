@@ -23,8 +23,8 @@ const Footer = () => {
               720 Vassar Street<br/>
               Orlando, FL 32804
             </p>
-            <p>T: <a href="tel:4074181338">407.418.1338</a></p>
-            <p>F: 407.418.1342</p>
+            <p className={styles["phone"]}>T: <a href="tel:4074181338">407.418.1338</a></p>
+            <p className={styles["fax"]}>F: 407.418.1342</p>
           </address>
         </div>
         <div className={styles['footer-section']}>
@@ -37,10 +37,10 @@ const Footer = () => {
           </nav>
           <div className={styles['form-box']}>
             <p>Form here...</p>
-            <nav>
+            <div className={styles['sub-nav']}>
               <Link href="/news"><a>News</a></Link>
               <Link href="/privacy-policy"><a>Privacy Policy</a></Link>
-            </nav>
+            </div>
           </div>
         </div>
       </div>
