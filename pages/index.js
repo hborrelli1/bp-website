@@ -74,6 +74,7 @@ export default function Home({homePageData, themeConfig, projects}) {
       title: item.fields.projectTitle,
       excerpt: item.fields.projectExcerpt,
       tags: item.fields.tags,
+      id: item.sys.id,
     }
 
     return acc;

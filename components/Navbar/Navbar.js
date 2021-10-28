@@ -3,8 +3,6 @@ import Image from 'next/image';
 import styles from './Navbar.module.scss'
 import { useEffect, useState } from 'react';
 
-console.log('styles:', styles);
-
 const Navbar = () => {
 
   const [isTop, setIsTop] = useState(true);

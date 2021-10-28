@@ -34,7 +34,7 @@ const CarouselComponent = ({ items }) => {
       // )}
     >
       {items.map(item => (
-        <div className="featured-project">
+        <div className="featured-project" key={item.id}>
           <div className="image-col">
             <img src={`https://${item.thumbnail.fields.file.url}`} />
           </div>
