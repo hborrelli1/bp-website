@@ -115,7 +115,7 @@ export default function Home({homePageData, themeConfig, projects}) {
               <h3>Our Services</h3>
               <div className="links">
                 {fields.ourServicesLinks.map(link => (
-                  <Link href={`${link.fields.servicesUrl}`} key={link.sys.id}><a>{link.fields.service}</a></Link>
+                  <Link href={`/${link.fields.servicesUrl}`} key={link.sys.id}><a>{link.fields.service}</a></Link>
                 ))}
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function Home({homePageData, themeConfig, projects}) {
                 width={fields.whyBpImage.fields.file.details.image.width}
                 height={fields.whyBpImage.fields.file.details.image.height}
               />
-              <Link href={fields.whyBpLink.fields.slug}>
+              <Link href={`/${fields.whyBpLink.fields.slug}`}>
                 <a className="image-button">
                   <span className="link-text">{fields.whyBpLinkTitle}</span>
                   <span className="link-icon">
