@@ -36,7 +36,7 @@ const CarouselComponent = ({ items }) => {
       {items.map(item => (
         <div className="featured-project" key={item.id}>
           <div className="image-col">
-            <Image src={`https://${item.thumbnail.fields.file.url}`} width="726" height="486" />
+            <Image src={`https:${item.thumbnail.fields.file.url}`} width="726" height="486" />
           </div>
           <div className="content-col">
             <span>{item.tags[0].fields.tagTitle}</span>
