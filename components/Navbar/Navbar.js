@@ -10,7 +10,6 @@ const Navbar = () => {
   useEffect(() =>{
     document.addEventListener('scroll', () => {
       const scrollCheck = window.scrollY < 100;
-      console.log('scrollCheck: ', scrollCheck)
       if (scrollCheck !== isTop) {
         setIsTop(scrollCheck)
       }

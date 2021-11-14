@@ -28,8 +28,6 @@ export const getStaticProps = async () => {
 }
 
 const About = ({themeConfig, aboutData}) => {
-  console.log('themeConfig:', themeConfig);
-  console.log('aboutData:', aboutData);
 
   const {
     aboutSubTitle,
@@ -51,7 +49,6 @@ const About = ({themeConfig, aboutData}) => {
     slug,
     testitmonials
   } = aboutData.fields;
-  console.log(styles);
   return (
     <>
       <Head>

@@ -1,0 +1,28 @@
+.two-column-header {
+  background-color: pink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  padding: 150px 0 100px 0;
+  color: #fff;
+
+  .content {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+
+    h1, p {
+      width: 50%;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+    }
+  }
+
+  .services-tabs {
+    display: block;
+  }
+}
