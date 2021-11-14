@@ -23,7 +23,6 @@ export const getStaticProps = async () => {
 }
 
 const Blog = ({ blogs }) => {
-  console.log('blogs:', blogs);
   const {
     fields,
   } = blogs;

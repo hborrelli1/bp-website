@@ -26,8 +26,6 @@ export const getStaticProps = async () => {
   const homePageData = await client.getEntries({ content_type: 'homePage' });
   const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
   const projects = await client.getEntries({ content_type: 'projects' });
-  console.log('homePageData:', homePageData);
-  console.log('themeConfig:', themeConfig);
 
   return {
     props: {
@@ -40,9 +38,6 @@ export const getStaticProps = async () => {
 }
 
 export default function Home({homePageData, themeConfig, projects}) {
-  console.log('themeConfig:', themeConfig);
-  console.log('homePageData:', homePageData);
-  console.log('projects:', projects);
   const {fields} = homePageData[0];
   const [navHeight, setNavHeight] = useState(60);
   const [heroHeight, setHeroHeight] = useState(0);

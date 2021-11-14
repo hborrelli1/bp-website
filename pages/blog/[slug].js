@@ -44,7 +44,6 @@ export const getStaticProps = async ({ params }) => {
 }
 
 const BlogPost = ({ blog }) => {
-  console.log('blog: ', blog);
   const {blogTitle, heroImage, blogContent, } = blog.fields;
   return (
     <div className="blog-content">
