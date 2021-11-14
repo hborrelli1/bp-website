@@ -1,10 +1,13 @@
+import styles from "./Footer.module.scss"
 
-
-const FooterCta = () => {
+const FooterCta = ({ctaData}) => {
   return (
-    <div>
-      Footer CTA.
-    </div>
+    <section className={styles["footer-cta"]}>
+      <div className={styles['footer-cta-content']}>
+        <p>{servicesCta}</p>
+        <button type="button">Our Services </button>
+      </div>
+    </section>
   )
 }
 
