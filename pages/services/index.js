@@ -6,6 +6,8 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Image from 'next/image';
 import servicesDataPreval from '../../contentfulApi/services-data.preval';
 
+const fetcher = (url) => fetch(url).then((res) => res.json())
+
 export const getStaticProps = async () => {
   // const res = await fetch(/** contentful api here */);
   // const data = await res.json();
@@ -37,6 +39,7 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
   const [serviceTabs, setServiceTabs] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
   const [icons, setIcons] = useState([]);
+  const [footerLink, setFooterLink] = useState('');
 
   const {
     pageTitle, 
@@ -44,6 +47,7 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
     services,
     servicesCta,
     backgroundImage,
+    footerCta
   } = servicesPageData.fields;
 
   const { url: themeBackgroundImageUrl } = themeConfig.fields.backgroundTexture.fields.file;
@@ -75,6 +79,10 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
   //   })
   // }, [])
 
+  useEffect(() => {
+
+  },[])
+
   const handleTabChange = (index) => {
     setActiveTab(index);
   }
@@ -101,42 +109,78 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
             {
               services.reduce((acc, service, index) => {
                 console.log('service:', service);
+
+                const secondSection = service.fields.serviceDescriptionHeading2 && service.fields.serviceDescription2 && service.fields.mainImage2 && service.fields.features2;
+
                 acc[index] = (
-                  <div
-                    className="service-content"
-                    style={{ display: index === activeTab ? 'flex' : 'none' }} 
-                    key={service.sys.id}
-                  >
-                    <div 
-                      className="service-image-col"
+                    <div
+                      className="service-content"
+                      style={{ display: index === activeTab ? 'flex' : 'none' }} 
+                      key={service.sys.id}
                     >
-                      <Image 
-                        src={`https:${service.fields.mainImage.fields.file.url}`} 
-                        width={service.fields.mainImage.fields.file.details.image.width} 
-                        height={service.fields.mainImage.fields.file.details.image.height} />
-                    </div>
-                    <div className="content-col">
-                      <h2>{service.fields.serviceDescriptionHeading}</h2>
-                      {documentToReactComponents(service.fields.serviceDescription)}
-                    </div>
-                    <div className="service-icons">
-                      {service.fields.features.map(feature => {
-                        const featureData = iconsWithText.find(icon => icon.sys.id === feature.sys.id);
-                        return (
-                          <div className="icon" key={feature.sys.id}>
-                            <div className="img-wrap"> 
-                              <Image 
-                                src={`https:${featureData.fields.icon.fields.file.url}`} 
-                                width="50" 
-                                height="50"
-                              />
-                            </div>
-                            <h3>{featureData.fields.iconText}</h3>
+                      <div className="service-content-body">
+                        <div className="service-image-col">
+                          <Image 
+                            src={`https:${service.fields.mainImage.fields.file.url}`} 
+                            width={service.fields.mainImage.fields.file.details.image.width} 
+                            height={service.fields.mainImage.fields.file.details.image.height} />
+                        </div>
+                        <div className="content-col">
+                          <h2>{service.fields.serviceDescriptionHeading}</h2>
+                          {documentToReactComponents(service.fields.serviceDescription)}
+                        </div>
+                        <div className="service-icons">
+                          {service.fields.features.map(feature => {
+                            const featureData = iconsWithText.find(icon => icon.sys.id === feature.sys.id);
+                            return (
+                              <div className="icon" key={feature.sys.id}>
+                                <div className="img-wrap"> 
+                                  <Image 
+                                    src={`https:${featureData.fields.icon.fields.file.url}`} 
+                                    width="50" 
+                                    height="50"
+                                  />
+                                </div>
+                                <h3>{featureData.fields.iconText}</h3>
+                              </div>
+                            )
+                          })}
+                        </div>
+                      </div>
+                      {secondSection && (
+                        <div className="service-content-body">
+                          <div className="service-image-col">
+                            <Image 
+                              src={`https:${service.fields.mainImage2.fields.file.url}`} 
+                              width={service.fields.mainImage2.fields.file.details.image.width} 
+                              height={service.fields.mainImage2.fields.file.details.image.height} />
                           </div>
-                        )
-                      })}
+                          <div className="content-col">
+                            <h2>{service.fields.serviceDescriptionHeading2}</h2>
+                            {documentToReactComponents(service.fields.serviceDescription2)}
+                          </div>
+                          <div className="service-icons">
+                            {service.fields.features2.map(feature => {
+                              const featureData = iconsWithText.find(icon => icon.sys.id === feature.sys.id);
+                              return (
+                                <div className="icon" key={feature.sys.id}>
+                                  <div className="img-wrap"> 
+                                    <Image 
+                                      src={`https:${featureData.fields.icon.fields.file.url}`} 
+                                      width="50" 
+                                      height="50"
+                                    />
+                                  </div>
+                                  <h3>{featureData.fields.iconText}</h3>
+                                </div>
+                              )
+                            })}
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
+                      
+                    
                 );
 
                 return acc;
@@ -146,9 +190,12 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
 
         </section>
       </div>
-      {/* <FooterCta ctaData={{
-        copy: 
-      }} /> */}
+      <FooterCta ctaData={{
+        copy: footerCta.fields.copy,
+        buttonText: footerCta.fields.ctaText,
+        buttonUrl: footerCta.fields.ctaLink,
+        backgroundImage: footerCta.fields.backgroundImage
+      }} />
     </article>
   );
 }

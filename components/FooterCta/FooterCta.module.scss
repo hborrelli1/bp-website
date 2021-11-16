@@ -1,0 +1,39 @@
+.footer-cta {
+  display: flex;
+  flex-flow: wrap;
+  padding: 100px 30px;
+
+  .footer-cta-content {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    p {
+      font-size: 26px;
+      line-height: 40px;
+      letter-spacing: 1px;
+      font-weight: 300;
+      padding-right: 100px;
+      width: 67%;
+    }
+
+    a {
+      width: 33%;
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-left: 20px;
+        display: flex;
+      }
+    }
+  }
+}

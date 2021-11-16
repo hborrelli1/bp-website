@@ -2,8 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Navbar.module.scss'
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { introspectionFromSchema } from 'graphql';
 
 const Navbar = () => {
+  const router = useRouter();
 
   const [isTop, setIsTop] = useState(true);
 
@@ -22,6 +25,16 @@ const Navbar = () => {
 
   }
 
+  const menu = [
+    { title: 'Home', path: '/' },
+    { title: 'Services', path: '/services' },
+    { title: 'Our Work', path: '/our-work' },
+    { title: 'About', path: '/about' },
+    { title: 'Careers', path: '/careers' },
+    { title: 'Blog', path: '/blog' },
+    { title: 'Contact', path: '/contact' },
+  ]
+
   return (
     <nav className={styles.navbar} id="Navbar" style={navBarStyle}>
       <Link className="logo" href="/">
@@ -34,15 +47,15 @@ const Navbar = () => {
           />
         </a>
       </Link>
-      <div className={styles['nav-items']}>
-        <Link href="/"><a className={styles["nav-item"]}>Home</a></Link>
-        <Link href="/services"><a className={styles["nav-item"]}>Services</a></Link>
-        <Link href="/our-work"><a className={styles["nav-item"]}>Our Work</a></Link>
-        <Link href="/about"><a className={styles["nav-item"]}>About</a></Link>
-        <Link href="/careers"><a className={styles["nav-item"]}>Careers</a></Link>
-        <Link href="/blog"><a className={styles["nav-item"]}>News</a></Link>
-        <Link href="/contact"><a className={styles["nav-item"]}>Contact</a></Link>
-      </div>
+      <ul className={styles['nav-items']}>
+        {menu.map((item, index) => {
+          return (
+            <li className={`${styles["nav-item"]} ${router.pathname === item.path ? styles.active : ''}`}>
+              <Link href={item.path}><a>{item.title}</a></Link>
+            </li>
+          )
+        })}
+      </ul>
     </nav>
   )
 }
