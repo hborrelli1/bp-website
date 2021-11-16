@@ -4,7 +4,9 @@ import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import servicesDataPreval from '../../contentfulApi/services-data.preval';
+import _ from 'lodash';
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
@@ -32,10 +34,7 @@ export const getStaticProps = async () => {
 }
 
 const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
-  console.log('servicesPageData:', servicesPageData);
-  console.log('themeConfig:', themeConfig);
-  console.log('iconsWithText:', iconsWithText);
-  
+  const router = useRouter();
   const [serviceTabs, setServiceTabs] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
   const [icons, setIcons] = useState([]);
@@ -51,11 +50,10 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
   } = servicesPageData.fields;
 
   const { url: themeBackgroundImageUrl } = themeConfig.fields.backgroundTexture.fields.file;
-
   useEffect(() => {
     // Generate Tabs Objects
     const tabs = services.reduce((acc, service, index) => {
-      acc[index] = service.fields.service
+      acc[index] = { title: service.fields.service, id: service.fields.servicesUrl }
       return acc;
     },[]);
     setServiceTabs(tabs)
@@ -80,13 +78,36 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
   // }, [])
 
   useEffect(() => {
+    const url = router.asPath;
+    const paramRegex = /#+.+$/;
+    const specificService = url.match(paramRegex);
 
-  },[])
+    console.log('specificServce: ', specificService);
+    console.log('serviceTabs:', serviceTabs);
+
+    if (router.asPath.includes('#') && serviceTabs) {
+      console.log('true......');
+
+      const indexOfTab = _.findIndex(serviceTabs, (serviceTab => { 
+        console.log('specificService[0]:', specificService[0]);
+        console.log('serviceTab.id:', serviceTab.id);
+        console.log('specificService[0].includes(serviceTab.id):', specificService[0].includes(serviceTab.id));
+
+        return specificService[0] === `#${serviceTab.id}`
+      }));
+
+      console.log('indexOfTab:', indexOfTab);
+      setActiveTab(indexOfTab)
+
+    } 
+
+  },[router, serviceTabs])
 
   const handleTabChange = (index) => {
     setActiveTab(index);
+    // push id to url
+    router.push(`/services#${serviceTabs[index].id}`, null, {shallow:true})
   }
-
   return (
     <article className="services">
       <TwoColumnHeader 
@@ -97,21 +118,22 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
       <div className="services-container" style={{backgroundImage: `url(https:${themeBackgroundImageUrl})`}}>
         {/* <div> */}
         <ul className='services-tabs'>
-          {serviceTabs.map((tab, index) => (
+          {serviceTabs.map((service, index) => (
             <li
               className={index === activeTab ? 'active' : ''}
               onClick={() => handleTabChange(index)} 
-              key={tab}
-            >{tab}</li>
+              key={service.title}
+            >{service.title}</li>
           ))}
         </ul>
         <section className="services-tab-content">
             {
               services.reduce((acc, service, index) => {
-                console.log('service:', service);
-
-                const secondSection = service.fields.serviceDescriptionHeading2 && service.fields.serviceDescription2 && service.fields.mainImage2 && service.fields.features2;
-
+                const secondSection = service.fields.serviceDescriptionHeading2 
+                  && service.fields.serviceDescription2 
+                  && service.fields.mainImage2 
+                  && service.fields.features2;
+                
                 acc[index] = (
                     <div
                       className="service-content"

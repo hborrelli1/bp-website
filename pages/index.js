@@ -110,7 +110,7 @@ export default function Home({homePageData, themeConfig, projects}) {
               <h3>Our Services</h3>
               <div className="links">
                 {fields.ourServicesLinks.map(link => (
-                  <Link href={`/${link.fields.servicesUrl}`} key={link.sys.id}><a>{link.fields.service}</a></Link>
+                  <Link href={`/services#${link.fields.servicesUrl}`} scroll={true} key={link.sys.id}><a>{link.fields.service}</a></Link>
                 ))}
               </div>
             </div>
