@@ -12,15 +12,48 @@
   z-index: 9999;
 
   .nav-items {
+    display: flex;
+
     .nav-item {
       color: #fff;
       margin-left: 30px;
       font-family: 'Din 2014';
-      text-decoration: none;
       font-weight: 300;
+      list-style-type: none;
+      position: relative;
+      
+      &.active {
+        position: relative;
+        
+        &:before {
+          content: '';
+          background-color: #fff;
+          width: 3px;
+          height: 3px;
+          position: absolute;
+          top: 30px;
+          left: calc(50% - 1.5px);
+          border-radius: 4px;
+        }
+      }
+      
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
 
       &:hover {
         border-bottom: 1px solid $bp-light-gray;
+        // &:before {
+        //   content: '';
+        //   background-color: #fff;
+        //   width: 3px;
+        //   height: 3px;
+        //   position: absolute;
+        //   top: 30px;
+        //   left: calc(50% - 1.5px);
+        //   border-radius: 4px;
+        // }
       }
     }
   }
