@@ -50,7 +50,7 @@ const Navbar = () => {
       <ul className={styles['nav-items']}>
         {menu.map((item, index) => {
           return (
-            <li className={`${styles["nav-item"]} ${router.pathname === item.path ? styles.active : ''}`}>
+            <li key={index} className={`${styles["nav-item"]} ${router.pathname === item.path ? styles.active : ''}`}>
               <Link href={item.path}><a>{item.title}</a></Link>
             </li>
           )
