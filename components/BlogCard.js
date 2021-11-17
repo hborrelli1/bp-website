@@ -10,6 +10,7 @@ const BlogCard = ({blog}) => {
         src={`https:${thumbnailImage.fields.file.url}`}
         width={thumbnailImage.fields.file.details.image.width}
         height={thumbnailImage.fields.file.details.image.height}
+        alt={blogTitle}
       />
       <div className="info">
         <h4>{blogTitle}</h4>

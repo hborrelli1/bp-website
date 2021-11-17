@@ -79,6 +79,7 @@ const About = ({themeConfig, aboutData}) => {
                 src={`https:${descriptionPhoto.fields.file.url}`} 
                 width={descriptionPhoto.fields.file.details.image.width} 
                 height={descriptionPhoto.fields.file.details.image.height} 
+                alt="About Borrelli + Partners"
               />
             </div>
           </div>
@@ -91,6 +92,7 @@ const About = ({themeConfig, aboutData}) => {
                   src="/assets/icons/sustainability-icon@2x.png" 
                   width="122" 
                   height="122"
+                  alt={qualityTitle}
                 />
               </div>
               <div className={styles['quality-content']}>
@@ -104,6 +106,7 @@ const About = ({themeConfig, aboutData}) => {
                   src="/assets/icons/minority-owned-icon@2x.png" 
                   width="122" 
                   height="122"
+                  alt={qualityTitle}
                 />
               </div>
               <div className={styles['quality-content']}>
@@ -117,6 +120,7 @@ const About = ({themeConfig, aboutData}) => {
                   src="/assets/icons/technology-icon@2x.png" 
                   width="122" 
                   height="122"
+                  alt={qualityTitle}
                 />
               </div>
               <div className={styles['quality-content']}>
@@ -130,6 +134,7 @@ const About = ({themeConfig, aboutData}) => {
                   src="/assets/icons/crime-prevention-icon@2x.png" 
                   width="122" 
                   height="122"
+                  alt={qualityTitle}
                 />
               </div>
               <div className={styles['quality-content']}>
@@ -155,6 +160,7 @@ const About = ({themeConfig, aboutData}) => {
                     src={`https:${person.fields.photo.fields.file.url}`} 
                     width={person.fields.photo.fields.file.details.image.width} 
                     height={person.fields.photo.fields.file.details.image.height} 
+                    alt={person.fields.name}
                   />
                   <div className={styles['card']}>
                     <h5>{person.fields.name}</h5>

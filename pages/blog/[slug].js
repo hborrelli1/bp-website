@@ -51,6 +51,7 @@ const BlogPost = ({ blog }) => {
         src={`https:${heroImage.fields.file.url}`}
         width={heroImage.fields.file.details.image.width}
         height={heroImage.fields.file.details.image.height}
+        alt={blogTitle}
       />
       <h2>{blogTitle}</h2>
       {documentToReactComponents(blogContent)}
