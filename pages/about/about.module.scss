@@ -2,22 +2,29 @@
 
 .about {
   header {
-    padding: 100px 0 0;
+    padding: 0;
     display: flex;
     align-items: flex-end;
-    height: 80vh;
     background-size: cover;
     background-position: center;
 
     .header-content {
       background-color: $bp-blue;
       width: 100%;
-      padding: 50px 0px;
+      padding: 0;
+
+      .header-image {
+        height: 60vh;
+        background-size: cover;
+        background-position: center;
+      }
 
       .header-copy {
         width: 100%;
         max-width: 800px;
         margin: 0 auto;
+        padding: 40px 0;
+
         h1 {
           margin: 0;
           color: rgba(255,255,255,.75);
@@ -42,6 +49,8 @@
     padding: 100px;
     justify-content: center;
     align-items: center;
+    background-size: cover;
+    background-position: top center;
 
     .margin-container {
       max-width: 1000px;
@@ -72,15 +81,88 @@
 
   .our-qualities {
     display: flex;
+    flex-flow: wrap;
     padding: 100px 0px;
-
+    
     .our-qualities-content {
-      max-width: 1000px;
+      margin: 0 auto;
+      max-width: 1200px;
       display: flex;
       flex-flow: wrap;
 
       .quality {
-        width: 25%;
+        width: 50%;
+        display: flex;
+        flex-flow: wrap;
+        align-items: flex-start;
+        padding-right: 70px;
+        margin-bottom: 50px;
+
+        .quality-image {
+          width: 25%;
+        }
+
+        .quality-content {
+          width: 75%;
+          align-self: start;
+          padding-left: 20px;
+
+          h5 {
+            margin: 30px 0 20px 0;
+            font-weight: 500;     
+            letter-spacing: 1px;
+            font-size: 24px;  
+          }
+
+          p {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+
+  .our-team {
+    display: flex;
+    padding: 0 30px;
+
+    .content {
+      max-width: 1000px;
+      margin: 0 auto;
+
+      .people-wrapper {
+        display: flex;
+        flex-flow: wrap;
+
+        .person {
+          width: 33%;
+          position: relative;
+          margin-bottom: 50px;
+          padding-right: 40px;
+          
+          .card {
+            padding: 10px 20px;
+            background-color: #fff;
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            -webkit-box-shadow: 0px 0px 14px 5px rgb(0 0 0 / 5%);
+            box-shadow: 0px 0px 14px 5px rgb(0 0 0 / 5%);
+            width: 80%;
+
+            h5 {
+              font-size: 18px;
+              font-weight: 500;
+              margin: 10px 0 6px 0;
+            }
+            
+            p {
+              font-size: 12px;  
+              line-height: 18px;
+              margin: 0 0 10px 0;
+            }
+          }
+        }
       }
     }
   }

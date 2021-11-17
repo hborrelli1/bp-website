@@ -97,7 +97,7 @@ export default function Home({homePageData, themeConfig, projects}) {
             <div className="description">{documentToReactComponents(fields.heroImageText)}</div>
           </div>
           <button type="button" className="view-more" onClick={() => scrollDown()}>
-            <Image src="/assets/icons/down-arrow-circle-white@2x.png" width="34" height="34" layout="fixed" />
+            <Image src="/assets/icons/down-arrow-circle-white@2x.png" width="34" height="34" layout="fixed" alt="" />
           </button>
         </div>
         <div className="services" style={backgroundSectionStyles}>
@@ -136,6 +136,7 @@ export default function Home({homePageData, themeConfig, projects}) {
                 src={`https:${fields.whyBpImage.fields.file.url}`}
                 width={fields.whyBpImage.fields.file.details.image.width}
                 height={fields.whyBpImage.fields.file.details.image.height}
+                alt="Why Borrelli + Partners"
               />
               <Link href={`/${fields.whyBpLink.fields.slug}`}>
                 <a className="image-button">
@@ -146,6 +147,7 @@ export default function Home({homePageData, themeConfig, projects}) {
                       width="34" 
                       height="34" 
                       layout="fixed"
+                      alt=""
                     />
                   </span>
                 </a>

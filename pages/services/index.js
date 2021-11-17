@@ -145,7 +145,7 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                           <Image 
                             src={`https:${service.fields.mainImage.fields.file.url}`} 
                             width={service.fields.mainImage.fields.file.details.image.width} 
-                            height={service.fields.mainImage.fields.file.details.image.height} />
+                            height={service.fields.mainImage.fields.file.details.image.height} alt={service.fields.serviceDescriptionHeading} />
                         </div>
                         <div className="content-col">
                           <h2>{service.fields.serviceDescriptionHeading}</h2>
@@ -161,6 +161,7 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                                     src={`https:${featureData.fields.icon.fields.file.url}`} 
                                     width="50" 
                                     height="50"
+                                    alt={`${featureData.fields.iconText} icon`}
                                   />
                                 </div>
                                 <h3>{featureData.fields.iconText}</h3>
@@ -175,7 +176,7 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                             <Image 
                               src={`https:${service.fields.mainImage2.fields.file.url}`} 
                               width={service.fields.mainImage2.fields.file.details.image.width} 
-                              height={service.fields.mainImage2.fields.file.details.image.height} />
+                              height={service.fields.mainImage2.fields.file.details.image.height} alt={service.fields.serviceDescriptionHeading2} />
                           </div>
                           <div className="content-col">
                             <h2>{service.fields.serviceDescriptionHeading2}</h2>
@@ -191,6 +192,7 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                                       src={`https:${featureData.fields.icon.fields.file.url}`} 
                                       width="50" 
                                       height="50"
+                                      alt={featureData.fields.iconText}
                                     />
                                   </div>
                                   <h3>{featureData.fields.iconText}</h3>

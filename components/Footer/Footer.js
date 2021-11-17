@@ -16,6 +16,7 @@ const Footer = () => {
             height="65"
             layout="fixed"
             className={styles["img-icon"]}
+            alt="Borrelli + Partners Logo"
           />
           <address className={styles.address} >
             <h5>BORRELLI + PARTNERS</h5>
