@@ -77,10 +77,13 @@ const Person = ({ person }) => {
         <div className="bio-col">
           <h1>{name}</h1>
           <p className="certifications">{certifications}</p>
-          <p className="job-title">{jobTitle}</p>
-          {documentToReactComponents(leadershipBio)}
+          <p className="job-title"><span></span>{jobTitle}</p>
+          <div className="bio">
+            {documentToReactComponents(leadershipBio)}
+          </div>
         </div>
       </section>
+      
       <section className="testimonials">
         <div className="content">
           <div className="testimonial-row">
