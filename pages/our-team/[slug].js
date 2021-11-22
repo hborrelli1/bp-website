@@ -69,12 +69,29 @@ const Person = ({ person }) => {
               width={photo.fields.file.details.image.width}
               height={photo.fields.file.details.image.height}
               layout="responsive"
+              alt={`${name} leadership photo.`}
             />
           </div>
           <div className="socials">
             <span>Connect</span>
-            <Link href={linkedInUrl}><a><Image src="/assets/icons/linkedin-icon@2x.png" width="24px" height="18px" /></a></Link>
-            <a href={`mailto:${email}`}><Image src="/assets/icons/email-icon@2x.png" width="24px" height="18px" /></a>
+            <Link href={linkedInUrl}>
+              <a>
+                <Image 
+                  src="/assets/icons/linkedin-icon@2x.png" 
+                  width="24px" 
+                  height="18px" 
+                  alt={`${name} LinkedIn.`}
+                />
+              </a>
+            </Link>
+            <a href={`mailto:${email}`}>
+              <Image 
+                src="/assets/icons/email-icon@2x.png" 
+                width="24px" 
+                height="18px" 
+                alt={`${name} email`}
+              />
+            </a>
           </div>
         </div>
         <div className="bio-col">
@@ -98,6 +115,7 @@ const Person = ({ person }) => {
                 src="https://via.placeholder.com/530x400"
                 width="530px"
                 height="400px"
+                alt=""
               />
             </div>
           </div>
@@ -110,6 +128,7 @@ const Person = ({ person }) => {
                 src="https://via.placeholder.com/530x400"
                 width="530px"
                 height="400px"
+                alt=""
               />
             </div>
           </div>
