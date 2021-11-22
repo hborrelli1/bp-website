@@ -63,13 +63,16 @@ const Person = ({ person }) => {
       <div className="header"></div>
       <section className="leadership-bio">
         <div className="image-col">
-          <Image 
-            src={`https:${photo.fields.file.url}`}
-            width={photo.fields.file.details.image.width}
-            height={photo.fields.file.details.image.width}
-          />
+          <div className="bio-img">
+            <Image 
+              src={`https:${photo.fields.file.url}`}
+              width={photo.fields.file.details.image.width}
+              height={photo.fields.file.details.image.height}
+              layout="responsive"
+            />
+          </div>
           <div className="socials">
-            Connect
+            <span>Connect</span>
             <Link href={linkedInUrl}><a><Image src="/assets/icons/linkedin-icon@2x.png" width="24px" height="18px" /></a></Link>
             <a href={`mailto:${email}`}><Image src="/assets/icons/email-icon@2x.png" width="24px" height="18px" /></a>
           </div>
@@ -114,9 +117,10 @@ const Person = ({ person }) => {
       </section>
 
       {/* Featured Projects */}
+      <p>Featured Projects...</p>
 
       {/* Involvement */}
-
+      <p>Involvement</p>
     </article>
   );
 }
