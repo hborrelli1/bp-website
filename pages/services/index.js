@@ -57,46 +57,18 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
       return acc;
     },[]);
     setServiceTabs(tabs)
-  }, []);
-
-  // useEffect(() => {
-  //   const client = createClient({
-  //     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  //     space: process.env.CONTENTFUL_SPACE_ID,
-  //   });
-    
-  //   // Generate Icons with Text objects
-  //   // const iconObjects = [];
-  //   servicesPageData.fields.services.forEach(service => {
-  //     service.fields.features.forEach(feature => {
-  //       client.getEntry(feature.sys.id)
-  //         .then((entry) => console.log(entry))
-  //         .catch(console.error)
-        
-  //     })
-  //   })
-  // }, [])
+  }, [services]);
 
   useEffect(() => {
     const url = router.asPath;
     const paramRegex = /#+.+$/;
     const specificService = url.match(paramRegex);
 
-    console.log('specificServce: ', specificService);
-    console.log('serviceTabs:', serviceTabs);
-
     if (router.asPath.includes('#') && serviceTabs) {
-      console.log('true......');
-
       const indexOfTab = _.findIndex(serviceTabs, (serviceTab => { 
-        console.log('specificService[0]:', specificService[0]);
-        console.log('serviceTab.id:', serviceTab.id);
-        console.log('specificService[0].includes(serviceTab.id):', specificService[0].includes(serviceTab.id));
-
         return specificService[0] === `#${serviceTab.id}`
       }));
 
-      console.log('indexOfTab:', indexOfTab);
       setActiveTab(indexOfTab)
 
     } 

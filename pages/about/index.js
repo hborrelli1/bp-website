@@ -92,7 +92,7 @@ const About = ({themeConfig, aboutData}) => {
                   src="/assets/icons/sustainability-icon@2x.png" 
                   width="122" 
                   height="122"
-                  alt={qualityTitle}
+                  alt={qualityTitle1}
                 />
               </div>
               <div className={styles['quality-content']}>
@@ -106,7 +106,7 @@ const About = ({themeConfig, aboutData}) => {
                   src="/assets/icons/minority-owned-icon@2x.png" 
                   width="122" 
                   height="122"
-                  alt={qualityTitle}
+                  alt={qualityTitle2}
                 />
               </div>
               <div className={styles['quality-content']}>
@@ -120,7 +120,7 @@ const About = ({themeConfig, aboutData}) => {
                   src="/assets/icons/technology-icon@2x.png" 
                   width="122" 
                   height="122"
-                  alt={qualityTitle}
+                  alt={qualityTitle3}
                 />
               </div>
               <div className={styles['quality-content']}>
@@ -134,7 +134,7 @@ const About = ({themeConfig, aboutData}) => {
                   src="/assets/icons/crime-prevention-icon@2x.png" 
                   width="122" 
                   height="122"
-                  alt={qualityTitle}
+                  alt={qualityTitle4}
                 />
               </div>
               <div className={styles['quality-content']}>
@@ -153,21 +153,44 @@ const About = ({themeConfig, aboutData}) => {
           <div className={styles['content']}>
             <h2>Our Team</h2>
             <div className={styles['people-wrapper']}>
-              {ourTeam.map(person => (
-                <div className={styles['person']} key={person.sys.id}>
-                  <Image 
-                    className={styles['headshot']}
-                    src={`https:${person.fields.photo.fields.file.url}`} 
-                    width={person.fields.photo.fields.file.details.image.width} 
-                    height={person.fields.photo.fields.file.details.image.height} 
-                    alt={person.fields.name}
-                  />
-                  <div className={styles['card']}>
-                    <h5>{person.fields.name}</h5>
-                    <p>{person.fields.jobTitle}</p>
-                  </div>
-                </div>
-              ))}
+              {ourTeam.map(person => {
+                if (person.fields.fullBioPage) {
+                  return (
+                    <Link href={`/our-team/${person.fields.slug}`} className={styles['person']} key={person.sys.id}>
+                      <a>
+                      <Image 
+                        className={styles['headshot']}
+                        src={`https:${person.fields.photo.fields.file.url}`} 
+                        width={person.fields.photo.fields.file.details.image.width} 
+                        height={person.fields.photo.fields.file.details.image.height} 
+                        alt={person.fields.name}
+                      />
+                      <div className={styles['card']}>
+                        <h5>{person.fields.name}</h5>
+                        <p>{person.fields.jobTitle}</p>
+                      </div>
+                      </a>
+                    </Link>
+                  );
+                } else {
+                  return (
+                    <div className={styles['person']} key={person.sys.id}>
+                      <Image 
+                        className={styles['headshot']}
+                        src={`https:${person.fields.photo.fields.file.url}`} 
+                        width={person.fields.photo.fields.file.details.image.width} 
+                        height={person.fields.photo.fields.file.details.image.height} 
+                        alt={person.fields.name}
+                      />
+                      <div className={styles['card']}>
+                        <h5>{person.fields.name}</h5>
+                        <p>{person.fields.jobTitle}</p>
+                      </div>
+                    </div>
+                  );
+                }
+                
+              })}
             </div>
           </div>
         </section>
