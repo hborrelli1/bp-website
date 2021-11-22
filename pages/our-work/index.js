@@ -2,6 +2,7 @@ import {createClient} from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useEffect, useState } from 'react';
 import FooterCta from '../../components/FooterCta/FooterCta';
+import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 
 export const getStaticProps = async () => {
   const client = createClient({
@@ -25,6 +26,7 @@ export const getStaticProps = async () => {
 const OurWork = ({pageData}) => {
   console.log('pageData:', pageData);
   const {
+    backgroundImage,
     featuredProjects,
     footerCta,
     pageDescription,
@@ -46,9 +48,9 @@ const OurWork = ({pageData}) => {
     } else {
       return projects.map(project => {
         const { 
+          industry,
           location,
           projectTitle,
-          tags,
           serviceType,
           thumbnailImage,
         } = project.fields;
@@ -62,7 +64,8 @@ const OurWork = ({pageData}) => {
                 <p>{location}</p>
               </div>
               <div className="tags">
-                {`Service: ${serviceType}`}
+                <p><span>Industry</span>: {industry}</p>
+                <p><span>Service</span>: {serviceType}</p>
               </div>
             </div>
           </div>
@@ -73,14 +76,11 @@ const OurWork = ({pageData}) => {
 
   return (
     <article className="our-work-wrapper">
-      <header>
-        <div className="title-col">
-          <h1>{pageTitle}</h1>
-        </div>
-        <div className="info-col">
-          {documentToReactComponents(pageDescription)}
-        </div>
-      </header>
+      <TwoColumnHeader 
+        title={pageTitle}
+        copy={pageDescription}
+        image={backgroundImage}
+      />
       <div className="filter-bar">
         <p>Filters here...</p>
       </div>

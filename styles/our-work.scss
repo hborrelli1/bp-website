@@ -29,8 +29,10 @@
       .meta-data {
         // display: none;
         opacity: 0;
-        padding: 40px;
+        padding: 10%;
         color: #fff;
+        flex-flow: column;
+        justify-content: space-between;
         transition: all .3s;
 
         h2 {
@@ -42,10 +44,28 @@
         p {
           font-size: 15px;
           font-family: din-2014, sans-serif;
-          text-transform: uppercase;
           letter-spacing: 1px;
           opacity: .7;
           font-weight: 300;
+        }
+        
+        .tags {
+          display: flex;
+          width: 100%;
+
+          p {
+            margin-right: 40px;
+            font-size: 14px;
+            opacity: 1;
+            span {
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              opacity: .7;
+            }
+            &:last-of-type {
+              margin-right: 0;
+            }
+          }
         }
       }
 
@@ -70,7 +90,6 @@
         }
         .meta-data {
           display: flex;
-          flex-flow: wrap;
           z-index: 100;
         }
       }
