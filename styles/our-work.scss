@@ -22,7 +22,7 @@
         position: relative;
         
         .filter-button {
-          background: unset;
+          background: none;
           border: 0;
           margin-right: 20px;
           cursor: pointer;
@@ -88,13 +88,11 @@
       cursor: pointer;
 
       .project-thumb-bg {
-        // display: none;
         opacity: 0;
         transition: all .3s;
       } 
 
       .meta-data {
-        // display: none;
         opacity: 0;
         padding: 10%;
         color: #fff;
