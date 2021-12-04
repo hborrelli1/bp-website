@@ -1,14 +1,84 @@
+@import './variables';
+
 .our-work-wrapper {
   header {
 
   }
   .filter-bar {
+    display: flex;
+    margin: 30px 0px;
 
+    .filters-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      span {
+        text-transform: uppercase;
+        margin-right: 20px;
+        font-family: din-2014, sans-serif;
+        font-size: 15px;
+        letter-spacing: 2px;
+      }
+      .filter {
+        position: relative;
+        
+        .filter-button {
+          background: unset;
+          border: 0;
+          margin-right: 20px;
+          cursor: pointer;
+          font-size: 15px;
+          letter-spacing: 1px;
+
+          .filter-button-icon {
+            margin-left: 10px;
+          }
+        }
+
+        .menu {
+          display: none;
+
+          .filter-item {
+            cursor: pointer;
+          }
+        }
+
+        &.open {
+          border-bottom: 1px solid $bp-blue;
+          .menu {
+            width: 250px;
+            display: block;
+            position: absolute;
+            top: calc(100% + 1px);
+            left: 0px;
+            z-index: 200;
+            background-color: #fff;
+            -webkit-box-shadow: 0px 5px 12px 0px rgba(0,0,0,0.1); 
+            box-shadow: 0px 5px 12px 0px rgba(0,0,0,0.1);
+            padding: 10px 0;
+
+            .filter-item {
+              padding: 10px 20px;
+              font-family: muli, sans-serif;
+              font-size: 15px;
+              letter-spacing: 1px;
+
+              &:hover {
+                background-color: #f1f1f1;
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+      }
+    }
   }
   .featured-projects {
     display: flex;
     flex-flow: wrap;
-    padding: 5px;
+    padding: 0 5px;
 
     .project {
       width: calc(50% - 10px);
