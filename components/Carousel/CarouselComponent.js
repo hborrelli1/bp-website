@@ -3,6 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from 'react-responsive-carousel';
 
 const CarouselComponent = ({ items }) => {
+  console.log('items:', items);
 
   return (
     <Carousel
@@ -11,26 +12,6 @@ const CarouselComponent = ({ items }) => {
       showIndicators={false}
       infiniteLoop={true}
       statusFormatter={(currentItem, totalCount) => (<span>0{currentItem} / 0{totalCount}</span>)}
-      // renderIndicator={(
-      //   onClickHandler,
-      //   isSelected,
-      //   index,
-      //   label
-      // ) => (
-      //   // it will render inside an ul element
-      //   <li
-      //     onClick={onClickHandler}
-      //     onKeyDown={onClickHandler}
-      //     value={index}
-      //     key={index}
-      //     role="button"
-      //     tabIndex={0}
-      //     aria-label={`${label} ${index + 1}`}
-      //   >
-      //     {/* render the number instead of a box*/}
-      //     {`0${index + 1}`}
-      //   </li>
-      // )}
     >
       {items.map(item => (
         <div className="featured-project" key={item.id}>
@@ -43,7 +24,7 @@ const CarouselComponent = ({ items }) => {
             />
           </div>
           <div className="content-col">
-            <span>{item.tags[0].fields.tagTitle}</span>
+            <span>{item.industry}</span>
             <h3>{item.title}</h3>
             <p>{item.excerpt}</p>
           </div>
