@@ -68,7 +68,7 @@ export default function Home({homePageData, themeConfig, projects}) {
       thumbnail: item.fields.thumbnailImage,
       title: item.fields.projectTitle,
       excerpt: item.fields.projectExcerpt,
-      tags: item.fields.tags,
+      industry: item.fields.industry,
       id: item.sys.id,
     }
 
