@@ -5,6 +5,7 @@ import FooterCta from '../../components/FooterCta/FooterCta';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import _ from 'lodash';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export const getStaticProps = async () => {
   const client = createClient({
@@ -101,22 +102,27 @@ const OurWork = ({pageData}) => {
         projectTitle,
         serviceType,
         thumbnailImage,
+        slug,
       } = project.fields;
+
+      console.log('slug:', slug)
       
       return (
-        <div className="project" key={project.sys.id} style={{backgroundImage: `url(https:${thumbnailImage.fields.file.url})`}}>
-          <div className="project-thumb-bg"></div>
-          <div className="meta-data">
-            <div className="title">
-              <h2>{projectTitle}</h2>
-              <p>{location}</p>
+        <Link href={`/our-work/${slug}`} key={project.sys.id}>
+          <a className="project" style={{backgroundImage: `url(https:${thumbnailImage.fields.file.url})`}}>
+            <div className="project-thumb-bg"></div>
+            <div className="meta-data">
+              <div className="title">
+                <h2>{projectTitle}</h2>
+                <p>{location}</p>
+              </div>
+              <div className="tags">
+                <p><span>Industry</span>: {industry}</p>
+                <p><span>Service</span>: {serviceType}</p>
+              </div>
             </div>
-            <div className="tags">
-              <p><span>Industry</span>: {industry}</p>
-              <p><span>Service</span>: {serviceType}</p>
-            </div>
-          </div>
-        </div>
+          </a>
+        </Link>
       )
     });
   }

@@ -1,0 +1,126 @@
+@import './variables';
+
+.project-wrapper {
+  header {
+    min-height: 70vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    padding: 50px 30px;
+    position: relative;
+
+    .overlay {
+      position: absolute;  
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: block;
+    }
+
+    // .bg-overlay-1 {
+    //   opacity: .5;
+    //   background-color: $bp-blue;
+    //   // background-filter: opacity(20%);
+    // }
+    .bg-overlay-1 {
+      position: absolute;  
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgb(5,19,40);
+      background: linear-gradient(35deg, rgba(5,19,40,1) 0%, rgba(23,36,57,0.32) 100%);
+      z-index: 6;
+      opacity: .65;
+    }
+
+    .bg-overlay-2 {
+      background-color: $bp-blue;
+      opacity: .5;
+      z-index: 5;
+    }
+
+    .bg-overlay-3 {
+      background-color: #40637a;
+      opacity: .3;
+      z-index: 4;
+    }
+
+    // .bg-overlay-4 {
+    //   background: rgb(236,229,194);
+    //   background: linear-gradient(35deg, rgba(236,229,194,1) 0%, rgba(63,82,94,0.03) 100%);
+    //   z-index: 3;
+    //   opacity: .16;
+    // }
+    
+    // .bg-overlay-5 {
+    //   background-color: #fff;
+    //   opacity: .28;
+    //   z-index: 2;
+    // }
+    
+    // .bg-overlay-6 {
+    //   z-index: 1;
+    // }  
+
+    .header-content {
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+
+      h1 {
+        margin: 0;
+        color: #fff;
+        font-size: 40px;
+        font-weight: 400;
+      }
+    }
+
+  }
+
+  .project-body {
+    .project-content {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+
+      .project-info {
+        display: flex;
+
+        .details {
+          width: 30%;
+          margin-right: 20px;
+        }
+        
+        .summary {
+          width: 70%;
+
+          p {
+            padding: 0;
+          }
+        }
+
+        .project-style {
+          
+          h2 {
+            font-size: 14px;
+            font-family: muli, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0px 20px;
+            border-bottom: 1px solid #707070;
+            margin-bottom: 30px;
+          }
+
+          p {
+            font-size: 14px;
+            padding: 0px 20px;
+          }
+        }
+      }
+    }
+  }
+}
