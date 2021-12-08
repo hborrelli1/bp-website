@@ -251,57 +251,6 @@ h5 {
         }
       }
     }
-
-    .carousel-slider {
-      position: relative;
-
-      .control-arrow {
-        width: 23px;
-        height: 20px;
-        position: absolute;
-        bottom: 20px !important;
-        top: unset !important;
-        opacity: 1 !important;
-        padding: 0;
-        -webkit-filter: drop-shadow(1px 1px .5px rgba(0,0,0,.8));
-        filter: drop-shadow(1px 1px .5px rgba(0,0,0,.8));
-
-        &:hover {
-          background-color: unset !important;
-          opacity: .7 !important;
-        }
-
-        &.control-next {
-          left: calc(60% - 50px) !important;
-          background-image: url('/assets/icons/arrow-right-white@2x.png');
-          background-size: cover;
-          background-position: center;
-          &:before {
-            content: unset;
-          }
-        }
-        &.control-prev {
-          left: calc(60% - 160px) !important;
-          background-image: url('/assets/icons/arrow-left-white@2x.png');
-          background-size: cover;
-          background-position: center;
-          &:before {
-            content: unset;
-          }
-        }
-      }
-
-      .carousel-status {
-        position: absolute;
-        height: 23px;
-        bottom: 20px !important;
-        left: calc(60% - 114px) !important;
-        top: unset !important;
-        font-size: 14px;
-        margin: 0;
-        padding: 0;
-      }
-    }
   }
   .why-bp {
     background-color: $bp-blue;

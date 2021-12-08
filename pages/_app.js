@@ -1,4 +1,5 @@
 import Layout from '../components/Layout'
+import '../styles/carousel-styles.scss'
 import '../styles/globals.scss'
 import '../styles/services.scss';
 import '../styles/our-team.scss';

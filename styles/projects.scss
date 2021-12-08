@@ -19,11 +19,6 @@
       display: block;
     }
 
-    // .bg-overlay-1 {
-    //   opacity: .5;
-    //   background-color: $bp-blue;
-    //   // background-filter: opacity(20%);
-    // }
     .bg-overlay-1 {
       position: absolute;  
       top: 0;
@@ -48,23 +43,6 @@
       z-index: 4;
     }
 
-    // .bg-overlay-4 {
-    //   background: rgb(236,229,194);
-    //   background: linear-gradient(35deg, rgba(236,229,194,1) 0%, rgba(63,82,94,0.03) 100%);
-    //   z-index: 3;
-    //   opacity: .16;
-    // }
-    
-    // .bg-overlay-5 {
-    //   background-color: #fff;
-    //   opacity: .28;
-    //   z-index: 2;
-    // }
-    
-    // .bg-overlay-6 {
-    //   z-index: 1;
-    // }  
-
     .header-content {
       z-index: 10;
       max-width: 1200px;
@@ -78,17 +56,34 @@
         font-weight: 400;
       }
     }
-
   }
 
   .project-body {
     .project-content {
       width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
+      max-width: 1100px;
+      margin: 50px auto;
+
+      .project-style {
+        h2 {
+          font-size: 14px;
+          font-family: muli, sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          padding: 0px 20px;
+          border-bottom: 1px solid #707070;
+          margin-bottom: 30px;
+        }
+
+        p {
+          font-size: 14px;
+          padding: 0px 20px;
+        }
+      }
 
       .project-info {
         display: flex;
+        margin-bottom: 50px;
 
         .details {
           width: 30%;
@@ -102,22 +97,28 @@
             padding: 0;
           }
         }
+      }
 
-        .project-style {
-          
-          h2 {
-            font-size: 14px;
-            font-family: muli, sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 0px 20px;
-            border-bottom: 1px solid #707070;
-            margin-bottom: 30px;
+      .gallery-carousel {
+        .carousel.carousel-slider {
+          margin-bottom: 45px;
+          overflow: visible;
+          .control-arrow, 
+          .carousel-status {
+            bottom: -40px !important;
           }
-
-          p {
-            font-size: 14px;
-            padding: 0px 20px;
+          .carousel-status {
+            color: $bp-blue;
+            text-shadow: unset;
+            left: calc(50% - 30px) !important;
+          }
+          .control-arrow.control-prev {
+            left: calc(50% - 80px) !important;
+            background-image: url("/assets/icons/arrow-left-dark@2x.png") !important;
+          }
+          .control-arrow.control-next {
+            background-image: url("/assets/icons/arrow-right-dark@2x.png") !important;
+            left: calc(50% + 40px) !important;
           }
         }
       }

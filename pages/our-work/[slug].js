@@ -2,6 +2,7 @@ import {createClient} from 'contentful';
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';
+import CarouselComponent from '../../components/Carousel/CarouselComponent';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -86,10 +87,12 @@ const Project = ({ project }) => {
               {documentToReactComponents(summary)}
             </section>
           </div>
-          <section className="gallery">
-            Gallery Here...
+          <section className="gallery project-style">
+            <h2>Gallery</h2>
+            <div className="gallery-carousel">
+              {galleryImages && <CarouselComponent items={galleryImages} type="images" />}
+            </div>
           </section>
-          <section>Gallery Feed....</section>
           <section>Two Column CTA....</section>
         </div>
       </article>
