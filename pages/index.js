@@ -120,7 +120,7 @@ export default function Home({homePageData, themeConfig, projects}) {
           <div className="background-block"></div>
           <div className="project-slider">
             <h4>Featured Projects</h4>
-            <CarouselComponent items={featuredProjectItems} />
+            <CarouselComponent items={featuredProjectItems} type='projects' />
             <a className="view-all-projects" href="/projects">View All Projects +</a>
           </div>
         </div>

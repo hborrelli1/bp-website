@@ -1,0 +1,127 @@
+@import './variables';
+
+.project-wrapper {
+  header {
+    min-height: 70vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    padding: 50px 30px;
+    position: relative;
+
+    .overlay {
+      position: absolute;  
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: block;
+    }
+
+    .bg-overlay-1 {
+      position: absolute;  
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgb(5,19,40);
+      background: linear-gradient(35deg, rgba(5,19,40,1) 0%, rgba(23,36,57,0.32) 100%);
+      z-index: 6;
+      opacity: .65;
+    }
+
+    .bg-overlay-2 {
+      background-color: $bp-blue;
+      opacity: .5;
+      z-index: 5;
+    }
+
+    .bg-overlay-3 {
+      background-color: #40637a;
+      opacity: .3;
+      z-index: 4;
+    }
+
+    .header-content {
+      z-index: 10;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+
+      h1 {
+        margin: 0;
+        color: #fff;
+        font-size: 40px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .project-body {
+    .project-content {
+      width: 100%;
+      max-width: 1100px;
+      margin: 50px auto;
+
+      .project-style {
+        h2 {
+          font-size: 14px;
+          font-family: muli, sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          padding: 0px 20px;
+          border-bottom: 1px solid #707070;
+          margin-bottom: 30px;
+        }
+
+        p {
+          font-size: 14px;
+          padding: 0px 20px;
+        }
+      }
+
+      .project-info {
+        display: flex;
+        margin-bottom: 50px;
+
+        .details {
+          width: 30%;
+          margin-right: 20px;
+        }
+        
+        .summary {
+          width: 70%;
+
+          p {
+            padding: 0;
+          }
+        }
+      }
+
+      .gallery-carousel {
+        .carousel.carousel-slider {
+          margin-bottom: 45px;
+          overflow: visible;
+          .control-arrow, 
+          .carousel-status {
+            bottom: -40px !important;
+          }
+          .carousel-status {
+            color: $bp-blue;
+            text-shadow: unset;
+            left: calc(50% - 30px) !important;
+          }
+          .control-arrow.control-prev {
+            left: calc(50% - 80px) !important;
+            background-image: url("/assets/icons/arrow-left-dark@2x.png") !important;
+          }
+          .control-arrow.control-next {
+            background-image: url("/assets/icons/arrow-right-dark@2x.png") !important;
+            left: calc(50% + 40px) !important;
+          }
+        }
+      }
+    }
+  }
+}
