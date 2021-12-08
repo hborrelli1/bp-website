@@ -44,6 +44,7 @@ const CarouselComponent = ({ items, type }) => {
       >
         {items.map(item => (
           <Image 
+            key={item.id}
             src={`https:${item.fields.file.url}`} 
             width="1109" 
             height="624" 

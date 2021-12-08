@@ -161,7 +161,14 @@ const OurWork = ({pageData}) => {
               className="filter-button" 
               onClick={() => toggleMenu('industry')}
             >
-              {industryFilter === 'all' ? 'Industry' : industryKey[industryFilter]} <span className="filter-button-icon"><Image src="/assets/icons/down-chevron@2x.png" width="15px" height="8px" /></span>
+              {industryFilter === 'all' ? 'Industry' : industryKey[industryFilter]} <span className="filter-button-icon">
+                <Image 
+                  src="/assets/icons/down-chevron@2x.png" 
+                  width="15px" 
+                  height="8px" 
+                  alt="Industry Filter Arrow"
+                />
+              </span>
             </button>
             <div className="menu">
               {_.map(industryKey, (item, index) => 
@@ -174,7 +181,14 @@ const OurWork = ({pageData}) => {
               className="filter-button" 
               onClick={() => toggleMenu('service')}
             >
-              {serviceFilter === 'all' ? 'Service' : servicesKey[serviceFilter]} <span className="filter-button-icon"><Image src="/assets/icons/down-chevron@2x.png" width="15px" height="8px" /></span>
+              {serviceFilter === 'all' ? 'Service' : servicesKey[serviceFilter]} <span className="filter-button-icon">
+                <Image 
+                  src="/assets/icons/down-chevron@2x.png" 
+                  width="15px" 
+                  height="8px" 
+                  alt="Industry Filter Arrow"
+                />
+              </span>
             </button>
             <div className="menu">
               {_.map(servicesKey, (item, index) => 
