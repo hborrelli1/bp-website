@@ -1,0 +1,44 @@
+@import './variables';
+
+.news-list {
+  .sub-title {
+    width: 100%;
+    font-size: 15px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .content-margins {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: wrap;
+  }
+
+  .featured-news {
+    padding: 50px 20px;
+    margin-bottom: 50px;
+
+    .img-col,
+    .content-col {
+      width: 50%;
+    }
+
+    .content-col {
+      padding: 0px 50px;
+
+      h2 {
+        font-weight: 300;
+      }
+
+      a {
+        color: $bp-blue;
+      }
+    }
+  }
+
+  .all-news {
+
+  }
+}

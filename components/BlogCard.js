@@ -6,12 +6,14 @@ const BlogCard = ({blog}) => {
 
   return (
     <div className="blog-card">
-      <Image  
-        src={`https:${thumbnailImage.fields.file.url}`}
-        width={thumbnailImage.fields.file.details.image.width}
-        height={thumbnailImage.fields.file.details.image.height}
-        alt={blogTitle}
-      />
+      <div className="img-wrap">
+        <Image  
+          src={`https:${thumbnailImage.fields.file.url}`}
+          width={thumbnailImage.fields.file.details.image.width}
+          height={thumbnailImage.fields.file.details.image.height}
+          alt={blogTitle}
+        />
+      </div>
       <div className="info">
         <h4>{blogTitle}</h4>
         <p>alksdjflakjsdf</p>
