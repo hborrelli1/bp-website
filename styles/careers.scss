@@ -1,0 +1,126 @@
+@import "./variables";
+
+.careers-wrapper {
+  .core-values {
+    background-color: $bp-blue;
+    padding: 30px 20px;
+    
+    .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .value {
+        display: flex;
+        align-items: center;
+        margin: 0px 40px;
+        color: #fff;
+
+        .img-wrap {
+          margin-right: 20px;
+        }
+
+        p {
+          font-family: din-2014, sans-serif;
+          font-weight: 300;
+          font-size: 20px;
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+
+  .body-content {
+    .content-section {
+
+      .content-margins {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 50px 0px;
+
+        .content-col,
+        .img-col {
+          width: 46%;
+        }
+
+        .content-col {
+          h2 {
+            font-weight: 400;
+            margin: 0 0 20px;
+          }
+          a {
+            color: $bp-blue;
+          }
+        }
+
+        .img-col {
+          display: flex;
+          flex-direction: column;
+
+          .cta {
+            background-color: $bp-blue;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 20px;
+            color: #fff;
+            text-decoration: none;
+
+            .icon {
+              display: flex;
+              padding: 20px;
+              background-color: darken($bp-blue, 10%);
+              transform: rotate(-90deg)
+            }
+          }
+        }
+      }
+
+      &:nth-child(even) {
+        .content-margins {
+          flex-direction: row-reverse;
+          padding: 0;
+          padding-right: 40px;
+          background-color: $bp-blue;
+          
+          .content-col {
+            color: #fff;
+          }
+
+          .img-col {
+            margin-top: -60px;
+          }
+        }
+      }
+
+      &:nth-child(odd) {
+        .content-margins {
+          padding: 0;
+          max-width: 1100px;
+          margin: 100px auto 150px;
+          width: 100%;
+
+        }
+      }
+
+      &:first-of-type {
+        .content-margins {
+          max-width: 1100px;
+          width: 100%;
+          margin: 0px auto 150px;
+          padding-top: 50px;
+          
+          .content-col p {
+            &:first-of-type {
+              margin-bottom: 30px;
+            }
+            &:last-of-type {
+              margin-top: -10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
