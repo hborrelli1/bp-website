@@ -49,6 +49,31 @@
             font-weight: 400;
             margin: 0 0 20px;
           }
+          a {
+            color: $bp-blue;
+          }
+        }
+
+        .img-col {
+          display: flex;
+          flex-direction: column;
+
+          .cta {
+            background-color: $bp-blue;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-left: 20px;
+            color: #fff;
+            text-decoration: none;
+
+            .icon {
+              display: flex;
+              padding: 20px;
+              background-color: darken($bp-blue, 10%);
+              transform: rotate(-90deg)
+            }
+          }
         }
       }
 
@@ -93,6 +118,9 @@
           padding-top: 50px;
           
           .content-col p {
+            &:first-of-type {
+              margin-bottom: 30px;
+            }
             &:last-of-type {
               margin-top: -10px;
             }

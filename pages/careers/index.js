@@ -1,6 +1,7 @@
 import {createClient} from 'contentful';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import Image from 'next/image';
+import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export const getStaticProps = async () => {
@@ -22,6 +23,7 @@ export const getStaticProps = async () => {
 }
 
 const Careers = ({ careers, themeConfig }) => {
+  console.log('careers:', careers);
   const {
     coreValues,
     headerBackgroundImage,
@@ -67,26 +69,45 @@ const Careers = ({ careers, themeConfig }) => {
               ? `url(https:${themeConfig.fields.backgroundTexture.fields.file.url})`
               : 'unset'
           }
+          const { content, image, linkTitle, linkUrl, sectionTitle } = section.fields;
 
           return (
-            <section className="content-section" style={style}>
+            <section className="content-section" style={style} key={index}>
               <div className="content-margins">
                 <div className="content-col">
-                  <h2>{section.fields.sectionTitle}</h2>
-                  {documentToReactComponents(section.fields.content)}
+                  <h2>{sectionTitle}</h2>
+                  {documentToReactComponents(content)}
                 </div>
                 <div className="img-col">
                   <Image 
-                    src={`https:${section.fields.image.fields.file.url}`}
-                    width={section.fields.image.fields.file.details.image.width}
-                    height={section.fields.image.fields.file.details.image.height}
-                    alt={section.fields.sectionTitle}
+                    src={`https:${image.fields.file.url}`}
+                    width={image.fields.file.details.image.width}
+                    height={image.fields.file.details.image.height}
+                    alt={sectionTitle}
                   />
+                  {linkUrl && (
+                      <Link href={linkUrl}>
+                        <a className="cta">
+                          <span>{linkTitle}</span>
+                          <div className="icon">
+                            <Image 
+                              src="/assets/icons/down-arrow-circle-white@2x.png"
+                              width="34px"
+                              height="34px"
+                              alt="Meet our people"
+                            />
+                          </div>
+                        </a>
+                      </Link>
+                  )}
                 </div>
               </div>
             </section>
           );
         })}
+      </section>
+      <section>
+        Contact Form
       </section>
     </article>
   )
