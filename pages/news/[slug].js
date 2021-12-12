@@ -44,15 +44,9 @@ export const getStaticProps = async ({ params }) => {
 }
 
 const BlogPost = ({ blog }) => {
-  const {blogTitle, heroImage, blogContent, } = blog.fields;
+  const {blogTitle, blogContent, } = blog.fields;
   return (
     <div className="blog-content">
-      <Image  
-        src={`https:${heroImage.fields.file.url}`}
-        width={heroImage.fields.file.details.image.width}
-        height={heroImage.fields.file.details.image.height}
-        alt={blogTitle}
-      />
       <h2>{blogTitle}</h2>
       {documentToReactComponents(blogContent)}
     </div>

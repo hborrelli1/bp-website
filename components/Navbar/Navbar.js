@@ -31,7 +31,7 @@ const Navbar = () => {
     { title: 'Our Work', path: '/our-work' },
     { title: 'About', path: '/about' },
     { title: 'Careers', path: '/careers' },
-    { title: 'Blog', path: '/blog' },
+    { title: 'News', path: '/news' },
     { title: 'Contact', path: '/contact' },
   ]
 
