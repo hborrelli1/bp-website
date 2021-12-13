@@ -38,7 +38,23 @@
     }
   }
 
-  .all-news {
+  .load-more-button {
+    background: none;
+    border: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    margin: 0 auto;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    cursor: pointer;
 
+    .icon {
+      margin-top: 10px;
+      transform: rotate(90deg);
+      display: flex;
+    }
   }
 }

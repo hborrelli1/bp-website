@@ -5,6 +5,7 @@ import FooterCta from '../../components/FooterCta/FooterCta';
 import Image from 'next/image';
 import Link from 'next/link';
 import BlogCard from '../../components/BlogCard';
+import { useState } from 'react';
 
 // Runs at build time
 // Used to fetch data from Blog section.
@@ -40,6 +41,14 @@ const News = ({ newsPage, blogItems }) => {
     pageTitle,
   } = newsPage.fields;
 
+  const [itemsToDisplay, setItemsToDisplay] = useState(6);
+
+  const blogItemsDisplay = blogItems.map((blog, index) => <BlogCard blog={blog} />);
+
+  const increaseItemsToDisplay = () => {
+    setItemsToDisplay(itemsToDisplay + 6);
+  }
+
   return (
     <article className="news-list">
       <TwoColumnHeader 
@@ -71,13 +80,24 @@ const News = ({ newsPage, blogItems }) => {
       <section className="all-news">
         <div className="content-margins">
           <h3 className="sub-title">All News</h3>
-          {blogItems.map(blog => {
-            console.log('blog:', blog);
-
-            return (
-              <BlogCard blog={blog} />
-            )
-          })}
+          {blogItemsDisplay.filter((blog, index) => index < itemsToDisplay)}
+          {blogItemsDisplay.length > itemsToDisplay && (
+            <button 
+              type="button" 
+              className="load-more-button"
+              onClick={increaseItemsToDisplay}
+            >
+              <span>Load More</span>
+              <div className="icon">
+                <Image 
+                  src="/assets/icons/arrow-with-circle@2x.png"
+                  width="40px"
+                  height="40px"
+                  alt="Load More Articles."
+                />
+              </div>
+            </button>
+          )}
         </div>
       </section>
 

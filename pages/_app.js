@@ -7,6 +7,7 @@ import '../styles/our-team.scss';
 import '../styles/our-work.scss';
 import '../styles/projects.scss';
 import '../styles/news.scss';
+import '../styles/blog-card.scss';
 
 
 function MyApp({ Component, pageProps }) {
