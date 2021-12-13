@@ -43,7 +43,7 @@ const News = ({ newsPage, blogItems }) => {
 
   const [itemsToDisplay, setItemsToDisplay] = useState(6);
 
-  const blogItemsDisplay = blogItems.map((blog, index) => <BlogCard blog={blog} />);
+  const blogItemsDisplay = blogItems.map((blog, index) => <BlogCard key={index} blog={blog} />);
 
   const increaseItemsToDisplay = () => {
     setItemsToDisplay(itemsToDisplay + 6);
