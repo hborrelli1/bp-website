@@ -1,0 +1,116 @@
+@import './variables';
+@import './mixins';
+
+.blog-card {
+  display: flex;
+  flex-flow: wrap;
+  // align-items: flex-start;
+  width: 30%;
+  margin-right: 5%;
+  margin-bottom: 50px;
+  color: $bp-blue;
+  text-decoration: none;
+
+  .img-wrap {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-height: 212px;
+    position: relative;
+    overflow:hidden;
+
+    .img-hover-circle {
+      opacity: 0;
+      width: 40;
+      height: 40;
+      transition: transform .3s;
+      position: relative;
+      
+      .icon {
+        display: flex;
+        position: absolute;
+        top: calc(50% - 20px);
+        left: calc(50% - 20px);
+        transform: rotate(-90deg);
+      }
+    }
+  }
+
+  .info {
+    width: 100%;
+    h4 {
+      margin: 10px 0 5px;
+      font-size: 20px;
+      font-weight: 300;
+    }
+    p {
+      margin: 0 0 15px;
+      font-size: 12px;
+      line-height: 20px;
+    }
+
+  }
+
+  .link {
+    align-self: flex-end;
+    color: $bp-blue;
+    font-size: 12px;
+    text-align: right;
+    width: 100%;
+    text-decoration: underline;
+  }
+  
+  &:nth-of-type(3n) {
+    margin-right: 0px;
+  }
+
+  &:hover {
+    .img-wrap {
+      position: relative;
+      .img-el {
+        filter: blur(2px);
+        overflow: hidden;
+        transition: all .3s;
+      }
+    }
+    .img-hover-filter-bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 99;
+      background-color: #172439;
+      opacity: .38;
+      
+    }
+    .img-hover-circle {
+      opacity: 1;
+      border: .5px solid #fff;
+      position: absolute;
+      z-index: 110;
+      border-radius: 50%;
+      display: block;
+      transition: transform .2s;
+      
+
+      @include keyframes(hoverCircle){
+        0%{
+          width: 0;
+          height: 0;
+          top: 50%;
+          left: 50%;
+        }
+        100%{
+          width: 250px;
+          height: 250px;
+          top: calc(50% - 125px);
+          left: calc(50% - 125px);
+        }
+      }
+      @include animate(hoverCircle, .3s, linear);
+      animation-fill-mode: forwards;
+    }
+  }
+}
