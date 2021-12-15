@@ -8,6 +8,7 @@ import '../styles/our-work.scss';
 import '../styles/projects.scss';
 import '../styles/news.scss';
 import '../styles/blog-card.scss';
+import '../styles/privacy-policy.scss';
 
 
 function MyApp({ Component, pageProps }) {

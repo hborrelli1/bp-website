@@ -1,0 +1,33 @@
+@import './variables';
+
+.privacy-policy-wrapper {
+  header {
+    background-color: $bp-blue;
+    color: #fff;
+    padding: 100px 30px 50px;
+
+    .content-margins {
+      max-width: 1000px;
+      margin: 0 auto;
+      h1 {
+        margin: 0;
+      }
+    }
+  }
+
+  .content {
+    .content-margins {
+      max-width: 1000px;
+      margin: 100px auto;
+  
+      h2, h3, h4, h5, h6 {
+        font-weight: 400;
+        margin-top: 50px;
+      }
+  
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}
