@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const BlogCard = ({blog}) => {
   console.log('blog...:', blog);
-  const {blogContent, blogExcerpt, blogTitle, slug, thumbnailImage} = blog.fields;
+  const {blogExcerpt, blogTitle, slug, thumbnailImage, projectExcerpt} = blog.fields;
 
   const excerptText = blogExcerpt.length > 150 
     ? `${blogExcerpt.substring(0, 150)}...` 
@@ -37,7 +37,7 @@ const BlogCard = ({blog}) => {
         </div>
         <div className="info">
           <h4>{blogTitle}</h4>
-          <p>{excerptText}</p>
+          <p>{excerptText || projectExcerpt}</p>
         </div>
         <p className="link">Keep Reading +</p>
       </a>

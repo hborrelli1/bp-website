@@ -9,6 +9,8 @@ import '../styles/projects.scss';
 import '../styles/news.scss';
 import '../styles/blog-card.scss';
 import '../styles/privacy-policy.scss';
+import '../styles/featured-posts.scss';
+import '../styles/blog-post.scss';
 
 
 function MyApp({ Component, pageProps }) {
