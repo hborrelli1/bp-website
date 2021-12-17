@@ -6,6 +6,7 @@ import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import _ from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
+import safeJsonStringify from 'safe-json-stringify';
 
 export const getStaticProps = async () => {
   const client = createClient({
@@ -15,9 +16,12 @@ export const getStaticProps = async () => {
 
   const res = await client.getEntries({ content_type: 'ourWork' });
 
+  const stringifiedItems = safeJsonStringify(res);
+  const data = JSON.parse(stringifiedItems);
+
   return {
     props: {
-      pageData: res.items[0]
+      pageData: data.items[0]
     },
     revalidate: 1,
   }

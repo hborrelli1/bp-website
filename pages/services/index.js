@@ -6,6 +6,7 @@ import FooterCta from '../../components/FooterCta/FooterCta';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import safeJsonStringify from 'safe-json-stringify';
 import _ from 'lodash';
 
 export const getStaticProps = async () => {
@@ -21,9 +22,12 @@ export const getStaticProps = async () => {
   const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
   const iconsWithText = await client.getEntries({ content_type: 'iconWithText' });
 
+  const stringifiedItems = safeJsonStringify(servicesData);
+  const servicesDataItems = JSON.parse(stringifiedItems);
+
   return {
     props: {
-      servicesPageData: servicesData.items[0],
+      servicesPageData: servicesDataItems.items[0],
       themeConfig: themeConfig.items[0],
       iconsWithText: iconsWithText.items,
     },
