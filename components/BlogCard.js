@@ -2,14 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const BlogCard = ({blog}) => {
-  console.log('blog...:', blog);
-  const {blogExcerpt, blogTitle, slug, thumbnailImage, projectExcerpt} = blog.fields;
+  const {shortSummary, blogTitle, slug, thumbnailImage} = blog.fields;
 
-  const excerptText = blogExcerpt.length > 150 
-    ? `${blogExcerpt.substring(0, 150)}...` 
-    : blogExcerpt;
-
-  
+  const shortSummaryText = shortSummary.length > 150 
+    ? `${shortSummary.substring(0, 150)}...` 
+    : shortSummary;
 
   return (
     <Link href={`/news/${slug}`}>
@@ -37,7 +34,7 @@ const BlogCard = ({blog}) => {
         </div>
         <div className="info">
           <h4>{blogTitle}</h4>
-          <p>{excerptText || projectExcerpt}</p>
+          <p>{shortSummaryText}</p>
         </div>
         <p className="link">Keep Reading +</p>
       </a>

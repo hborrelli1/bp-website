@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import CarouselComponent from '../../components/Carousel/CarouselComponent';
+import safeJsonStringify from 'safe-json-stringify';
+import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -30,6 +32,9 @@ export const getStaticProps = async ({ params }) => {
     'fields.slug': params.slug,
   });
 
+  const stringifiedItems = safeJsonStringify(items);
+  const data = JSON.parse(stringifiedItems);
+
   if (!items.length) {
     return {
       redirect: {
@@ -40,7 +45,7 @@ export const getStaticProps = async ({ params }) => {
   }
 
   return {
-    props: { project: items[0]},
+    props: { project: data[0]},
     revalidate: 1,
   }
 }
@@ -60,6 +65,7 @@ const Project = ({ project }) => {
     slug,
     summary,
     thumbnailImage,
+    featuredProjects,
   } = project.fields;
   console.log('project', project)
   return (
@@ -96,6 +102,11 @@ const Project = ({ project }) => {
           <section>Two Column CTA....</section>
         </div>
       </article>
+      <ThreeColumnFeaturedPosts info={{
+        subTitle: "More Success Stories",
+        title: '', 
+        posts: featuredProjects
+      }} />
       <FooterCta ctaData={{
         copy: footerCta.fields.copy,
         buttonText: footerCta.fields.ctaText,

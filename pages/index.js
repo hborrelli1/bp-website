@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import CarouselComponent from '../components/Carousel/CarouselComponent';
 import ThreeColumnFeaturedPosts from '../components/ThreeColumnFeaturedPosts';
+import safeJsonStringify from 'safe-json-stringify';
 
 // import homepageData from '../contentfulApi/homepage-data.preval';
 // import servicesData from '../contentfulApi/services-data.preval';
@@ -28,9 +29,12 @@ export const getStaticProps = async () => {
   const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
   const projects = await client.getEntries({ content_type: 'projects' });
 
+  const stringifiedHomePageData = safeJsonStringify(homePageData);
+  const homeData = JSON.parse(stringifiedHomePageData);
+
   return {
     props: {
-      homePageData: homePageData.items,
+      homePageData: homeData.items,
       themeConfig: themeConfig.items,
       projects: projects.items,
     },
