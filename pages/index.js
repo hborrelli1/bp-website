@@ -31,12 +31,14 @@ export const getStaticProps = async () => {
 
   const stringifiedHomePageData = safeJsonStringify(homePageData);
   const homeData = JSON.parse(stringifiedHomePageData);
+  const stringifiedProjectData = safeJsonStringify(projects);
+  const projectData = JSON.parse(stringifiedProjectData);
 
   return {
     props: {
       homePageData: homeData.items,
       themeConfig: themeConfig.items,
-      projects: projects.items,
+      projects: projectData.items,
     },
     revalidate: 1,
   }
