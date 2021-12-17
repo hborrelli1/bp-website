@@ -1,14 +1,13 @@
 import {createClient} from 'contentful';
 import { useState, useEffect } from 'react';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
+import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import servicesDataPreval from '../../contentfulApi/services-data.preval';
+import safeJsonStringify from 'safe-json-stringify';
 import _ from 'lodash';
-
-const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export const getStaticProps = async () => {
   // const res = await fetch(/** contentful api here */);
@@ -19,13 +18,16 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const servicesData = await client.getEntries({ content_type: 'servicesPage' });
+  const servicesData = await client.getEntries({ content_type: 'servicesPage', include: 2 });
   const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
   const iconsWithText = await client.getEntries({ content_type: 'iconWithText' });
 
+  const stringifiedItems = safeJsonStringify(servicesData);
+  const servicesDataItems = JSON.parse(stringifiedItems);
+
   return {
     props: {
-      servicesPageData: servicesData.items[0],
+      servicesPageData: servicesDataItems.items[0],
       themeConfig: themeConfig.items[0],
       iconsWithText: iconsWithText.items,
     },
@@ -48,8 +50,10 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
     backgroundImage,
     footerCta
   } = servicesPageData.fields;
-  console.log('backgroundImage:', backgroundImage);
   const { url: themeBackgroundImageUrl } = themeConfig.fields.backgroundTexture.fields.file;
+
+  console.log('services:', services);
+
   useEffect(() => {
     // Generate Tabs Objects
     const tabs = services.reduce((acc, service, index) => {
@@ -174,9 +178,12 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                           </div>
                         </div>
                       )}
+                      <ThreeColumnFeaturedPosts info={{
+                        subTitle: service.fields.featuredProjectsSubtitle,
+                        title: service.fields.featuredProjectsSectionTitle,
+                        posts: service.fields.featuredProjects
+                      }} />
                     </div>
-                      
-                    
                 );
 
                 return acc;

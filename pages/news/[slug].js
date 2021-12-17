@@ -1,6 +1,9 @@
 import {createClient} from 'contentful';
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
+import safeJsonStringify from 'safe-json-stringify';
+import moment from 'moment';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -28,6 +31,9 @@ export const getStaticProps = async ({ params }) => {
     'fields.slug': params.slug,
   });
 
+  const stringifiedItems = safeJsonStringify(items);
+  const data = JSON.parse(stringifiedItems);
+
   if (!items.length) {
     return {
       redirect: {
@@ -38,17 +44,41 @@ export const getStaticProps = async ({ params }) => {
   }
 
   return {
-    props: { blog: items[0]},
+    props: { blog: data[0]},
     revalidate: 1,
   }
 }
 
 const BlogPost = ({ blog }) => {
-  const {blogTitle, blogContent, } = blog.fields;
+  console.log('blog:', blog);
+  const {blogTitle, blogContent, featuredPosts, thumbnailImage} = blog.fields;
+  console.log('featuredPosts:', featuredPosts);
+  const updatedAt = blog.sys.updatedAt;
+
   return (
     <div className="blog-content">
-      <h2>{blogTitle}</h2>
-      {documentToReactComponents(blogContent)}
+        <div className="header-block"></div>
+        <div className="body-content">
+          <div className="img-wrap">
+            <Image 
+              src={`https:${thumbnailImage.fields.file.url}`}
+              width={thumbnailImage.fields.file.details.image.width}
+              height={thumbnailImage.fields.file.details.image.height}
+              alt={`${blogTitle} thumbnail image.`}
+            />
+          </div>
+          <p className="date">{moment(updatedAt).format('MMMM D YYYY')}</p>
+          <h1>{blogTitle}</h1>
+          {documentToReactComponents(blogContent)}
+        </div>
+      <div className="content-margins">
+        <h4 className="sub-title">More News</h4>
+        <ThreeColumnFeaturedPosts info={{
+          subTitle: null,
+          title: null,
+          posts: featuredPosts
+        }}/>
+      </div>
     </div>
   );
 }

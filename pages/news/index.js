@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import BlogCard from '../../components/BlogCard';
 import { useState } from 'react';
+import safeJsonStringify from 'safe-json-stringify';
 
 // Runs at build time
 // Used to fetch data from Blog section.
@@ -18,13 +19,18 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const newRes = await client.getEntries({ content_type: 'newsPage' });
+  const newsRes = await client.getEntries({ content_type: 'newsPage', include: 2});
   const blogRes = await client.getEntries({ content_type: 'blog' });
+
+  const stringifiedNews = safeJsonStringify(newsRes);
+  const stringifiedBlog = safeJsonStringify(blogRes);
+  const newsData = JSON.parse(stringifiedNews);
+  const blogData = JSON.parse(stringifiedBlog);
 
   return {
     props: {
-      newsPage: newRes.items[0],
-      blogItems: blogRes.items,
+      newsPage: newsData.items[0],
+      blogItems: blogData.items,
     },
     revalidate: 1,
   }
@@ -69,7 +75,7 @@ const News = ({ newsPage, blogItems }) => {
           </div>
           <div className="content-col">
             <h2>{featuredNews.fields.blogTitle}</h2>
-            <p>{featuredNews.fields.blogExcerpt}</p>
+            <p>{featuredNews.fields.shortSummary}</p>
             <Link href={`/news/${featuredNews.fields.slug}`}>
               <a className="blog-link">Keep reading +</a>
             </Link>
