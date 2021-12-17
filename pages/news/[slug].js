@@ -64,6 +64,7 @@ const BlogPost = ({ blog }) => {
               src={`https:${thumbnailImage.fields.file.url}`}
               width={thumbnailImage.fields.file.details.image.width}
               height={thumbnailImage.fields.file.details.image.height}
+              alt={`${blogTitle} thumbnail image.`}
             />
           </div>
           <p className="date">{moment(updatedAt).format('MMMM D YYYY')}</p>
