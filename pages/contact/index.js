@@ -69,18 +69,20 @@ const Contact = ({ contactData, themeConfig }) => {
               </Link>
               </li>
           </ul>
-          <a href={linkedInUrl} className="linkedin">
-            <Image 
-              src="/assets/icons/linkedin-white@2x.png"
-              width="15px"
-              height="15px"
-              alt="Borrelli + Partners LinkedIn"
-            />
-          </a>
+          <Link href={linkedInUrl}>
+            <a className="linkedin">
+              <Image 
+                src="/assets/icons/linkedin-white@2x.png"
+                width="15px"
+                height="15px"
+                alt="Borrelli + Partners LinkedIn"
+              />
+            </a>
+          </Link>
         </div>
       </address>
       <section>
-        <h2>Let's Connect</h2>
+        <h2>Let&rsquo;s Connect</h2>
         <p>Form here...</p>
       </section>
       <ThreeColumnFeaturedPosts info={{
