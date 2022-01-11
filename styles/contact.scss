@@ -1,0 +1,50 @@
+@import './variables';
+
+.contact-page {
+  header {
+    padding-bottom: 200px;
+  }
+  address {
+    width: 100%;
+    margin-top: -55px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    font-style: normal;
+
+    .content-margins {
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .links {
+      display: flex;
+      flex-flow: wrap;
+      color: #fff;
+      align-items: center;
+      width: 100%;
+      list-style-type: circle;
+
+      .link {
+        color: #fff;
+        margin-right: 40px;
+
+        * {
+          display: inline;
+        }
+        
+        a {
+          color: #fff;
+          text-decoration: none
+        }
+        
+      }
+    }
+
+    .linkedin {
+      padding: 15px;
+    }
+  }
+}

@@ -11,6 +11,7 @@ import '../styles/blog-card.scss';
 import '../styles/privacy-policy.scss';
 import '../styles/featured-posts.scss';
 import '../styles/blog-post.scss';
+import '../styles/contact.scss';
 
 
 function MyApp({ Component, pageProps }) {
