@@ -1,4 +1,5 @@
 import Layout from '../components/Layout'
+import '../styles/mobile-menu.scss'
 import '../styles/careers.scss'
 import '../styles/carousel-styles.scss'
 import '../styles/globals.scss'

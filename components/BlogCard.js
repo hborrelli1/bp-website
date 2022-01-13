@@ -19,16 +19,18 @@ const BlogCard = ({blog}) => {
                 width="40px"
                 height="40px"
                 alt={`${blogTitle} Thumbnail Image.`}
-              />
+                />
             </div>
           </div>
           <div className="img-hover-filter-bg"></div>
           <div className="img-el">
             <Image  
               src={`https:${thumbnailImage.fields.file.url}`}
-              width={thumbnailImage.fields.file.details.image.width}
-              height={thumbnailImage.fields.file.details.image.height}
+              // width={thumbnailImage.fields.file.details.image.width}
+              // height={thumbnailImage.fields.file.details.image.height}
               alt={blogTitle}
+              className="img"
+              layout="fill"
             />
           </div>
         </div>

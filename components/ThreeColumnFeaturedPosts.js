@@ -13,7 +13,9 @@ const ThreeColumnFeaturedPosts = ({info}) => {
           {subTitle && <h3>{subTitle}</h3>}
           {title && <h2>{title}</h2>}
         </header>
-        {posts.map((post, index) => <BlogCard key={index} blog={post}/>)}
+        <div className="posts">
+          {posts.map((post, index) => <BlogCard key={index} blog={post}/>)}
+        </div>
       </div>
     </section>
   )

@@ -2,8 +2,10 @@
 
 .featured-posts {
   margin: 100px 0px;
+
   .content-margins {
     max-width: 1000px;
+    padding: 0 30px;
     margin: 0 auto;
     display: flex;
     flex-flow: wrap;
@@ -11,6 +13,7 @@
     header {
       width: 100%;
       text-align: center;
+      
       h3 {
         font-size: 15px;
         font-weight: 600;
@@ -19,10 +22,37 @@
         color: rgba($bp-blue, .3);
         margin: 0;
       }
+
       h2 {
         margin: 0 0 40px;
         font-weight: 300;
       }
     }
+
+    .posts {
+      display: flex;
+    }
   } 
+
+  @media screen and (max-width: 680px) {
+    .content-margins {
+      justify-content: center;
+
+      .posts {
+        flex-flow: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+  
+        .blog-card {
+          width: 100%;
+          max-width: 350px;
+          
+          .img-wrap {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 }
