@@ -10,14 +10,16 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles['top-bar']}>
         <div className={styles['logo-block']}>
-          <Image 
-            src="/assets/logos/bp-logo-icon@2x.png"
-            width="65"
-            height="65"
-            layout="fixed"
-            className={styles["img-icon"]}
-            alt="Borrelli + Partners Logo"
-          />
+          <div className={styles['logo-wrap']}>
+            <Image 
+              src="/assets/logos/bp-logo-icon@2x.png"
+              // width="65"
+              // height="65"
+              layout="fill"
+              className={styles["img-icon"]}
+              alt="Borrelli + Partners Logo"
+            />
+          </div>
           <address className={styles.address} >
             <h5>BORRELLI + PARTNERS</h5>
             <p>

@@ -47,7 +47,6 @@ h5 {
   font-weight: 600;
 }
 
-
 .home {
   .home-hero-banner {
     position: relative;
@@ -91,6 +90,17 @@ h5 {
         cursor: pointer;
       }
     }
+
+    @media screen and (max-width: 930px) {
+      .content {
+        flex-direction: column;
+        max-width: 600px;
+
+        h1, .description {
+          width: 100%;
+        }
+      }
+    }
   }
   .services {
     display: flex;
@@ -103,7 +113,8 @@ h5 {
     .content {
       max-width: 1200px;
       display: flex;
-      justify-content: space-between;;
+      justify-content: space-between;
+      overflow: hidden;
 
       .content-column {
         width: 50%;
@@ -151,6 +162,37 @@ h5 {
               transform:translateX(14px);
               transition: all .2s;
 
+              &:before {
+                content: "";
+                background-image: url(/assets/icons/arrow-icon@2x.png);
+                background-size: cover;
+                width: 20px;
+                height: 19px;
+                position: absolute;
+                top: 3px;
+                left: -34px;
+                animation: fadeInOpacity 0.8s ease-out;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: 720px) {
+      .content {
+        flex-flow: wrap;
+        max-width: 500px;
+        justify-content: center;
+        
+        .content-column, .services-column {
+          width: 100%;
+          max-width: unset;
+        }
+
+        .services-column {
+          .links {
+            a {
               &:before {
                 content: "";
                 background-image: url(/assets/icons/arrow-icon@2x.png);
@@ -253,6 +295,7 @@ h5 {
     }
   }
   .why-bp {
+    background-image: url(/assets/images/dark-bg-pattern.jpg);
     background-color: $bp-blue;
     background-size: cover;
     background-position: center;
@@ -276,7 +319,7 @@ h5 {
       width: 100%;
       color: #fff;
       display: flex;
-      max-width: 1000px;
+      max-width: 900px;
       overflow-y: visible;
     }
     
@@ -300,7 +343,7 @@ h5 {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-top: -4px;
+        margin-top: -5px;
         
         .link-text {
           padding-left: 30px;
@@ -316,6 +359,25 @@ h5 {
           justify-content: center;
           align-items: center;
           padding: 20px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 840px) {
+      .content {
+        flex-flow: column-reverse;
+
+        .content-column, .image-column {
+          width: 100%;
+        }
+
+        .content-column {
+          margin-top: 60px;
+        }
+
+        .image-column {
+          width: 100%;
+          max-width: 630px;
         }
       }
     }

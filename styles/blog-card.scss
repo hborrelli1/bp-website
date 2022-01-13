@@ -19,6 +19,23 @@
     max-height: 212px;
     position: relative;
     overflow:hidden;
+    height: 100%;
+    
+    .img-el {
+      width: 100% !important;
+
+      > div {
+        position: unset !important;
+      }
+
+      .img {
+        object-fit: cover;
+        width: 100% !important;
+        position: relative !important;
+        height: unset !important;
+        height: 200px !important;
+      }
+    }
 
     .img-hover-circle {
       opacity: 0;

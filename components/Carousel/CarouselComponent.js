@@ -22,6 +22,7 @@ const CarouselComponent = ({ items, type }) => {
                 width="726" 
                 height="486" 
                 alt={item.thumbnail.fields.title}
+                layout="responsive"
               />
             </div>
             <div className="content-col">

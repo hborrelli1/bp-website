@@ -132,7 +132,7 @@ export default function Home({homePageData, themeConfig, projects}) {
             <a className="view-all-projects" href="/projects">View All Projects +</a>
           </div>
         </div>
-        <div className="why-bp" style={backgroundSectionStyles}>
+        <div className="why-bp">
           <div className="why-bp-title">WHY B+P</div>
           <div className="content">
             <div className="content-column">
