@@ -101,7 +101,7 @@ const Navbar = () => {
                 <Link 
                   className={styles['menu-item']} 
                   href={item.path}
-                  
+                  key={item.title}
                 ><a onClick={() => closeMenu()}>{item.title}</a></Link>
               // </li>
             )
