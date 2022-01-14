@@ -101,6 +101,16 @@ h5 {
         }
       }
     }
+
+    @media screen and (max-width: 560px) {
+      .content {
+        .description {
+          p {
+            text-shadow: 0px 0px 12px rgb(0 0 0);
+          }
+        }
+      }
+    }
   }
   .services {
     display: flex;
