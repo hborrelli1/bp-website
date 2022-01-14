@@ -132,11 +132,11 @@
 
     @media screen and (max-width: 1000px) {
       .address {
-        margin-left: 20px !important;
+        margin-left: 40px !important;
       }
     }
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 800px) {
       flex-flow: wrap;
       justify-content: center;
       margin-bottom: 0;

@@ -204,6 +204,9 @@ h5 {
                 left: -34px;
                 animation: fadeInOpacity 0.8s ease-out;
               }
+              &:hover {
+                
+              }
             }
           }
         }
@@ -365,19 +368,107 @@ h5 {
 
     @media screen and (max-width: 840px) {
       .content {
-        flex-flow: column-reverse;
+        flex-flow: column;
 
         .content-column, .image-column {
           width: 100%;
         }
 
-        .content-column {
-          margin-top: 60px;
-        }
-
         .image-column {
           width: 100%;
           max-width: 630px;
+          padding-right: 100px;
+          margin-top: 50px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 560px) {
+      .content {
+        .image-column {
+          width: 100%;
+          max-width: 630px;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .featured-projects {
+      .project-slider {
+        .carousel-slider {
+
+          .control-arrow.control-prev {
+            left: calc(50% - 160px) !important;
+          }
+          .carousel-status {
+            left: calc(50% - 114px) !important;
+          }
+          .control-arrow.control-next {
+            left: calc(50% - 50px) !important;
+          }
+        }
+
+        .featured-project {
+          flex-flow: wrap;
+      
+          .image-col, .content-col {
+            width: 50% !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .featured-projects {
+      margin-bottom: 0;
+
+      .background-block {
+        width: 100%;
+      }
+      .project-slider {
+        max-width: 500px;
+
+        .carousel-slider {
+
+          .control-arrow.control-prev {
+            left: calc(80% - 160px) !important;
+          }
+          .carousel-status {
+            left: calc(80% - 114px) !important;
+          }
+          .control-arrow.control-next {
+            left: calc(80% - 50px) !important;
+          }
+          
+        }
+
+        .featured-project {
+          flex-flow: wrap;
+          flex-direction: column-reverse;
+          max-width: 400px;
+          width: 100%;
+      
+          .image-col, .content-col {
+            width: 100% !important;
+            padding: 0;
+          }
+
+          .content-col {
+            span {
+              color: $bp-light-gray;
+            }
+            h3 {
+              color: #d1d1d1;
+            }
+          }
+        }
+        
+        .view-all-projects {
+          left: unset;
+          color: #d1d1d1;
         }
       }
     }

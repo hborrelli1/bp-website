@@ -129,7 +129,7 @@ export default function Home({homePageData, themeConfig, projects}) {
           <div className="project-slider">
             <h4>Featured Projects</h4>
             <CarouselComponent items={featuredProjectItems} type='projects' />
-            <a className="view-all-projects" href="/projects">View All Projects +</a>
+            <a className="view-all-projects" href="/our-work">View All Projects +</a>
           </div>
         </div>
         <div className="why-bp">
