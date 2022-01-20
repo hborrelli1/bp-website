@@ -9,6 +9,7 @@
   .content {
     width: 100%;
     max-width: 1200px;
+    padding: 0 30px;
     display: flex;
 
     h1, p {
@@ -23,5 +24,19 @@
 
   .services-tabs {
     display: block;
+  }
+
+  @media screen and (max-width: 700px) {
+    .content {
+     flex-flow: column;
+     h1 {
+       text-align: left;
+       width: 100%;
+       margin-bottom: 10px;
+     }
+     p {
+       width: 100%;
+     }
+    }
   }
 }
