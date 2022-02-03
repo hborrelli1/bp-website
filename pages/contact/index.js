@@ -49,38 +49,8 @@ const Contact = ({ contactData, themeConfig }) => {
         title={pageTitle}
         copy={pageDescription}
         image={backgroundImage}
+        contactInfo={{telephoneNumber, faxNumber, address, linkedInUrl}}
       />
-      <address>
-        <div className="content-margins">
-          <ul className="links">
-            <li className="link">
-              <Link href="tel:4074181338">
-                <a>P: {telephoneNumber}</a>
-              </Link>
-              </li>
-            <li className="link">
-              <Link href="tel:4074181342">
-                <a>F: {faxNumber}</a>
-              </Link>
-              </li>
-            <li className="link">
-              <Link href="https://goo.gl/maps/2owQTVWmYejBTjdG6">
-                <a>{documentToReactComponents(address)}</a>
-              </Link>
-              </li>
-          </ul>
-          <Link href={linkedInUrl}>
-            <a className="linkedin">
-              <Image 
-                src="/assets/icons/linkedin-white@2x.png"
-                width="15px"
-                height="15px"
-                alt="Borrelli + Partners LinkedIn"
-              />
-            </a>
-          </Link>
-        </div>
-      </address>
       <section>
         <h2>Let&rsquo;s Connect</h2>
         <p>Form here...</p>

@@ -20,6 +20,7 @@
     position: relative;
     overflow:hidden;
     height: 100%;
+    width: 100%;
     
     .img-el {
       width: 100% !important;
@@ -129,5 +130,21 @@
       @include animate(hoverCircle, .3s, linear);
       animation-fill-mode: forwards;
     }
+  }
+
+  @media screen and (max-width: 780px) {
+    width: 47.5%;
+
+    &:nth-of-type(3n) {
+      margin-right: 5%;
+    }
+    &:nth-of-type(2n) {
+      margin-right: 0;
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    width: 100%;
+    margin-right: 0;
   }
 }
