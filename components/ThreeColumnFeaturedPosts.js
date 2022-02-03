@@ -9,10 +9,10 @@ const ThreeColumnFeaturedPosts = ({info}) => {
   return (
     <section className="featured-posts">
       <div className="content-margins">
-        <header>
+        <div className="section-header">
           {subTitle && <h3>{subTitle}</h3>}
           {title && <h2>{title}</h2>}
-        </header>
+        </div>
         <div className="posts">
           {posts.map((post, index) => <BlogCard key={index} blog={post}/>)}
         </div>
