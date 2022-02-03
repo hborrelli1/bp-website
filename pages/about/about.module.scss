@@ -23,7 +23,7 @@
         width: 100%;
         max-width: 800px;
         margin: 0 auto;
-        padding: 40px 0;
+        padding: 40px 30px;
 
         h1 {
           margin: 0;
@@ -87,16 +87,22 @@
     .our-qualities-content {
       margin: 0 auto;
       max-width: 1200px;
+      width: 100%;
       display: flex;
       flex-flow: wrap;
+      padding: 0 30px;
 
       .quality {
-        width: 50%;
+        width: calc(50% - 45px);
         display: flex;
         flex-flow: wrap;
         align-items: flex-start;
-        padding-right: 70px;
+        margin-right: 70px;
         margin-bottom: 50px;
+
+        &:nth-of-type(2n) {
+          margin-right: 0px;
+        }
 
         .quality-image {
           width: 25%;
@@ -129,16 +135,25 @@
     .content {
       max-width: 1000px;
       margin: 0 auto;
+      width: 100%;
 
       .people-wrapper {
         display: flex;
         flex-flow: wrap;
+        justify-content: space-between;
 
         .person {
-          width: 33%;
+          width: calc(31%);
+          height: 300px;
           position: relative;
           margin-bottom: 50px;
-          padding-right: 40px;
+
+          .headshot {
+            object-fit: cover;
+            width: 100% !important;
+            position: relative !important;
+            height: unset !important;
+          }
           
           .card {
             padding: 10px 20px;
@@ -154,14 +169,128 @@
               font-size: 18px;
               font-weight: 500;
               margin: 10px 0 6px 0;
+              color: #000;
             }
             
             p {
               font-size: 12px;  
               line-height: 18px;
               margin: 0 0 10px 0;
+              color: #000;
             }
           }
+        }
+        a.person {
+          &:hover {
+            -webkit-box-shadow: 0px 0px 10px 5px rgb(0 0 0 / 8%);
+            box-shadow: 0px 0px 10px 5px rgb(0 0 0 / 8%);
+            h5, p {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .main-content {
+      .margin-container {
+        flex-flow: column;
+        .content-col, 
+        .image-col {
+          width: 100%;
+          padding: 0;
+        }
+        .content-col {
+          margin-bottom: 40px;
+        }
+      }  
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    .our-team {
+      .content {
+        .people-wrapper {
+          .person {
+            width: 48%;
+            height: 50vh;
+            max-height: 450px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 740px) {
+    .our-qualities {
+      .our-qualities-content {
+        .quality {
+          flex-flow: column;
+          margin-right: 20px;
+          width: calc(50% - 10px);
+
+          .quality-image, 
+          .quality-content {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .header-content {
+      .header-copy {
+        p {
+          font-size: 18px !important;
+          line-height: 26px !important;
+          font-weight: 300;
+        }
+      }
+    }  
+    .main-content {
+      padding: 40px 30px;
+    }
+    .our-team {
+      .content {
+        .people-wrapper {
+          .person {
+            width: 100%;
+            margin: 0 auto 50px;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    .our-qualities {
+      .our-qualities-content {
+        .quality {
+          width: 100%;
+          flex-direction: row;
+
+          .quality-image {
+            width: 100px;
+          }
+          .quality-content {
+            h5 {
+              margin-top: 5px;
+            }
+          }
+
+          // justify-content: center;
+          // align-items: center;
+          // .quality-content {
+          //   text-align: center;
+          // }
+          // .quality-image {
+          //   justify-content: center;
+          //   align-items: center;
+          //   margin: 0 auto;
+          // }
         }
       }
     }

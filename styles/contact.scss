@@ -3,48 +3,72 @@
 .contact-page {
   header {
     padding-bottom: 200px;
-  }
-  address {
-    width: 100%;
-    margin-top: -55px;
-    display: flex;
-    justify-content: center;
     position: relative;
-    font-style: normal;
-
-    .content-margins {
-      max-width: 900px;
+    
+    address {
       width: 100%;
+      margin-top: -55px;
       display: flex;
-      align-items: center;
-    }
-
-    .links {
-      display: flex;
-      flex-flow: wrap;
-      color: #fff;
-      align-items: center;
-      width: 100%;
-      list-style-type: circle;
-
-      .link {
+      justify-content: center;
+      position: absolute;
+      font-style: normal;
+      bottom: 0;
+      left: 0;
+  
+      .content-margins {
+        max-width: 900px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+  
+      .links {
+        display: flex;
+        flex-flow: wrap;
         color: #fff;
-        margin-right: 40px;
-
-        * {
-          display: inline;
-        }
-        
-        a {
+        align-items: center;
+        width: 100%;
+        list-style-type: circle;
+  
+        .link {
           color: #fff;
-          text-decoration: none
+          margin-right: 40px;
+  
+          * {
+            display: inline;
+          }
+          
+          a {
+            color: #fff;
+            text-decoration: none
+          }
         }
-        
+      }
+  
+      .linkedin {
+        padding: 15px;
       }
     }
+  }
 
-    .linkedin {
-      padding: 15px;
+  @media screen and (max-width: 420px) {
+    header {
+      address {
+        .links {
+          .link {
+            margin-bottom: 10px;
+            &:nth-of-type(3n) {
+              a {
+                display: flex;
+                flex-flow: column;
+                p {
+                  margin: 0;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

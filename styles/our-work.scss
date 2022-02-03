@@ -161,4 +161,60 @@
       }
     }
   }
+
+  @media screen and (max-width: 1000px) {
+    .featured-projects {
+      .project {
+        .meta-data {
+          position: absolute;
+          opacity: 1;
+          padding: 15px;
+          top: unset;
+          bottom: 0px;
+          background: rgba(23, 36, 57, 0.57);
+          backdrop-filter: brightness(17%);
+          backdrop-filter: opacity(57%);
+          backdrop-filter: blur(8px);
+          overflow: hidden;
+          .title {
+            h2 {
+              font-size: 16px;
+              line-height: 26px;
+            }
+            p {
+              margin: 4px 0px;
+              font-size: 14px;
+              line-height: 16px;
+            }
+          }
+          .tags {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 700px) {
+    .featured-projects {
+      .project {
+        width: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .filter-bar {
+      .filters-content {
+        flex-flow: column;
+        span {
+          margin-bottom: 10px;
+        }
+        .filter {
+          margin-bottom: 10px;
+        }
+      }
+    }
+
+  }
 }

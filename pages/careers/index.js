@@ -52,9 +52,11 @@ const Careers = ({ careers, themeConfig }) => {
               <div className="img-wrap">
                 <Image 
                   src={coreValueKey[index]}
-                  width="45px"
-                  height="45px"
+                  className="icon"
+                  // width="45px"
+                  // height="45px"
                   alt={`${value} icon`}
+                  layout="fill"
                 />
               </div>
               <p>{value}</p>
@@ -79,12 +81,15 @@ const Careers = ({ careers, themeConfig }) => {
                   {documentToReactComponents(content)}
                 </div>
                 <div className="img-col">
-                  <Image 
-                    src={`https:${image.fields.file.url}`}
-                    width={image.fields.file.details.image.width}
-                    height={image.fields.file.details.image.height}
-                    alt={sectionTitle}
-                  />
+                  <div className="img-wrap">
+                    <Image 
+                      src={`https:${image.fields.file.url}`}
+                      className="cta-img"
+                      // width={image.fields.file.details.image.width}
+                      // height={image.fields.file.details.image.height}
+                      layout="fill"
+                      alt={sectionTitle}
+                    />                  </div>
                   {linkUrl && (
                       <Link href={linkUrl}>
                         <a className="cta">

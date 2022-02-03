@@ -157,13 +157,12 @@ const About = ({themeConfig, aboutData}) => {
                 if (person.fields.fullBioPage) {
                   return (
                     <Link href={`/our-team/${person.fields.slug}`} className={styles['person']} key={person.sys.id}>
-                      <a>
+                      <a className={styles["person"]} >
                       <Image 
                         className={styles['headshot']}
                         src={`https:${person.fields.photo.fields.file.url}`} 
-                        width={person.fields.photo.fields.file.details.image.width} 
-                        height={person.fields.photo.fields.file.details.image.height} 
                         alt={person.fields.name}
+                        layout="fill"
                       />
                       <div className={styles['card']}>
                         <h5>{person.fields.name}</h5>
@@ -174,13 +173,12 @@ const About = ({themeConfig, aboutData}) => {
                   );
                 } else {
                   return (
-                    <div className={styles['person']} key={person.sys.id}>
+                    <div className={styles['person']} key={person.sys.id} >
                       <Image 
                         className={styles['headshot']}
                         src={`https:${person.fields.photo.fields.file.url}`} 
-                        width={person.fields.photo.fields.file.details.image.width} 
-                        height={person.fields.photo.fields.file.details.image.height} 
                         alt={person.fields.name}
+                        layout="fill"
                       />
                       <div className={styles['card']}>
                         <h5>{person.fields.name}</h5>

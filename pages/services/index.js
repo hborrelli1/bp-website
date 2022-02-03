@@ -10,9 +10,6 @@ import safeJsonStringify from 'safe-json-stringify';
 import _ from 'lodash';
 
 export const getStaticProps = async () => {
-  // const res = await fetch(/** contentful api here */);
-  // const data = await res.json();
-
   const client = createClient({
     space: process.env.CONTENTFUL_SPACE_ID,
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,

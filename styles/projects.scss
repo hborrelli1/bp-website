@@ -59,6 +59,7 @@
   }
 
   .project-body {
+    padding: 0 30px;
     .project-content {
       width: 100%;
       max-width: 1100px;
@@ -88,6 +89,7 @@
         .details {
           width: 30%;
           margin-right: 20px;
+          min-width: 290px;
         }
         
         .summary {
@@ -119,6 +121,21 @@
           .control-arrow.control-next {
             background-image: url("/assets/icons/arrow-right-dark@2x.png") !important;
             left: calc(50% + 40px) !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 750px) {
+    .project-body {
+      .project-content {    
+        .project-info {
+          flex-flow: column;
+          .details,
+          .summary {
+            width: 100%;
+            margin-bottom: 30px;
           }
         }
       }

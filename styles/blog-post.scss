@@ -10,6 +10,7 @@
   .body-content {
     max-width: 800px;
     margin: -70px auto 0;
+    padding: 0 30px;
 
     .img-wrap {
       width: 100%;
@@ -56,6 +57,7 @@
   .content-margins {
     max-width: 1000px;
     margin: 0 auto;
+    padding: 0 30px;
 
     .sub-title {
       margin: 100px 0 30px;
@@ -68,6 +70,13 @@
 
     .featured-posts {
       margin-top: 0;
+      .content-margins {
+        padding: 0;
+      }
     }
+  }
+
+  @media screen and (max-width:500px) {
+
   }
 }
