@@ -45,7 +45,6 @@ export const getStaticProps = async () => {
 }
 
 export default function Home({homePageData, themeConfig, projects}) {
-  console.log('homepageData:', homePageData);
   const {fields} = homePageData[0];
   const [navHeight, setNavHeight] = useState(60);
   const [heroHeight, setHeroHeight] = useState(0);
@@ -71,13 +70,14 @@ export default function Home({homePageData, themeConfig, projects}) {
     backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})`,
   }
 
-  const featuredProjectItems = projects.reduce((acc, item, index) => {
+  const featuredProjectItems = fields.featuredProjects.reduce((acc, item, index) => {
     acc[index] = {
       thumbnail: item.fields.thumbnailImage,
       title: item.fields.projectTitle,
-      excerpt: item.fields.projectExcerpt,
+      excerpt: item.fields.shortSummary,
       industry: item.fields.industry,
       id: item.sys.id,
+      slug: item.fields.slug,
     }
 
     return acc;
