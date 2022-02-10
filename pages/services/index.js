@@ -176,6 +176,7 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                         </div>
                       )}
                       <ThreeColumnFeaturedPosts info={{
+                        type: "our-work",
                         subTitle: service.fields.featuredProjectsSubtitle,
                         title: service.fields.featuredProjectsSectionTitle,
                         posts: service.fields.featuredProjects

@@ -56,7 +56,7 @@ const Contact = ({ contactData, themeConfig }) => {
         <p>Form here...</p>
       </section>
       <ThreeColumnFeaturedPosts info={{
-        subTitle: null,
+        subTitle: "News",
         title: null,
         posts: featuredPosts
       }} />

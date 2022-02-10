@@ -433,6 +433,14 @@ h5 {
     }
   }
 
+  .featured-posts {
+    .content-margins {
+      .section-header {
+        text-align: center;
+      }
+    }
+  }
+
   @media screen and (max-width: 800px) {
     .featured-projects {
       .project-slider {

@@ -105,7 +105,8 @@ const Project = ({ project }) => {
       <ThreeColumnFeaturedPosts info={{
         subTitle: "More Success Stories",
         title: '', 
-        posts: featuredProjects
+        posts: featuredProjects,
+        type: "our-work"
       }} />
       <FooterCta ctaData={{
         copy: footerCta.fields.copy,
