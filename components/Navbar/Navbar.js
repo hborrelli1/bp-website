@@ -54,7 +54,7 @@ const Navbar = () => {
   }
 
   const menu = [
-    { title: 'Home', path: '/' },
+    // { title: 'Home', path: '/' },
     { title: 'Services', path: '/services' },
     { title: 'Our Work', path: '/our-work' },
     { title: 'About', path: '/about' },
