@@ -49,8 +49,6 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
   } = servicesPageData.fields;
   const { url: themeBackgroundImageUrl } = themeConfig.fields.backgroundTexture.fields.file;
 
-  console.log('services:', services);
-
   useEffect(() => {
     // Generate Tabs Objects
     const tabs = services.reduce((acc, service, index) => {

@@ -23,7 +23,6 @@ export const getStaticProps = async () => {
 }
 
 const Careers = ({ careers, themeConfig }) => {
-  console.log('careers:', careers);
   const {
     coreValues,
     headerBackgroundImage,

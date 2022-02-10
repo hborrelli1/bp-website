@@ -29,8 +29,6 @@ export const getStaticProps = async () => {
 
 
 const Contact = ({ contactData, themeConfig }) => {
-  console.log('contact Data:', contactData);  
-  console.log('themeConfig:', themeConfig);  
   const {
     featuredPosts,
     pageDescription,

@@ -28,7 +28,6 @@ export const getStaticProps = async () => {
 }
 
 const About = ({themeConfig, aboutData}) => {
-  console.log('aboutdata:', aboutData);
 
   const {
     aboutSubTitle,

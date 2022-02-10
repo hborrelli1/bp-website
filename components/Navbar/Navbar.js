@@ -112,6 +112,7 @@ const Navbar = () => {
             src="/assets/icons/hamburger-menu@2x.png"
             width="32px"
             height="22px"
+            alt="Navigation Menu"
           />
         </button>
       </div>

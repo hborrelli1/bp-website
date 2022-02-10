@@ -31,7 +31,6 @@ export const getStaticProps = async () => {
 }
 
 const OurWork = ({pageData}) => {
-  console.log('pageData:', pageData);
   const {
     backgroundImage,
     featuredProjects,
@@ -109,8 +108,6 @@ const OurWork = ({pageData}) => {
         slug,
       } = project.fields;
 
-      console.log('slug:', slug)
-      
       return (
         <Link href={`/our-work/${slug}`} key={project.sys.id}>
           <a className="project" style={{backgroundImage: `url(https:${thumbnailImage.fields.file.url})`}}>
