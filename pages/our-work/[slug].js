@@ -99,7 +99,6 @@ const Project = ({ project }) => {
               {galleryImages && <CarouselComponent items={galleryImages} type="images" />}
             </div>
           </section>
-          <section>Two Column CTA....</section>
         </div>
       </article>
       <ThreeColumnFeaturedPosts info={{

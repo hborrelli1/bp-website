@@ -2,6 +2,8 @@ import {createClient} from 'contentful';
 import Image from 'next/image';
 import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import safeJsonStringify from 'safe-json-stringify';
+import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -29,6 +31,9 @@ export const getStaticProps = async ({ params }) => {
     'fields.slug': params.slug,
   });
 
+  const stringifiedItems = safeJsonStringify(items)
+  const data = JSON.parse(stringifiedItems)
+
   if (!items.length) {
     return {
       redirect: {
@@ -39,12 +44,13 @@ export const getStaticProps = async ({ params }) => {
   }
 
   return {
-    props: { person: items[0]},
+    props: { person: data[0]},
     revalidate: 1,
   }
 }
 
 const Person = ({ person }) => {
+  console.log('person: ', person);
   if (!person.fields.fullBioPage) {
     return (<p>No bio page.</p>);
   }
@@ -60,6 +66,9 @@ const Person = ({ person }) => {
     slug,
     quote1,
     quote2,
+    featuredProjects,
+    involvement,
+
   } = person.fields;
   return (
     <article className="leadership-wrapper">
@@ -139,10 +148,21 @@ const Person = ({ person }) => {
       </section>
 
       {/* Featured Projects */}
-      <p>Featured Projects...</p>
+      <ThreeColumnFeaturedPosts info={{
+        subTitle: `${name}'s Featured Work`,
+        title: null,
+        posts: featuredProjects
+      }}/>
 
       {/* Involvement */}
-      <p>Involvement</p>
+      <section className="involvement">
+        <div className="content-margins">
+          <h3>Involvment</h3>
+          <ul className="involvement-list">
+            {involvement.map((item, key) => <li className="item" key={key}>{item}</li>)}
+          </ul>
+        </div>
+      </section>
     </article>
   );
 }
