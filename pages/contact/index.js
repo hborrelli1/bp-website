@@ -51,9 +51,11 @@ const Contact = ({ contactData, themeConfig }) => {
         image={backgroundImage}
         contactInfo={{telephoneNumber, faxNumber, address, linkedInUrl}}
       />
-      <section>
-        <h2>Let&rsquo;s Connect</h2>
-        <p>Form here...</p>
+      <section className="contact-body">
+        <div className="content-margins">
+          <h2>Let&rsquo;s Connect</h2>
+          <p>Contact Form here...</p>
+        </div>
       </section>
       <ThreeColumnFeaturedPosts info={{
         subTitle: "News",
