@@ -22,13 +22,13 @@ p, a, span, button, li {
 h1 {
   font-family: din-2014, sans-serif;
   font-size: 50px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 60px;
 }
 h2 {
   font-family: din-2014, sans-serif;
   font-size: 40px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 46px;
 }
 h3 {
@@ -67,6 +67,7 @@ h5 {
         margin: 0;
         width: 50%;
         color: #fff;
+        font-weight: 500;
       }
       .description {
         width: 50%;
