@@ -37,8 +37,6 @@ export const getStaticProps = async () => {
 }
 
 const News = ({ newsPage, blogItems }) => {
-  console.log('newsPage:', newsPage);
-  console.log('blogItems:', blogItems);
   const {
     backgroundImage,
     featuredNews,

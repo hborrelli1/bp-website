@@ -67,7 +67,7 @@ const Project = ({ project }) => {
     thumbnailImage,
     featuredProjects,
   } = project.fields;
-  console.log('project', project)
+  
   return (
     <div className="project-wrapper">
       <header style={{ backgroundImage: `url(https:${galleryImages[0].fields.file.url})`}}>
@@ -105,7 +105,8 @@ const Project = ({ project }) => {
       <ThreeColumnFeaturedPosts info={{
         subTitle: "More Success Stories",
         title: '', 
-        posts: featuredProjects
+        posts: featuredProjects,
+        type: "our-work"
       }} />
       <FooterCta ctaData={{
         copy: footerCta.fields.copy,

@@ -29,8 +29,6 @@ export const getStaticProps = async () => {
 
 
 const Contact = ({ contactData, themeConfig }) => {
-  console.log('contact Data:', contactData);  
-  console.log('themeConfig:', themeConfig);  
   const {
     featuredPosts,
     pageDescription,
@@ -51,12 +49,14 @@ const Contact = ({ contactData, themeConfig }) => {
         image={backgroundImage}
         contactInfo={{telephoneNumber, faxNumber, address, linkedInUrl}}
       />
-      <section>
-        <h2>Let&rsquo;s Connect</h2>
-        <p>Form here...</p>
+      <section className="contact-body">
+        <div className="content-margins">
+          <h2>Let&rsquo;s Connect</h2>
+          <p>Contact Form here...</p>
+        </div>
       </section>
       <ThreeColumnFeaturedPosts info={{
-        subTitle: null,
+        subTitle: "News",
         title: null,
         posts: featuredPosts
       }} />

@@ -4,7 +4,7 @@
   margin: 100px 0px;
 
   .content-margins {
-    max-width: 1150px;
+    max-width: 1400px;
     padding: 0 30px;
     margin: 0 auto;
     display: flex;
@@ -19,7 +19,7 @@
         text-transform: uppercase;
         letter-spacing: 2px;
         color: rgba($bp-blue, .3);
-        margin: 0;
+        margin: 0 0 8px;
       }
 
       h2 {

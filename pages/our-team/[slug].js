@@ -45,7 +45,6 @@ export const getStaticProps = async ({ params }) => {
 }
 
 const Person = ({ person }) => {
-  console.log('person:', person);
   if (!person.fields.fullBioPage) {
     return (<p>No bio page.</p>);
   }

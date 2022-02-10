@@ -54,7 +54,7 @@ const Navbar = () => {
   }
 
   const menu = [
-    { title: 'Home', path: '/' },
+    // { title: 'Home', path: '/' },
     { title: 'Services', path: '/services' },
     { title: 'Our Work', path: '/our-work' },
     { title: 'About', path: '/about' },
@@ -112,6 +112,7 @@ const Navbar = () => {
             src="/assets/icons/hamburger-menu@2x.png"
             width="32px"
             height="22px"
+            alt="Navigation Menu"
           />
         </button>
       </div>

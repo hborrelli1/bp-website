@@ -304,6 +304,35 @@ h5 {
           letter-spacing: 1px;
           color: rgba(0,0,0,.8);
         }
+
+        .project-link {
+          color: $bp-dark-blue;
+          padding: 10px 20px;
+          border: 1px solid $bp-dark-blue;
+          text-decoration: none;
+          margin-top: 20px;
+          position: relative;
+          padding-right: 30px;
+          
+          &:after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-right: 1px solid $bp-dark-blue;
+            border-bottom: 1px solid $bp-dark-blue;
+            position: relative;
+            display: inline-block;
+            left: 10px;
+            transform: rotate(-45deg);
+            transition: all .3s;
+          }
+
+          &:hover {
+            &:after {
+              left: 15px;
+            }
+          }
+        }
       }
     }
   }
@@ -400,6 +429,14 @@ h5 {
           max-width: 630px;
           padding: 0;
         }
+      }
+    }
+  }
+
+  .featured-posts {
+    .content-margins {
+      .section-header {
+        text-align: center;
       }
     }
   }

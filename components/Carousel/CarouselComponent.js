@@ -1,9 +1,9 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 
 const CarouselComponent = ({ items, type }) => {
-  console.log('items:', items);
 
   if (type === 'projects') {
     return (
@@ -29,6 +29,9 @@ const CarouselComponent = ({ items, type }) => {
               <span>{item.industry}</span>
               <h3>{item.title}</h3>
               <p>{item.excerpt}</p>
+              <Link href={`/our-work/${item.slug}`}>
+                <a className="project-link">Keep Reading</a>
+              </Link>
             </div>
           </div>
         ))}

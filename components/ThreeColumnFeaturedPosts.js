@@ -2,6 +2,7 @@ import BlogCard from './BlogCard';
 
 const ThreeColumnFeaturedPosts = ({info}) => {
   const {
+    type,
     subTitle,
     title,
     posts
@@ -14,7 +15,7 @@ const ThreeColumnFeaturedPosts = ({info}) => {
           {title && <h2>{title}</h2>}
         </div>
         <div className="posts">
-          {posts.map((post, index) => <BlogCard key={index} blog={post}/>)}
+          {posts.map((post, index) => <BlogCard key={index} blog={post} type={type} />)}
         </div>
       </div>
     </section>

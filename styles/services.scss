@@ -12,7 +12,9 @@
       display: flex;
       justify-content: space-between;
       padding: 60px 20px 100px;
-      margin: 0;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1400px;
 
       li {
         margin: 0px 30px;
@@ -49,6 +51,9 @@
     .services-tab-content {
       .service-content {
         flex-flow: wrap;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
 
         .service-content-body {
           display: flex;
@@ -98,6 +103,15 @@
                 font-weight: 500;
                 letter-spacing: 1px;
               }
+            }
+          }
+        }
+
+        .featured-posts {
+          width: 100%;
+          .content-margins {
+            .section-header {
+              text-align: center;
             }
           }
         }

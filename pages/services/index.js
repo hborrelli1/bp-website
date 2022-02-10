@@ -49,8 +49,6 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
   } = servicesPageData.fields;
   const { url: themeBackgroundImageUrl } = themeConfig.fields.backgroundTexture.fields.file;
 
-  console.log('services:', services);
-
   useEffect(() => {
     // Generate Tabs Objects
     const tabs = services.reduce((acc, service, index) => {
@@ -176,6 +174,7 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                         </div>
                       )}
                       <ThreeColumnFeaturedPosts info={{
+                        type: "our-work",
                         subTitle: service.fields.featuredProjectsSubtitle,
                         title: service.fields.featuredProjectsSectionTitle,
                         posts: service.fields.featuredProjects

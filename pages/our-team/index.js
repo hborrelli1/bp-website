@@ -22,7 +22,6 @@ export const getStaticProps = async () => {
 }
 
 const OurTeam = ({ people }) => {
-  console.log('people', people);
   const {
     fields,
   } = people;

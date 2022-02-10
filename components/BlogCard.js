@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-const BlogCard = ({blog}) => {
+const BlogCard = ({blog, type = "news"}) => {
   const {shortSummary, blogTitle, slug, thumbnailImage} = blog.fields;
 
   const shortSummaryText = shortSummary.length > 150 
@@ -9,7 +9,7 @@ const BlogCard = ({blog}) => {
     : shortSummary;
 
   return (
-    <Link href={`/news/${slug}`}>
+    <Link href={`/${type}/${slug}`}>
       <a className="blog-card">
         <div className="img-wrap">
           <div className="img-hover-circle">
