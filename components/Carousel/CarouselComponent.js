@@ -48,7 +48,7 @@ const CarouselComponent = ({ items, type }) => {
         statusFormatter={(currentItem, totalCount) => (<span>0{currentItem} / 0{totalCount}</span>)}
       >
         {items.map(item => (
-          <blockquote className="testimonials-wrap">
+          <blockquote className="testimonials-wrap" key={item.sys.id}>
             <div className="copy">{documentToReactComponents(item.fields.testimonial)}</div>
             <div className="info-block">
               <p className="name">{item.fields.name}</p>
