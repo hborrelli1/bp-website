@@ -1,6 +1,9 @@
 @import "./variables";
 
 .careers-wrapper {
+  header {
+    padding: 200px 0;
+  }
   .core-values {
     background-color: $bp-blue;
     padding: 30px 20px;

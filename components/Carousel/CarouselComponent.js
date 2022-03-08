@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 const CarouselComponent = ({ items, type }) => {
 
@@ -34,6 +35,26 @@ const CarouselComponent = ({ items, type }) => {
               </Link>
             </div>
           </div>
+        ))}
+      </Carousel>
+    )
+  } else if (type === 'testimonials') {
+    return (
+      <Carousel
+        showThumbs={false}
+        showArrows={true}
+        showIndicators={false}
+        infiniteLoop={true}
+        statusFormatter={(currentItem, totalCount) => (<span>0{currentItem} / 0{totalCount}</span>)}
+      >
+        {items.map(item => (
+          <blockquote className="testimonials-wrap">
+            <div className="copy">{documentToReactComponents(item.fields.testimonial)}</div>
+            <div className="info-block">
+              <p className="name">{item.fields.name}</p>
+              <p className="title">{item.fields.title}</p>
+            </div>
+          </blockquote>
         ))}
       </Carousel>
     )
