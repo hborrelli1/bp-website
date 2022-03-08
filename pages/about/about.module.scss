@@ -14,7 +14,7 @@
       padding: 0;
 
       .header-image {
-        height: 60vh;
+        height: 50vh;
         background-size: cover;
         background-position: center;
       }
@@ -193,6 +193,14 @@
     }
   }
 
+  @media screen and (max-width: 1100px) {
+    .header-content  {
+      .header-image {
+        height: 25vh !important;
+      }
+    }
+  }
+
   @media screen and (max-width: 1000px) {
     .main-content {
       .margin-container {
@@ -266,6 +274,11 @@
   }
 
   @media screen and (max-width: 500px) {
+    .header-content  {
+      .header-image {
+        height: 17vh !important;
+      }
+    }
     .our-qualities {
       .our-qualities-content {
         .quality {

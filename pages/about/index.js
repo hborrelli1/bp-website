@@ -5,6 +5,7 @@ import {createClient} from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import styles from './about.module.scss'
+import CarouselComponent from '../../components/Carousel/CarouselComponent';
 
 // Runs at build time
 // Used to fetch data from Blog section.
@@ -49,8 +50,9 @@ const About = ({themeConfig, aboutData}) => {
     servicesCta,
     shortDescription,
     slug,
-    testitmonials
+    testimonials
   } = aboutData.fields;
+  console.log('testimonials:', testimonials);
   return (
     <>
       <Head>
@@ -145,7 +147,7 @@ const About = ({themeConfig, aboutData}) => {
         </section>
         <section className="testimonials">
           <div className="content">
-            {/* Add Testimonials Carousel Here.... */}
+            <CarouselComponent items={testimonials} type="testimonials" />
           </div>
         </section>
         <section className={styles['our-team']}>
