@@ -38,10 +38,6 @@ const Navbar = () => {
     }
   })
 
-  useEffect(() => {
-    
-  })
-
 
   useEffect(() => {
     setIsMobileState();

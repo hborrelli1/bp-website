@@ -2,6 +2,7 @@ import {createClient} from 'contentful';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export const getStaticProps = async () => {
@@ -23,9 +24,34 @@ export const getStaticProps = async () => {
 }
 
 const Careers = ({ careers, themeConfig }) => {
+  console.log('careers:', careers);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const setIsMobileState = () => {
+    const windowSize = window.innerWidth;
+    if (windowSize <= 600) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }
+
+  useEffect(() =>{
+    window.addEventListener('resize', setIsMobileState)
+
+    return () => {
+      window.removeEventListener('resize', setIsMobileState)
+    }
+  })
+
+  useEffect(() => {
+    setIsMobileState();
+  }, [])
+
   const {
     coreValues,
     headerBackgroundImage,
+    mobileBackgroundImage,
     pageDescription,
     pageTitle,
     textAndImageSections,
@@ -42,7 +68,7 @@ const Careers = ({ careers, themeConfig }) => {
       <TwoColumnHeader 
         title={pageTitle}
         copy={pageDescription}
-        image={headerBackgroundImage}
+        image={isMobile ? mobileBackgroundImage : headerBackgroundImage}
       />
       <section className="core-values">
         <div className="content">
