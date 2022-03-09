@@ -36,6 +36,16 @@ const Careers = ({ careers, themeConfig }) => {
     }
   }
 
+  const scrollTo = (indexValue) => {
+    const elOffsetHeight = document.getElementById(`section-${indexValue + 1}`);
+    
+    // window.scrollTo({
+    //   top: heroHeight - navHeight, 
+    //   left: 0,
+    //   behavior: 'smooth'
+    // });
+  }
+
   useEffect(() =>{
     window.addEventListener('resize', setIsMobileState)
 
@@ -73,17 +83,19 @@ const Careers = ({ careers, themeConfig }) => {
       <section className="core-values">
         <div className="content">
           {coreValues.map((value, index) => (
-            <div key={index} className="value">
-              <div className="img-wrap">
-                <Image 
-                  src={coreValueKey[index]}
-                  className="icon"
-                  // width="45px"
-                  // height="45px"
-                  alt={`${value} icon`}
-                  layout="fill"
-                />
-              </div>
+            <div key={index} className="value" id={value}>
+              <Link href={`#section-${index}`} >
+                <a className="img-wrap">
+                  <Image 
+                    src={coreValueKey[index]}
+                    className="icon"
+                    // width="45px"
+                    // height="45px"
+                    alt={`${value} icon`}
+                    layout="fill"
+                  />
+                </a>
+              </Link>
               <p>{value}</p>
             </div>
           ))}
@@ -99,7 +111,7 @@ const Careers = ({ careers, themeConfig }) => {
           const { content, image, linkTitle, linkUrl, sectionTitle } = section.fields;
 
           return (
-            <section className="content-section" style={style} key={index}>
+            <section className="content-section" style={style} key={index} id={`section-${index}`}>
               <div className="content-margins">
                 <div className="content-col">
                   <h2>{sectionTitle}</h2>
@@ -112,7 +124,9 @@ const Careers = ({ careers, themeConfig }) => {
                       className="cta-img"
                       // width={image.fields.file.details.image.width}
                       // height={image.fields.file.details.image.height}
-                      layout="fill"
+                      width="730px"
+                      height="552px"
+                      layout="responsive"
                       alt={sectionTitle}
                     />                  </div>
                   {linkUrl && (

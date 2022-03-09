@@ -111,13 +111,13 @@
             align-self: flex-end;
             .img-wrap {
               position: relative;
-              height: 500px;
+              // height: 500px;
 
               .cta-img {
-                object-fit: cover;
-                width: 100% !important;
-                position: relative !important;
-                height: unset !important;
+                // object-fit: cover;
+                // width: 100% !important;
+                // position: relative !important;
+                // height: unset !important;
               }
             }
           }
@@ -133,13 +133,13 @@
           .content-col {}
           .img-col {
             .img-wrap {
-              height: 400px;
+              // height: 400px;
               position: relative;
               .cta-img {
-                object-fit: contain;
-                width: 100% !important;
-                position: relative !important;
-                height: unset !important;
+                // object-fit: contain;
+                // width: 100% !important;
+                // position: relative !important;
+                // height: unset !important;
               }
             }
           }
@@ -163,13 +163,13 @@
           }
           .img-wrap {
             position: relative;
-            height: 400px;
+            // height: 400px;
 
             .cta-img {
-              object-fit: cover !important;
-              width: 100% !important;
-              position: relative !important;
-              height: unset !important;
+              // object-fit: cover !important;
+              // width: 100% !important;
+              // position: relative !important;
+              // height: unset !important;
             }
           }
         }
@@ -265,10 +265,10 @@
                 position: relative;
                 height: 400px;
                 .cta-img {
-                  object-fit: cover;
-                  width: 100% !important;
-                  position: relative !important;
-                  height: unset !important;
+                  // object-fit: cover;
+                  // width: 100% !important;
+                  // position: relative !important;
+                  // height: unset !important;
                 }
               }
             }
