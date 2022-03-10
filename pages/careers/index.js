@@ -38,20 +38,18 @@ const Careers = ({ careers, themeConfig }) => {
 
   const scrollTo = (indexValue) => {
     const element = document.getElementById(`section-${indexValue + 1}`);
-    console.log('element:', element)
-    var getElemDistance = function ( elem ) {
-      var location = 0;
+    const getElemDistance = (elem) => {
+      let location = 0;
       if (elem.offsetParent) {
-          do {
-              location += elem.offsetTop;
-              elem = elem.offsetParent;
-          } while (elem);
+        do {
+          location += elem.offsetTop;
+          elem = elem.offsetParent;
+        } while (elem);
       }
       return location >= 0 ? location : 0;
-  };
+    };
 
-  const distance = getElemDistance(element)
-  console.log('distance:', distance)
+    const distance = getElemDistance(element);
     window.scrollTo({
       top: distance, 
       left: 0,
