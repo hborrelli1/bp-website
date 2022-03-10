@@ -38,10 +38,6 @@ const Navbar = () => {
     }
   })
 
-  useEffect(() => {
-    
-  })
-
 
   useEffect(() => {
     setIsMobileState();
@@ -78,7 +74,7 @@ const Navbar = () => {
   if (isMobile) {
     return (
       <div className="navbarMobile" style={navBarStyle} id="Navbar">
-        <Link className="logo" href="/">
+        <Link className="logo" href="/" scroll={false}>
           <a>
             <Image 
               src="/assets/logos/bp-main-logo@2x.png" 

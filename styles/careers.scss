@@ -6,7 +6,7 @@
   }
   .core-values {
     background-color: $bp-blue;
-    padding: 30px 20px;
+    padding: 100px 20px;
     
     .content {
       display: flex;
@@ -18,6 +18,9 @@
         align-items: center;
         margin: 0px 40px;
         color: #fff;
+        background-color: unset;
+        border: 0;
+        cursor: pointer;
 
         .img-wrap {
           margin-right: 20px;
@@ -111,13 +114,13 @@
             align-self: flex-end;
             .img-wrap {
               position: relative;
-              height: 500px;
+              // height: 500px;
 
               .cta-img {
-                object-fit: cover;
-                width: 100% !important;
-                position: relative !important;
-                height: unset !important;
+                // object-fit: cover;
+                // width: 100% !important;
+                // position: relative !important;
+                // height: unset !important;
               }
             }
           }
@@ -133,13 +136,13 @@
           .content-col {}
           .img-col {
             .img-wrap {
-              height: 400px;
+              // height: 400px;
               position: relative;
               .cta-img {
-                object-fit: contain;
-                width: 100% !important;
-                position: relative !important;
-                height: unset !important;
+                // object-fit: contain;
+                // width: 100% !important;
+                // position: relative !important;
+                // height: unset !important;
               }
             }
           }
@@ -163,13 +166,13 @@
           }
           .img-wrap {
             position: relative;
-            height: 400px;
+            // height: 400px;
 
             .cta-img {
-              object-fit: cover !important;
-              width: 100% !important;
-              position: relative !important;
-              height: unset !important;
+              // object-fit: cover !important;
+              // width: 100% !important;
+              // position: relative !important;
+              // height: unset !important;
             }
           }
         }
@@ -265,10 +268,10 @@
                 position: relative;
                 height: 400px;
                 .cta-img {
-                  object-fit: cover;
-                  width: 100% !important;
-                  position: relative !important;
-                  height: unset !important;
+                  // object-fit: cover;
+                  // width: 100% !important;
+                  // position: relative !important;
+                  // height: unset !important;
                 }
               }
             }

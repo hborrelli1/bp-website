@@ -2,6 +2,7 @@ import {createClient} from 'contentful';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export const getStaticProps = async () => {
@@ -23,9 +24,55 @@ export const getStaticProps = async () => {
 }
 
 const Careers = ({ careers, themeConfig }) => {
+  console.log('careers:', careers);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const setIsMobileState = () => {
+    const windowSize = window.innerWidth;
+    if (windowSize <= 600) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }
+
+  const scrollTo = (indexValue) => {
+    const element = document.getElementById(`section-${indexValue + 1}`);
+    const getElemDistance = (elem) => {
+      let location = 0;
+      if (elem.offsetParent) {
+        do {
+          location += elem.offsetTop;
+          elem = elem.offsetParent;
+        } while (elem);
+      }
+      return location >= 0 ? location : 0;
+    };
+
+    const distance = getElemDistance(element);
+    window.scrollTo({
+      top: distance, 
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  useEffect(() =>{
+    window.addEventListener('resize', setIsMobileState)
+
+    return () => {
+      window.removeEventListener('resize', setIsMobileState)
+    }
+  })
+
+  useEffect(() => {
+    setIsMobileState();
+  }, [])
+
   const {
     coreValues,
     headerBackgroundImage,
+    mobileBackgroundImage,
     pageDescription,
     pageTitle,
     textAndImageSections,
@@ -42,24 +89,22 @@ const Careers = ({ careers, themeConfig }) => {
       <TwoColumnHeader 
         title={pageTitle}
         copy={pageDescription}
-        image={headerBackgroundImage}
+        image={isMobile ? mobileBackgroundImage : headerBackgroundImage}
       />
       <section className="core-values">
         <div className="content">
           {coreValues.map((value, index) => (
-            <div key={index} className="value">
+            <button type="button" key={index} className="value" onClick={() => scrollTo(index-1)}>
               <div className="img-wrap">
                 <Image 
                   src={coreValueKey[index]}
                   className="icon"
-                  // width="45px"
-                  // height="45px"
                   alt={`${value} icon`}
                   layout="fill"
                 />
               </div>
               <p>{value}</p>
-            </div>
+            </button>
           ))}
         </div>
       </section>
@@ -73,7 +118,7 @@ const Careers = ({ careers, themeConfig }) => {
           const { content, image, linkTitle, linkUrl, sectionTitle } = section.fields;
 
           return (
-            <section className="content-section" style={style} key={index}>
+            <section className="content-section" style={style} key={index} id={`section-${index}`}>
               <div className="content-margins">
                 <div className="content-col">
                   <h2>{sectionTitle}</h2>
@@ -86,7 +131,9 @@ const Careers = ({ careers, themeConfig }) => {
                       className="cta-img"
                       // width={image.fields.file.details.image.width}
                       // height={image.fields.file.details.image.height}
-                      layout="fill"
+                      width="730px"
+                      height="552px"
+                      layout="responsive"
                       alt={sectionTitle}
                     />                  </div>
                   {linkUrl && (
