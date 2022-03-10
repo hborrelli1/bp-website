@@ -96,21 +96,17 @@ const Careers = ({ careers, themeConfig }) => {
       <section className="core-values">
         <div className="content">
           {coreValues.map((value, index) => (
-            // <div key={index} className="value" id={value}>
-              <button type="button" key={index} className="value" onClick={() => scrollTo(index-1)}>
-                <div className="img-wrap">
-                  <Image 
-                    src={coreValueKey[index]}
-                    className="icon"
-                    // width="45px"
-                    // height="45px"
-                    alt={`${value} icon`}
-                    layout="fill"
-                  />
-                </div>
-                <p>{value}</p>
-              </button>
-            // </div>
+            <button type="button" key={index} className="value" onClick={() => scrollTo(index-1)}>
+              <div className="img-wrap">
+                <Image 
+                  src={coreValueKey[index]}
+                  className="icon"
+                  alt={`${value} icon`}
+                  layout="fill"
+                />
+              </div>
+              <p>{value}</p>
+            </button>
           ))}
         </div>
       </section>
