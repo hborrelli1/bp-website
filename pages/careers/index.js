@@ -37,13 +37,26 @@ const Careers = ({ careers, themeConfig }) => {
   }
 
   const scrollTo = (indexValue) => {
-    const elOffsetHeight = document.getElementById(`section-${indexValue + 1}`);
-    
-    // window.scrollTo({
-    //   top: heroHeight - navHeight, 
-    //   left: 0,
-    //   behavior: 'smooth'
-    // });
+    const element = document.getElementById(`section-${indexValue + 1}`);
+    console.log('element:', element)
+    var getElemDistance = function ( elem ) {
+      var location = 0;
+      if (elem.offsetParent) {
+          do {
+              location += elem.offsetTop;
+              elem = elem.offsetParent;
+          } while (elem);
+      }
+      return location >= 0 ? location : 0;
+  };
+
+  const distance = getElemDistance(element)
+  console.log('distance:', distance)
+    window.scrollTo({
+      top: distance, 
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   useEffect(() =>{
@@ -83,9 +96,9 @@ const Careers = ({ careers, themeConfig }) => {
       <section className="core-values">
         <div className="content">
           {coreValues.map((value, index) => (
-            <div key={index} className="value" id={value}>
-              <Link href={`#section-${index}`} >
-                <a className="img-wrap">
+            // <div key={index} className="value" id={value}>
+              <button type="button" key={index} className="value" onClick={() => scrollTo(index-1)}>
+                <div className="img-wrap">
                   <Image 
                     src={coreValueKey[index]}
                     className="icon"
@@ -94,10 +107,10 @@ const Careers = ({ careers, themeConfig }) => {
                     alt={`${value} icon`}
                     layout="fill"
                   />
-                </a>
-              </Link>
-              <p>{value}</p>
-            </div>
+                </div>
+                <p>{value}</p>
+              </button>
+            // </div>
           ))}
         </div>
       </section>
