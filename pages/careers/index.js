@@ -135,7 +135,8 @@ const Careers = ({ careers, themeConfig }) => {
                       height="552px"
                       layout="responsive"
                       alt={sectionTitle}
-                    />                  </div>
+                    />                  
+                  </div>
                   {linkUrl && (
                       <Link href={linkUrl}>
                         <a className="cta">

@@ -2,6 +2,7 @@ import ThreeColumnFeaturedPosts from "../../components/ThreeColumnFeaturedPosts"
 import {createClient} from 'contentful';
 import safeJsonStringify from 'safe-json-stringify';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
+import ContactForm from '../../components/ContactForm/ContactForm';
 import Image from 'next/image';
 import Link from 'next/link';
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -27,6 +28,8 @@ export const getStaticProps = async () => {
   }
 }
 
+// https://flaviocopes.com/nextjs-recaptcha/
+// Try this article for recaptcha with nextjs.
 
 const Contact = ({ contactData, themeConfig }) => {
   const {
@@ -51,8 +54,7 @@ const Contact = ({ contactData, themeConfig }) => {
       />
       <section className="contact-body">
         <div className="content-margins">
-          <h2>Let&rsquo;s Connect</h2>
-          <p>Contact Form here...</p>
+          <ContactForm />
         </div>
       </section>
       <ThreeColumnFeaturedPosts info={{

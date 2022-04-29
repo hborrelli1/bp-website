@@ -51,9 +51,9 @@ export default function Home({homePageData, themeConfig, projects}) {
 
   useEffect(() => {
     // Set navbar height on load
-    const navElement = document.getElementById('Navbar');
-    const navHeight = navElement.clientHeight;
-    setNavHeight(navHeight);
+    // const navElement = document.getElementById('Navbar');
+    // const navHeight = navElement.clientHeight;
+    // setNavHeight(navHeight);
 
     // Set hero height on load
     const heroElement = document.getElementById('heroBanner');
