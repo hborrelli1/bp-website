@@ -54,7 +54,6 @@ const Contact = ({ contactData, themeConfig }) => {
       />
       <section className="contact-body">
         <div className="content-margins">
-          <h2>Let&rsquo;s Connect</h2>
           <ContactForm />
         </div>
       </section>
