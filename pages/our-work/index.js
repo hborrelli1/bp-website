@@ -1,5 +1,4 @@
 import {createClient} from 'contentful';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useEffect, useState } from 'react';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
@@ -25,9 +24,6 @@ export const getStaticProps = async () => {
     },
     revalidate: 1,
   }
-  // const res = await fetch(/** contentful api here */);
-  // const data = await res.json();
-
 }
 
 const OurWork = ({pageData}) => {
