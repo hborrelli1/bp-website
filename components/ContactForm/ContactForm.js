@@ -126,13 +126,19 @@ const ContactForm = () => {
         </div>
         <div className="form-group">
           <label>What are you looking for? *</label>
-          <input 
+          <select 
             type="text" 
             name="what_looking" 
-            onKeyUp={(e) => updateParams(e)} 
             onBlur={(e) => validateField(e)}
             required
-          />
+          >
+            <option value="">-- Select -- </option>
+            <option value="new_project">New Project</option>
+            <option value="teaming">Teaming</option>
+            <option value="current_client">Current Client</option>
+            <option value="marketing_inquiry">Marketing/Advertising Inquiry</option>
+            <option value="career_inquiry">Career of Internship Inquiry</option>
+          </select>
         </div>
         <div className="form-group">
           <label>Message</label>
