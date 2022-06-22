@@ -73,7 +73,7 @@ const About = ({themeConfig, aboutData}) => {
           <div className={styles['margin-container']}>
             <div className={styles['content-col']}>
               <h2>{mainTitle}</h2>
-              {documentToReactComponents(mainDescription)}
+              <div className="body-copy">{documentToReactComponents(mainDescription)}</div>
             </div>
             <div className={styles['image-col']}>
               <Image 
@@ -98,7 +98,7 @@ const About = ({themeConfig, aboutData}) => {
               </div>
               <div className={styles['quality-content']}>
                 <h5>{qualityTitle1}</h5>
-                {documentToReactComponents(qualityDescription1)}
+                <div className="body-copy">{documentToReactComponents(qualityDescription1)}</div>
               </div>
             </div>
             <div className={styles.quality}>
@@ -112,7 +112,7 @@ const About = ({themeConfig, aboutData}) => {
               </div>
               <div className={styles['quality-content']}>
                 <h5>{qualityTitle2}</h5>
-                {documentToReactComponents(qualityDescription2)}
+                <div className="body-copy">{documentToReactComponents(qualityDescription2)}</div>
               </div>
             </div>
             <div className={styles.quality}>
@@ -126,7 +126,7 @@ const About = ({themeConfig, aboutData}) => {
               </div>
               <div className={styles['quality-content']}>
                 <h5>{qualityTitle3}</h5>
-                {documentToReactComponents(qualityDescription3)}
+                <div className="body-copy">{documentToReactComponents(qualityDescription3)}</div>
               </div>
             </div>
             <div className={styles.quality}>
@@ -140,7 +140,7 @@ const About = ({themeConfig, aboutData}) => {
               </div>
               <div className={styles['quality-content']}>
                 <h5>{qualityTitle4}</h5>
-                {documentToReactComponents(qualityDescription4)}
+                <div className="body-copy">{documentToReactComponents(qualityDescription4)}</div>
               </div>
             </div>
           </div>

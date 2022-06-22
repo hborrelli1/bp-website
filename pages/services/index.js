@@ -98,32 +98,63 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
           ))}
         </ul>
         <section className="services-tab-content">
-            {
-              services.reduce((acc, service, index) => {
-                const secondSection = service.fields.serviceDescriptionHeading2 
-                  && service.fields.serviceDescription2 
-                  && service.fields.mainImage2 
-                  && service.fields.features2;
-                
-                acc[index] = (
-                    <div
-                      className="service-content"
-                      style={{ display: index === activeTab ? 'flex' : 'none' }} 
-                      key={service.sys.id}
-                    >
+          {
+            services.reduce((acc, service, index) => {
+              const secondSection = service.fields.serviceDescriptionHeading2 
+                && service.fields.serviceDescription2 
+                && service.fields.mainImage2 
+                && service.fields.features2;
+              
+              acc[index] = (
+                  <div
+                    className="service-content"
+                    style={{ display: index === activeTab ? 'flex' : 'none' }} 
+                    key={service.sys.id}
+                  >
+                    <div className="service-content-body">
+                      <div className="service-image-col">
+                        <Image 
+                          src={`https:${service.fields.mainImage.fields.file.url}`} 
+                          width={service.fields.mainImage.fields.file.details.image.width} 
+                          height={service.fields.mainImage.fields.file.details.image.height} alt={service.fields.serviceDescriptionHeading} />
+                      </div>
+                      <div className="content-col">
+                        <h2>{service.fields.serviceDescriptionHeading}</h2>
+                        <div className="body-copy">{documentToReactComponents(service.fields.serviceDescription)}</div>
+                      </div>
+                      <div className="service-icons">
+                        {service.fields.features.map(feature => {
+                          const featureData = iconsWithText.find(icon => icon.sys.id === feature.sys.id);
+                          return (
+                            <div className="icon" key={feature.sys.id}>
+                              <div className="img-wrap"> 
+                                <Image 
+                                  src={`https:${featureData.fields.icon.fields.file.url}`} 
+                                  width="50" 
+                                  height="50"
+                                  alt={`${featureData.fields.iconText} icon`}
+                                />
+                              </div>
+                              <h3>{featureData.fields.iconText}</h3>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                    {secondSection && (
                       <div className="service-content-body">
                         <div className="service-image-col">
                           <Image 
-                            src={`https:${service.fields.mainImage.fields.file.url}`} 
-                            width={service.fields.mainImage.fields.file.details.image.width} 
-                            height={service.fields.mainImage.fields.file.details.image.height} alt={service.fields.serviceDescriptionHeading} />
+                            src={`https:${service.fields.mainImage2.fields.file.url}`} 
+                            width={service.fields.mainImage2.fields.file.details.image.width} 
+                            height={service.fields.mainImage2.fields.file.details.image.height} alt={service.fields.serviceDescriptionHeading2} />
                         </div>
                         <div className="content-col">
-                          <h2>{service.fields.serviceDescriptionHeading}</h2>
-                          {documentToReactComponents(service.fields.serviceDescription)}
+                          <h2>{service.fields.serviceDescriptionHeading2}</h2>
+                          {documentToReactComponents(service.fields.serviceDescription2)}
                         </div>
                         <div className="service-icons">
-                          {service.fields.features.map(feature => {
+                          {service.fields.features2.map(feature => {
                             const featureData = iconsWithText.find(icon => icon.sys.id === feature.sys.id);
                             return (
                               <div className="icon" key={feature.sys.id}>
@@ -132,7 +163,7 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                                     src={`https:${featureData.fields.icon.fields.file.url}`} 
                                     width="50" 
                                     height="50"
-                                    alt={`${featureData.fields.iconText} icon`}
+                                    alt={featureData.fields.iconText}
                                   />
                                 </div>
                                 <h3>{featureData.fields.iconText}</h3>
@@ -141,52 +172,19 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                           })}
                         </div>
                       </div>
-                      {secondSection && (
-                        <div className="service-content-body">
-                          <div className="service-image-col">
-                            <Image 
-                              src={`https:${service.fields.mainImage2.fields.file.url}`} 
-                              width={service.fields.mainImage2.fields.file.details.image.width} 
-                              height={service.fields.mainImage2.fields.file.details.image.height} alt={service.fields.serviceDescriptionHeading2} />
-                          </div>
-                          <div className="content-col">
-                            <h2>{service.fields.serviceDescriptionHeading2}</h2>
-                            {documentToReactComponents(service.fields.serviceDescription2)}
-                          </div>
-                          <div className="service-icons">
-                            {service.fields.features2.map(feature => {
-                              const featureData = iconsWithText.find(icon => icon.sys.id === feature.sys.id);
-                              return (
-                                <div className="icon" key={feature.sys.id}>
-                                  <div className="img-wrap"> 
-                                    <Image 
-                                      src={`https:${featureData.fields.icon.fields.file.url}`} 
-                                      width="50" 
-                                      height="50"
-                                      alt={featureData.fields.iconText}
-                                    />
-                                  </div>
-                                  <h3>{featureData.fields.iconText}</h3>
-                                </div>
-                              )
-                            })}
-                          </div>
-                        </div>
-                      )}
-                      <ThreeColumnFeaturedPosts info={{
-                        type: "our-work",
-                        subTitle: service.fields.featuredProjectsSubtitle,
-                        title: service.fields.featuredProjectsSectionTitle,
-                        posts: service.fields.featuredProjects
-                      }} />
-                    </div>
-                );
+                    )}
+                    <ThreeColumnFeaturedPosts info={{
+                      type: "our-work",
+                      subTitle: service.fields.featuredProjectsSubtitle,
+                      title: service.fields.featuredProjectsSectionTitle,
+                      posts: service.fields.featuredProjects
+                    }} />
+                  </div>
+              );
 
-                return acc;
-              },[])
-            }
-
-
+              return acc;
+            },[])
+          }
         </section>
       </div>
       <FooterCta ctaData={{

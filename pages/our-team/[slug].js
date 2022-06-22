@@ -111,7 +111,7 @@ const Person = ({ person }) => {
           <p className="certifications">{certifications}</p>
           <p className="job-title"><span></span>{jobTitle}</p>
           <div className="bio">
-            {documentToReactComponents(leadershipBio)}
+            <div className="body-copy">{documentToReactComponents(leadershipBio)}</div>
           </div>
         </div>
       </section>

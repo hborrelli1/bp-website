@@ -112,7 +112,7 @@ export default function Home({homePageData, themeConfig, projects}) {
           <div className="content">
             <div className="content-column">
               <h2>{fields.ourServicesTitle}</h2>
-              {documentToReactComponents(fields.ourServicesDescription)}
+              <div className="body-copy">{documentToReactComponents(fields.ourServicesDescription)}</div>
             </div>
             <div className="services-column">
               <h3>Our Services</h3>
@@ -140,7 +140,7 @@ export default function Home({homePageData, themeConfig, projects}) {
           <div className="content">
             <div className="content-column">
               <h2>{fields.whyBpTitle}</h2>
-              {documentToReactComponents(fields.whyBpDescription)}
+              <div className="body-copy">{documentToReactComponents(fields.whyBpDescription)}</div>
             </div>
             <div className="image-column">
               <Image 

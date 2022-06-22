@@ -29,7 +29,7 @@ const CarouselComponent = ({ items, type }) => {
             <div className="content-col">
               <span>{item.industry}</span>
               <h3>{item.title}</h3>
-              <p>{item.excerpt}</p>
+              <p className="body-copy">{item.excerpt}</p>
               <Link href={`/our-work/${item.slug}`}>
                 <a className="project-link">Keep Reading</a>
               </Link>
@@ -49,7 +49,7 @@ const CarouselComponent = ({ items, type }) => {
       >
         {items.map(item => (
           <blockquote className="testimonials-wrap" key={item.sys.id}>
-            <div className="copy">{documentToReactComponents(item.fields.testimonial)}</div>
+            <div className="copy body-copy">{documentToReactComponents(item.fields.testimonial)}</div>
             <div className="info-block">
               <p className="name">{item.fields.name}</p>
               <p className="title">{item.fields.title}</p>

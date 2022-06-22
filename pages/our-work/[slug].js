@@ -90,7 +90,7 @@ const Project = ({ project }) => {
             </section>
             <section className="summary project-style">
               <h2>Summary</h2>
-              {documentToReactComponents(summary)}
+              <div className="body-copy">{documentToReactComponents(summary)}</div>
             </section>
           </div>
           <section className="gallery project-style">

@@ -73,7 +73,7 @@ const News = ({ newsPage, blogItems }) => {
           </div>
           <div className="content-col">
             <h2>{featuredNews.fields.blogTitle}</h2>
-            <p>{featuredNews.fields.shortSummary}</p>
+            <p className="body-copy">{featuredNews.fields.shortSummary}</p>
             <Link href={`/news/${featuredNews.fields.slug}`}>
               <a className="blog-link">Keep reading +</a>
             </Link>

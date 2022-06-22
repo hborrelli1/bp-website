@@ -122,7 +122,7 @@ const Careers = ({ careers, themeConfig }) => {
               <div className="content-margins">
                 <div className="content-col">
                   <h2>{sectionTitle}</h2>
-                  {documentToReactComponents(content)}
+                  <div className="body-copy">{documentToReactComponents(content)}</div>
                 </div>
                 <div className="img-col">
                   <div className="img-wrap">

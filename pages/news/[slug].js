@@ -67,7 +67,7 @@ const BlogPost = ({ blog }) => {
           </div>
           <p className="date">{moment(updatedAt).format('MMMM D YYYY')}</p>
           <h1>{blogTitle}</h1>
-          {documentToReactComponents(blogContent)}
+          <div className="body-copy">{documentToReactComponents(blogContent)}</div>
         </div>
       <div className="content-margins">
         <h4 className="sub-title">More News</h4>

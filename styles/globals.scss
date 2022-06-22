@@ -14,7 +14,7 @@ body {
 }
 
 p, a, span, button, li, label, input, select {
-  font-family: muli, sans-serif;
+  font-family: muli, helvetica, sans-serif;
   line-height: 24px;
   letter-spacing: .5px;
 }
@@ -47,6 +47,10 @@ h5 {
   font-weight: 600;
 }
 
+.body-copy {
+  opacity: .8;
+}
+
 .home {
   .home-hero-banner {
     position: relative;
@@ -72,6 +76,7 @@ h5 {
       .description {
         width: 50%;
         color: #fff;
+        opacity: 1;
         font-weight: 300;
         font-size: .875rem;
         letter-spacing: 1px;

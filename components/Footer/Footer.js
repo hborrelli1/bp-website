@@ -22,12 +22,14 @@ const Footer = () => {
           </div>
           <address className={styles.address} >
             <h5>BORRELLI + PARTNERS</h5>
-            <p>
+            <p className="body-copy">
               720 Vassar Street<br/>
               Orlando, FL 32804
             </p>
-            <p className={styles["phone"]}>T: <a href="tel:4074181338">407.418.1338</a></p>
-            <p className={styles["fax"]}>F: 407.418.1342</p>
+            <div className="body-copy">
+              <p className={styles["phone"]}>T: <a href="tel:4074181338">407.418.1338</a></p>
+              <p className={styles["fax"]}>F: 407.418.1342</p>
+            </div>
           </address>
         </div>
         <div className={styles['footer-section']}>
