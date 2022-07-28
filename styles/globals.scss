@@ -17,6 +17,7 @@ p, a, span, button, li, label, input, select {
   font-family: muli, helvetica, sans-serif;
   line-height: 24px;
   letter-spacing: .5px;
+  color: $bp-blue;
 }
 
 h1 {
@@ -81,6 +82,7 @@ h5 {
         font-size: .875rem;
         letter-spacing: 1px;
         line-height: 24px;
+        p { color: #fff; }
       }
     }
 
@@ -369,6 +371,7 @@ h5 {
       display: flex;
       max-width: 900px;
       overflow-y: visible;
+      p { color: #fff; }
     }
     
     .content-column {
