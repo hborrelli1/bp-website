@@ -31,6 +31,19 @@
     .posts {
       display: flex;
       flex-flow: wrap;
+
+      .blog-card {
+        .link {
+          opacity: .8;
+          transition: all .3s;
+          
+        }
+        &:hover {
+            .link {
+              opacity: 1;
+            }
+        }
+      }
     }
   } 
 

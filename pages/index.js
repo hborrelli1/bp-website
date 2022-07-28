@@ -105,7 +105,10 @@ export default function Home({homePageData, themeConfig, projects}) {
             <div className="description">{documentToReactComponents(fields.heroImageText)}</div>
           </div>
           <button type="button" className="view-more" onClick={() => scrollDown()}>
-            <Image src="/assets/icons/down-arrow-circle-white@2x.png" width="34" height="34" layout="fixed" alt="" />
+            <Image src="/assets/icons/circle-icon-white@2x.png" width="34" height="34" layout="fixed" alt="" />
+            <div className='chevron-icon'>
+              <Image src="/assets/icons/chevron-icon-white@2x.png" width="10" height="6" layout="fixed" alt="" />
+            </div>
           </button>
         </div>
         <div className="services" style={backgroundSectionStyles}>
@@ -154,12 +157,15 @@ export default function Home({homePageData, themeConfig, projects}) {
                   <span className="link-text">{fields.whyBpLinkTitle}</span>
                   <span className="link-icon">
                     <Image 
-                      src="/assets/icons/arrow-with-circle@2x.png" 
+                      src="/assets/icons/circle-icon-dark@2x.png" 
                       width="34" 
                       height="34" 
                       layout="fixed"
                       alt=""
                     />
+                    <div className='chevron-icon'>
+                      <Image src="/assets/icons/chevron-icon-dark@2x.png" width="10" height="6" layout="fixed" alt="" />
+                    </div>
                   </span>
                 </a>
               </Link>

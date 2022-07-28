@@ -37,6 +37,18 @@
       span {
         margin-left: 20px;
         display: flex;
+        .chevron-icon {
+          transition: all .3s;
+          position: relative;
+          left: -40px;
+          margin-top: 12px;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+        span .chevron-icon {
+          margin-top: 17px;
+        }
       }
     }
   }
