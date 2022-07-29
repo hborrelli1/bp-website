@@ -63,7 +63,8 @@ export default function Home({homePageData, themeConfig, projects}) {
 
   const heroSectionStyles = {
     backgroundImage: `url(https:${fields.heroImage.fields.file.url})`,
-    height: `calc(100vh - ${navHeight}px)`,
+    // height: `calc(100vh - ${navHeight}px)`,
+    height: '100vh',
   }
 
   const backgroundSectionStyles = {
