@@ -19,7 +19,7 @@ import '../styles/404.scss';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
+    <Layout {...pageProps}>
       <Component {...pageProps} />
     </Layout>
   )

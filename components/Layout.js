@@ -1,12 +1,12 @@
 import Footer from "./Footer/Footer"
 import Navbar from "./Navbar/Navbar"
 
-const Layout = ({ children }) => {
+const Layout = ({ children, themeConfig }) => {
   return (
     <div className="content">
       <Navbar />
       { children }
-      <Footer />
+      <Footer {...themeConfig} />
     </div>
   );
 }
