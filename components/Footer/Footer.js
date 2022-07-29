@@ -4,8 +4,9 @@ import styles from './Footer.module.scss';
 
 // import themeConfig from '../../contentfulApi/contentful-data.preval';
 
-const Footer = () => {
-
+const Footer = (themeConfig) => {
+  const { fields } = themeConfig[0];
+  
   return (
     <footer className={styles.footer}>
       <div className={styles['top-bar']}>
@@ -13,8 +14,6 @@ const Footer = () => {
           <div className={styles['logo-wrap']}>
             <Image 
               src="/assets/logos/bp-logo-icon@2x.png"
-              // width="65"
-              // height="65"
               layout="fill"
               className={styles["img-icon"]}
               alt="Borrelli + Partners Logo"
@@ -51,6 +50,19 @@ const Footer = () => {
       </div>
       <div className={styles['bottom-bar']} >
         <p>&copy; 2020 Borrelli + Partners AAC000711</p>
+        <div className={styles['bottom-bar-linkedin']}>
+          <Link href={fields.linkedInUrl}>
+            <a>
+              <Image 
+                src="/assets/icons/linkedin-white@2x.png"
+                width="15"
+                height="15"
+                alt="Borrelli + Partners Logo"
+                className={styles['linkedin-icon']}
+              />
+            </a>
+          </Link>
+        </div>
       </div>
     </footer>
   );
