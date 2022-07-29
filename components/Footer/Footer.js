@@ -4,9 +4,7 @@ import styles from './Footer.module.scss';
 
 // import themeConfig from '../../contentfulApi/contentful-data.preval';
 
-const Footer = (themeConfig) => {
-  const { fields } = themeConfig[0];
-  
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles['top-bar']}>
@@ -51,7 +49,7 @@ const Footer = (themeConfig) => {
       <div className={styles['bottom-bar']} >
         <p>&copy; 2020 Borrelli + Partners AAC000711</p>
         <div className={styles['bottom-bar-linkedin']}>
-          <Link href={fields.linkedInUrl}>
+          <Link href="https://www.linkedin.com/company/borrelli-partners-inc-/">
             <a>
               <Image 
                 src="/assets/icons/linkedin-white@2x.png"
