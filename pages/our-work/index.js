@@ -115,8 +115,8 @@ const OurWork = ({pageData}) => {
                 <p>{location}</p>
               </div>
               <div className="tags">
-                <p><span>Industry:</span> {industryTag.map(item => <span className="industry-item">{item}</span>)}</p>
-                <p><span>Service:</span> {serviceTags.map(item => <span className="service-item">{item}</span>)}</p>
+                <p><span>Industry:</span> {industryTag.map(item => <span key={item} className="industry-item">{item}</span>)}</p>
+                <p><span>Service:</span> {serviceTags.map(item => <span key={item} className="service-item">{item}</span>)}</p>
               </div>
             </div>
           </a>
