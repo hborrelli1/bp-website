@@ -10,6 +10,7 @@
   margin-bottom: 50px;
   color: $bp-blue;
   text-decoration: none;
+  transition: all .3s ease-in-out;
 
   .img-wrap {
     overflow: hidden;
@@ -58,9 +59,9 @@
   .info {
     width: 100%;
     h4 {
-      margin: 10px 0 5px;
+      margin: 20px 0 10px;
       font-size: 20px;
-      font-weight: 300;
+      font-weight: 600;
     }
     p {
       margin: 0 0 15px;
@@ -77,6 +78,12 @@
     text-align: right;
     width: 100%;
     text-decoration: underline;
+    opacity: .8;
+    transition: all .3s;
+    font-weight: 600;
+    &:hover {
+      opacity: 1;
+    }
   }
   
   &:nth-of-type(3n) {
@@ -89,7 +96,7 @@
       .img-el {
         filter: blur(2px);
         overflow: hidden;
-        transition: all .3s;
+        transition: all .3s ease-in-out;
       }
     }
     .img-hover-filter-bg {
@@ -101,7 +108,7 @@
       z-index: 99;
       background-color: #172439;
       opacity: .38;
-      
+      transition: all .3s ease-in-out;
     }
     .img-hover-circle {
       opacity: 1;
@@ -110,7 +117,7 @@
       z-index: 110;
       border-radius: 50%;
       display: block;
-      transition: transform .2s;
+      transition: transform .2s ease-in-out;
       
 
       @include keyframes(hoverCircle){
@@ -129,6 +136,9 @@
       }
       @include animate(hoverCircle, .3s, linear);
       animation-fill-mode: forwards;
+    }
+    .link {
+      opacity: 1;
     }
   }
 

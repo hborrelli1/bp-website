@@ -36,7 +36,7 @@ const BlogCard = ({blog, type = "news"}) => {
         </div>
         <div className="info">
           <h4>{blogTitle}</h4>
-          <p>{shortSummaryText}</p>
+          <p className="body-copy">{shortSummaryText}</p>
         </div>
         <p className="link">Keep Reading +</p>
       </a>

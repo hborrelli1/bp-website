@@ -73,7 +73,7 @@ const News = ({ newsPage, blogItems }) => {
           </div>
           <div className="content-col">
             <h2>{featuredNews.fields.blogTitle}</h2>
-            <p>{featuredNews.fields.shortSummary}</p>
+            <p className="body-copy">{featuredNews.fields.shortSummary}</p>
             <Link href={`/news/${featuredNews.fields.slug}`}>
               <a className="blog-link">Keep reading +</a>
             </Link>
@@ -94,11 +94,14 @@ const News = ({ newsPage, blogItems }) => {
               <span>Load More</span>
               <div className="icon">
                 <Image 
-                  src="/assets/icons/arrow-with-circle@2x.png"
+                  src="/assets/icons/circle-icon-dark@2x.png"
                   width="40px"
                   height="40px"
                   alt="Load More Articles."
                 />
+                <div className='chevron-icon'>
+                  <Image src="/assets/icons/chevron-icon-dark@2x.png" width="10" height="6" layout="fixed" alt="" />
+                </div>
               </div>
             </button>
           )}

@@ -36,7 +36,7 @@ const PrivacyPolicy = ({ policyData }) => {
       <section className="content">
         <div className="content-margins">
         <p>{`Last updated: ${moment(updatedAt).format('MMMM D YYYY')}`}</p>
-        {documentToReactComponents(content)}
+        <div className="body-copy">{documentToReactComponents(content)}</div>
         </div>
       </section>
     </article>

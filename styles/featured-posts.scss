@@ -14,23 +14,37 @@
       width: 100%;
       
       h3 {
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 3px;
         color: rgba($bp-blue, .3);
         margin: 0 0 8px;
       }
 
       h2 {
         margin: 0 0 40px;
-        font-weight: 300;
+        font-weight: 600;
+        font-size: 34px;
       }
     }
 
     .posts {
       display: flex;
       flex-flow: wrap;
+
+      .blog-card {
+        .link {
+          opacity: .8;
+          transition: all .3s;
+          
+        }
+        &:hover {
+            .link {
+              opacity: 1;
+            }
+        }
+      }
     }
   } 
 

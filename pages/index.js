@@ -63,7 +63,8 @@ export default function Home({homePageData, themeConfig, projects}) {
 
   const heroSectionStyles = {
     backgroundImage: `url(https:${fields.heroImage.fields.file.url})`,
-    height: `calc(100vh - ${navHeight}px)`,
+    // height: `calc(100vh - ${navHeight}px)`,
+    height: '100vh',
   }
 
   const backgroundSectionStyles = {
@@ -105,14 +106,17 @@ export default function Home({homePageData, themeConfig, projects}) {
             <div className="description">{documentToReactComponents(fields.heroImageText)}</div>
           </div>
           <button type="button" className="view-more" onClick={() => scrollDown()}>
-            <Image src="/assets/icons/down-arrow-circle-white@2x.png" width="34" height="34" layout="fixed" alt="" />
+            <Image src="/assets/icons/circle-icon-white@2x.png" width="34" height="34" layout="fixed" alt="" />
+            <div className='chevron-icon'>
+              <Image src="/assets/icons/chevron-icon-white@2x.png" width="10" height="6" layout="fixed" alt="" />
+            </div>
           </button>
         </div>
         <div className="services" style={backgroundSectionStyles}>
           <div className="content">
             <div className="content-column">
               <h2>{fields.ourServicesTitle}</h2>
-              {documentToReactComponents(fields.ourServicesDescription)}
+              <div className="body-copy">{documentToReactComponents(fields.ourServicesDescription)}</div>
             </div>
             <div className="services-column">
               <h3>Our Services</h3>
@@ -140,7 +144,7 @@ export default function Home({homePageData, themeConfig, projects}) {
           <div className="content">
             <div className="content-column">
               <h2>{fields.whyBpTitle}</h2>
-              {documentToReactComponents(fields.whyBpDescription)}
+              <div className="body-copy">{documentToReactComponents(fields.whyBpDescription)}</div>
             </div>
             <div className="image-column">
               <Image 
@@ -154,12 +158,15 @@ export default function Home({homePageData, themeConfig, projects}) {
                   <span className="link-text">{fields.whyBpLinkTitle}</span>
                   <span className="link-icon">
                     <Image 
-                      src="/assets/icons/arrow-with-circle@2x.png" 
+                      src="/assets/icons/circle-icon-dark@2x.png" 
                       width="34" 
                       height="34" 
                       layout="fixed"
                       alt=""
                     />
+                    <div className='chevron-icon'>
+                      <Image src="/assets/icons/chevron-icon-dark@2x.png" width="10" height="6" layout="fixed" alt="" />
+                    </div>
                   </span>
                 </a>
               </Link>

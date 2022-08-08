@@ -116,6 +116,7 @@
           letter-spacing: 1px;
           opacity: .7;
           font-weight: 300;
+          color: rgba(255,255,255,.5);
         }
         
         .tags {
@@ -130,6 +131,7 @@
               text-transform: uppercase;
               letter-spacing: 1px;
               opacity: .7;
+              color: rgba(255,255,255,.5);
             }
             &:last-of-type {
               margin-right: 0;

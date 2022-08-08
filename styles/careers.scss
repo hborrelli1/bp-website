@@ -41,6 +41,7 @@
           font-weight: 300;
           font-size: 20px;
           letter-spacing: 1px;
+          color: rgba(255,255,255,.5);
         }
       }
     }
@@ -107,6 +108,9 @@
           .content-col {
             color: #fff;
             padding: 30px;
+            p {
+              color: #fff;
+            }
           }
 
           .img-col {

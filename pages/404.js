@@ -1,21 +1,21 @@
 import Link from "next/link";
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 
 const NotFound = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    setTimeout(() => {
-      router.push('/');
-    }, 3000)
-  }, [router]);
 
   return (
-    <div>
-      <h1>Ooooops....</h1>
-      <h2>That page cannot be found.</h2>
-      <p>Go back to the <Link href="/"><a>Homepage</a></Link></p>
+    <div className="page-404">
+      <header>
+        <div className="content-margins">
+          <h1>Sorry,</h1>
+          <h2>That page cannot be found.</h2>
+        </div>
+      </header>
+      <div className="content">
+        <div className="content-margins">
+          <p>Back to the <Link href="/"><a>Homepage</a></Link></p>
+        </div>
+
+      </div>
     </div>
   );
 }

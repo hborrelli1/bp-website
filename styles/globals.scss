@@ -14,9 +14,10 @@ body {
 }
 
 p, a, span, button, li, label, input, select {
-  font-family: muli, sans-serif;
+  font-family: muli, helvetica, sans-serif;
   line-height: 24px;
   letter-spacing: .5px;
+  color: $bp-blue;
 }
 
 h1 {
@@ -47,6 +48,10 @@ h5 {
   font-weight: 600;
 }
 
+.body-copy {
+  opacity: .8;
+}
+
 .home {
   .home-hero-banner {
     position: relative;
@@ -68,27 +73,38 @@ h5 {
         width: 50%;
         color: #fff;
         font-weight: 500;
+        letter-spacing: 2px;
       }
       .description {
         width: 50%;
         color: #fff;
+        opacity: 1;
         font-weight: 300;
         font-size: .875rem;
         letter-spacing: 1px;
         line-height: 24px;
+        p { color: #fff; }
       }
     }
 
     .view-more {
       position: absolute;
-      bottom: 10px;
+      bottom: 35px;
       background-color: unset;
       border: 0;
       display: flex;
       justify-content: center;
       align-items: center;
+      .chevron-icon {
+        transition: all .3s;
+        position: relative;
+        left: -22px;
+      }
       &:hover {
         cursor: pointer;
+        .chevron-icon {
+          margin-bottom: -8px;
+        }
       }
     }
 
@@ -134,7 +150,10 @@ h5 {
           font-size: 24px;
           line-height: 32px;
           font-weight: 600;
-          letter-spacing: 1.5px;
+          letter-spacing: 0.5px;
+        }
+        .body-copy {
+          font-size: 14px;
         }
       }
       
@@ -149,6 +168,8 @@ h5 {
           font-size: 17px;
           font-weight: 600;
           letter-spacing: 2px;
+          margin-top: 28px;
+          margin-bottom: 25px;
         }
 
         .links {
@@ -156,7 +177,7 @@ h5 {
             display: block;
             text-decoration: none;
             color: rgba($bp-blue, .8);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             transition: all .2s;
             position: relative;
 
@@ -246,9 +267,9 @@ h5 {
       margin: 0 auto;
 
       h4 {
-        font-size: 16px;
+        font-size: 14px;
         color: #fff;
-        letter-spacing: 2px;
+        letter-spacing: 3px;
         text-transform: uppercase;
         color: $bp-light-gray;
         font-weight: 400;
@@ -262,6 +283,11 @@ h5 {
         color: rgba(0,0,0,.8);
         font-weight: 600;
         letter-spacing: 1px;        
+        opacity: .8;
+        transition: all .3s;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
 
@@ -329,6 +355,7 @@ h5 {
           }
 
           &:hover {
+            color: rgba($bp-blue, .7);
             &:after {
               left: 15px;
             }
@@ -353,24 +380,32 @@ h5 {
       left: 10px;
       color: #FFF;
       font-family: din-2014, sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       color: rgba(255, 255, 255, .75);
-      letter-spacing: 2px;
+      letter-spacing: 3px;
     }
 
     .content {
       width: 100%;
       color: #fff;
       display: flex;
-      max-width: 900px;
+      max-width: 1000px;
       overflow-y: visible;
+      p { color: #fff; }
     }
     
     .content-column {
       width: 40%;
 
-      h2 { margin-top: 0px; }
-      p { margin-bottom: 0px; }
+      h2 { 
+        margin-top: 0px;
+        letter-spacing: 1.5px; 
+      }
+      p { 
+        margin-bottom: 0px; 
+        font-size: 14px;
+        opacity: .8;
+      }
     }
 
     .image-column {
@@ -387,6 +422,19 @@ h5 {
         justify-content: space-between;
         align-items: center;
         margin-top: -5px;
+        .chevron-icon {
+          transition: all .3s;
+          position: relative;
+          left: -22px;
+          bottom: 2px;
+        }
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+          .chevron-icon {
+            margin-bottom: -8px;
+          }
+        }
         
         .link-text {
           padding-left: 30px;

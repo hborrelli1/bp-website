@@ -53,6 +53,7 @@
           letter-spacing: 1px;
           font-size: 13px;
           line-height: 18px;
+          color: rgba(255,255,255,.55);
         }
 
         a {
@@ -80,14 +81,14 @@
         margin-bottom: 30px;
         
         a {
-          color: $bp-light-gray;
+          color: #fff;
           text-decoration: none;
           text-transform: uppercase;
           font-family: din-2014, sans-serif;
           font-weight: 400;
-          font-size: 14px;
-          letter-spacing: 1px;
-          margin-right: 50px;
+          font-size: 12px;
+          letter-spacing: 3px;
+          margin-right: 80px;
 
           &:hover {
             text-decoration: underline;
@@ -109,19 +110,20 @@
         .sub-nav {
           width: 40%;
           text-align: right;
-
+          
           a {
-            margin-left: 10px;
+            margin-left: 20px;
             color: $bp-light-gray;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 12px;
+            letter-spacing: 1px;
 
             &:hover {
               text-decoration: underline;
             }
 
             &:first-of-type {
-              padding-right: 10px;
+              padding-right: 20px;
               margin-right: 0px;
               border-right: 1px solid $bp-light-gray;
             }
@@ -205,7 +207,21 @@
   .bottom-bar {
     border-top: .5px solid rgba(255,255,255,.5);
     color: rgba(255,255,255,.5);
-    font-size: 14px;
+    font-size: 12px;
     width: 100%;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    align-items: center;
+    p {
+      color: rgba(255,255,255,.5);
+      margin-top: 18px;
+    }
+    .bottom-bar-linkedin {
+      margin-top: 10px;
+      .linkedin-icon {
+        opacity: .5;
+      }
+    }
   }
 }

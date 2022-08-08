@@ -6,7 +6,7 @@ const withNextPluginPreval = createNextPluginPreval();
 module.exports = withNextPluginPreval({
   reactStrictMode: true,
   images: {
-    domains: ['images.ctfassets.net', 'via.placeholder.com']
+    domains: ['images.ctfassets.net', 'via.placeholder.com', 'downloads.ctfassets.net']
   },
   // sassOptions: {
   //   includePaths: [path.join(__dirname, 'styles')],

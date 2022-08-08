@@ -36,8 +36,13 @@
           margin-top: 0px;
         }
   
-        a {
+        .blog-link {
           color: $bp-blue;
+          opacity: .8;
+          transition: all .3s;
+          &:hover {
+            opacity: 1;
+          }
         }
       }
     }
@@ -67,7 +72,21 @@
       margin-top: 10px;
       transform: rotate(90deg);
       display: flex;
+      .chevron-icon {
+        position: relative;
+        transform: rotate(-90deg);
+        margin-top: 0px;
+        transition: all .3s;
+        left: -16px;
+      }
+      &:hover {
+        .chevron-icon {
+          margin-top: 0px;
+          left: -10px;
+        }
+      }
     }
+
   }
 
   @media screen and (max-width: 900px) {

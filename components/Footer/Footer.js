@@ -5,7 +5,6 @@ import styles from './Footer.module.scss';
 // import themeConfig from '../../contentfulApi/contentful-data.preval';
 
 const Footer = () => {
-
   return (
     <footer className={styles.footer}>
       <div className={styles['top-bar']}>
@@ -13,8 +12,6 @@ const Footer = () => {
           <div className={styles['logo-wrap']}>
             <Image 
               src="/assets/logos/bp-logo-icon@2x.png"
-              // width="65"
-              // height="65"
               layout="fill"
               className={styles["img-icon"]}
               alt="Borrelli + Partners Logo"
@@ -22,12 +19,14 @@ const Footer = () => {
           </div>
           <address className={styles.address} >
             <h5>BORRELLI + PARTNERS</h5>
-            <p>
+            <p className="body-copy">
               720 Vassar Street<br/>
               Orlando, FL 32804
             </p>
-            <p className={styles["phone"]}>T: <a href="tel:4074181338">407.418.1338</a></p>
-            <p className={styles["fax"]}>F: 407.418.1342</p>
+            <div className="body-copy">
+              <p className={styles["phone"]}>T: <a href="tel:4074181338">407.418.1338</a></p>
+              <p className={styles["fax"]}>F: 407.418.1342</p>
+            </div>
           </address>
         </div>
         <div className={styles['footer-section']}>
@@ -49,6 +48,19 @@ const Footer = () => {
       </div>
       <div className={styles['bottom-bar']} >
         <p>&copy; 2020 Borrelli + Partners AAC000711</p>
+        <div className={styles['bottom-bar-linkedin']}>
+          <Link href="https://www.linkedin.com/company/borrelli-partners-inc-/">
+            <a>
+              <Image 
+                src="/assets/icons/linkedin-white@2x.png"
+                width="15"
+                height="15"
+                alt="Borrelli + Partners Logo"
+                className={styles['linkedin-icon']}
+              />
+            </a>
+          </Link>
+        </div>
       </div>
     </footer>
   );

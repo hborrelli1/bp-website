@@ -13,10 +13,13 @@
     max-width: 1200px;
     padding: 0 30px;
     display: flex;
-
+    
     h1, p {
       width: 50%;
       margin: 0;
+    }
+    p {
+      color: rgba(255,255,255,.80);;
     }
 
     h1 {

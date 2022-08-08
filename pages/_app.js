@@ -14,11 +14,12 @@ import '../styles/featured-posts.scss';
 import '../styles/blog-post.scss';
 import '../styles/contact.scss';
 import '../styles/testimonials.scss';
+import '../styles/404.scss';
 
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
+    <Layout {...pageProps}>
       <Component {...pageProps} />
     </Layout>
   )
