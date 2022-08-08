@@ -380,16 +380,16 @@ h5 {
       left: 10px;
       color: #FFF;
       font-family: din-2014, sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       color: rgba(255, 255, 255, .75);
-      letter-spacing: 2px;
+      letter-spacing: 3px;
     }
 
     .content {
       width: 100%;
       color: #fff;
       display: flex;
-      max-width: 900px;
+      max-width: 1000px;
       overflow-y: visible;
       p { color: #fff; }
     }
@@ -397,8 +397,15 @@ h5 {
     .content-column {
       width: 40%;
 
-      h2 { margin-top: 0px; }
-      p { margin-bottom: 0px; }
+      h2 { 
+        margin-top: 0px;
+        letter-spacing: 1.5px; 
+      }
+      p { 
+        margin-bottom: 0px; 
+        font-size: 14px;
+        opacity: .8;
+      }
     }
 
     .image-column {
@@ -423,6 +430,7 @@ h5 {
         }
         &:hover {
           cursor: pointer;
+          text-decoration: underline;
           .chevron-icon {
             margin-bottom: -8px;
           }
