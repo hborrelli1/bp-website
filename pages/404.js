@@ -10,7 +10,7 @@ const NotFound = () => {
           <h2>That page cannot be found.</h2>
         </div>
       </header>
-      <div class="content">
+      <div className="content">
         <div className="content-margins">
           <p>Back to the <Link href="/"><a>Homepage</a></Link></p>
         </div>
