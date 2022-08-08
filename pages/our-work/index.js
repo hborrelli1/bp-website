@@ -95,11 +95,12 @@ const OurWork = ({pageData}) => {
     }
 
     return projectsToRender.map(project => {
+      console.log('project:', project )
       const { 
-        industry,
+        industryTag,
         location,
         projectTitle,
-        serviceType,
+        serviceTags,
         thumbnailImage,
         slug,
       } = project.fields;
@@ -114,8 +115,8 @@ const OurWork = ({pageData}) => {
                 <p>{location}</p>
               </div>
               <div className="tags">
-                <p><span>Industry</span>: {industry}</p>
-                <p><span>Service</span>: {serviceType}</p>
+                <p><span>Industry:</span> {industryTag.map(item => <span key={item} className="industry-item">{item}</span>)}</p>
+                <p><span>Service:</span> {serviceTags.map(item => <span key={item} className="service-item">{item}</span>)}</p>
               </div>
             </div>
           </a>
