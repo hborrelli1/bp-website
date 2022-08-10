@@ -17,7 +17,7 @@ export const getStaticProps = async () => {
   });
 
   const themeConfigData = await client.getEntries({ content_type: 'themeConfig' });
-  const aboutData = await client.getEntries({ content_type: 'about' });
+  const aboutData = await client.getEntries({ content_type: 'about', include: 2 });
 
   return {
     props: {
@@ -145,11 +145,13 @@ const About = ({themeConfig, aboutData}) => {
             </div>
           </div>
         </section>
-        <section className="testimonials">
-          <div className="content">
-            <CarouselComponent items={testimonials} type="testimonials" />
-          </div>
-        </section>
+        {testimonials && (
+          <section className="testimonials">
+            <div className="content">
+              <CarouselComponent items={testimonials} type="testimonials" />
+            </div>
+          </section>
+        )}
         <section className={styles['our-team']}>
           <div className={styles['content']}>
             <h2>Our Team</h2>
