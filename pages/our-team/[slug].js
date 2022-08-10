@@ -50,7 +50,6 @@ export const getStaticProps = async ({ params }) => {
 }
 
 const Person = ({ person }) => {
-  console.log('person: ', person);
   if (!person.fields.fullBioPage) {
     return (<p>No bio page.</p>);
   }
@@ -85,84 +84,99 @@ const Person = ({ person }) => {
             />
           </div>
           <div className="socials">
-            <span>Connect</span>
-            <Link href={linkedInUrl}>
-              <a>
+            {(linkedInUrl && email) && (
+              <span>Connect</span>
+            )}
+            {linkedInUrl && (
+              <Link href={linkedInUrl}>
+                <a>
+                  <Image 
+                    src="/assets/icons/linkedin-icon@2x.png" 
+                    width="24px" 
+                    height="18px" 
+                    alt={`${name} LinkedIn.`}
+                  />
+                </a>
+              </Link>
+
+            )}
+            {email && (
+              <a href={`mailto:${email}`}>
                 <Image 
-                  src="/assets/icons/linkedin-icon@2x.png" 
+                  src="/assets/icons/email-icon@2x.png" 
                   width="24px" 
                   height="18px" 
-                  alt={`${name} LinkedIn.`}
+                  alt={`${name} email`}
                 />
               </a>
-            </Link>
-            <a href={`mailto:${email}`}>
-              <Image 
-                src="/assets/icons/email-icon@2x.png" 
-                width="24px" 
-                height="18px" 
-                alt={`${name} email`}
-              />
-            </a>
+            )}
           </div>
         </div>
         <div className="bio-col">
           <h1>{name}</h1>
-          <p className="certifications">{certifications}</p>
+          {certifications && <p className="certifications">{certifications}</p>}
           <p className="job-title"><span></span>{jobTitle}</p>
-          <div className="bio">
-            <div className="body-copy">{documentToReactComponents(leadershipBio)}</div>
-          </div>
+          {leadershipBio && (
+            <div className="bio">
+              <div className="body-copy">{documentToReactComponents(leadershipBio)}</div>
+            </div>
+          )}
         </div>
       </section>
       
       <section className="testimonials">
         <div className="content">
-          <div className="testimonial-row">
-            <div className="quote-col">
-              <p>{quote1}</p>
+          {quote1 && (
+            <div className="testimonial-row">
+              <div className="quote-col">
+                <p>{quote1}</p>
+              </div>
+              <div className="image-col">
+                <Image 
+                  src="https://via.placeholder.com/530x400"
+                  width="530px"
+                  height="400px"
+                  alt=""
+                />
+              </div>
             </div>
-            <div className="image-col">
-              <Image 
-                src="https://via.placeholder.com/530x400"
-                width="530px"
-                height="400px"
-                alt=""
-              />
+          )}
+          {quote2 && (
+            <div className="testimonial-row">
+              <div className="quote-col">
+                <p>{quote2}</p>
+              </div>
+              <div className="image-col">
+                <Image 
+                  src="https://via.placeholder.com/530x400"
+                  width="530px"
+                  height="400px"
+                  alt=""
+                />
+              </div>
             </div>
-          </div>
-          <div className="testimonial-row">
-            <div className="quote-col">
-              <p>{quote2}</p>
-            </div>
-            <div className="image-col">
-              <Image 
-                src="https://via.placeholder.com/530x400"
-                width="530px"
-                height="400px"
-                alt=""
-              />
-            </div>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <ThreeColumnFeaturedPosts info={{
-        subTitle: `${name}'s Featured Work`,
-        title: null,
-        posts: featuredProjects
-      }}/>
+      {featuredProjects && (
+        <ThreeColumnFeaturedPosts info={{
+          subTitle: `${name}'s Featured Work`,
+          title: null,
+          posts: featuredProjects
+        }}/>
+      )}
 
-      {/* Involvement */}
-      <section className="involvement">
-        <div className="content-margins">
-          <h3>Involvment</h3>
-          <ul className="involvement-list">
-            {involvement.map((item, key) => <li className="item" key={key}>{item}</li>)}
-          </ul>
-        </div>
-      </section>
+      {involvement && (
+        <section className="involvement">
+          <div className="content-margins">
+            <h3>Involvment</h3>
+            <ul className="involvement-list">
+              {involvement.map((item, key) => <li className="item" key={key}>{item}</li>)}
+            </ul>
+          </div>
+        </section>
+      )}
     </article>
   );
 }
