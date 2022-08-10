@@ -1,5 +1,6 @@
 import {createClient} from 'contentful';
 import Image from 'next/image';
+import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import CarouselComponent from '../../components/Carousel/CarouselComponent';
@@ -64,6 +65,7 @@ const Project = ({ project }) => {
     size,
     slug,
     summary,
+    specSheet,
     thumbnailImage,
     featuredProjects,
   } = project.fields;
@@ -91,6 +93,11 @@ const Project = ({ project }) => {
             <section className="summary project-style">
               <h2>Summary</h2>
               <div className="body-copy">{documentToReactComponents(summary)}</div>
+              {specSheet && (
+                <Link href={`https:${specSheet.fields.file.url}`}>
+                  <a className="spec-sheet">Download Spec Sheet</a>
+                </Link>
+              )}
             </section>
           </div>
           <section className="gallery project-style">
