@@ -101,18 +101,22 @@ const Project = ({ project }) => {
           </section>
         </div>
       </article>
-      <ThreeColumnFeaturedPosts info={{
-        subTitle: "More Success Stories",
-        title: '', 
-        posts: featuredProjects,
-        type: "our-work"
-      }} />
-      <FooterCta ctaData={{
-        copy: footerCta.fields.copy,
-        buttonText: footerCta.fields.ctaText,
-        buttonUrl: footerCta.fields.ctaLink,
-        backgroundImage: footerCta.fields.backgroundImage
-      }} />
+      {featuredProjects && (
+        <ThreeColumnFeaturedPosts info={{
+          subTitle: "More Success Stories",
+          title: '', 
+          posts: featuredProjects,
+          type: "our-work"
+        }} />
+      )}
+      {footerCta && (
+        <FooterCta ctaData={{
+          copy: footerCta.fields.copy,
+          buttonText: footerCta.fields.ctaText,
+          buttonUrl: footerCta.fields.ctaLink,
+          backgroundImage: footerCta.fields.backgroundImage
+        }} />
+      )}
     </div>
   );
 }

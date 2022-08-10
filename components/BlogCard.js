@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const BlogCard = ({blog, type = "news"}) => {
-  const {shortSummary, blogTitle, slug, thumbnailImage} = blog.fields;
+  const {shortSummary, blogTitle, slug = '/', thumbnailImage} = blog.fields;
 
   const shortSummaryText = shortSummary.length > 150 
     ? `${shortSummary.substring(0, 150)}...` 
