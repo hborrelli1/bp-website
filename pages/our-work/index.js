@@ -1,5 +1,5 @@
 import {createClient} from 'contentful';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import _ from 'lodash';
@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const res = await client.getEntries({ content_type: 'ourWork' });
+  const res = await client.getEntries({ content_type: 'ourWork', include: 4 });
 
   const stringifiedItems = safeJsonStringify(res);
   const data = JSON.parse(stringifiedItems);
@@ -66,8 +66,9 @@ const OurWork = ({pageData}) => {
   const [displayServiceMenu, setDisplayServiceMenu] = useState(false);
   
   useEffect(() => {
-    setProjects(featuredProjects);
-  },[featuredProjects, projects])
+    const projectsToDisplay = featuredProjects.filter(item => Object.keys(item).includes('fields'));
+    setProjects(projectsToDisplay);
+  },[featuredProjects])
 
   const renderProjects = (projects) => {
     let projectsToRender = [];
@@ -78,17 +79,17 @@ const OurWork = ({pageData}) => {
 
     if (industryFilter !== 'all' && serviceFilter !== 'all') {
       const filteredProjects = projects.filter(proj => (
-        proj.fields.industry === industryKey[industryFilter] 
-        && proj.fields.serviceType === servicesKey[serviceFilter])
+        proj.fields.industryTag.includes(industryKey[industryFilter])  
+        && proj.fields.serviceTags.includes(servicesKey[serviceFilter]) )
       );
       projectsToRender.push(...filteredProjects);
     } else if (industryFilter !== 'all') {
       const filteredProjects = projects.filter(proj => 
-        proj.fields.industry === industryKey[industryFilter]);
+        proj.fields.industryTag.includes(industryKey[industryFilter]));
       projectsToRender.push(...filteredProjects);
     } else if (serviceFilter !== 'all') {
       const filteredProjects = projects.filter(proj => 
-        proj.fields.serviceType === servicesKey[serviceFilter]);
+        proj.fields.serviceTags.includes(servicesKey[serviceFilter]));
       projectsToRender.push(...filteredProjects);
     } else {
       projectsToRender.push(...projects);
@@ -96,6 +97,9 @@ const OurWork = ({pageData}) => {
 
     return projectsToRender.map(project => {
       console.log('project:', project )
+      if (!project.fields) {
+        return;
+      }
       const { 
         industryTag,
         location,
@@ -124,6 +128,7 @@ const OurWork = ({pageData}) => {
       )
     });
   }
+  // return(<div>hi</div>)
 
   const toggleMenu = (filterType) => {
     if (filterType === 'industry') {
