@@ -91,8 +91,8 @@ const About = ({themeConfig, aboutData}) => {
               <div className={styles['quality-image']}>
                 <Image 
                   src="/assets/icons/sustainability-icon@2x.png" 
-                  width="122" 
-                  height="122"
+                  width="100" 
+                  height="100"
                   alt={qualityTitle1}
                 />
               </div>
@@ -105,8 +105,8 @@ const About = ({themeConfig, aboutData}) => {
               <div className={styles['quality-image']}>
                 <Image 
                   src="/assets/icons/minority-owned-icon@2x.png" 
-                  width="122" 
-                  height="122"
+                  width="100" 
+                  height="100"
                   alt={qualityTitle2}
                 />
               </div>
@@ -119,8 +119,8 @@ const About = ({themeConfig, aboutData}) => {
               <div className={styles['quality-image']}>
                 <Image 
                   src="/assets/icons/technology-icon@2x.png" 
-                  width="122" 
-                  height="122"
+                  width="100" 
+                  height="100"
                   alt={qualityTitle3}
                 />
               </div>
@@ -133,8 +133,8 @@ const About = ({themeConfig, aboutData}) => {
               <div className={styles['quality-image']}>
                 <Image 
                   src="/assets/icons/crime-prevention-icon@2x.png" 
-                  width="122" 
-                  height="122"
+                  width="100" 
+                  height="100"
                   alt={qualityTitle4}
                 />
               </div>

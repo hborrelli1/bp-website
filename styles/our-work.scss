@@ -15,8 +15,9 @@
         text-transform: uppercase;
         margin-right: 20px;
         font-family: din-2014, sans-serif;
-        font-size: 15px;
-        letter-spacing: 2px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 3px;
       }
       .filter {
         position: relative;
@@ -27,7 +28,8 @@
           margin-right: 20px;
           cursor: pointer;
           font-size: 15px;
-          letter-spacing: 1px;
+          letter-spacing: 2px;
+          font-weight: 600;
 
           .filter-button-icon {
             margin-left: 10px;
@@ -108,7 +110,7 @@
           margin: 0;
           font-size: 34px;
           line-height: 42px;
-          font-weight: 300;
+          font-weight: 500;
         }
         p {
           font-size: 15px;
@@ -134,6 +136,11 @@
               opacity: .7;
               color: rgba(255,255,255,.5);
               display: block;
+            }
+            span.industry-label,
+            span.service-label {
+              font-family: din-2014, sans-serif;
+              font-weight: 500;
             }
             span.industry-item,
             span.service-item {

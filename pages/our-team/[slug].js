@@ -163,7 +163,8 @@ const Person = ({ person }) => {
         <ThreeColumnFeaturedPosts info={{
           subTitle: `${name}'s Featured Work`,
           title: null,
-          posts: featuredProjects
+          posts: featuredProjects,
+          type: 'projects'
         }}/>
       )}
 
