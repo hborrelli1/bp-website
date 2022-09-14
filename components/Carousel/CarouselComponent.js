@@ -53,6 +53,11 @@ const CarouselComponent = ({ items, type }) => {
             <div className="info-block">
               <p className="name">{item.fields.name}</p>
               <p className="title">{item.fields.title}</p>
+              {item.fields.projectReference && (
+                <Link href={`/our-work/${item.fields.projectReference.fields.slug}`}>
+                  <a className="project-link">View Project</a>
+                </Link>
+              )}
             </div>
           </blockquote>
         ))}

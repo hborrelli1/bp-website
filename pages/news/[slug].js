@@ -51,7 +51,8 @@ export const getStaticProps = async ({ params }) => {
 
 const BlogPost = ({ blog }) => {
   const {blogTitle, blogContent, featuredPosts, thumbnailImage} = blog.fields;
-  const updatedAt = blog.sys.updatedAt;
+  const updatedAt = blog.sys.updatedAt
+  console.log('blog:', blog);
 
   return (
     <div className="blog-content">
@@ -65,7 +66,7 @@ const BlogPost = ({ blog }) => {
               alt={`${blogTitle} thumbnail image.`}
             />
           </div>
-          <p className="date">{moment(updatedAt).format('MMMM D YYYY')}</p>
+          <p className="date">{moment(updatedAt).format('MMMM Do YYYY')}</p>
           <h1>{blogTitle}</h1>
           <div className="body-copy">{documentToReactComponents(blogContent)}</div>
         </div>

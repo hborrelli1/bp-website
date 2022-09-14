@@ -36,6 +36,31 @@
                 text-transform: uppercase;
                 font-size: 16px;
               }
+
+              .project-link {
+                font-size: 12px;
+                letter-spacing: 2px;
+                position: relative;
+                
+                &:after {
+                  content: '';
+                  background-image: url(/assets/icons/arrow-right-dark@2x.png);
+                  width: 16px;
+                  height: 15px;
+                  display: block;
+                  background-size: cover;
+                  position: absolute;
+                  top: 0px;
+                  left: calc(100% + 10px);
+                  transition: all .3s;
+                }
+
+                &:hover {
+                  &:after {
+                    left: calc(100% + 20px);
+                  }
+                }
+              }
             }
           }
   
