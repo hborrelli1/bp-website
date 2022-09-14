@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Footer.module.scss';
 
-// import themeConfig from '../../contentfulApi/contentful-data.preval';
-
+import themeConfig from '../../contentfulApi/contentful-data.preval';
+console.log('themeConfig:', themeConfig)
 const Footer = () => {
   return (
     <footer className={styles.footer}>
@@ -47,7 +47,8 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles['bottom-bar']} >
-        <p>&copy; 2020 Borrelli + Partners AAC000711</p>
+        {/* <p>&copy; 2020 Borrelli + Partners AAC000711</p> */}
+        <p>{themeConfig.themeConfigCollection.items[0].copyright}</p>
         <div className={styles['bottom-bar-linkedin']}>
           <Link href="https://www.linkedin.com/company/borrelli-partners-inc-/">
             <a>

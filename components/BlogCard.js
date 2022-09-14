@@ -1,13 +1,15 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import moment from 'moment';
 
 const BlogCard = ({blog, type = "news"}) => {
-  const {shortSummary, blogTitle, slug = '/', thumbnailImage} = blog.fields;
+  const {shortSummary, blogTitle, slug = '/', thumbnailImage, date} = blog.fields;
 
   const shortSummaryText = shortSummary.length > 150 
     ? `${shortSummary.substring(0, 150)}...` 
     : shortSummary;
 
+    console.log('blog:', blog);
   return (
     <Link href={`/${type}/${slug}`}>
       <a className="blog-card">
@@ -36,6 +38,7 @@ const BlogCard = ({blog, type = "news"}) => {
         </div>
         <div className="info">
           <h4>{blogTitle}</h4>
+          <h5 className="date">{moment(date).format('MMMM Do YYYY')}</h5>
           <p className="body-copy">{shortSummaryText}</p>
         </div>
         <p className="link">Keep Reading +</p>

@@ -1,5 +1,4 @@
 import {createClient} from 'contentful';
-import RecipeCard from '../../components/BlogCard';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import Image from 'next/image';
@@ -7,6 +6,7 @@ import Link from 'next/link';
 import BlogCard from '../../components/BlogCard';
 import { useState } from 'react';
 import safeJsonStringify from 'safe-json-stringify';
+import moment from 'moment';
 
 // Runs at build time
 // Used to fetch data from Blog section.
@@ -20,34 +20,32 @@ export const getStaticProps = async () => {
   });
 
   const newsRes = await client.getEntries({ content_type: 'newsPage', include: 2});
-  const blogRes = await client.getEntries({ content_type: 'blog' });
-
   const stringifiedNews = safeJsonStringify(newsRes);
-  const stringifiedBlog = safeJsonStringify(blogRes);
+
   const newsData = JSON.parse(stringifiedNews);
-  const blogData = JSON.parse(stringifiedBlog);
 
   return {
     props: {
       newsPage: newsData.items[0],
-      blogItems: blogData.items,
     },
     revalidate: 1,
   }
 }
 
-const News = ({ newsPage, blogItems }) => {
+const News = ({ newsPage }) => {
   const {
     backgroundImage,
     featuredNews,
     footerCta,
     pageDescription,
     pageTitle,
+    date,
+    newsPosts
   } = newsPage.fields;
 
   const [itemsToDisplay, setItemsToDisplay] = useState(6);
 
-  const blogItemsDisplay = blogItems.map((blog, index) => <BlogCard key={index} blog={blog} />);
+  const blogItemsDisplay = newsPosts.map((blog, index) => <BlogCard key={index} blog={blog} />);
 
   const increaseItemsToDisplay = () => {
     setItemsToDisplay(itemsToDisplay + 6);
@@ -73,6 +71,7 @@ const News = ({ newsPage, blogItems }) => {
           </div>
           <div className="content-col">
             <h2>{featuredNews.fields.blogTitle}</h2>
+            <h5 className="date">{moment(date).format('MMMM Do YYYY')}</h5>
             <p className="body-copy">{featuredNews.fields.shortSummary}</p>
             <Link href={`/news/${featuredNews.fields.slug}`}>
               <a className="blog-link">Keep reading +</a>
