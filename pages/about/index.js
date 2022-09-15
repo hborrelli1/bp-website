@@ -161,16 +161,16 @@ const About = ({themeConfig, aboutData}) => {
                   return (
                     <Link href={`/our-team/${person.fields.slug}`} className={styles['person']} key={person.sys.id}>
                       <a className={styles["person"]} >
-                      <Image 
-                        className={styles['headshot']}
-                        src={`https:${person.fields.photo.fields.file.url}`} 
-                        alt={person.fields.name}
-                        layout="fill"
-                      />
-                      <div className={styles['card']}>
-                        <h5>{person.fields.name}</h5>
-                        <p>{person.fields.jobTitle}</p>
-                      </div>
+                        <Image 
+                          className={styles['headshot']}
+                          src={`https:${person.fields.photo.fields.file.url}`} 
+                          alt={person.fields.name}
+                          layout="fill"
+                        />
+                        <div className={styles['card']}>
+                          <h5>{person.fields.name}</h5>
+                          <p>{person.fields.jobTitle}</p>
+                        </div>
                       </a>
                     </Link>
                   );
