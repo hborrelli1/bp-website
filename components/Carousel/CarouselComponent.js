@@ -13,7 +13,7 @@ const CarouselComponent = ({ items, type }) => {
         showArrows={true}
         showIndicators={false}
         infiniteLoop={true}
-        statusFormatter={(currentItem, totalCount) => (<span>0{currentItem} / 0{totalCount}</span>)}
+        statusFormatter={(currentItem, totalCount) => (<span>{currentItem > 9 ? '' : 0}{currentItem} / {totalCount > 9 ? '' : 0}{totalCount}</span>)}
       >
         {items.map(item => (
           <div className="featured-project" key={item.id}>
@@ -45,7 +45,7 @@ const CarouselComponent = ({ items, type }) => {
         showArrows={true}
         showIndicators={false}
         infiniteLoop={true}
-        statusFormatter={(currentItem, totalCount) => (<span>0{currentItem} / 0{totalCount}</span>)}
+        statusFormatter={(currentItem, totalCount) => (<span>{currentItem > 9 ? '' : 0}{currentItem} / {totalCount > 9 ? '' : 0}{totalCount}</span>)}
       >
         {items.map(item => (
           <blockquote className="testimonials-wrap" key={item.sys.id}>
@@ -70,7 +70,7 @@ const CarouselComponent = ({ items, type }) => {
         showArrows={true}
         showIndicators={false}
         infiniteLoop={true}
-        statusFormatter={(currentItem, totalCount) => (<span>0{currentItem} / 0{totalCount}</span>)}
+        statusFormatter={(currentItem, totalCount) => (<span>{currentItem > 9 ? '' : 0}{currentItem} / {totalCount > 9 ? '' : 0}{totalCount}</span>)}
       >
         {items.map(item => (
           <Image 

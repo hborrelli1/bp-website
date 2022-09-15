@@ -119,8 +119,8 @@ const OurWork = ({pageData}) => {
                 <p>{location}</p>
               </div>
               <div className="tags">
-                <p><span>Industry:</span> {industryTag.map(item => <span key={item} className="industry-item">{item}</span>)}</p>
-                <p><span>Service:</span> {serviceTags.map(item => <span key={item} className="service-item">{item}</span>)}</p>
+                <p><span className="industry-label">Industry</span> {industryTag.map(item => <span key={item} className="industry-item">{item}</span>)}</p>
+                <p><span className="service-label">Service</span> {serviceTags.map(item => <span key={item} className="service-item">{item}</span>)}</p>
               </div>
             </div>
           </a>
@@ -167,8 +167,8 @@ const OurWork = ({pageData}) => {
               {industryFilter === 'all' ? 'Industry' : industryKey[industryFilter]} <span className="filter-button-icon">
                 <Image 
                   src="/assets/icons/down-chevron@2x.png" 
-                  width="15px" 
-                  height="8px" 
+                  width="12px" 
+                  height="6px" 
                   alt="Industry Filter Arrow"
                 />
               </span>
@@ -187,8 +187,8 @@ const OurWork = ({pageData}) => {
               {serviceFilter === 'all' ? 'Service' : servicesKey[serviceFilter]} <span className="filter-button-icon">
                 <Image 
                   src="/assets/icons/down-chevron@2x.png" 
-                  width="15px" 
-                  height="8px" 
+                  width="12px" 
+                  height="6px"  
                   alt="Industry Filter Arrow"
                 />
               </span>

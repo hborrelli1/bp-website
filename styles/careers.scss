@@ -3,6 +3,7 @@
 .careers-wrapper {
   header {
     padding: 200px 0;
+    height: 100vh;
   }
   .core-values {
     background-color: $bp-blue;
@@ -42,6 +43,13 @@
           font-size: 20px;
           letter-spacing: 1px;
           color: rgba(255,255,255,.5);
+          transition: .3s all;
+        }
+
+        &:hover {
+          p {
+            color: #fff;
+          }
         }
       }
     }
@@ -87,12 +95,19 @@
             padding-left: 20px;
             color: #fff;
             text-decoration: none;
+            transition: .3s all;
+
+            span { color: #fff}
 
             .icon {
               display: flex;
               padding: 20px;
               background-color: darken($bp-blue, 10%);
               transform: rotate(-90deg)
+            }
+
+            &:hover {
+              text-decoration: underline;
             }
           }
         }

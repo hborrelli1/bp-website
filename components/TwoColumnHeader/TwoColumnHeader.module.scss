@@ -10,7 +10,7 @@
 
   .content {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1000px;
     padding: 0 30px;
     display: flex;
     
@@ -19,7 +19,8 @@
       margin: 0;
     }
     p {
-      color: rgba(255,255,255,.80);;
+      color: rgba(255,255,255,.80);
+      padding-top: 15px;
     }
 
     h1 {

@@ -46,5 +46,26 @@
     font-size: 14px !important;
     margin: 0 !important;
     padding: 0 !important;
+    span {
+      // color: #fff;
+    }
+  }
+}
+
+.gallery-carousel {
+  .carousel .control-arrow {
+    filter: none !important;
+  }
+}
+
+.featured-projects {
+  .project-slider {
+    .carousel {
+      .carousel-status {
+        span {
+          color: #fff;
+        }
+      }
+    }
   }
 }
