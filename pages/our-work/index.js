@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const res = await client.getEntries({ content_type: 'ourWork', include: 4 });
+  const res = await client.getEntries({ content_type: 'ourWork', include: 4, limit: 2 });
 
   const stringifiedItems = safeJsonStringify(res);
   const data = JSON.parse(stringifiedItems);

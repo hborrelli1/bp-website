@@ -9,11 +9,6 @@ import CarouselComponent from '../components/Carousel/CarouselComponent';
 import ThreeColumnFeaturedPosts from '../components/ThreeColumnFeaturedPosts';
 import safeJsonStringify from 'safe-json-stringify';
 
-// import homepageData from '../contentfulApi/homepage-data.preval';
-// import servicesData from '../contentfulApi/services-data.preval';
-// import themeConfigData from '../contentfulApi/contentful-data.preval'; 
-
-
 // Runs at build time
 // Used to fetch data from Blog section.
 export const getStaticProps = async () => {
@@ -26,8 +21,8 @@ export const getStaticProps = async () => {
   });
 
   const homePageData = await client.getEntries({ content_type: 'homePage' });
-  const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
-  const projects = await client.getEntries({ content_type: 'projects' });
+  // const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
+  const projects = await client.getEntries({ content_type: 'projects', limit: 10 });
 
   const stringifiedHomePageData = safeJsonStringify(homePageData);
   const homeData = JSON.parse(stringifiedHomePageData);
@@ -37,23 +32,24 @@ export const getStaticProps = async () => {
   return {
     props: {
       homePageData: homeData.items,
-      themeConfig: themeConfig.items,
+      // themeConfig: themeConfig.items,
       projects: projectData.items,
     },
     revalidate: 1,
   }
 }
 
-export default function Home({homePageData, themeConfig, projects}) {
+// export default function Home({homePageData, themeConfig, projects}) {
+export default function Home({homePageData, projects}) {
   const {fields} = homePageData[0];
   const [navHeight, setNavHeight] = useState(60);
   const [heroHeight, setHeroHeight] = useState(0);
 
   useEffect(() => {
     // Set navbar height on load
-    // const navElement = document.getElementById('Navbar');
-    // const navHeight = navElement.clientHeight;
-    // setNavHeight(navHeight);
+    const navElement = document.getElementById('Navbar');
+    const navHeight = navElement.clientHeight;
+    setNavHeight(navHeight);
 
     // Set hero height on load
     const heroElement = document.getElementById('heroBanner');
@@ -63,13 +59,12 @@ export default function Home({homePageData, themeConfig, projects}) {
 
   const heroSectionStyles = {
     backgroundImage: `url(https:${fields.heroImage.fields.file.url})`,
-    // height: `calc(100vh - ${navHeight}px)`,
     height: '100vh',
   }
 
-  const backgroundSectionStyles = {
-    backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})`,
-  }
+  // const backgroundSectionStyles = {
+  //   backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})`,
+  // }
 
   const featuredProjectItems = fields.featuredProjects.reduce((acc, item, index) => {
     acc[index] = {
@@ -112,7 +107,8 @@ export default function Home({homePageData, themeConfig, projects}) {
             </div>
           </button>
         </div>
-        <div className="services" style={backgroundSectionStyles}>
+        {/* <div className="services" style={backgroundSectionStyles}> */}
+        <div className="services" >
           <div className="content">
             <div className="content-column">
               <h2>{fields.ourServicesTitle}</h2>
@@ -176,7 +172,8 @@ export default function Home({homePageData, themeConfig, projects}) {
         <ThreeColumnFeaturedPosts info={{
           subTitle: fields.featuredPostSubtitle,
           title: fields.featuredPostTitle,
-          posts: fields.featuredPosts
+          posts: fields.featuredPosts,
+          type: 'projects'
         }}/>
       </div>
       {/* <style jsx>{`
