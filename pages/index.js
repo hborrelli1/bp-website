@@ -22,25 +22,25 @@ export const getStaticProps = async () => {
 
   const homePageData = await client.getEntries({ content_type: 'homePage' });
   // const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
-  const projects = await client.getEntries({ content_type: 'projects', limit: 10 });
+  // const projects = await client.getEntries({ content_type: 'projects', limit: 10 });
 
   const stringifiedHomePageData = safeJsonStringify(homePageData);
   const homeData = JSON.parse(stringifiedHomePageData);
-  const stringifiedProjectData = safeJsonStringify(projects);
-  const projectData = JSON.parse(stringifiedProjectData);
+  // const stringifiedProjectData = safeJsonStringify(projects);
+  // const projectData = JSON.parse(stringifiedProjectData);
 
   return {
     props: {
       homePageData: homeData.items,
       // themeConfig: themeConfig.items,
-      projects: projectData.items,
+      // projects: projectData.items,
     },
     revalidate: 1,
   }
 }
 
 // export default function Home({homePageData, themeConfig, projects}) {
-export default function Home({homePageData, projects}) {
+export default function Home({homePageData}) {
   const {fields} = homePageData[0];
   const [navHeight, setNavHeight] = useState(60);
   const [heroHeight, setHeroHeight] = useState(0);
@@ -66,18 +66,18 @@ export default function Home({homePageData, projects}) {
   //   backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})`,
   // }
 
-  const featuredProjectItems = fields.featuredProjects.reduce((acc, item, index) => {
-    acc[index] = {
-      thumbnail: item.fields.thumbnailImage,
-      title: item.fields.projectTitle,
-      excerpt: item.fields.shortSummary,
-      industry: item.fields.industry,
-      id: item.sys.id,
-      slug: item.fields.slug,
-    }
+  // const featuredProjectItems = fields.featuredProjects.reduce((acc, item, index) => {
+  //   acc[index] = {
+  //     thumbnail: item.fields.thumbnailImage,
+  //     title: item.fields.projectTitle,
+  //     excerpt: item.fields.shortSummary,
+  //     industry: item.fields.industry,
+  //     id: item.sys.id,
+  //     slug: item.fields.slug,
+  //   }
 
-    return acc;
-  }, []);
+  //   return acc;
+  // }, []);
 
   const scrollDown = () => {
     window.scrollTo({
@@ -128,7 +128,7 @@ export default function Home({homePageData, projects}) {
           <div className="background-block"></div>
           <div className="project-slider">
             <h4>Featured Projects</h4>
-            <CarouselComponent items={featuredProjectItems} type='projects' />
+            {/* <CarouselComponent items={featuredProjectItems} type='projects' /> */}
             <Link href="/our-work">
               <a className="view-all-projects">View All Projects +</a>
             </Link>
