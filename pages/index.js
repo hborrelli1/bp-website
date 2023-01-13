@@ -66,18 +66,18 @@ export default function Home({homePageData}) {
   //   backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})`,
   // }
 
-  // const featuredProjectItems = fields.featuredProjects.reduce((acc, item, index) => {
-  //   acc[index] = {
-  //     thumbnail: item.fields.thumbnailImage,
-  //     title: item.fields.projectTitle,
-  //     excerpt: item.fields.shortSummary,
-  //     industry: item.fields.industry,
-  //     id: item.sys.id,
-  //     slug: item.fields.slug,
-  //   }
+  const featuredProjectItems = fields.featuredProjects.reduce((acc, item, index) => {
+    acc[index] = {
+      thumbnail: item.fields.thumbnailImage,
+      title: item.fields.projectTitle,
+      excerpt: item.fields.shortSummary,
+      industry: item.fields.industry,
+      id: item.sys.id,
+      slug: item.fields.slug,
+    }
 
-  //   return acc;
-  // }, []);
+    return acc;
+  }, []);
 
   const scrollDown = () => {
     window.scrollTo({
@@ -128,7 +128,7 @@ export default function Home({homePageData}) {
           <div className="background-block"></div>
           <div className="project-slider">
             <h4>Featured Projects</h4>
-            {/* <CarouselComponent items={featuredProjectItems} type='projects' /> */}
+            <CarouselComponent items={featuredProjectItems} type='projects' />
             <Link href="/our-work">
               <a className="view-all-projects">View All Projects +</a>
             </Link>
