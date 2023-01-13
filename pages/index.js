@@ -21,7 +21,7 @@ export const getStaticProps = async () => {
   });
 
   const homePageData = await client.getEntries({ content_type: 'homePage' });
-  // const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
+  const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
   // const projects = await client.getEntries({ content_type: 'projects', limit: 10 });
 
   const stringifiedHomePageData = safeJsonStringify(homePageData);
@@ -32,7 +32,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       homePageData: homeData.items,
-      // themeConfig: themeConfig.items,
+      themeConfig: themeConfig.items,
       // projects: projectData.items,
     },
     revalidate: 1,
@@ -40,7 +40,7 @@ export const getStaticProps = async () => {
 }
 
 // export default function Home({homePageData, themeConfig, projects}) {
-export default function Home({homePageData}) {
+export default function Home({homePageData, themeConfig}) {
   const {fields} = homePageData[0];
   const [navHeight, setNavHeight] = useState(60);
   const [heroHeight, setHeroHeight] = useState(0);
@@ -62,9 +62,9 @@ export default function Home({homePageData}) {
     height: '100vh',
   }
 
-  // const backgroundSectionStyles = {
-  //   backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})`,
-  // }
+  const backgroundSectionStyles = {
+    backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})`,
+  }
 
   const featuredProjectItems = fields.featuredProjects.reduce((acc, item, index) => {
     acc[index] = {
@@ -107,8 +107,7 @@ export default function Home({homePageData}) {
             </div>
           </button>
         </div>
-        {/* <div className="services" style={backgroundSectionStyles}> */}
-        <div className="services" >
+        <div className="services" style={backgroundSectionStyles}>
           <div className="content">
             <div className="content-column">
               <h2>{fields.ourServicesTitle}</h2>
