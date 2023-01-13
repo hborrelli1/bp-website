@@ -18,30 +18,30 @@ const BlogCard = ({blog, type = "news"}) => {
         <div className="img-wrap">
           <div className="img-hover-circle">
             <div className="icon">
-              {/* <Image 
+              <Image 
                 src="/assets/icons/circle-with-plus@2x.png"
                 width="40px"
                 height="40px"
                 alt={`${postTitle} Thumbnail Image.`}
-                /> */}
+                />
             </div>
           </div>
           <div className="img-hover-filter-bg"></div>
           <div className="img-el">
-            {/* <Image  
+            <Image  
               src={`https:${thumbnailImage.fields.file.url}`}
               // width={thumbnailImage.fields.file.details.image.width}
               // height={thumbnailImage.fields.file.details.image.height}
               alt={postTitle}
               className="img"
               layout="fill"
-            /> */}
+            />
           </div>
         </div>
         <div className="info">
           <h4>{postTitle}</h4>
           <h5 className="date">{moment(date).format('MMMM Do YYYY')}</h5>
-          {/* <p className="body-copy">{shortSummaryText}</p> */}
+          <p className="body-copy">{shortSummaryText}</p>
         </div>
         <p className="link">Keep Reading +</p>
       </a>
