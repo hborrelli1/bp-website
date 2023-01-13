@@ -75,7 +75,8 @@ const BlogPost = ({ blog }) => {
         <ThreeColumnFeaturedPosts info={{
           subTitle: null,
           title: null,
-          posts: featuredPosts
+          posts: featuredPosts,
+          type: 'news'
         }}/>
       </div>
     </div>

@@ -7,6 +7,7 @@ const ThreeColumnFeaturedPosts = ({info}) => {
     title,
     posts
   } = info;
+
   return (
     <section className="featured-posts">
       <div className="content-margins">

@@ -60,7 +60,8 @@ const Contact = ({ contactData, themeConfig }) => {
       <ThreeColumnFeaturedPosts info={{
         subTitle: "News",
         title: null,
-        posts: featuredPosts
+        posts: featuredPosts,
+        type: 'news'
       }} />
     </article>
   );

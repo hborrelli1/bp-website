@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const res = await client.getEntries({ content_type: 'ourWork', include: 4 });
+  const res = await client.getEntries({ content_type: 'ourWork', limit: 2 });
 
   const stringifiedItems = safeJsonStringify(res);
   const data = JSON.parse(stringifiedItems);
@@ -58,8 +58,6 @@ const OurWork = ({pageData}) => {
   }
 
   const [projects, setProjects] = useState(null);
-  const [industryTags, setIndustryTags] = useState(null);
-  const [serviceTags, setServiceTags] = useState(null);
   const [industryFilter, setIndustryFilter] = useState('all');
   const [serviceFilter, setServiceFilter] = useState('all');
   const [displayIndustryMenu, setDisplayIndustryMenu] = useState(false);
@@ -96,7 +94,6 @@ const OurWork = ({pageData}) => {
     }
 
     return projectsToRender.map(project => {
-      console.log('project:', project )
       if (!project.fields) {
         return;
       }
@@ -128,7 +125,6 @@ const OurWork = ({pageData}) => {
       )
     });
   }
-  // return(<div>hi</div>)
 
   const toggleMenu = (filterType) => {
     if (filterType === 'industry') {
@@ -201,13 +197,8 @@ const OurWork = ({pageData}) => {
         </div>
       </div>
       <section className="featured-projects">
+        {/** create pagination for projects... */}
         {renderProjects(projects)}
-        
-          {/* {industryFilter === 'all' 
-            ? renderProjects(projects)
-            : renderProjects(projects.filter(proj => proj.fields.industry === industryKey[industryFilter]))
-          } */}
-        
       </section>
 
       <FooterCta 

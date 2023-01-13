@@ -3,14 +3,14 @@ import Image from 'next/image';
 import moment from 'moment';
 
 const BlogCard = ({blog, type = "news"}) => {
-  const {shortSummary, blogTitle, projectTitle, slug = '/', thumbnailImage, date} = blog.fields;
+  const {shortSummary = '', blogTitle, slug, projectTitle, thumbnailImage, date} = blog?.fields;
 
   const shortSummaryText = shortSummary.length > 150 
     ? `${shortSummary.substring(0, 150)}...` 
     : shortSummary;
 
   const postTitle = type === "news" ? blogTitle : projectTitle;
-    console.log('blog:', blog);
+  
   return (
     <Link href={`/${type}/${slug}`}>
       <a className="blog-card">

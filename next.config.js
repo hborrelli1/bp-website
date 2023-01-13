@@ -1,10 +1,8 @@
 // next.config.js
-const createNextPluginPreval = require('next-plugin-preval/config');
-const withNextPluginPreval = createNextPluginPreval();
-// const path = require('path');
 
-module.exports = withNextPluginPreval({
+module.exports = {
   reactStrictMode: true,
+  staticPageGenerationTimeout: 10000,
   images: {
     domains: ['images.ctfassets.net', 'via.placeholder.com', 'downloads.ctfassets.net']
   },
@@ -12,4 +10,4 @@ module.exports = withNextPluginPreval({
   //   includePaths: [path.join(__dirname, 'styles')],
   //   prependData: `@import "main.scss";`
   // },
-})
+}
