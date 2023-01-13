@@ -173,12 +173,12 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                         </div>
                       </div>
                     )}
-                    {/* <ThreeColumnFeaturedPosts info={{
+                    <ThreeColumnFeaturedPosts info={{
                       type: "our-work",
                       subTitle: service.fields.featuredProjectsSubtitle,
                       title: service.fields.featuredProjectsSectionTitle,
                       posts: service.fields.featuredProjects
-                    }} /> */}
+                    }} />
                   </div>
               );
 

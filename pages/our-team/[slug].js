@@ -159,14 +159,14 @@ const Person = ({ person }) => {
         </div>
       </section>
 
-      {/* {featuredProjects && (
+      {featuredProjects && (
         <ThreeColumnFeaturedPosts info={{
           subTitle: `${name}'s Featured Work`,
           title: null,
           posts: featuredProjects,
           type: 'projects'
         }}/>
-      )} */}
+      )}
 
       {involvement && (
         <section className="involvement">

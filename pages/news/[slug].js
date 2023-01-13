@@ -56,7 +56,7 @@ const BlogPost = ({ blog }) => {
 
   return (
     <div className="blog-content">
-        {/* <div className="header-block"></div>
+        <div className="header-block"></div>
         <div className="body-content">
           <div className="img-wrap">
             <Image 
@@ -78,7 +78,7 @@ const BlogPost = ({ blog }) => {
           posts: featuredPosts,
           type: 'news'
         }}/>
-      </div> */}
+      </div>
     </div>
   );
 }

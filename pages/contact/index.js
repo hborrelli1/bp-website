@@ -57,12 +57,12 @@ const Contact = ({ contactData, themeConfig }) => {
           <ContactForm />
         </div>
       </section>
-      {/* <ThreeColumnFeaturedPosts info={{
+      <ThreeColumnFeaturedPosts info={{
         subTitle: "News",
         title: null,
         posts: featuredPosts,
         type: 'news'
-      }} /> */}
+      }} />
     </article>
   );
 }

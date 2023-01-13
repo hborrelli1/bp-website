@@ -108,14 +108,14 @@ const Project = ({ project }) => {
           </section>
         </div>
       </article>
-      {/* {featuredProjects && (
+      {featuredProjects && (
         <ThreeColumnFeaturedPosts info={{
           subTitle: "More Success Stories",
           title: '', 
           posts: featuredProjects,
           type: "our-work"
         }} />
-      )} */}
+      )}
       {footerCta && (
         <FooterCta ctaData={{
           copy: footerCta.fields.copy,
