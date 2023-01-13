@@ -45,7 +45,7 @@ const News = ({ newsPage }) => {
 
   const [itemsToDisplay, setItemsToDisplay] = useState(6);
 
-  // const blogItemsDisplay = newsPosts?.map((blog, index) => <BlogCard key={index} blog={blog} type={'news'} />);
+  const blogItemsDisplay = newsPosts?.map((blog, index) => <BlogCard key={index} blog={blog} type={'news'} />);
 
   const increaseItemsToDisplay = () => {
     setItemsToDisplay(itemsToDisplay + 6);
@@ -83,7 +83,7 @@ const News = ({ newsPage }) => {
       <section className="all-news">
         <div className="content-margins">
           <h3 className="sub-title">All News</h3>
-          {/* {blogItemsDisplay.filter((blog, index) => index < itemsToDisplay)}
+          {blogItemsDisplay.filter((blog, index) => index < itemsToDisplay)}
           {blogItemsDisplay.length > itemsToDisplay && (
             <button 
               type="button" 
@@ -103,7 +103,7 @@ const News = ({ newsPage }) => {
                 </div>
               </div>
             </button>
-          )} */}
+          )}
         </div>
       </section>
 

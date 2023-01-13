@@ -34,7 +34,6 @@ const OurWork = ({pageData}) => {
     pageDescription,
     pageTitle,
   } = pageData.fields;
-  console.log({pageData})
 
   const industryKey = {
     'all': 'All',
@@ -126,7 +125,6 @@ const OurWork = ({pageData}) => {
       )
     });
   }
-  // return(<div>hi</div>)
 
   const toggleMenu = (filterType) => {
     if (filterType === 'industry') {
