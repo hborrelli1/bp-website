@@ -173,7 +173,7 @@ const Person = ({ person }) => {
           subTitle: `${name}'s Featured Work`,
           title: null,
           posts: featuredProjects,
-          type: 'projects'
+          type: 'our-work'
         }}/>
       )}
 
