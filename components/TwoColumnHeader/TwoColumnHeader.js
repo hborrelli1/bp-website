@@ -18,21 +18,19 @@ const TwoColumnHeader = ({title, copy, image, contactInfo = false}) => {
             <ul className="links">
               <li className="link">
                 <Link href="tel:4074181338">
-                  <a>P: {contactInfo.telephoneNumber}</a>
+                  <a>P: {contactInfo?.telephoneNumber}</a>
                 </Link>
                 </li>
-              <li className="link">
-                <Link href="tel:4074181342">
-                  <a>F: {contactInfo.faxNumber}</a>
-                </Link>
+                <li className="link">
+                  <p>F: {contactInfo?.faxNumber}</p>
                 </li>
               <li className="link">
                 <Link href="https://goo.gl/maps/2owQTVWmYejBTjdG6">
-                  <a>{documentToReactComponents(contactInfo.address)}</a>
+                  <a>{documentToReactComponents(contactInfo?.address)}</a>
                 </Link>
                 </li>
             </ul>
-            <Link href={contactInfo.linkedInUrl}>
+            <Link href={contactInfo?.linkedInUrl}>
               <a className="linkedin">
                 <Image 
                   src="/assets/icons/linkedin-white@2x.png"

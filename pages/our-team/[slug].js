@@ -64,7 +64,9 @@ const Person = ({ person }) => {
     photo,
     slug,
     quote1,
+    quoteImage1,
     quote2,
+    quoteImage2,
     featuredProjects,
     involvement,
 
@@ -84,7 +86,7 @@ const Person = ({ person }) => {
             />
           </div>
           <div className="socials">
-            {(linkedInUrl && email) && (
+            {(linkedInUrl || email) && (
               <span>Connect</span>
             )}
             {linkedInUrl && (
@@ -126,33 +128,40 @@ const Person = ({ person }) => {
       
       <section className="testimonials">
         <div className="content">
-          {quote1 && (
+          {(quote1 || quoteImage1) && (
             <div className="testimonial-row">
               <div className="quote-col">
-                <p>{quote1}</p>
+                <p>{quote1 || ''}</p>
               </div>
               <div className="image-col">
-                <Image 
-                  src="https://via.placeholder.com/530x400"
-                  width="530px"
-                  height="400px"
-                  alt=""
-                />
+                {!quoteImage1 ? '' : (
+                  <Image 
+                    src={`https:${quoteImage1.fields.file.url}`}
+                    width={quoteImage1.fields.file.details.image.width}
+                    height={quoteImage1.fields.file.details.image.height}
+                    layout="responsive"
+                    alt={quoteImage1.fields.title}
+                  />
+                )}
               </div>
             </div>
           )}
-          {quote2 && (
+          {(quote2 || quoteImage2) && (
             <div className="testimonial-row">
               <div className="quote-col">
-                <p>{quote2}</p>
+                <p>{quote2 || ''}</p>
               </div>
               <div className="image-col">
-                <Image 
-                  src="https://via.placeholder.com/530x400"
-                  width="530px"
-                  height="400px"
-                  alt=""
+                {!quoteImage2 ? '' : (
+                  <Image 
+                  src={`https:${quoteImage2.fields.file.url}`}
+                  width={quoteImage2.fields.file.details.image.width}
+                  height={quoteImage2.fields.file.details.image.height}
+                  layout="responsive"
+                  alt={quoteImage2.fields.title}
                 />
+                )}
+                
               </div>
             </div>
           )}
@@ -164,7 +173,7 @@ const Person = ({ person }) => {
           subTitle: `${name}'s Featured Work`,
           title: null,
           posts: featuredProjects,
-          type: 'projects'
+          type: 'our-work'
         }}/>
       )}
 

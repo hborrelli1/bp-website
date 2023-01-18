@@ -18,7 +18,7 @@
     .logo-block {
       display: flex;
       justify-content: flex-end;
-      padding: 20px 70px 20px 0px;
+      padding: 20px 50px 20px 0px;
       border-right: 1px solid rgba(255,255,255,.5);
       width: 33%;
 
@@ -72,7 +72,7 @@
 
     .footer-section {
       width: 67%;
-      padding: 20px 50px 20px 70px;
+      padding: 20px 50px 20px 50px;
 
 
       nav {
@@ -89,9 +89,14 @@
           font-size: 12px;
           letter-spacing: 3px;
           margin-right: 80px;
+          margin-bottom: 10px;
 
           &:hover {
             text-decoration: underline;
+          }
+
+          &:last-of-type {
+            margin-right: 0;
           }
         }
       }
