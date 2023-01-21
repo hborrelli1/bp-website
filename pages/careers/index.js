@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import CareerForm from '../../components/ContactForm/CareerForm';
 
 export const getStaticProps = async () => {
   const client = createClient({
@@ -158,8 +159,10 @@ const Careers = ({ careers, themeConfig }) => {
           );
         })}
       </section>
-      <section>
-        Contact Form
+      <section className="career-body">
+        <div className="content-margins">
+          <CareerForm />
+        </div>
       </section>
     </article>
   )
