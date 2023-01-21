@@ -199,6 +199,15 @@
     }
   }
 
+  .career-body {
+    padding: 80px 30px;
+    .content-margins {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
   @media screen and (max-width: 780px) {
     .core-values {
       .content {

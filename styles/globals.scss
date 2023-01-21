@@ -122,6 +122,10 @@ h5 {
 
     @media screen and (max-width: 560px) {
       .content {
+        h1 {
+          font-size: 30px;
+          line-height:45px;
+        }
         .description {
           p {
             text-shadow: 0px 0px 12px rgb(0 0 0);
@@ -224,22 +228,24 @@ h5 {
         }
 
         .services-column {
+          padding-left:0px;
           .links {
             a {
-              &:before {
-                content: "";
-                background-image: url(/assets/icons/arrow-icon@2x.png);
-                background-size: cover;
-                width: 20px;
-                height: 19px;
-                position: absolute;
-                top: 3px;
-                left: -34px;
-                animation: fadeInOpacity 0.8s ease-out;
-              }
-              &:hover {
+              font-size: 15px;
+        //       &:before {
+        //         content: "";
+        //         background-image: url(/assets/icons/arrow-icon@2x.png);
+        //         background-size: cover;
+        //         width: 20px;
+        //         height: 19px;
+        //         position: absolute;
+        //         top: 3px;
+        //         left: -34px;
+        //         animation: fadeInOpacity 0.8s ease-out;
+        //       }
+        //       &:hover {
                 
-              }
+        //       }
             }
           }
         }
@@ -362,6 +368,23 @@ h5 {
             }
           }
         }
+      }
+    }
+
+    @media screen and (max-width: 850px) {
+      .background-block {
+        // .image-col {
+        //   width: 60%;
+        //   height: 100%;
+  
+        //   img {
+        //     object-fit: cover;
+        //     width: 100%;
+        //     height: 100%;
+        //   }
+        // }
+  
+        // .content-col {
       }
     }
   }
@@ -498,12 +521,15 @@ h5 {
 
           .control-arrow.control-prev {
             left: calc(50% - 160px) !important;
+            // top: 34% !important;
           }
           .carousel-status {
             left: calc(50% - 114px) !important;
+            // top: 34% !important;
           }
           .control-arrow.control-next {
-            left: calc(50% - 50px) !important;
+            left: calc(50% - 300px) !important;
+            // top: 34% !important;
           }
         }
 
@@ -518,12 +544,13 @@ h5 {
     }
   }
 
-  @media screen and (max-width: 650px) {
+  @media screen and (max-width: 850px) {
     .featured-projects {
       margin-bottom: 0;
 
       .background-block {
         width: 100%;
+        height: 250px;
       }
       .project-slider {
         max-width: 500px;
@@ -531,21 +558,27 @@ h5 {
         .carousel-slider {
 
           .control-arrow.control-prev {
-            left: calc(80% - 160px) !important;
+            display:none;
+            left: calc(80% - 250px) !important;
+            // top: 20px !important;
           }
           .carousel-status {
-            left: calc(80% - 114px) !important;
+            display:none;
+            left: calc(80% - 194px) !important;
+            // top: 20px !important;
           }
           .control-arrow.control-next {
+            display:none;
             left: calc(80% - 50px) !important;
+            // top: 20px !important;
           }
           
         }
 
         .featured-project {
           flex-flow: wrap;
-          flex-direction: column-reverse;
-          max-width: 400px;
+          // flex-direction: column-reverse;
+          // max-width: 400px;
           width: 100%;
       
           .image-col, .content-col {
@@ -558,14 +591,14 @@ h5 {
               color: $bp-light-gray;
             }
             h3 {
-              color: #d1d1d1;
+              // color: #d1d1d1;
             }
           }
         }
         
         .view-all-projects {
           left: unset;
-          color: #d1d1d1;
+          // color: #d1d1d1;
         }
       }
     }
