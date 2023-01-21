@@ -55,12 +55,15 @@
   }
 
   @media screen and (max-width: 600px) {
+    background-color: #92A2AC;
+    background-image: unset !important;
     .footer-cta-content {
       flex-direction: column;
 
       p, a {
         width: 100%;
         padding: 0;
+        font-weight: 300;
       }
 
       p {
