@@ -8,19 +8,8 @@ import Link from 'next/link';
 import safeJsonStringify from 'safe-json-stringify';
 
 export const getStaticProps = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  });
-
   const space = process.env.CONTENTFUL_SPACE_ID;
   const accessToken = process.env.CONTENTFUL_ACCESS_KEY;
-
-  // const res = await client.getEntries({ content_type: 'ourWork', limit: 1 });
-  // console.log('res:', res)
-  // const stringifiedItems = safeJsonStringify(res);
-  // // const stringifiedItems = JSON.stringify(res);
-  // const data = JSON.parse(stringifiedItems);
 
   const res = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${space}`,
@@ -282,14 +271,14 @@ const OurWork = ({pageData, featuredProjects}) => {
         {renderProjects(projects)}
       </section>
 
-      {/* <FooterCta 
+      <FooterCta 
           ctaData={{
             copy: footerCta.copy,
             buttonText: footerCta.ctaText,
             buttonUrl: '/services',
             backgroundImage: footerCta.backgroundImage
           }}
-        /> */}
+        />
     </article>
   );
 }
