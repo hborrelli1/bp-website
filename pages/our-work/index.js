@@ -13,27 +13,111 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const res = await client.getEntries({ content_type: 'ourWork', limit: 2 });
+  const space = process.env.CONTENTFUL_SPACE_ID;
+  const accessToken = process.env.CONTENTFUL_ACCESS_KEY;
 
-  const stringifiedItems = safeJsonStringify(res);
-  const data = JSON.parse(stringifiedItems);
+  // const res = await client.getEntries({ content_type: 'ourWork', limit: 1 });
+  // console.log('res:', res)
+  // const stringifiedItems = safeJsonStringify(res);
+  // // const stringifiedItems = JSON.stringify(res);
+  // const data = JSON.parse(stringifiedItems);
+
+  const res = await fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${space}`,
+    {
+      method: 'POST', // GraphQL *always* uses POST requests!
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${accessToken}`, // add our access token header
+      },
+      // send the query we wrote in GraphiQL as a string
+      body: JSON.stringify({
+        // all requests start with "query: ", so we'll stringify that for convenience
+        query: `
+        {
+          ourWorkCollection(limit: 20) {
+            items {
+              pageTitle
+              backgroundImage {
+                url
+              }
+              footerCta {
+                copy 
+                ctaText
+                backgroundImage {
+                  url
+                }
+              }
+            }
+          }
+        }
+      `,
+      }),
+    },
+  );
+
+  const res2 = await fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${space}`,
+    {
+      method: 'POST', // GraphQL *always* uses POST requests!
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${accessToken}`, // add our access token header
+      },
+      // send the query we wrote in GraphiQL as a string
+      body: JSON.stringify({
+        // all requests start with "query: ", so we'll stringify that for convenience
+        query: `
+        {
+          projectsCollection(limit: 20) {
+            items {
+              projectTitle
+              thumbnailImage {
+                url
+              }
+              location
+              industryTag
+              serviceTags
+              slug
+            }
+          }
+        }
+      `,
+      }),
+    },
+  );
+  // return {
+  //   props: {
+  //     pageData: data.items[0]
+  //   },
+  //   revalidate: 1,
+  // }
+
+  // grab the data from our response
+  const data = await res.json()
+  const data2 = await res2.json()
+  console.log('data...', data)
+  console.log('data2...', data2)
 
   return {
     props: {
-      pageData: data.items[0]
+    	pageData: data.data.ourWorkCollection.items,
+      featuredProjects: data2.data.projectsCollection.items,
     },
-    revalidate: 1,
   }
 }
 
-const OurWork = ({pageData}) => {
+const OurWork = ({pageData, featuredProjects}) => {
+  console.log('pageData:',pageData)
+  console.log('featuredProjects:',featuredProjects)
+
   const {
     backgroundImage,
-    featuredProjects,
+    // featuredProjects = [],
     footerCta,
     pageDescription,
     pageTitle,
-  } = pageData.fields;
+  } = pageData[0];
 
   const industryKey = {
     'all': 'All',
@@ -57,16 +141,16 @@ const OurWork = ({pageData}) => {
     'restoration/adaptive-re-use': 'Restoration/Adaptive Re-Use',
   }
 
-  const [projects, setProjects] = useState(null);
+  const [projects, setProjects] = useState(featuredProjects);
   const [industryFilter, setIndustryFilter] = useState('all');
   const [serviceFilter, setServiceFilter] = useState('all');
   const [displayIndustryMenu, setDisplayIndustryMenu] = useState(false);
   const [displayServiceMenu, setDisplayServiceMenu] = useState(false);
   
-  useEffect(() => {
-    const projectsToDisplay = featuredProjects.filter(item => Object.keys(item).includes('fields'));
-    setProjects(projectsToDisplay);
-  },[featuredProjects])
+  // useEffect(() => {
+  //   const projectsToDisplay = featuredProjects.filter(item => Object.keys(item).includes('fields'));
+  //   setProjects(projectsToDisplay);
+  // },[featuredProjects])
 
   const renderProjects = (projects) => {
     let projectsToRender = [];
@@ -77,26 +161,23 @@ const OurWork = ({pageData}) => {
 
     if (industryFilter !== 'all' && serviceFilter !== 'all') {
       const filteredProjects = projects.filter(proj => (
-        proj.fields.industryTag.includes(industryKey[industryFilter])  
-        && proj.fields.serviceTags.includes(servicesKey[serviceFilter]) )
+        proj.industryTag.includes(industryKey[industryFilter])  
+        && proj.serviceTags.includes(servicesKey[serviceFilter]) )
       );
       projectsToRender.push(...filteredProjects);
     } else if (industryFilter !== 'all') {
       const filteredProjects = projects.filter(proj => 
-        proj.fields.industryTag.includes(industryKey[industryFilter]));
+        proj.industryTag.includes(industryKey[industryFilter]));
       projectsToRender.push(...filteredProjects);
     } else if (serviceFilter !== 'all') {
       const filteredProjects = projects.filter(proj => 
-        proj.fields.serviceTags.includes(servicesKey[serviceFilter]));
+        proj.serviceTags.includes(servicesKey[serviceFilter]));
       projectsToRender.push(...filteredProjects);
     } else {
       projectsToRender.push(...projects);
     }
 
     return projectsToRender.map(project => {
-      if (!project.fields) {
-        return;
-      }
       const { 
         industryTag,
         location,
@@ -104,11 +185,11 @@ const OurWork = ({pageData}) => {
         serviceTags,
         thumbnailImage,
         slug,
-      } = project.fields;
+      } = project;
 
       return (
-        <Link href={`/our-work/${slug}`} key={project.sys.id}>
-          <a className="project" style={{backgroundImage: `url(https:${thumbnailImage.fields.file.url})`}}>
+        <Link href={`/our-work/${slug}`} key={slug}>
+          <a className="project" style={{backgroundImage: `url(${thumbnailImage.url})`}}>
             <div className="project-thumb-bg"></div>
             <div className="meta-data">
               <div className="title">
@@ -201,14 +282,14 @@ const OurWork = ({pageData}) => {
         {renderProjects(projects)}
       </section>
 
-      <FooterCta 
+      {/* <FooterCta 
           ctaData={{
-            copy: footerCta.fields.copy,
-            buttonText: footerCta.fields.ctaText,
+            copy: footerCta.copy,
+            buttonText: footerCta.ctaText,
             buttonUrl: '/services',
-            backgroundImage: footerCta.fields.backgroundImage
+            backgroundImage: footerCta.backgroundImage
           }}
-        />
+        /> */}
     </article>
   );
 }

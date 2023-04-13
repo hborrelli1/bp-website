@@ -10,7 +10,7 @@ const FooterCta = ({ctaData}) => {
     backgroundImage
   } = ctaData;
   return (
-    <section className={styles["footer-cta"]} style={{ backgroundImage: `url(https:${backgroundImage.fields.file.url})`}}>
+    <section className={styles["footer-cta"]} style={{ backgroundImage: `url(https:${backgroundImage.url})`}}>
       <div className={styles['footer-cta-content']}>
         <p>{copy}</p>
         <Link href={buttonUrl}>

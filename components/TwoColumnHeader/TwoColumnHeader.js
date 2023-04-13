@@ -5,9 +5,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const TwoColumnHeader = ({title, copy, image, contactInfo = false}) => {
+  console.log({title, copy, image, contactInfo})
 
   return (
-    <header className={styles['two-column-header']} style={{ backgroundImage: `url(https:${image.fields.file.url})` }}>
+    <header className={styles['two-column-header']} style={{ backgroundImage: `url(${image.url})` }}>
         <div className={styles.content}>
           <h1>{title}</h1>
           {_.isObject(copy) ? documentToReactComponents(copy) : <p>{copy}</p>}
