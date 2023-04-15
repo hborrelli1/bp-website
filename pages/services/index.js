@@ -19,7 +19,6 @@ export const getStaticProps = async () => {
   const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
   const iconsWithText = await client.getEntries({ content_type: 'iconWithText' });
 
-  console.log({servicesData})
   const stringifiedItems = safeJsonStringify(servicesData);
   const servicesDataItems = JSON.parse(stringifiedItems);
 
@@ -34,7 +33,6 @@ export const getStaticProps = async () => {
 }
 
 const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
-  console.log({servicesPageData})
   const router = useRouter();
   const [serviceTabs, setServiceTabs] = useState([]);
   const [activeTab, setActiveTab] = useState(0);
@@ -106,7 +104,6 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                 && service.fields.serviceDescription2 
                 && service.fields.mainImage2 
                 && service.fields.features2;
-              console.log('service:', service)
               acc[index] = (
                   <div
                     className="service-content"

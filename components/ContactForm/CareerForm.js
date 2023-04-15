@@ -20,7 +20,6 @@ const CareerForm = () => {
 
     emailjs.sendForm('service_98lgg2i', 'careers_form', form, 'mmK3OKeHIopjzpZnQ')
       .then((result) => {
-          console.log('result:',result);
           if (result.status === 200) {
             // Display thank you message..
             setThankYouMessage(true);

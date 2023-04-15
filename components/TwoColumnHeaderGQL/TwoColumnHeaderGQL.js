@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const TwoColumnHeaderGQL = ({title, copy, image, contactInfo = false}) => {
-  console.log({title, copy, image, contactInfo})
 
   return (
     <header className={styles['two-column-header']} style={{ backgroundImage: `url(${image.url})` }}>

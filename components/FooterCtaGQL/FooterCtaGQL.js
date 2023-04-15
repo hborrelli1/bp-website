@@ -9,8 +9,6 @@ const FooterCtaGQL = ({ctaData}) => {
     buttonUrl,
     backgroundImage
   } = ctaData;
-  console.log('footerdata')
-  console.log({copy, buttonText,buttonUrl,backgroundImage})
   return (
     <section className={styles["footer-cta"]} style={{ backgroundImage: `url(${backgroundImage.url})`}}>
       <div className={styles['footer-cta-content']}>

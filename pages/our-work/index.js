@@ -86,8 +86,6 @@ export const getStaticProps = async () => {
 }
 
 const OurWork = ({pageData, featuredProjects}) => {
-  console.log('pageData:',pageData)
-  console.log('featuredProjects:',featuredProjects)
 
   const {
     backgroundImage,

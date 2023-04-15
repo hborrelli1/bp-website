@@ -41,7 +41,6 @@ export const getStaticProps = async () => {
 
 // export default function Home({homePageData, themeConfig, projects}) {
 export default function Home({homePageData, themeConfig}) {
-  console.log({homePageData})
   const {fields} = homePageData[0];
   const [navHeight, setNavHeight] = useState(60);
   const [heroHeight, setHeroHeight] = useState(0);

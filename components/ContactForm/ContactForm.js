@@ -21,7 +21,6 @@ const ContactForm = () => {
 
     emailjs.sendForm('service_98lgg2i', 'contact_form', form, 'mmK3OKeHIopjzpZnQ')
       .then((result) => {
-          console.log('result:',result);
           if (result.status === 200) {
             // Display thank you message..
             setThankYouMessage(true);
