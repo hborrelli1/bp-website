@@ -25,7 +25,6 @@ export const getStaticProps = async () => {
 }
 
 const Careers = ({ careers, themeConfig }) => {
-  console.log('careers:', careers);
   const [isMobile, setIsMobile] = useState(false);
 
   const setIsMobileState = () => {

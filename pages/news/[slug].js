@@ -52,7 +52,6 @@ export const getStaticProps = async ({ params }) => {
 const BlogPost = ({ blog }) => {
   const {blogTitle, blogContent, featuredPosts, thumbnailImage} = blog.fields;
   const updatedAt = blog.sys.updatedAt
-  console.log('blog:', blog);
 
   return (
     <div className="blog-content">

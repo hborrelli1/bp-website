@@ -104,7 +104,6 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                 && service.fields.serviceDescription2 
                 && service.fields.mainImage2 
                 && service.fields.features2;
-              console.log('service:', service)
               acc[index] = (
                   <div
                     className="service-content"

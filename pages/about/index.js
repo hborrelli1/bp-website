@@ -52,7 +52,6 @@ const About = ({themeConfig, aboutData}) => {
     slug,
     testimonials
   } = aboutData.fields;
-  console.log('testimonials:', testimonials);
   return (
     <>
       <Head>

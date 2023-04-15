@@ -1,39 +1,98 @@
-import {createClient} from 'contentful';
-import { useEffect, useState, useMemo } from 'react';
-import FooterCta from '../../components/FooterCta/FooterCta';
-import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
+import { useState } from 'react';
+import TwoColumnHeaderGQL from '../../components/TwoColumnHeaderGQL/TwoColumnHeaderGQL';
+import FooterCtaGQL from '../../components/FooterCtaGQL/FooterCtaGQL';
 import _ from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
-import safeJsonStringify from 'safe-json-stringify';
 
 export const getStaticProps = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  });
+  const space = process.env.CONTENTFUL_SPACE_ID;
+  const accessToken = process.env.CONTENTFUL_ACCESS_KEY;
 
-  const res = await client.getEntries({ content_type: 'ourWork', limit: 2 });
+  const res = await fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${space}`,
+    {
+      method: 'POST', // GraphQL *always* uses POST requests!
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${accessToken}`, // add our access token header
+      },
+      // send the query we wrote in GraphiQL as a string
+      body: JSON.stringify({
+        // all requests start with "query: ", so we'll stringify that for convenience
+        query: `
+        {
+          ourWorkCollection(limit: 20) {
+            items {
+              pageTitle
+              backgroundImage {
+                url
+              }
+              footerCta {
+                copy 
+                ctaText
+                backgroundImage {
+                  url
+                }
+              }
+            }
+          }
+        }
+      `,
+      }),
+    },
+  );
 
-  const stringifiedItems = safeJsonStringify(res);
-  const data = JSON.parse(stringifiedItems);
+  const res2 = await fetch(
+    `https://graphql.contentful.com/content/v1/spaces/${space}`,
+    {
+      method: 'POST', // GraphQL *always* uses POST requests!
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${accessToken}`, // add our access token header
+      },
+      // send the query we wrote in GraphiQL as a string
+      body: JSON.stringify({
+        // all requests start with "query: ", so we'll stringify that for convenience
+        query: `
+        {
+          projectsCollection {
+            items {
+              projectTitle
+              thumbnailImage {
+                url
+              }
+              location
+              industryTag
+              serviceTags
+              slug
+            }
+          }
+        }
+      `,
+      }),
+    },
+  );
+
+  const data = await res.json()
+  const data2 = await res2.json()
 
   return {
     props: {
-      pageData: data.items[0]
+    	pageData: data.data.ourWorkCollection.items,
+      featuredProjects: data2.data.projectsCollection.items,
     },
-    revalidate: 1,
   }
 }
 
-const OurWork = ({pageData}) => {
+const OurWork = ({pageData, featuredProjects}) => {
+
   const {
     backgroundImage,
-    featuredProjects,
     footerCta,
     pageDescription,
     pageTitle,
-  } = pageData.fields;
+  } = pageData[0];
 
   const industryKey = {
     'all': 'All',
@@ -57,46 +116,38 @@ const OurWork = ({pageData}) => {
     'restoration/adaptive-re-use': 'Restoration/Adaptive Re-Use',
   }
 
-  const [projects, setProjects] = useState(null);
+  const [projects, setProjects] = useState(featuredProjects);
   const [industryFilter, setIndustryFilter] = useState('all');
   const [serviceFilter, setServiceFilter] = useState('all');
   const [displayIndustryMenu, setDisplayIndustryMenu] = useState(false);
   const [displayServiceMenu, setDisplayServiceMenu] = useState(false);
-  
-  useEffect(() => {
-    const projectsToDisplay = featuredProjects.filter(item => Object.keys(item).includes('fields'));
-    setProjects(projectsToDisplay);
-  },[featuredProjects])
 
   const renderProjects = (projects) => {
     let projectsToRender = [];
 
-    if (!projects) {
-      return (<p>no projects...</p>)
-    } 
-
     if (industryFilter !== 'all' && serviceFilter !== 'all') {
       const filteredProjects = projects.filter(proj => (
-        proj.fields.industryTag.includes(industryKey[industryFilter])  
-        && proj.fields.serviceTags.includes(servicesKey[serviceFilter]) )
+        proj.industryTag.includes(industryKey[industryFilter])  
+        && proj.serviceTags.includes(servicesKey[serviceFilter]) )
       );
       projectsToRender.push(...filteredProjects);
     } else if (industryFilter !== 'all') {
       const filteredProjects = projects.filter(proj => 
-        proj.fields.industryTag.includes(industryKey[industryFilter]));
+        proj.industryTag.includes(industryKey[industryFilter]));
       projectsToRender.push(...filteredProjects);
     } else if (serviceFilter !== 'all') {
       const filteredProjects = projects.filter(proj => 
-        proj.fields.serviceTags.includes(servicesKey[serviceFilter]));
+        proj.serviceTags.includes(servicesKey[serviceFilter]));
       projectsToRender.push(...filteredProjects);
     } else {
       projectsToRender.push(...projects);
     }
 
-    return projectsToRender.map(project => {
-      if (!project.fields) {
-        return;
-      }
+    if (!projectsToRender.length) {
+      return (<p>no projects to display.</p>)
+    } 
+
+    return (projectsToRender).map(project => {
       const { 
         industryTag,
         location,
@@ -104,11 +155,11 @@ const OurWork = ({pageData}) => {
         serviceTags,
         thumbnailImage,
         slug,
-      } = project.fields;
+      } = project;
 
       return (
-        <Link href={`/our-work/${slug}`} key={project.sys.id}>
-          <a className="project" style={{backgroundImage: `url(https:${thumbnailImage.fields.file.url})`}}>
+        <Link href={`/our-work/${slug}`} key={slug}>
+          <a className="project" style={{backgroundImage: `url(${thumbnailImage.url})`}}>
             <div className="project-thumb-bg"></div>
             <div className="meta-data">
               <div className="title">
@@ -146,7 +197,7 @@ const OurWork = ({pageData}) => {
 
   return (
     <article className="our-work-wrapper">
-      <TwoColumnHeader 
+      <TwoColumnHeaderGQL 
         title={pageTitle}
         copy={pageDescription}
         image={backgroundImage}
@@ -201,12 +252,12 @@ const OurWork = ({pageData}) => {
         {renderProjects(projects)}
       </section>
 
-      <FooterCta 
+      <FooterCtaGQL 
           ctaData={{
-            copy: footerCta.fields.copy,
-            buttonText: footerCta.fields.ctaText,
+            copy: footerCta.copy,
+            buttonText: footerCta.ctaText,
             buttonUrl: '/services',
-            backgroundImage: footerCta.fields.backgroundImage
+            backgroundImage: footerCta.backgroundImage
           }}
         />
     </article>
