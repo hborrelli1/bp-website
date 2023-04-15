@@ -1,11 +1,9 @@
-import {createClient} from 'contentful';
-import { useEffect, useState, useMemo } from 'react';
-import FooterCta from '../../components/FooterCta/FooterCta';
-import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
+import { useState } from 'react';
+import TwoColumnHeaderGQL from '../../components/TwoColumnHeaderGQL/TwoColumnHeaderGQL';
+import FooterCtaGQL from '../../components/FooterCtaGQL/FooterCtaGQL';
 import _ from 'lodash';
 import Image from 'next/image';
 import Link from 'next/link';
-import safeJsonStringify from 'safe-json-stringify';
 
 export const getStaticProps = async () => {
   const space = process.env.CONTENTFUL_SPACE_ID;
@@ -58,7 +56,7 @@ export const getStaticProps = async () => {
         // all requests start with "query: ", so we'll stringify that for convenience
         query: `
         {
-          projectsCollection(limit: 20) {
+          projectsCollection {
             items {
               projectTitle
               thumbnailImage {
@@ -75,18 +73,9 @@ export const getStaticProps = async () => {
       }),
     },
   );
-  // return {
-  //   props: {
-  //     pageData: data.items[0]
-  //   },
-  //   revalidate: 1,
-  // }
 
-  // grab the data from our response
   const data = await res.json()
   const data2 = await res2.json()
-  console.log('data...', data)
-  console.log('data2...', data2)
 
   return {
     props: {
@@ -102,7 +91,6 @@ const OurWork = ({pageData, featuredProjects}) => {
 
   const {
     backgroundImage,
-    // featuredProjects = [],
     footerCta,
     pageDescription,
     pageTitle,
@@ -135,18 +123,9 @@ const OurWork = ({pageData, featuredProjects}) => {
   const [serviceFilter, setServiceFilter] = useState('all');
   const [displayIndustryMenu, setDisplayIndustryMenu] = useState(false);
   const [displayServiceMenu, setDisplayServiceMenu] = useState(false);
-  
-  // useEffect(() => {
-  //   const projectsToDisplay = featuredProjects.filter(item => Object.keys(item).includes('fields'));
-  //   setProjects(projectsToDisplay);
-  // },[featuredProjects])
 
   const renderProjects = (projects) => {
     let projectsToRender = [];
-
-    if (!projects) {
-      return (<p>no projects...</p>)
-    } 
 
     if (industryFilter !== 'all' && serviceFilter !== 'all') {
       const filteredProjects = projects.filter(proj => (
@@ -166,7 +145,11 @@ const OurWork = ({pageData, featuredProjects}) => {
       projectsToRender.push(...projects);
     }
 
-    return projectsToRender.map(project => {
+    if (!projectsToRender.length) {
+      return (<p>no projects to display.</p>)
+    } 
+
+    return (projectsToRender).map(project => {
       const { 
         industryTag,
         location,
@@ -216,7 +199,7 @@ const OurWork = ({pageData, featuredProjects}) => {
 
   return (
     <article className="our-work-wrapper">
-      <TwoColumnHeader 
+      <TwoColumnHeaderGQL 
         title={pageTitle}
         copy={pageDescription}
         image={backgroundImage}
@@ -271,7 +254,7 @@ const OurWork = ({pageData, featuredProjects}) => {
         {renderProjects(projects)}
       </section>
 
-      <FooterCta 
+      <FooterCtaGQL 
           ctaData={{
             copy: footerCta.copy,
             buttonText: footerCta.ctaText,

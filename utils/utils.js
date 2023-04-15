@@ -1,8 +1,6 @@
 const space = process.env.CONTENTFUL_SPACE_ID;
 const accessToken = process.env.CONTENTFUL_ACCESS_KEY;
 
-const options = 
-
 export const getOurWork = async () => {
   const res = await fetch(
     `https://graphql.contentful.com/content/v1/spaces/${space}`,
