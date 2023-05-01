@@ -1,6 +1,7 @@
 import {createClient} from 'contentful';
 import Image from 'next/image';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { BLOCKS } from '@contentful/rich-text-types';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
 import safeJsonStringify from 'safe-json-stringify';
 import moment from 'moment';
@@ -49,9 +50,24 @@ export const getStaticProps = async ({ params }) => {
   }
 }
 
+const options = {
+  renderNode: {
+    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+      const { title } = node.data.target.fields;
+      return <Image 
+              src={`https:${node.data.target.fields.file.url}`}
+              width={node.data.target.fields.file.details.image.width}
+              height={node.data.target.fields.file.details.image.height}
+              alt={`${title} thumbnail image.`}
+            />
+    }
+  }
+};
+
 const BlogPost = ({ blog }) => {
   const {blogTitle, blogContent, featuredPosts, thumbnailImage} = blog.fields;
   const updatedAt = blog.sys.updatedAt
+
 
   return (
     <div className="blog-content">
@@ -67,7 +83,7 @@ const BlogPost = ({ blog }) => {
           </div>
           <p className="date">{moment(updatedAt).format('MMMM Do YYYY')}</p>
           <h1>{blogTitle}</h1>
-          <div className="body-copy">{documentToReactComponents(blogContent)}</div>
+          <div className="body-copy">{documentToReactComponents(blogContent,options)}</div>
         </div>
       <div className="content-margins">
         <h4 className="sub-title">More News</h4>
