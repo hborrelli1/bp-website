@@ -6,6 +6,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import FooterCta from '../../components/FooterCta/FooterCta';
 import styles from './about.module.scss'
 import CarouselComponent from '../../components/Carousel/CarouselComponent';
+import safeJsonStringify from 'safe-json-stringify';
 
 // Runs at build time
 // Used to fetch data from Blog section.
@@ -17,7 +18,9 @@ export const getStaticProps = async () => {
   });
 
   const themeConfigData = await client.getEntries({ content_type: 'themeConfig' });
-  const aboutData = await client.getEntries({ content_type: 'about', include: 2 });
+  const aboutDataRes = await client.getEntries({ content_type: 'about', include: 2 });
+  const stringifiedAboutData = safeJsonStringify(aboutDataRes);
+  const aboutData = JSON.parse(stringifiedAboutData);
 
   return {
     props: {
@@ -29,7 +32,6 @@ export const getStaticProps = async () => {
 }
 
 const About = ({themeConfig, aboutData}) => {
-
   const {
     aboutSubTitle,
     descriptionPhoto,
@@ -52,6 +54,7 @@ const About = ({themeConfig, aboutData}) => {
     slug,
     testimonials
   } = aboutData.fields;
+
   return (
     <>
       <Head>
