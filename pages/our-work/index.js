@@ -22,15 +22,29 @@ export const getStaticProps = async () => {
         // all requests start with "query: ", so we'll stringify that for convenience
         query: `
         {
-          ourWorkCollection(limit: 20) {
+          ourWorkCollection(limit:10) {
             items {
               pageTitle
               backgroundImage {
                 url
               }
+              featuredProjectsCollection(where:{sys:{id_exists:true}} limit:100) {
+                items {
+                  projectTitle
+                  thumbnailImage {
+                    title
+                    url
+                  }
+                  location
+                  industryTag
+                  serviceTags
+                  slug
+                }
+              }
               footerCta {
                 copy 
                 ctaText
+                ctaLink
                 backgroundImage {
                   url
                 }
@@ -43,55 +57,55 @@ export const getStaticProps = async () => {
     },
   );
 
-  const res2 = await fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${space}`,
-    {
-      method: 'POST', // GraphQL *always* uses POST requests!
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${accessToken}`, // add our access token header
-      },
-      // send the query we wrote in GraphiQL as a string
-      body: JSON.stringify({
-        // all requests start with "query: ", so we'll stringify that for convenience
-        query: `
-        {
-          projectsCollection {
-            items {
-              projectTitle
-              thumbnailImage {
-                url
-              }
-              location
-              industryTag
-              serviceTags
-              slug
-            }
-          }
-        }
-      `,
-      }),
-    },
-  );
+  // const res2 = await fetch(
+  //   `https://graphql.contentful.com/content/v1/spaces/${space}`,
+  //   {
+  //     method: 'POST', // GraphQL *always* uses POST requests!
+  //     headers: {
+  //       'content-type': 'application/json',
+  //       authorization: `Bearer ${accessToken}`, // add our access token header
+  //     },
+  //     // send the query we wrote in GraphiQL as a string
+  //     body: JSON.stringify({
+  //       // all requests start with "query: ", so we'll stringify that for convenience
+  //       query: `
+  //       {
+  //         projectsCollection {
+  //           items {
+  //             projectTitle
+  //             thumbnailImage {
+  //               url
+  //             }
+  //             location
+  //             industryTag
+  //             serviceTags
+  //             slug
+  //           }
+  //         }
+  //       }
+  //     `,
+  //     }),
+  //   },
+  // );
 
   const data = await res.json()
-  const data2 = await res2.json()
+  // const data2 = await res2.json()
 
   return {
     props: {
     	pageData: data.data.ourWorkCollection.items,
-      featuredProjects: data2.data.projectsCollection.items,
+      // featuredProjects: data2.data.projectsCollection.items,
     },
   }
 }
 
-const OurWork = ({pageData, featuredProjects}) => {
-
+const OurWork = ({pageData}) => {
   const {
     backgroundImage,
     footerCta,
     pageDescription,
     pageTitle,
+    featuredProjectsCollection
   } = pageData[0];
 
   const industryKey = {
@@ -116,7 +130,7 @@ const OurWork = ({pageData, featuredProjects}) => {
     'restoration/adaptive-re-use': 'Restoration/Adaptive Re-Use',
   }
 
-  const [projects, setProjects] = useState(featuredProjects);
+  const [projects, setProjects] = useState(featuredProjectsCollection.items || []);
   const [industryFilter, setIndustryFilter] = useState('all');
   const [serviceFilter, setServiceFilter] = useState('all');
   const [displayIndustryMenu, setDisplayIndustryMenu] = useState(false);
@@ -250,13 +264,13 @@ const OurWork = ({pageData, featuredProjects}) => {
       <section className="featured-projects">
         {/** create pagination for projects... */}
         {renderProjects(projects)}
-      </section>
+      </section>config
 
       <FooterCtaGQL 
           ctaData={{
             copy: footerCta.copy,
             buttonText: footerCta.ctaText,
-            buttonUrl: '/services',
+            buttonUrl: footerCta.ctaLink,
             backgroundImage: footerCta.backgroundImage
           }}
         />
