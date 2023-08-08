@@ -24,16 +24,21 @@
 
       .logo-wrap {
         // width: 100%;
+        // display: flex;
+        // position: relative;
+        max-width: 75px;
+        max-height: 75px;
 
-        > div {
-          position: unset !important;
-        }
+        // > div {
+        //   position: unset !important;
+        // }
 
         .img-icon {
-          object-fit: contain;
-          width: 100% !important;
-          position: relative !important;
-          height: unset !important;
+          // object-fit: contain;
+          // width: 100% !important;
+          // position: relative !important;
+          // height: unset !important;
+          // width: 100%;
         }        
       }
 
