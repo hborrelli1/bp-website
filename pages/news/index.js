@@ -59,6 +59,8 @@ export const getStaticProps = async () => {
                     url
                   }
                   slug
+                  blogTitle
+                  date
                 }
               }
             }
@@ -107,7 +109,7 @@ const News = ({ pageData }) => {
     date,
     newsPostsCollection
   } = pageData[0]
-
+  console.log('newsPostsCollection:', newsPostsCollection)
   const [itemsToDisplay, setItemsToDisplay] = useState(6);
 
   const blogItemsDisplay = newsPostsCollection.items?.map((blog, index) => <BlogCardGQL key={index} blog={blog} type={'news'} />);

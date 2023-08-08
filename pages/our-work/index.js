@@ -118,6 +118,7 @@ const OurWork = ({pageData}) => {
     'parks+recreation': 'Parks + Recreation',
     'hospitality': 'Hospitality',
     'residential': 'Residential',
+    'zoological': 'Residential',
   }
 
   const servicesKey = {
@@ -126,7 +127,6 @@ const OurWork = ({pageData}) => {
     'construction-management': 'Construction Management',
     'interior-design': 'Interior Design',
     'landscape+recreation': 'Landscape + Recreation',
-    'design': 'Design',
     'restoration/adaptive-re-use': 'Restoration/Adaptive Re-Use',
   }
 
@@ -264,7 +264,7 @@ const OurWork = ({pageData}) => {
       <section className="featured-projects">
         {/** create pagination for projects... */}
         {renderProjects(projects)}
-      </section>config
+      </section>
 
       <FooterCtaGQL 
           ctaData={{
