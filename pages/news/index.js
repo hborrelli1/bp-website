@@ -58,6 +58,7 @@ export const getStaticProps = async () => {
                   thumbnailImage {
                     url
                   }
+                  slug
                 }
               }
             }

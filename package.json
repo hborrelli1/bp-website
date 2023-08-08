@@ -9,19 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@contentful/rich-text-react-renderer": "^15.16.2",
-    "@emailjs/browser": "^3.10.0",
+    "@contentful/rich-text-react-renderer": "^15.17.1",
+    "@emailjs/browser": "^3.11.0",
     "contentful": "^8.4.2",
     "graphql": "^15.8.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "next": "^11.1.4",
+    "next": "^12.3.4",
     "react": "17.0.2",
     "react-burger-menu": "^3.0.9",
     "react-dom": "17.0.2",
     "react-responsive-carousel": "^3.2.23",
     "safe-json-stringify": "^1.2.0",
-    "sass": "^1.57.1"
+    "sass": "^1.64.2"
   },
   "devDependencies": {
     "eslint": "7.31.0",
