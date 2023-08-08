@@ -12,7 +12,7 @@ const BlogCard = ({blog, type = "news"}) => {
   const postTitle = type === "news" ? blogTitle : projectTitle;
   
   return (
-    <div>
+    // <div>
       <Link href={`/${type}/${slug}`}>
         <a className="blog-card">
           <div className="img-wrap">
@@ -48,7 +48,7 @@ const BlogCard = ({blog, type = "news"}) => {
           <p className="link">Keep Reading +</p>
         </a>
       </Link>
-    </div>
+    // </div>
   );
 }
  

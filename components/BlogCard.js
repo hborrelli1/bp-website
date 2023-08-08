@@ -14,9 +14,9 @@ const BlogCard = ({blog, type = "news"}) => {
   const postTitle = type === "news" ? blogTitle : projectTitle;
   
   return (
-    <div className='blog-card' onClick={() => router.push(`/${type}/${slug}`)}>
-      {/* <Link href={`/${type}/${slug}`}>
-        <a> */}
+    // <div className='blog-card' onClick={() => router.push(`/${type}/${slug}`)}>
+      <Link href={`/${type}/${slug}`}>
+        <a className='blog-card'> 
           <div className="img-wrap">
             <div className="img-hover-circle">
               <div className="icon">
@@ -49,9 +49,9 @@ const BlogCard = ({blog, type = "news"}) => {
             <p className="body-copy">{shortSummaryText || ''}</p>
           <p className="link">Keep Reading +</p>
           </div>
-        {/* </a>
-      </Link> */}
-    </div>
+        </a>
+      </Link>
+    // </div>
   );
 }
  
