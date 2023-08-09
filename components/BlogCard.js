@@ -35,7 +35,6 @@ const BlogCard = ({blog, type = "news"}) => {
                 alt={postTitle || ''}
                 className="img"
                 layout="fill"
-                fill={true}
               />
             )}
           </div>
