@@ -172,7 +172,7 @@ export default function Home({homePageData, themeConfig}) {
           subTitle: fields.featuredPostSubtitle,
           title: fields.featuredPostTitle,
           posts: fields.featuredPosts,
-          type: 'projects'
+          type: 'news'
         }}/>
       </div>
       {/* <style jsx>{`

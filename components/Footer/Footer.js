@@ -26,7 +26,6 @@ const Footer = () => {
             </p>
             <div className="body-copy">
               <p className={styles["phone"]}>T: <a href="tel:4074181338">407.418.1338</a></p>
-              <p className={styles["fax"]}>F: 407.418.1342</p>
             </div>
           </address>
         </div>
@@ -48,7 +47,7 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles['bottom-bar']} >
-        <p>&copy; {`${new Date().getFullYear()} Borrelli + Partners AAC000711`}</p>
+        <p>&copy; {`${new Date().getFullYear()} Borrelli + Partners AR0004308 & LA6667122`}</p>
         <div className={styles['bottom-bar-linkedin']}>
           <Link href="https://www.linkedin.com/company/borrelli-partners-inc-/">
             <a>

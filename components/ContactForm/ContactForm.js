@@ -50,6 +50,7 @@ const ContactForm = () => {
       setErrMessage('Some fields were filled incorrectly...')
     } else {
       e.target.classList.remove('error');
+      setErrMessage('')
     }
     const invalidFields = Object.keys(fieldsData).reduce((acc, item) => {
       if (!fieldsData[item] && item !== 'message') {
