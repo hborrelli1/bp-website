@@ -119,10 +119,9 @@
         }
         .sub-nav {
           width: 40%;
-          text-align: right;
           
           a {
-            margin-left: 20px;
+            margin-right: 20px;
             color: $bp-light-gray;
             text-decoration: none;
             font-size: 12px;
@@ -134,7 +133,6 @@
 
             &:first-of-type {
               padding-right: 20px;
-              margin-right: 0px;
               border-right: 1px solid $bp-light-gray;
             }
           }

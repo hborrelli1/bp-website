@@ -50,7 +50,9 @@ h5 {
 }
 
 .body-copy {
-  opacity: .8;
+  :not(img) {
+    opacity: .8;
+  }
 }
 
 .home {

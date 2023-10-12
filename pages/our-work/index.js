@@ -118,7 +118,7 @@ const OurWork = ({pageData}) => {
     'parks+recreation': 'Parks + Recreation',
     'hospitality': 'Hospitality',
     'residential': 'Residential',
-    'zoological': 'Residential',
+    'zoological': 'Zoological',
   }
 
   const servicesKey = {
@@ -158,7 +158,7 @@ const OurWork = ({pageData}) => {
     }
 
     if (!projectsToRender.length) {
-      return (<p>no projects to display.</p>)
+      return (<p className="no-projects">no projects to display.</p>)
     } 
 
     return (projectsToRender).map(project => {
@@ -194,7 +194,9 @@ const OurWork = ({pageData}) => {
   const toggleMenu = (filterType) => {
     if (filterType === 'industry') {
       setDisplayIndustryMenu(!displayIndustryMenu);
+      setDisplayServiceMenu(false);
     } else {
+      setDisplayIndustryMenu(false);
       setDisplayServiceMenu(!displayServiceMenu);
     }
   }

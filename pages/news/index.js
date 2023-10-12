@@ -36,6 +36,7 @@ export const getStaticProps = async () => {
               }
               featuredNews {
                 blogTitle
+                date
                 shortSummary
                 thumbnailImage {
                   url
@@ -106,10 +107,9 @@ const News = ({ pageData }) => {
     footerCta,
     pageDescription,
     pageTitle,
-    date,
     newsPostsCollection
   } = pageData[0]
-  console.log('newsPostsCollection:', newsPostsCollection)
+  
   const [itemsToDisplay, setItemsToDisplay] = useState(6);
 
   const blogItemsDisplay = newsPostsCollection.items?.map((blog, index) => <BlogCardGQL key={index} blog={blog} type={'news'} />);
@@ -138,7 +138,7 @@ const News = ({ pageData }) => {
           </div>
           <div className="content-col">
             <h2>{featuredNews.blogTitle}</h2>
-            <h5 className="date">{moment(date).format('MMMM Do YYYY')}</h5>
+            <h5 className="date">{moment(featuredNews.date).add(1, 'days').format('MMMM Do YYYY')}</h5>
             <p className="body-copy">{featuredNews.shortSummary}</p>
             <Link href={`/news/${featuredNews.slug}`}>
               <a className="blog-link">Keep reading +</a>

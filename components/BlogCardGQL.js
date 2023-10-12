@@ -41,7 +41,7 @@ const BlogCard = ({blog, type = "news"}) => {
         </div>
         <div className="info">
           <h4>{postTitle || ''}</h4>
-          {date && <h5 className="date">{moment(date).format('MMMM Do YYYY')}</h5>}
+          {date && <h5 className="date">{moment(date).add(1, 'days').format('MMMM Do YYYY')}</h5>}
           <p className="body-copy">{shortSummaryText || ''}</p>
         </div>
         <p className="link">Keep Reading +</p>
