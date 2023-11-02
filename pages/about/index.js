@@ -49,9 +49,7 @@ const About = ({themeConfig, aboutData}) => {
     qualityDescription2,
     qualityDescription3,
     qualityDescription4,
-    servicesCta,
     shortDescription,
-    slug,
     testimonials
   } = aboutData.fields;
 

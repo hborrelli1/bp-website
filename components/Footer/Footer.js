@@ -10,11 +10,8 @@ const Footer = () => {
           <div className={styles['logo-wrap']}>
             <Image 
               src="/assets/logos/bp-logo-icon@2x.png"
-              // fill={true}
               width="129px"
               height="129px"
-              // layout="fill"
-              // className={styles["img-icon"]}
               alt="Borrelli + Partners Logo"
             />
           </div>

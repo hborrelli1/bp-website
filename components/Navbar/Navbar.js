@@ -50,7 +50,6 @@ const Navbar = () => {
   }
 
   const menu = [
-    // { title: 'Home', path: '/' },
     { title: 'Services', path: '/services' },
     { title: 'Our Work', path: '/our-work' },
     { title: 'About', path: '/about' },
@@ -93,13 +92,13 @@ const Navbar = () => {
         >
           {menu.map((item, index) => {
             return (
-              // <li key={index} className={`${styles["nav-item"]} ${router.pathname === item.path ? styles.active : ''}`}>
-                <Link 
-                  className={styles['menu-item']} 
-                  href={item.path}
-                  key={item.title}
-                ><a onClick={() => closeMenu()}>{item.title}</a></Link>
-              // </li>
+              <Link 
+                className={styles['menu-item']} 
+                href={item.path}
+                key={item.title}
+              >
+                <a onClick={() => closeMenu()}>{item.title}</a>
+              </Link>
             )
           })}
         </Menu>
