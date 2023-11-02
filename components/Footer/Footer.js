@@ -35,7 +35,6 @@ const Footer = () => {
             <Link href="/contact"><a>Contact</a></Link>
           </nav>
           <div className={styles['form-box']}>
-            <p>Form here...</p>
             <div className={styles['sub-nav']}>
               <Link href="/news"><a>News</a></Link>
               <Link href="/privacy-policy"><a>Privacy Policy</a></Link>
