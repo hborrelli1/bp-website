@@ -129,8 +129,6 @@ const Careers = ({ careers, themeConfig }) => {
                     <Image 
                       src={`https:${image.fields.file.url}`}
                       className="cta-img"
-                      // width={image.fields.file.details.image.width}
-                      // height={image.fields.file.details.image.height}
                       width="730px"
                       height="552px"
                       layout="responsive"

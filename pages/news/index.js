@@ -80,23 +80,6 @@ export const getStaticProps = async () => {
       // featuredProjects: data2.data.projectsCollection.items,
     },
   }
-
-  // const client = createClient({
-  //   space: process.env.CONTENTFUL_SPACE_ID,
-  //   accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  // });
-
-  // const newsRes = await client.getEntries({ content_type: 'newsPage'});
-  // const stringifiedNews = safeJsonStringify(newsRes);
-
-  // const newsData = JSON.parse(stringifiedNews);
-
-  // return {
-  //   props: {
-  //     newsPage: newsData.items[0],
-  //   },
-  //   revalidate: 1,
-  // }
 }
 
 const News = ({ pageData }) => {
@@ -109,7 +92,6 @@ const News = ({ pageData }) => {
     date,
     newsPostsCollection
   } = pageData[0]
-  console.log('newsPostsCollection:', newsPostsCollection)
   const [itemsToDisplay, setItemsToDisplay] = useState(6);
 
   const blogItemsDisplay = newsPostsCollection.items?.map((blog, index) => <BlogCardGQL key={index} blog={blog} type={'news'} />);

@@ -62,7 +62,6 @@ const Person = ({ person }) => {
     linkedInUrl,
     name,
     photo,
-    slug,
     quote1,
     quoteImage1,
     quote2,

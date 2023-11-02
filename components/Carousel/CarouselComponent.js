@@ -16,7 +16,7 @@ const CarouselComponent = ({ items, type }) => {
         statusFormatter={(currentItem, totalCount) => (<span>{currentItem > 9 ? '' : 0}{currentItem} / {totalCount > 9 ? '' : 0}{totalCount}</span>)}
       >
         {items.map(item => (
-          <div className="featured-project" key={item.id}>
+          <div className="featured-project" key={item.sys.id}>
             <div className="image-col">
               <Image 
                 src={`https:${item.thumbnail.fields.file.url}`} 
@@ -74,7 +74,7 @@ const CarouselComponent = ({ items, type }) => {
       >
         {items.map(item => (
           <Image 
-            key={item.id}
+            key={item.sys.id}
             src={`https:${item.fields.file.url}`} 
             width="1109" 
             height="624" 
