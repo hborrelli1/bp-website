@@ -90,7 +90,7 @@ const Person = ({ person }) => {
             )}
             {linkedInUrl && (
               <Link href={linkedInUrl}>
-                <a>
+                <a target="_blank">
                   <Image 
                     src="/assets/icons/linkedin-icon@2x.png" 
                     width="24px" 

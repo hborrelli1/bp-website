@@ -16,32 +16,38 @@ const TwoColumnHeaderGQL = ({title, copy, image, contactInfo = false}) => {
         <address>
           <div className="content-margins">
             <ul className="links">
-              <li className="link">
-                <Link href="tel:4074181338">
-                  <a>P: {contactInfo?.telephoneNumber}</a>
-                </Link>
-                </li>
+              {contactInfo?.telephoneNumber && (
                 <li className="link">
-                  {contactInfo?.googleMapsLink ? (
-                    <Link href="https://goo.gl/maps/2owQTVWmYejBTjdG6">
-                      <a>{documentToReactComponents(contactInfo?.address)}</a>
-                    </Link>
-                  )
-                  : (
-                    documentToReactComponents(contactInfo?.address)
-                  )}
+                  <Link href={`tel:${contactInfo.telephoneNumber.replace(/[-.]/g, '')}`}>
+                    <a>P: {contactInfo.telephoneNumber}</a>
+                  </Link>
                 </li>
+              )}
+              {contactInfo?.googleMapsLink ? (
+                <li className="link">
+                  <Link href={contactInfo?.googleMapsLink}>
+                    <a>{documentToReactComponents(contactInfo?.address)}</a>
+                  </Link>
+                </li>
+              )
+              : (
+                <li>
+                  {documentToReactComponents(contactInfo?.address)}
+                </li>
+              )}
             </ul>
-            <Link href={contactInfo?.linkedInUrl}>
-              <a className="linkedin">
-                <Image 
-                  src="/assets/icons/linkedin-white@2x.png"
-                  width="15px"
-                  height="15px"
-                  alt="Borrelli + Partners LinkedIn"
-                />
-              </a>
-            </Link>
+            {contactInfo?.linkedInUrl && (
+              <Link href={contactInfo?.linkedInUrl}>
+                <a className="linkedin" target="_blank">
+                  <Image 
+                    src="/assets/icons/linkedin-white@2x.png"
+                    width="15px"
+                    height="15px"
+                    alt="Borrelli + Partners LinkedIn"
+                  />
+                </a>
+              </Link>
+            )}
           </div>
         </address>
       )}

@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Footer.module.scss';
 import { useEffect, useState } from 'react';
-import { getBlogPosts } from '../../lib/contentfulService';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 const Footer = () => {
@@ -47,7 +46,9 @@ const Footer = () => {
                 )}
             </div>
             <div className="body-copy">
-              <p className={styles["phone"]}>T: <a href="tel:4074181338">407.418.1338</a></p>
+              {themeConfig?.telephoneNumber && (
+                <p className={styles["phone"]}>T: <a href={`tel:${themeConfig?.telephoneNumber.replace(/[-.]/g, '')}`}>{themeConfig?.telephoneNumber}</a></p>
+              )}
             </div>
           </address>
         </div>
@@ -68,19 +69,21 @@ const Footer = () => {
         </div>
       </div>
       <div className={styles['bottom-bar']} >
-        <p>&copy; {`${new Date().getFullYear()} Borrelli + Partners AR0004308 & LA6667122`}</p>
+        <p>&copy; {`${new Date().getFullYear()} ${themeConfig?.copyright}`}</p>
         <div className={styles['bottom-bar-linkedin']}>
-          <Link href="https://www.linkedin.com/company/borrelli-partners-inc-/">
-            <a>
-              <Image 
-                src="/assets/icons/linkedin-white@2x.png"
-                width="15"
-                height="15"
-                alt="Borrelli + Partners Logo"
-                className={styles['linkedin-icon']}
-              />
-            </a>
-          </Link>
+          {themeConfig?.linkedInUrl && (
+            <Link href={themeConfig.linkedInUrl}>
+              <a target="_blank">
+                <Image 
+                  src="/assets/icons/linkedin-white@2x.png"
+                  width="15"
+                  height="15"
+                  alt="Borrelli + Partners Logo"
+                  className={styles['linkedin-icon']}
+                />
+              </a>
+            </Link>
+          )}
         </div>
       </div>
     </footer>
