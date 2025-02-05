@@ -1,3 +1,4 @@
+import { NextApiRequest, NextApiResponse } from 'next';
 import {fetchEntries} from '../../lib/contentfulService';
 
 export default async function handler(req, res) {

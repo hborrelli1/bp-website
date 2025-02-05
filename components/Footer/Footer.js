@@ -37,7 +37,7 @@ const Footer = () => {
           </div>
           <address className={styles.address} >
             <h5>BORRELLI + PARTNERS</h5>
-            <p className={styles.block}>
+            <div className={styles.block}>
               {themeConfig?.googleMapsLink ? (
                 <a href={themeConfig?.googleMapsLink || ''} target="_blank" rel="noreferrer">
                   {documentToReactComponents(themeConfig?.address)}
@@ -46,7 +46,7 @@ const Footer = () => {
                 : (
                   documentToReactComponents(themeConfig?.address)
                 )}
-            </p>
+            </div>
             <div className="body-copy">
               <p className={styles["phone"]}>T: <a href="tel:4074181338">407.418.1338</a></p>
             </div>
