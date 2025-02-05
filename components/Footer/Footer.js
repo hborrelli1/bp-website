@@ -22,7 +22,6 @@ const Footer = () => {
     fetchThemeConfig();
   }, []);
 
-  console.log('themeConfig:', themeConfig)
   return (
     <footer className={styles.footer}>
       <div className={styles['top-bar']}>
