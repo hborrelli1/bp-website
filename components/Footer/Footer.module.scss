@@ -59,6 +59,14 @@
           font-size: 13px;
           line-height: 18px;
           color: rgba(255,255,255,.55);
+          opacity: 1;
+        }
+
+        .block {
+          min-width: 135px; 
+          p {
+            margin: 0px;
+          }
         }
 
         a {
@@ -68,9 +76,6 @@
 
         .phone {
           margin-bottom: 0;
-        }
-        .fax {
-          margin-top: 0px;
         }
       }
     }

@@ -22,12 +22,14 @@ const TwoColumnHeaderGQL = ({title, copy, image, contactInfo = false}) => {
                 </Link>
                 </li>
                 <li className="link">
-                  <p>F: {contactInfo?.faxNumber}</p>
-                </li>
-              <li className="link">
-                <Link href="https://goo.gl/maps/2owQTVWmYejBTjdG6">
-                  <a>{documentToReactComponents(contactInfo?.address)}</a>
-                </Link>
+                  {contactInfo?.googleMapsLink ? (
+                    <Link href="https://goo.gl/maps/2owQTVWmYejBTjdG6">
+                      <a>{documentToReactComponents(contactInfo?.address)}</a>
+                    </Link>
+                  )
+                  : (
+                    documentToReactComponents(contactInfo?.address)
+                  )}
                 </li>
             </ul>
             <Link href={contactInfo?.linkedInUrl}>

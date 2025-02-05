@@ -40,17 +40,18 @@ const Contact = ({ contactData, themeConfig }) => {
   } = contactData.fields;
   const {
     address,
+    googleMapsLink,
     telephoneNumber,
-    faxNumber,
     linkedInUrl
   } = themeConfig.fields;
+
   return (
     <article className="contact-page">
       <TwoColumnHeader 
         title={pageTitle}
         copy={pageDescription}
         image={backgroundImage}
-        contactInfo={{telephoneNumber, faxNumber, address, linkedInUrl}}
+        contactInfo={{telephoneNumber, googleMapsLink, address, linkedInUrl}}
       />
       <section className="contact-body">
         <div className="content-margins">

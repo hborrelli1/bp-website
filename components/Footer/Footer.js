@@ -1,8 +1,28 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './Footer.module.scss';
+import { useEffect, useState } from 'react';
+import { getBlogPosts } from '../../lib/contentfulService';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 const Footer = () => {
+  const [themeConfig, setThemeConfig] = useState();
+
+  useEffect(() => {
+    async function fetchThemeConfig() {
+      try {
+        const response = await fetch('/api/contentful'); // Call Next.js API route
+        const data = await response.json();
+        setThemeConfig(data[0].fields);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchThemeConfig();
+  }, []);
+
+  console.log('themeConfig:', themeConfig)
   return (
     <footer className={styles.footer}>
       <div className={styles['top-bar']}>
@@ -17,9 +37,15 @@ const Footer = () => {
           </div>
           <address className={styles.address} >
             <h5>BORRELLI + PARTNERS</h5>
-            <p className="body-copy">
-              720 Vassar Street<br/>
-              Orlando, FL 32804
+            <p className={styles.block}>
+              {themeConfig?.googleMapsLink ? (
+                <a href={themeConfig?.googleMapsLink || ''} target="_blank" rel="noreferrer">
+                  {documentToReactComponents(themeConfig?.address)}
+                </a>
+                ) 
+                : (
+                  documentToReactComponents(themeConfig?.address)
+                )}
             </p>
             <div className="body-copy">
               <p className={styles["phone"]}>T: <a href="tel:4074181338">407.418.1338</a></p>
