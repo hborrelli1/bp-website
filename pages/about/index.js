@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import {createClient} from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';
@@ -76,12 +76,15 @@ const About = ({themeConfig, aboutData}) => {
               <div className="body-copy">{documentToReactComponents(mainDescription)}</div>
             </div>
             <div className={styles['image-col']}>
-              <Image 
-                src={`https:${descriptionPhoto.fields.file.url}`} 
-                width={descriptionPhoto.fields.file.details.image.width} 
-                height={descriptionPhoto.fields.file.details.image.height} 
+              <Image
+                src={`https:${descriptionPhoto.fields.file.url}`}
+                width={descriptionPhoto.fields.file.details.image.width}
+                height={descriptionPhoto.fields.file.details.image.height}
                 alt="About Borrelli + Partners"
-              />
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
             </div>
           </div>
         </section>
@@ -89,12 +92,15 @@ const About = ({themeConfig, aboutData}) => {
           <div className={styles['our-qualities-content']}>
             <div className={styles.quality}>
               <div className={styles['quality-image']}>
-                <Image 
-                  src="/assets/icons/sustainability-icon@2x.png" 
-                  width="100" 
+                <Image
+                  src="/assets/icons/sustainability-icon@2x.png"
+                  width="100"
                   height="100"
                   alt={qualityTitle1}
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </div>
               <div className={styles['quality-content']}>
                 <h5>{qualityTitle1}</h5>
@@ -103,12 +109,15 @@ const About = ({themeConfig, aboutData}) => {
             </div>
             <div className={styles.quality}>
               <div className={styles['quality-image']}>
-                <Image 
-                  src="/assets/icons/minority-owned-icon@2x.png" 
-                  width="100" 
+                <Image
+                  src="/assets/icons/minority-owned-icon@2x.png"
+                  width="100"
                   height="100"
                   alt={qualityTitle2}
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </div>
               <div className={styles['quality-content']}>
                 <h5>{qualityTitle2}</h5>
@@ -117,12 +126,15 @@ const About = ({themeConfig, aboutData}) => {
             </div>
             <div className={styles.quality}>
               <div className={styles['quality-image']}>
-                <Image 
-                  src="/assets/icons/technology-icon@2x.png" 
-                  width="100" 
+                <Image
+                  src="/assets/icons/technology-icon@2x.png"
+                  width="100"
                   height="100"
                   alt={qualityTitle3}
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </div>
               <div className={styles['quality-content']}>
                 <h5>{qualityTitle3}</h5>
@@ -131,12 +143,15 @@ const About = ({themeConfig, aboutData}) => {
             </div>
             <div className={styles.quality}>
               <div className={styles['quality-image']}>
-                <Image 
-                  src="/assets/icons/crime-prevention-icon@2x.png" 
-                  width="100" 
+                <Image
+                  src="/assets/icons/crime-prevention-icon@2x.png"
+                  width="100"
                   height="100"
                   alt={qualityTitle4}
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </div>
               <div className={styles['quality-content']}>
                 <h5>{qualityTitle4}</h5>
@@ -160,29 +175,27 @@ const About = ({themeConfig, aboutData}) => {
                 if (person.fields.fullBioPage) {
                   return (
                     <Link href={`/our-team/${person.fields.slug}`} className={styles['person']} key={person.sys.id}>
-
-                      <Image 
+                      <Image
                         className={styles['headshot']}
-                        src={`https:${person.fields.photo.fields.file.url}`} 
+                        src={`https:${person.fields.photo.fields.file.url}`}
                         alt={person.fields.name}
-                        layout="fill"
-                      />
+                        fill
+                        sizes="100vw" />
                       <div className={styles['card']}>
                         <h5>{person.fields.name}</h5>
                         <p>{person.fields.jobTitle}</p>
                       </div>
-
                     </Link>
                   );
                 } else {
                   return (
                     <div className={styles['person']} key={person.sys.id} >
-                      <Image 
+                      <Image
                         className={styles['headshot']}
-                        src={`https:${person.fields.photo.fields.file.url}`} 
+                        src={`https:${person.fields.photo.fields.file.url}`}
                         alt={person.fields.name}
-                        layout="fill"
-                      />
+                        fill
+                        sizes="100vw" />
                       <div className={styles['card']}>
                         <h5>{person.fields.name}</h5>
                         <p>{person.fields.jobTitle}</p>

@@ -3,7 +3,7 @@ import {createClient} from 'contentful';
 import safeJsonStringify from 'safe-json-stringify';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import ContactForm from '../../components/ContactForm/ContactForm';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link';
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 

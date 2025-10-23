@@ -1,4 +1,4 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
@@ -18,13 +18,16 @@ const CarouselComponent = ({ items, type }) => {
         {items.map(item => (
           <div className="featured-project" key={item.id}>
             <div className="image-col">
-              <Image 
-                src={`https:${item.thumbnail.fields.file.url}`} 
-                width="726" 
-                height="486" 
+              <Image
+                src={`https:${item.thumbnail.fields.file.url}`}
+                width="726"
+                height="486"
                 alt={item.thumbnail.fields.title}
-                layout="responsive"
-              />
+                sizes="100vw"
+                style={{
+                  width: "100%",
+                  height: "auto"
+                }} />
             </div>
             <div className="content-col">
               <span>{item.industry}</span>
@@ -75,16 +78,19 @@ const CarouselComponent = ({ items, type }) => {
         statusFormatter={(currentItem, totalCount) => (<span>{currentItem > 9 ? '' : 0}{currentItem} / {totalCount > 9 ? '' : 0}{totalCount}</span>)}
       >
         {items.map(item => (
-          <Image 
+          <Image
             key={item.id}
-            src={`https:${item.fields.file.url}`} 
-            width="1109" 
-            height="624" 
+            src={`https:${item.fields.file.url}`}
+            width="1109"
+            height="624"
             alt={item.fields.title}
-          />
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         ))}
       </Carousel>
-    )
+    );
   }
 
 }

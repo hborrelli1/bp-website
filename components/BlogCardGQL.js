@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import moment from 'moment';
 
 const BlogCard = ({blog, type = "news"}) => {
@@ -16,25 +16,28 @@ const BlogCard = ({blog, type = "news"}) => {
       <div className="img-wrap">
         <div className="img-hover-circle">
           <div className="icon">
-            <Image 
+            <Image
               src="/assets/icons/circle-with-plus@2x.png"
-              width="40px"
-              height="40px"
+              width="40"
+              height="40"
               alt={`${postTitle || ''} Thumbnail Image.`}
-              />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </div>
         </div>
         <div className="img-hover-filter-bg"></div>
         <div className="img-el">
           {thumbnailImage && thumbnailImage.url && (
-            <Image  
+            <Image
               src={thumbnailImage.url}
               // width={thumbnailImage.fields.file.details.image.width}
               // height={thumbnailImage.fields.file.details.image.height}
               alt={postTitle || ''}
               className="img"
-              layout="fill"
-            />
+              fill
+              sizes="100vw" />
           )}
         </div>
       </div>

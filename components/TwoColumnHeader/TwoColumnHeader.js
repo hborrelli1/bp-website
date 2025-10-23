@@ -2,7 +2,7 @@ import styles from './TwoColumnHeader.module.scss';
 import _ from 'lodash';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 const TwoColumnHeader = ({title, copy, image, contactInfo = false}) => {
 
@@ -11,7 +11,7 @@ const TwoColumnHeader = ({title, copy, image, contactInfo = false}) => {
       <div className={styles.content}>
         <h1>{title}</h1>
         {_.isObject(copy) ? documentToReactComponents(copy) : <p>{copy}</p>}
-    </div>
+      </div>
       {contactInfo && (
         <address>
           <div className="content-margins">
@@ -39,12 +39,15 @@ const TwoColumnHeader = ({title, copy, image, contactInfo = false}) => {
             {contactInfo?.linkedInUrl && (
               <Link href={contactInfo?.linkedInUrl} className="linkedin" target="_blank">
 
-                <Image 
+                <Image
                   src="/assets/icons/linkedin-white@2x.png"
-                  width="15px"
-                  height="15px"
+                  width="15"
+                  height="15"
                   alt="Borrelli + Partners LinkedIn"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
 
               </Link>
             )}

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import styles from './Navbar.module.scss'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -75,12 +75,15 @@ const Navbar = () => {
       <div className="navbarMobile" style={navBarStyle} id="Navbar">
         <Link className="logo" href="/" scroll={false}>
 
-          <Image 
-            src="/assets/logos/bp-main-logo@2x.png" 
-            alt="Borrelli+Partners Logo" 
-            width="261px"
-            height="36.16px"
-          />
+          <Image
+            src="/assets/logos/bp-main-logo@2x.png"
+            alt="Borrelli+Partners Logo"
+            width="261"
+            height="36"
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
 
         </Link>
         <Menu 
@@ -103,12 +106,15 @@ const Navbar = () => {
           })}
         </Menu>
         <button className="menu-button" onClick={() => toggleMenu()} type="button">
-          <Image 
+          <Image
             src="/assets/icons/hamburger-menu@2x.png"
             width="32px"
             height="22px"
             alt="Navigation Menu"
-          />
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         </button>
       </div>
     );
@@ -118,12 +124,15 @@ const Navbar = () => {
     <nav className={styles.navbar} id="Navbar" style={navBarStyle}>
       <Link className="logo" href="/">
 
-        <Image 
-          src="/assets/logos/bp-main-logo@2x.png" 
-          alt="Borrelli+Partners Logo" 
-          width="261px"
-          height="36.16px"
-        />
+        <Image
+          src="/assets/logos/bp-main-logo@2x.png"
+          alt="Borrelli+Partners Logo"
+          width="261"
+          height="36"
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
 
       </Link>
       <ul className={styles['nav-items']}>

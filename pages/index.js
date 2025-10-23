@@ -4,7 +4,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import Link from 'next/link';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import CarouselComponent from '../components/Carousel/CarouselComponent';
 import ThreeColumnFeaturedPosts from '../components/ThreeColumnFeaturedPosts';
 import safeJsonStringify from 'safe-json-stringify';
@@ -101,9 +101,17 @@ export default function Home({homePageData, themeConfig}) {
             <div className="description">{documentToReactComponents(fields.heroImageText)}</div>
           </div>
           <button type="button" className="view-more" onClick={() => scrollDown()}>
-            <Image src="/assets/icons/circle-icon-white@2x.png" width="34" height="34" layout="fixed" alt="" />
+            <Image
+              src="/assets/icons/circle-icon-white@2x.png"
+              width="34"
+              height="34"
+              alt="" />
             <div className='chevron-icon'>
-              <Image src="/assets/icons/chevron-icon-white@2x.png" width="10" height="6" layout="fixed" alt="" />
+              <Image
+                src="/assets/icons/chevron-icon-white@2x.png"
+                width="10"
+                height="6"
+                alt="" />
             </div>
           </button>
         </div>
@@ -142,25 +150,22 @@ export default function Home({homePageData, themeConfig}) {
               <div className="body-copy">{documentToReactComponents(fields.whyBpDescription)}</div>
             </div>
             <div className="image-column">
-              <Image 
+              <Image
                 src={`https:${fields.whyBpImage.fields.file.url}`}
                 width={fields.whyBpImage.fields.file.details.image.width}
                 height={fields.whyBpImage.fields.file.details.image.height}
                 alt="Why Borrelli + Partners"
-              />
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
               <Link href={`/${fields.whyBpLink.fields.slug}`} className="image-button">
 
                 <span className="link-text">{fields.whyBpLinkTitle}</span>
                 <span className="link-icon">
-                  <Image 
-                    src="/assets/icons/circle-icon-dark@2x.png" 
-                    width="34" 
-                    height="34" 
-                    layout="fixed"
-                    alt=""
-                  />
+                  <Image src="/assets/icons/circle-icon-dark@2x.png" width="34" height="34" alt="" />
                   <div className='chevron-icon'>
-                    <Image src="/assets/icons/chevron-icon-dark@2x.png" width="10" height="6" layout="fixed" alt="" />
+                    <Image src="/assets/icons/chevron-icon-dark@2x.png" width="10" height="6" alt="" />
                   </div>
                 </span>
 

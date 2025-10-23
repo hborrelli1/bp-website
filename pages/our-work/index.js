@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TwoColumnHeaderGQL from '../../components/TwoColumnHeaderGQL/TwoColumnHeaderGQL';
 import FooterCtaGQL from '../../components/FooterCtaGQL/FooterCtaGQL';
 import _ from 'lodash';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link';
 
 export const getStaticProps = async () => {
@@ -232,12 +232,15 @@ const OurWork = ({pageData}) => {
               onClick={() => toggleMenu('industry')}
             >
               {industryFilter === 'all' ? 'Industry' : industryKey[industryFilter]} <span className="filter-button-icon">
-                <Image 
-                  src="/assets/icons/down-chevron@2x.png" 
-                  width="12px" 
-                  height="6px" 
+                <Image
+                  src="/assets/icons/down-chevron@2x.png"
+                  width="12"
+                  height="6"
                   alt="Industry Filter Arrow"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </span>
             </button>
             <div className="menu">
@@ -252,12 +255,15 @@ const OurWork = ({pageData}) => {
               onClick={() => toggleMenu('service')}
             >
               {serviceFilter === 'all' ? 'Service' : servicesKey[serviceFilter]} <span className="filter-button-icon">
-                <Image 
-                  src="/assets/icons/down-chevron@2x.png" 
-                  width="12px" 
-                  height="6px"  
+                <Image
+                  src="/assets/icons/down-chevron@2x.png"
+                  width="12"
+                  height="6"
                   alt="Industry Filter Arrow"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </span>
             </button>
             <div className="menu">
@@ -271,7 +277,6 @@ const OurWork = ({pageData}) => {
         {/** create pagination for projects... */}
         {renderProjects(projects)}
       </section>
-
       <FooterCtaGQL 
           ctaData={{
             copy: footerCta.copy,

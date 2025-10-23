@@ -4,7 +4,7 @@ import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useRouter } from 'next/router';
 import safeJsonStringify from 'safe-json-stringify';
 import _ from 'lodash';
@@ -112,10 +112,15 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                   >
                     <div className="service-content-body">
                       <div className="service-image-col">
-                        <Image 
-                          src={`https:${service.fields.mainImage.fields.file.url}`} 
-                          width={service.fields.mainImage.fields.file.details.image.width} 
-                          height={service.fields.mainImage.fields.file.details.image.height} alt={service.fields.serviceDescriptionHeading} />
+                        <Image
+                          src={`https:${service.fields.mainImage.fields.file.url}`}
+                          width={service.fields.mainImage.fields.file.details.image.width}
+                          height={service.fields.mainImage.fields.file.details.image.height}
+                          alt={service.fields.serviceDescriptionHeading}
+                          style={{
+                            maxWidth: "100%",
+                            height: "auto"
+                          }} />
                       </div>
                       <div className="content-col">
                         <h2>{service.fields.serviceDescriptionHeading}</h2>
@@ -127,26 +132,34 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                           return (
                             <div className="icon" key={feature.sys.id}>
                               <div className="img-wrap"> 
-                                <Image 
-                                  src={`https:${featureData.fields.icon.fields.file.url}`} 
-                                  width="50" 
+                                <Image
+                                  src={`https:${featureData.fields.icon.fields.file.url}`}
+                                  width="50"
                                   height="50"
                                   alt={`${featureData.fields.iconText} icon`}
-                                />
+                                  style={{
+                                    maxWidth: "100%",
+                                    height: "auto"
+                                  }} />
                               </div>
                               <h3>{featureData.fields.iconText}</h3>
                             </div>
-                          )
+                          );
                         })}
                       </div>
                     </div>
                     {secondSection && (
                       <div className="service-content-body">
                         <div className="service-image-col">
-                          <Image 
-                            src={`https:${service.fields.mainImage2.fields.file.url}`} 
-                            width={service.fields.mainImage2.fields.file.details.image.width} 
-                            height={service.fields.mainImage2.fields.file.details.image.height} alt={service.fields.serviceDescriptionHeading2} />
+                          <Image
+                            src={`https:${service.fields.mainImage2.fields.file.url}`}
+                            width={service.fields.mainImage2.fields.file.details.image.width}
+                            height={service.fields.mainImage2.fields.file.details.image.height}
+                            alt={service.fields.serviceDescriptionHeading2}
+                            style={{
+                              maxWidth: "100%",
+                              height: "auto"
+                            }} />
                         </div>
                         <div className="content-col">
                           <h2>{service.fields.serviceDescriptionHeading2}</h2>
@@ -158,16 +171,19 @@ const Services = ({ servicesPageData, themeConfig, iconsWithText }) => {
                             return (
                               <div className="icon" key={feature.sys.id}>
                                 <div className="img-wrap"> 
-                                  <Image 
-                                    src={`https:${featureData.fields.icon.fields.file.url}`} 
-                                    width="50" 
+                                  <Image
+                                    src={`https:${featureData.fields.icon.fields.file.url}`}
+                                    width="50"
                                     height="50"
                                     alt={featureData.fields.iconText}
-                                  />
+                                    style={{
+                                      maxWidth: "100%",
+                                      height: "auto"
+                                    }} />
                                 </div>
                                 <h3>{featureData.fields.iconText}</h3>
                               </div>
-                            )
+                            );
                           })}
                         </div>
                       </div>

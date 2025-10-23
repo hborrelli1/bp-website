@@ -1,6 +1,6 @@
 import {createClient} from 'contentful';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
@@ -96,12 +96,12 @@ const Careers = ({ careers, themeConfig }) => {
           {coreValues.map((value, index) => (
             <button type="button" key={index} className="value" onClick={() => scrollTo(index-1)}>
               <div className="img-wrap">
-                <Image 
+                <Image
                   src={coreValueKey[index]}
                   className="icon"
                   alt={`${value} icon`}
-                  layout="fill"
-                />
+                  fill
+                  sizes="100vw" />
               </div>
               <p>{value}</p>
             </button>
@@ -126,26 +126,32 @@ const Careers = ({ careers, themeConfig }) => {
                 </div>
                 <div className="img-col">
                   <div className="img-wrap">
-                    <Image 
+                    <Image
                       src={`https:${image.fields.file.url}`}
                       className="cta-img"
-                      width="730px"
-                      height="552px"
-                      layout="responsive"
+                      width="730"
+                      height="552"
                       alt={sectionTitle}
-                    />                  
+                      sizes="100vw"
+                      style={{
+                        width: "100%",
+                        height: "auto"
+                      }} />                  
                   </div>
                   {linkUrl && (
                       <Link href={linkUrl} className="cta">
 
                         <span>{linkTitle}</span>
                         <div className="icon">
-                          <Image 
+                          <Image
                             src="/assets/icons/down-arrow-circle-white@2x.png"
-                            width="34px"
-                            height="34px"
+                            width="34"
+                            height="34"
                             alt="Meet our people"
-                          />
+                            style={{
+                              maxWidth: "100%",
+                              height: "auto"
+                            }} />
                         </div>
 
                       </Link>

@@ -1,7 +1,7 @@
 import {createClient} from 'contentful';
 import TwoColumnHeaderGQL from '../../components/TwoColumnHeaderGQL/TwoColumnHeaderGQL';
 import FooterCtaGQL from '../../components/FooterCtaGQL/FooterCtaGQL';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link';
 import BlogCardGQL from '../../components/BlogCardGQL';
 import { useState } from 'react';
@@ -112,12 +112,15 @@ const News = ({ pageData }) => {
         <div className="content-margins">
           <h3 className="sub-title">Featured News:</h3>
           <div className="img-col">
-            <Image 
-              src={featuredNews.thumbnailImage.url} 
+            <Image
+              src={featuredNews.thumbnailImage.url}
               width={featuredNews.thumbnailImage.width}
               height={featuredNews.thumbnailImage.height}
               alt={featuredNews.blogTitle}
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </div>
           <div className="content-col">
             <h2>{featuredNews.blogTitle}</h2>
@@ -141,14 +144,17 @@ const News = ({ pageData }) => {
             >
               <span>Load More</span>
               <div className="icon">
-                <Image 
+                <Image
                   src="/assets/icons/circle-icon-dark@2x.png"
-                  width="40px"
-                  height="40px"
+                  width="40"
+                  height="40"
                   alt="Load More Articles."
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
                 <div className='chevron-icon'>
-                  <Image src="/assets/icons/chevron-icon-dark@2x.png" width="10" height="6" layout="fixed" alt="" />
+                  <Image src="/assets/icons/chevron-icon-dark@2x.png" width="10" height="6" alt="" />
                 </div>
               </div>
             </button>
