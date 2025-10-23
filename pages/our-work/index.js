@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TwoColumnHeaderGQL from '../../components/TwoColumnHeaderGQL/TwoColumnHeaderGQL';
 import FooterCtaGQL from '../../components/FooterCtaGQL/FooterCtaGQL';
 import _ from 'lodash';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 
 export const getStaticProps = async () => {

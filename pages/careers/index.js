@@ -1,6 +1,6 @@
 import {createClient} from 'contentful';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';

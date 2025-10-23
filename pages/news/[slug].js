@@ -1,5 +1,5 @@
 import {createClient} from 'contentful';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';

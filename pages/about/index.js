@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import {createClient} from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';

@@ -4,7 +4,7 @@ import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { useRouter } from 'next/router';
 import safeJsonStringify from 'safe-json-stringify';
 import _ from 'lodash';

@@ -1,6 +1,6 @@
 import styles from "./FooterCta.module.scss"
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 const FooterCta = ({ctaData}) => {
   const {

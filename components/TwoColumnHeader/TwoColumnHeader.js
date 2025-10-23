@@ -2,16 +2,16 @@ import styles from './TwoColumnHeader.module.scss';
 import _ from 'lodash';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 const TwoColumnHeader = ({title, copy, image, contactInfo = false}) => {
 
   return (
     <header className={styles['two-column-header']} style={{ backgroundImage: `url(https:${image.fields.file.url})` }}>
-        <div className={styles.content}>
-          <h1>{title}</h1>
-          {_.isObject(copy) ? documentToReactComponents(copy) : <p>{copy}</p>}
-      </div>
+      <div className={styles.content}>
+        <h1>{title}</h1>
+        {_.isObject(copy) ? documentToReactComponents(copy) : <p>{copy}</p>}
+    </div>
       {contactInfo && (
         <address>
           <div className="content-margins">

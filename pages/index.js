@@ -4,7 +4,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { useEffect, useState } from 'react';
 import _ from 'lodash';
 import Link from 'next/link';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import CarouselComponent from '../components/Carousel/CarouselComponent';
 import ThreeColumnFeaturedPosts from '../components/ThreeColumnFeaturedPosts';
 import safeJsonStringify from 'safe-json-stringify';
