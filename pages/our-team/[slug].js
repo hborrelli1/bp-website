@@ -89,15 +89,15 @@ const Person = ({ person }) => {
               <span>Connect</span>
             )}
             {linkedInUrl && (
-              <Link href={linkedInUrl}>
-                <a target="_blank">
-                  <Image 
-                    src="/assets/icons/linkedin-icon@2x.png" 
-                    width="24px" 
-                    height="18px" 
-                    alt={`${name} LinkedIn.`}
-                  />
-                </a>
+              <Link href={linkedInUrl} target="_blank">
+
+                <Image 
+                  src="/assets/icons/linkedin-icon@2x.png" 
+                  width="24px" 
+                  height="18px" 
+                  alt={`${name} LinkedIn.`}
+                />
+
               </Link>
 
             )}
@@ -124,7 +124,6 @@ const Person = ({ person }) => {
           )}
         </div>
       </section>
-      
       <section className="testimonials">
         <div className="content">
           {(quote1 || quoteImage1) && (
@@ -166,7 +165,6 @@ const Person = ({ person }) => {
           )}
         </div>
       </section>
-
       {featuredProjects && (
         <ThreeColumnFeaturedPosts info={{
           subTitle: `${name}'s Featured Work`,
@@ -175,7 +173,6 @@ const Person = ({ person }) => {
           type: 'our-work'
         }}/>
       )}
-
       {involvement && (
         <section className="involvement">
           <div className="content-margins">

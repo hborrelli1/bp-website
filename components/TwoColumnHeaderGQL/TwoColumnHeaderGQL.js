@@ -19,14 +19,14 @@ const TwoColumnHeaderGQL = ({title, copy, image, contactInfo = false}) => {
               {contactInfo?.telephoneNumber && (
                 <li className="link">
                   <Link href={`tel:${contactInfo.telephoneNumber.replace(/[-.]/g, '')}`}>
-                    <a>P: {contactInfo.telephoneNumber}</a>
+                    P: {contactInfo.telephoneNumber}
                   </Link>
                 </li>
               )}
               {contactInfo?.googleMapsLink ? (
                 <li className="link">
                   <Link href={contactInfo?.googleMapsLink}>
-                    <a>{documentToReactComponents(contactInfo?.address)}</a>
+                    {documentToReactComponents(contactInfo?.address)}
                   </Link>
                 </li>
               )
@@ -37,15 +37,15 @@ const TwoColumnHeaderGQL = ({title, copy, image, contactInfo = false}) => {
               )}
             </ul>
             {contactInfo?.linkedInUrl && (
-              <Link href={contactInfo?.linkedInUrl}>
-                <a className="linkedin" target="_blank">
-                  <Image 
-                    src="/assets/icons/linkedin-white@2x.png"
-                    width="15px"
-                    height="15px"
-                    alt="Borrelli + Partners LinkedIn"
-                  />
-                </a>
+              <Link href={contactInfo?.linkedInUrl} className="linkedin" target="_blank">
+
+                <Image 
+                  src="/assets/icons/linkedin-white@2x.png"
+                  width="15px"
+                  height="15px"
+                  alt="Borrelli + Partners LinkedIn"
+                />
+
               </Link>
             )}
           </div>

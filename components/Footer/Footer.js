@@ -54,16 +54,16 @@ const Footer = () => {
         </div>
         <div className={styles['footer-section']}>
           <nav>
-            <Link href="/services"><a>Services</a></Link>
-            <Link href="/our-work"><a>Our Work</a></Link>
-            <Link href="/about"><a>About</a></Link>
-            <Link href="/careers"><a>Careers</a></Link>
-            <Link href="/contact"><a>Contact</a></Link>
+            <Link href="/services">Services</Link>
+            <Link href="/our-work">Our Work</Link>
+            <Link href="/about">About</Link>
+            <Link href="/careers">Careers</Link>
+            <Link href="/contact">Contact</Link>
           </nav>
           <div className={styles['form-box']}>
             <div className={styles['sub-nav']}>
-              <Link href="/news"><a>News</a></Link>
-              <Link href="/privacy-policy"><a>Privacy Policy</a></Link>
+              <Link href="/news">News</Link>
+              <Link href="/privacy-policy">Privacy Policy</Link>
             </div>
           </div>
         </div>
@@ -72,16 +72,16 @@ const Footer = () => {
         <p>&copy; {`${new Date().getFullYear()} ${themeConfig?.copyright}`}</p>
         <div className={styles['bottom-bar-linkedin']}>
           {themeConfig?.linkedInUrl && (
-            <Link href={themeConfig.linkedInUrl}>
-              <a target="_blank">
-                <Image 
-                  src="/assets/icons/linkedin-white@2x.png"
-                  width="15"
-                  height="15"
-                  alt="Borrelli + Partners Logo"
-                  className={styles['linkedin-icon']}
-                />
-              </a>
+            <Link href={themeConfig.linkedInUrl} target="_blank">
+
+              <Image 
+                src="/assets/icons/linkedin-white@2x.png"
+                width="15"
+                height="15"
+                alt="Borrelli + Partners Logo"
+                className={styles['linkedin-icon']}
+              />
+
             </Link>
           )}
         </div>

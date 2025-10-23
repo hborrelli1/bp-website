@@ -30,14 +30,14 @@ const CarouselComponent = ({ items, type }) => {
               <span>{item.industry}</span>
               <h3>{item.title}</h3>
               <p className="body-copy">{item.excerpt}</p>
-              <Link href={`/our-work/${item.slug}`}>
-                <a className="project-link">Keep Reading</a>
+              <Link href={`/our-work/${item.slug}`} className="project-link">
+                Keep Reading
               </Link>
             </div>
           </div>
         ))}
       </Carousel>
-    )
+    );
   } else if (type === 'testimonials') {
     return (
       <Carousel
@@ -54,15 +54,17 @@ const CarouselComponent = ({ items, type }) => {
               <p className="name">{item.fields.name}</p>
               <p className="title">{item.fields.title}</p>
               {item.fields.projectReference && (
-                <Link href={`/our-work/${item.fields.projectReference.fields.slug}`}>
-                  <a className="project-link">View Project</a>
+                <Link
+                  href={`/our-work/${item.fields.projectReference.fields.slug}`}
+                  className="project-link">
+                  View Project
                 </Link>
               )}
             </div>
           </blockquote>
         ))}
       </Carousel>
-    )
+    );
   } else {
     return (
       <Carousel

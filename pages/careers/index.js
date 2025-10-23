@@ -136,18 +136,18 @@ const Careers = ({ careers, themeConfig }) => {
                     />                  
                   </div>
                   {linkUrl && (
-                      <Link href={linkUrl}>
-                        <a className="cta">
-                          <span>{linkTitle}</span>
-                          <div className="icon">
-                            <Image 
-                              src="/assets/icons/down-arrow-circle-white@2x.png"
-                              width="34px"
-                              height="34px"
-                              alt="Meet our people"
-                            />
-                          </div>
-                        </a>
+                      <Link href={linkUrl} className="cta">
+
+                        <span>{linkTitle}</span>
+                        <div className="icon">
+                          <Image 
+                            src="/assets/icons/down-arrow-circle-white@2x.png"
+                            width="34px"
+                            height="34px"
+                            alt="Meet our people"
+                          />
+                        </div>
+
                       </Link>
                   )}
                 </div>
@@ -162,7 +162,7 @@ const Careers = ({ careers, themeConfig }) => {
         </div>
       </section>
     </article>
-  )
+  );
 }
 
 export default Careers;

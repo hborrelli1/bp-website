@@ -94,8 +94,8 @@ const Project = ({ project }) => {
               <h2>Summary</h2>
               <div className="body-copy">{documentToReactComponents(summary)}</div>
               {specSheet && (
-                <Link href={`https:${specSheet.fields.file.url}`}>
-                  <a className="spec-sheet">Download Spec Sheet</a>
+                <Link href={`https:${specSheet.fields.file.url}`} className="spec-sheet">
+                  Download Spec Sheet
                 </Link>
               )}
             </section>

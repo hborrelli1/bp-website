@@ -14,38 +14,36 @@ const BlogCard = ({blog, type = "news"}) => {
   const postTitle = type === "news" ? blogTitle : projectTitle;
   
   return (
-    <Link href={`/${type}/${slug}`}>
-      <a className='blog-card'> 
-        <div className="img-wrap">
-          <div className="img-hover-circle">
-            <div className="icon">
-              <Image 
-                src="/assets/icons/circle-with-plus@2x.png"
-                width="40px"
-                height="40px"
-                alt={`${postTitle || ''} Thumbnail Image.`}
-                />
-            </div>
-          </div>
-          <div className="img-hover-filter-bg"></div>
-          <div className="img-el">
-            {thumbnailImage && thumbnailImage.fields && (
-              <Image  
-                src={`https:${thumbnailImage.fields.file.url}`}
-                alt={postTitle || ''}
-                className="img"
-                layout="fill"
+    <Link href={`/${type}/${slug}`} className='blog-card'>
+      <div className="img-wrap">
+        <div className="img-hover-circle">
+          <div className="icon">
+            <Image 
+              src="/assets/icons/circle-with-plus@2x.png"
+              width="40px"
+              height="40px"
+              alt={`${postTitle || ''} Thumbnail Image.`}
               />
-            )}
           </div>
         </div>
-        <div className="info">
-          <h4>{postTitle || ''}</h4>
-          {date && <h5 className="date">{moment(date).format('MMMM Do YYYY')}</h5>}
-          <p className="body-copy">{shortSummaryText || ''}</p>
-        <p className="link">Keep Reading +</p>
+        <div className="img-hover-filter-bg"></div>
+        <div className="img-el">
+          {thumbnailImage && thumbnailImage.fields && (
+            <Image  
+              src={`https:${thumbnailImage.fields.file.url}`}
+              alt={postTitle || ''}
+              className="img"
+              layout="fill"
+            />
+          )}
         </div>
-      </a>
+      </div>
+      <div className="info">
+        <h4>{postTitle || ''}</h4>
+        {date && <h5 className="date">{moment(date).format('MMMM Do YYYY')}</h5>}
+        <p className="body-copy">{shortSummaryText || ''}</p>
+      <p className="link">Keep Reading +</p>
+      </div>
     </Link>
   );
 }

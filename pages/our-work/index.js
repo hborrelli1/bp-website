@@ -172,22 +172,26 @@ const OurWork = ({pageData}) => {
       } = project;
 
       return (
-        <Link href={`/our-work/${slug}`} key={slug}>
-          <a className="project" style={{backgroundImage: `url(${thumbnailImage.url})`}}>
-            <div className="project-thumb-bg"></div>
-            <div className="meta-data">
-              <div className="title">
-                <h2>{projectTitle}</h2>
-                <p>{location}</p>
-              </div>
-              <div className="tags">
-                <p><span className="industry-label">Industry</span> {industryTag.map(item => <span key={item} className="industry-item">{item}</span>)}</p>
-                <p><span className="service-label">Service</span> {serviceTags.map(item => <span key={item} className="service-item">{item}</span>)}</p>
-              </div>
+        <Link
+          href={`/our-work/${slug}`}
+          key={slug}
+          className="project"
+          style={{backgroundImage: `url(${thumbnailImage.url})`}}>
+
+          <div className="project-thumb-bg"></div>
+          <div className="meta-data">
+            <div className="title">
+              <h2>{projectTitle}</h2>
+              <p>{location}</p>
             </div>
-          </a>
+            <div className="tags">
+              <p><span className="industry-label">Industry</span> {industryTag.map(item => <span key={item} className="industry-item">{item}</span>)}</p>
+              <p><span className="service-label">Service</span> {serviceTags.map(item => <span key={item} className="service-item">{item}</span>)}</p>
+            </div>
+          </div>
+
         </Link>
-      )
+      );
     });
   }
 

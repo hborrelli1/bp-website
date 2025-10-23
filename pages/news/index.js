@@ -123,13 +123,12 @@ const News = ({ pageData }) => {
             <h2>{featuredNews.blogTitle}</h2>
             <h5 className="date">{moment(featuredNews.date).add(1, 'days').format('MMMM Do YYYY')}</h5>
             <p className="body-copy">{featuredNews.shortSummary}</p>
-            <Link href={`/news/${featuredNews.slug}`}>
-              <a className="blog-link">Keep reading +</a>
+            <Link href={`/news/${featuredNews.slug}`} className="blog-link">
+              Keep reading +
             </Link>
           </div>
         </div>
       </section>
-      
       <section className="all-news">
         <div className="content-margins">
           <h3 className="sub-title">All News</h3>
@@ -156,7 +155,6 @@ const News = ({ pageData }) => {
           )}
         </div>
       </section>
-
       <FooterCtaGQL 
         ctaData={{
           copy: footerCta.copy,
@@ -166,7 +164,7 @@ const News = ({ pageData }) => {
         }}
       />
     </article>
-  )
+  );
 }
 
 export default News;

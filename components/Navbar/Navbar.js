@@ -74,14 +74,14 @@ const Navbar = () => {
     return (
       <div className="navbarMobile" style={navBarStyle} id="Navbar">
         <Link className="logo" href="/" scroll={false}>
-          <a>
-            <Image 
-              src="/assets/logos/bp-main-logo@2x.png" 
-              alt="Borrelli+Partners Logo" 
-              width="261px"
-              height="36.16px"
-            />
-          </a>
+
+          <Image 
+            src="/assets/logos/bp-main-logo@2x.png" 
+            alt="Borrelli+Partners Logo" 
+            width="261px"
+            height="36.16px"
+          />
+
         </Link>
         <Menu 
           right 
@@ -92,14 +92,14 @@ const Navbar = () => {
         >
           {menu.map((item, index) => {
             return (
-              <Link 
-                className={styles['menu-item']} 
+              <Link
+                className={styles['menu-item']}
                 href={item.path}
                 key={item.title}
-              >
-                <a onClick={() => closeMenu()}>{item.title}</a>
+                onClick={() => closeMenu()}>
+                {item.title}
               </Link>
-            )
+            );
           })}
         </Menu>
         <button className="menu-button" onClick={() => toggleMenu()} type="button">
@@ -111,32 +111,32 @@ const Navbar = () => {
           />
         </button>
       </div>
-    )
+    );
   }
 
   return (
     <nav className={styles.navbar} id="Navbar" style={navBarStyle}>
       <Link className="logo" href="/">
-        <a>
-          <Image 
-            src="/assets/logos/bp-main-logo@2x.png" 
-            alt="Borrelli+Partners Logo" 
-            width="261px"
-            height="36.16px"
-          />
-        </a>
+
+        <Image 
+          src="/assets/logos/bp-main-logo@2x.png" 
+          alt="Borrelli+Partners Logo" 
+          width="261px"
+          height="36.16px"
+        />
+
       </Link>
       <ul className={styles['nav-items']}>
         {menu.map((item, index) => {
           return (
             <li key={index} className={`${styles["nav-item"]} ${router.pathname === item.path ? styles.active : ''}`}>
-              <Link href={item.path}><a>{item.title}</a></Link>
+              <Link href={item.path}>{item.title}</Link>
             </li>
-          )
+          );
         })}
       </ul>
     </nav>
-  )
+  );
 }
 
 export default Navbar;
