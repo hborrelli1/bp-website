@@ -24,7 +24,7 @@ const CarouselComponent = ({ items, type }) => {
                 fill
                 alt={item.thumbnail.fields.title}
                 style={{
-                  objectFit: 'cover',
+                  objectFit: 'fill',
                 }}
               />
             </div>
@@ -84,7 +84,7 @@ const CarouselComponent = ({ items, type }) => {
               fill
               alt={item.fields.title}
               style={{
-                objectFit: 'cover',
+                objectFit: 'fill',
               }}
             />
           </div>
