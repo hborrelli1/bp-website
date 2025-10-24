@@ -92,7 +92,7 @@ export default function Home({homePageData, themeConfig}) {
       <Head>
         <title>Borrelli + Partners | Home</title>
         <meta name="keywords" content="Architect" />
-        <link rel="stylesheet" href="https://use.typekit.net/rrc4xhb.css"></link>
+        <link rel="stylesheet" href="https://use.typekit.net/rrc4xhb.css" />
       </Head>
       <div className={"home"}>
         <div className="home-hero-banner" id="heroBanner" style={heroSectionStyles}>

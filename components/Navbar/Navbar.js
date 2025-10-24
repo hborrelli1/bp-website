@@ -80,10 +80,8 @@ const Navbar = () => {
             alt="Borrelli+Partners Logo"
             width="261"
             height="36"
-            style={{
-              maxWidth: "100%",
-              height: "auto"
-            }} />
+            priority
+          />
 
         </Link>
         <Menu 
@@ -108,13 +106,10 @@ const Navbar = () => {
         <button className="menu-button" onClick={() => toggleMenu()} type="button">
           <Image
             src="/assets/icons/hamburger-menu@2x.png"
-            width="32px"
-            height="22px"
+            width="32"
+            height="22"
             alt="Navigation Menu"
-            style={{
-              maxWidth: "100%",
-              height: "auto"
-            }} />
+          />
         </button>
       </div>
     );
@@ -129,10 +124,7 @@ const Navbar = () => {
           alt="Borrelli+Partners Logo"
           width="261"
           height="36"
-          style={{
-            maxWidth: "100%",
-            height: "auto"
-          }} />
+        />
 
       </Link>
       <ul className={styles['nav-items']}>
