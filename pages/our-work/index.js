@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TwoColumnHeaderGQL from '../../components/TwoColumnHeaderGQL/TwoColumnHeaderGQL';
 import FooterCtaGQL from '../../components/FooterCtaGQL/FooterCtaGQL';
 import _ from 'lodash';
-import Image from 'next/image';
+import Image from "next/image";
 import Link from 'next/link';
 
 export const getStaticProps = async () => {
@@ -172,22 +172,26 @@ const OurWork = ({pageData}) => {
       } = project;
 
       return (
-        <Link href={`/our-work/${slug}`} key={slug}>
-          <a className="project" style={{backgroundImage: `url(${thumbnailImage.url})`}}>
-            <div className="project-thumb-bg"></div>
-            <div className="meta-data">
-              <div className="title">
-                <h2>{projectTitle}</h2>
-                <p>{location}</p>
-              </div>
-              <div className="tags">
-                <p><span className="industry-label">Industry</span> {industryTag.map(item => <span key={item} className="industry-item">{item}</span>)}</p>
-                <p><span className="service-label">Service</span> {serviceTags.map(item => <span key={item} className="service-item">{item}</span>)}</p>
-              </div>
+        <Link
+          href={`/our-work/${slug}`}
+          key={slug}
+          className="project"
+          style={{backgroundImage: `url(${thumbnailImage.url})`}}>
+
+          <div className="project-thumb-bg"></div>
+          <div className="meta-data">
+            <div className="title">
+              <h2>{projectTitle}</h2>
+              <p>{location}</p>
             </div>
-          </a>
+            <div className="tags">
+              <p><span className="industry-label">Industry</span> {industryTag.map(item => <span key={item} className="industry-item">{item}</span>)}</p>
+              <p><span className="service-label">Service</span> {serviceTags.map(item => <span key={item} className="service-item">{item}</span>)}</p>
+            </div>
+          </div>
+
         </Link>
-      )
+      );
     });
   }
 
@@ -228,12 +232,15 @@ const OurWork = ({pageData}) => {
               onClick={() => toggleMenu('industry')}
             >
               {industryFilter === 'all' ? 'Industry' : industryKey[industryFilter]} <span className="filter-button-icon">
-                <Image 
-                  src="/assets/icons/down-chevron@2x.png" 
-                  width="12px" 
-                  height="6px" 
+                <Image
+                  src="/assets/icons/down-chevron@2x.png"
+                  width="12"
+                  height="6"
                   alt="Industry Filter Arrow"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </span>
             </button>
             <div className="menu">
@@ -248,12 +255,15 @@ const OurWork = ({pageData}) => {
               onClick={() => toggleMenu('service')}
             >
               {serviceFilter === 'all' ? 'Service' : servicesKey[serviceFilter]} <span className="filter-button-icon">
-                <Image 
-                  src="/assets/icons/down-chevron@2x.png" 
-                  width="12px" 
-                  height="6px"  
+                <Image
+                  src="/assets/icons/down-chevron@2x.png"
+                  width="12"
+                  height="6"
                   alt="Industry Filter Arrow"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </span>
             </button>
             <div className="menu">
@@ -267,7 +277,6 @@ const OurWork = ({pageData}) => {
         {/** create pagination for projects... */}
         {renderProjects(projects)}
       </section>
-
       <FooterCtaGQL 
           ctaData={{
             copy: footerCta.copy,

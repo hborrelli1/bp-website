@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 import Link from 'next/link';
 import styles from './Footer.module.scss';
 import { useEffect, useState } from 'react';
@@ -26,12 +26,15 @@ const Footer = () => {
       <div className={styles['top-bar']}>
         <div className={styles['logo-block']}>
           <div className={styles['logo-wrap']}>
-            <Image 
+            <Image
               src="/assets/logos/bp-logo-icon@2x.png"
-              width="129px"
-              height="129px"
+              width="129"
+              height="129"
               alt="Borrelli + Partners Logo"
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </div>
           <address className={styles.address} >
             <h5>BORRELLI + PARTNERS</h5>
@@ -54,16 +57,16 @@ const Footer = () => {
         </div>
         <div className={styles['footer-section']}>
           <nav>
-            <Link href="/services"><a>Services</a></Link>
-            <Link href="/our-work"><a>Our Work</a></Link>
-            <Link href="/about"><a>About</a></Link>
-            <Link href="/careers"><a>Careers</a></Link>
-            <Link href="/contact"><a>Contact</a></Link>
+            <Link href="/services">Services</Link>
+            <Link href="/our-work">Our Work</Link>
+            <Link href="/about">About</Link>
+            <Link href="/careers">Careers</Link>
+            <Link href="/contact">Contact</Link>
           </nav>
           <div className={styles['form-box']}>
             <div className={styles['sub-nav']}>
-              <Link href="/news"><a>News</a></Link>
-              <Link href="/privacy-policy"><a>Privacy Policy</a></Link>
+              <Link href="/news">News</Link>
+              <Link href="/privacy-policy">Privacy Policy</Link>
             </div>
           </div>
         </div>
@@ -72,16 +75,19 @@ const Footer = () => {
         <p>&copy; {`${new Date().getFullYear()} ${themeConfig?.copyright}`}</p>
         <div className={styles['bottom-bar-linkedin']}>
           {themeConfig?.linkedInUrl && (
-            <Link href={themeConfig.linkedInUrl}>
-              <a target="_blank">
-                <Image 
-                  src="/assets/icons/linkedin-white@2x.png"
-                  width="15"
-                  height="15"
-                  alt="Borrelli + Partners Logo"
-                  className={styles['linkedin-icon']}
-                />
-              </a>
+            <Link href={themeConfig.linkedInUrl} target="_blank">
+
+              <Image
+                src="/assets/icons/linkedin-white@2x.png"
+                width="15"
+                height="15"
+                alt="Borrelli + Partners Logo"
+                className={styles['linkedin-icon']}
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
+
             </Link>
           )}
         </div>

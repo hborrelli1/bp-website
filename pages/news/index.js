@@ -1,7 +1,7 @@
 import {createClient} from 'contentful';
 import TwoColumnHeaderGQL from '../../components/TwoColumnHeaderGQL/TwoColumnHeaderGQL';
 import FooterCtaGQL from '../../components/FooterCtaGQL/FooterCtaGQL';
-import Image from 'next/image';
+import Image from "next/image";
 import Link from 'next/link';
 import BlogCardGQL from '../../components/BlogCardGQL';
 import { useState } from 'react';
@@ -112,24 +112,26 @@ const News = ({ pageData }) => {
         <div className="content-margins">
           <h3 className="sub-title">Featured News:</h3>
           <div className="img-col">
-            <Image 
-              src={featuredNews.thumbnailImage.url} 
+            <Image
+              src={featuredNews.thumbnailImage.url}
               width={featuredNews.thumbnailImage.width}
               height={featuredNews.thumbnailImage.height}
               alt={featuredNews.blogTitle}
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </div>
           <div className="content-col">
             <h2>{featuredNews.blogTitle}</h2>
             <h5 className="date">{moment(featuredNews.date).add(1, 'days').format('MMMM Do YYYY')}</h5>
             <p className="body-copy">{featuredNews.shortSummary}</p>
-            <Link href={`/news/${featuredNews.slug}`}>
-              <a className="blog-link">Keep reading +</a>
+            <Link href={`/news/${featuredNews.slug}`} className="blog-link">
+              Keep reading +
             </Link>
           </div>
         </div>
       </section>
-      
       <section className="all-news">
         <div className="content-margins">
           <h3 className="sub-title">All News</h3>
@@ -142,21 +144,23 @@ const News = ({ pageData }) => {
             >
               <span>Load More</span>
               <div className="icon">
-                <Image 
+                <Image
                   src="/assets/icons/circle-icon-dark@2x.png"
-                  width="40px"
-                  height="40px"
+                  width="40"
+                  height="40"
                   alt="Load More Articles."
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
                 <div className='chevron-icon'>
-                  <Image src="/assets/icons/chevron-icon-dark@2x.png" width="10" height="6" layout="fixed" alt="" />
+                  <Image src="/assets/icons/chevron-icon-dark@2x.png" width="10" height="6" alt="" />
                 </div>
               </div>
             </button>
           )}
         </div>
       </section>
-
       <FooterCtaGQL 
         ctaData={{
           copy: footerCta.copy,
@@ -166,7 +170,7 @@ const News = ({ pageData }) => {
         }}
       />
     </article>
-  )
+  );
 }
 
 export default News;

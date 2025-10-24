@@ -1,5 +1,5 @@
 import {createClient} from 'contentful';
-import Image from 'next/image';
+import Image from "next/image";
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { BLOCKS } from '@contentful/rich-text-types';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
@@ -54,12 +54,17 @@ const options = {
   renderNode: {
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
       const { title } = node.data.target.fields;
-      return <Image 
-              src={`https:${node.data.target.fields.file.url}`}
-              width={node.data.target.fields.file.details.image.width}
-              height={node.data.target.fields.file.details.image.height}
-              alt={`${title} thumbnail image.`}
-            />
+      return (
+        <Image
+          src={`https:${node.data.target.fields.file.url}`}
+          width={node.data.target.fields.file.details.image.width}
+          height={node.data.target.fields.file.details.image.height}
+          alt={`${title} thumbnail image.`}
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
+      );
     }
   }
 };
@@ -69,20 +74,23 @@ const BlogPost = ({ blog }) => {
 
   return (
     <div className="blog-content">
-        <div className="header-block"></div>
-        <div className="body-content">
-          <div className="img-wrap">
-            <Image 
-              src={`https:${thumbnailImage.fields.file.url}`}
-              width={thumbnailImage.fields.file.details.image.width}
-              height={thumbnailImage.fields.file.details.image.height}
-              alt={`${blogTitle} thumbnail image.`}
-            />
-          </div>
-          <p className="date">{moment(date).format('MMMM Do YYYY')}</p>
-          <h1>{blogTitle}</h1>
-          <div className="body-copy">{documentToReactComponents(blogContent,options)}</div>
+      <div className="header-block"></div>
+      <div className="body-content">
+        <div className="img-wrap">
+          <Image
+            src={`https:${thumbnailImage.fields.file.url}`}
+            width={thumbnailImage.fields.file.details.image.width}
+            height={thumbnailImage.fields.file.details.image.height}
+            alt={`${blogTitle} thumbnail image.`}
+            style={{
+              maxWidth: "100%",
+              height: "auto"
+            }} />
         </div>
+        <p className="date">{moment(date).format('MMMM Do YYYY')}</p>
+        <h1>{blogTitle}</h1>
+        <div className="body-copy">{documentToReactComponents(blogContent,options)}</div>
+      </div>
       <div className="content-margins">
         <h4 className="sub-title">More News</h4>
         <ThreeColumnFeaturedPosts info={{

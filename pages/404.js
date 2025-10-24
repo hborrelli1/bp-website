@@ -12,7 +12,7 @@ const NotFound = () => {
       </header>
       <div className="content">
         <div className="content-margins">
-          <p>Back to the <Link href="/"><a>Homepage</a></Link></p>
+          <p>Back to the <Link href="/">Homepage</Link></p>
         </div>
 
       </div>

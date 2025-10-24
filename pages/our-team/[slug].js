@@ -1,5 +1,5 @@
 import {createClient} from 'contentful';
-import Image from 'next/image';
+import Image from "next/image";
 import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import safeJsonStringify from 'safe-json-stringify';
@@ -76,39 +76,48 @@ const Person = ({ person }) => {
       <section className="leadership-bio">
         <div className="image-col">
           <div className="bio-img">
-            <Image 
+            <Image
               src={`https:${photo.fields.file.url}`}
               width={photo.fields.file.details.image.width}
               height={photo.fields.file.details.image.height}
-              layout="responsive"
               alt={`${name} leadership photo.`}
-            />
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto"
+              }} />
           </div>
           <div className="socials">
             {(linkedInUrl || email) && (
               <span>Connect</span>
             )}
             {linkedInUrl && (
-              <Link href={linkedInUrl}>
-                <a target="_blank">
-                  <Image 
-                    src="/assets/icons/linkedin-icon@2x.png" 
-                    width="24px" 
-                    height="18px" 
-                    alt={`${name} LinkedIn.`}
-                  />
-                </a>
+              <Link href={linkedInUrl} target="_blank">
+
+                <Image
+                  src="/assets/icons/linkedin-icon@2x.png"
+                  width="24"
+                  height="18"
+                  alt={`${name} LinkedIn.`}
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
+
               </Link>
 
             )}
             {email && (
               <a href={`mailto:${email}`}>
-                <Image 
-                  src="/assets/icons/email-icon@2x.png" 
-                  width="24px" 
-                  height="18px" 
+                <Image
+                  src="/assets/icons/email-icon@2x.png"
+                  width="24px"
+                  height="18px"
                   alt={`${name} email`}
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
               </a>
             )}
           </div>
@@ -124,7 +133,6 @@ const Person = ({ person }) => {
           )}
         </div>
       </section>
-      
       <section className="testimonials">
         <div className="content">
           {(quote1 || quoteImage1) && (
@@ -134,13 +142,16 @@ const Person = ({ person }) => {
               </div>
               <div className="image-col">
                 {!quoteImage1 ? '' : (
-                  <Image 
+                  <Image
                     src={`https:${quoteImage1.fields.file.url}`}
                     width={quoteImage1.fields.file.details.image.width}
                     height={quoteImage1.fields.file.details.image.height}
-                    layout="responsive"
                     alt={quoteImage1.fields.title}
-                  />
+                    sizes="100vw"
+                    style={{
+                      width: "100%",
+                      height: "auto"
+                    }} />
                 )}
               </div>
             </div>
@@ -152,13 +163,16 @@ const Person = ({ person }) => {
               </div>
               <div className="image-col">
                 {!quoteImage2 ? '' : (
-                  <Image 
-                  src={`https:${quoteImage2.fields.file.url}`}
-                  width={quoteImage2.fields.file.details.image.width}
-                  height={quoteImage2.fields.file.details.image.height}
-                  layout="responsive"
-                  alt={quoteImage2.fields.title}
-                />
+                  <Image
+                    src={`https:${quoteImage2.fields.file.url}`}
+                    width={quoteImage2.fields.file.details.image.width}
+                    height={quoteImage2.fields.file.details.image.height}
+                    alt={quoteImage2.fields.title}
+                    sizes="100vw"
+                    style={{
+                      width: "100%",
+                      height: "auto"
+                    }} />
                 )}
                 
               </div>
@@ -166,7 +180,6 @@ const Person = ({ person }) => {
           )}
         </div>
       </section>
-
       {featuredProjects && (
         <ThreeColumnFeaturedPosts info={{
           subTitle: `${name}'s Featured Work`,
@@ -175,7 +188,6 @@ const Person = ({ person }) => {
           type: 'our-work'
         }}/>
       )}
-
       {involvement && (
         <section className="involvement">
           <div className="content-margins">

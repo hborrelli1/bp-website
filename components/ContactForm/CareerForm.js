@@ -67,7 +67,7 @@ const CareerForm = () => {
     return (
       <div className="success-message">
         <h2>Thank you for reaching out. We&rsquo;ll get back to you shortly.</h2>
-        <p>View our <Link href="/our-work"><a>our projects</a></Link>!</p>
+        <p>View our <Link href="/our-work">our projects</Link>!</p>
       </div>
     );
   } else {

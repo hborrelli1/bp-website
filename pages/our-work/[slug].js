@@ -1,5 +1,5 @@
 import {createClient} from 'contentful';
-import Image from 'next/image';
+import Image from "next/image";
 import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';
@@ -94,8 +94,8 @@ const Project = ({ project }) => {
               <h2>Summary</h2>
               <div className="body-copy">{documentToReactComponents(summary)}</div>
               {specSheet && (
-                <Link href={`https:${specSheet.fields.file.url}`}>
-                  <a className="spec-sheet">Download Spec Sheet</a>
+                <Link href={`https:${specSheet.fields.file.url}`} className="spec-sheet">
+                  Download Spec Sheet
                 </Link>
               )}
             </section>
