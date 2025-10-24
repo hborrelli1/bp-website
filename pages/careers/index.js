@@ -129,13 +129,11 @@ const Careers = ({ careers, themeConfig }) => {
                     <Image
                       src={`https:${image.fields.file.url}`}
                       className="cta-img"
-                      width="730"
-                      height="552"
+                      fill
                       alt={sectionTitle}
                       sizes="100vw"
                       style={{
-                        width: "100%",
-                        height: "auto"
+                        objectFit: 'cover',
                       }} />                  
                   </div>
                   {linkUrl && (

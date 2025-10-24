@@ -110,6 +110,15 @@
         .carousel.carousel-slider {
           margin-bottom: 45px;
           overflow: visible;
+
+          .images-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1109/624;
+            overflow: hidden;
+            height: 100%;
+          }
+          
           .control-arrow, 
           .carousel-status {
             bottom: -40px !important;

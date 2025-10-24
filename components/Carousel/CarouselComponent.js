@@ -13,6 +13,7 @@ const CarouselComponent = ({ items, type }) => {
         showArrows={true}
         showIndicators={false}
         infiniteLoop={true}
+        dynamicHeight={false}
         statusFormatter={(currentItem, totalCount) => (<span>{currentItem > 9 ? '' : 0}{currentItem} / {totalCount > 9 ? '' : 0}{totalCount}</span>)}
       >
         {items.map(item => (
@@ -20,10 +21,11 @@ const CarouselComponent = ({ items, type }) => {
             <div className="image-col">
               <Image
                 src={`https:${item.thumbnail.fields.file.url}`}
-                width="726"
-                height="486"
+                fill
                 alt={item.thumbnail.fields.title}
-                sizes="(max-width: 1100px)"
+                style={{
+                  objectFit: 'cover',
+                }}
               />
             </div>
             <div className="content-col">
@@ -72,16 +74,21 @@ const CarouselComponent = ({ items, type }) => {
         showArrows={true}
         showIndicators={false}
         infiniteLoop={true}
+        dynamicHeight={false}
         statusFormatter={(currentItem, totalCount) => (<span>{currentItem > 9 ? '' : 0}{currentItem} / {totalCount > 9 ? '' : 0}{totalCount}</span>)}
       >
         {items.map(item => (
-          <Image
-            key={item.id}
-            src={`https:${item.fields.file.url}`}
-            width="1109"
-            height="624"
-            alt={item.fields.title}
-          />
+          <div className="images-wrapper">
+            <Image
+              key={item.id}
+              src={`https:${item.fields.file.url}`}
+              fill
+              alt={item.fields.title}
+              style={{
+                objectFit: 'cover',
+              }}
+            />
+          </div>
         ))}
       </Carousel>
     );
