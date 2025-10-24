@@ -23,11 +23,8 @@ const CarouselComponent = ({ items, type }) => {
                 width="726"
                 height="486"
                 alt={item.thumbnail.fields.title}
-                sizes="100vw"
-                style={{
-                  width: "100%",
-                  height: "auto"
-                }} />
+                sizes="(max-width: 1100px)"
+              />
             </div>
             <div className="content-col">
               <span>{item.industry}</span>
@@ -84,10 +81,7 @@ const CarouselComponent = ({ items, type }) => {
             width="1109"
             height="624"
             alt={item.fields.title}
-            style={{
-              maxWidth: "100%",
-              height: "auto"
-            }} />
+          />
         ))}
       </Carousel>
     );
