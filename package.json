@@ -15,16 +15,16 @@
     "graphql": "^15.8.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "next": "^13.5.11",
-    "react": "^18.2.0",
+    "next": "^14.2.33",
+    "react": "^18.3.1",
     "react-burger-menu": "^3.0.9",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.3.1",
     "react-responsive-carousel": "^3.2.23",
     "safe-json-stringify": "^1.2.0",
     "sass": "^1.64.2"
   },
   "devDependencies": {
     "eslint": "7.31.0",
-    "eslint-config-next": "^13.5.11"
+    "eslint-config-next": "^14.2.33"
   }
 }
