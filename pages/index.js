@@ -35,7 +35,7 @@ export const getStaticProps = async () => {
       themeConfig: themeConfig.items,
       // projects: projectData.items,
     },
-    revalidate: 1,
+    revalidate: 300,
   }
 }
 

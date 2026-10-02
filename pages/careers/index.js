@@ -20,7 +20,7 @@ export const getStaticProps = async () => {
       careers: res.items[0],
       themeConfig: res2.items[0]
     },
-    revalidate: 1,
+    revalidate: 300,
   }
 }
 

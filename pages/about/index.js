@@ -27,7 +27,7 @@ export const getStaticProps = async () => {
       themeConfig: themeConfigData.items,
       aboutData: aboutData.items[0],
     },
-    revalidate: 1,
+    revalidate: 300,
   }
 }
 

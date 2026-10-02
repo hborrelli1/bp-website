@@ -14,7 +14,7 @@ export const getStaticProps = async () => {
     props: {
       policyData: res.items[0],
     },
-    revalidate: 1,
+    revalidate: 300,
   }
 }
 
