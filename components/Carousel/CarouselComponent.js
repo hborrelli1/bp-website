@@ -32,7 +32,7 @@ const CarouselComponent = ({ items, type }) => {
               <span>{item.industry}</span>
               <h3>{item.title}</h3>
               <p className="body-copy">{item.excerpt}</p>
-              <Link href={`/our-work/${item.slug}`} className="project-link">
+              <Link href={`/our-work/${item.slug}`} className="project-link" prefetch={false}>
                 Keep Reading
               </Link>
             </div>
@@ -58,7 +58,8 @@ const CarouselComponent = ({ items, type }) => {
               {item.fields.projectReference && (
                 <Link
                   href={`/our-work/${item.fields.projectReference.fields.slug}`}
-                  className="project-link">
+                  className="project-link"
+                  prefetch={false}>
                   View Project
                 </Link>
               )}

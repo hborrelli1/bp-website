@@ -96,6 +96,7 @@ const Navbar = () => {
               <Link
                 className={styles['menu-item']}
                 href={item.path}
+                prefetch={false}
                 key={item.title}
                 onClick={() => closeMenu()}>
                 {item.title}
@@ -131,7 +132,7 @@ const Navbar = () => {
         {menu.map((item, index) => {
           return (
             <li key={index} className={`${styles["nav-item"]} ${router.pathname === item.path ? styles.active : ''}`}>
-              <Link href={item.path}>{item.title}</Link>
+              <Link href={item.path} prefetch={false}>{item.title}</Link>
             </li>
           );
         })}
