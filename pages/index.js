@@ -7,75 +7,108 @@ import Link from 'next/link';
 import Image from "next/image";
 import CarouselComponent from '../components/Carousel/CarouselComponent';
 import ThreeColumnFeaturedPosts from '../components/ThreeColumnFeaturedPosts';
-import { compactFields, mapAsset } from '../lib/contentfulPageData';
+import { compactFields, fetchContentfulGraphQL, mapGraphQLAsset } from '../lib/contentfulPageData';
 
 // Runs at build time
 // Used to fetch data from Blog section.
 export const getStaticProps = async () => {
-  // const res = await fetch(/** contentful api here */);
-  // const data = await res.json();
-
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  });
-
-  const homePageData = await client.getEntries({
-    content_type: 'homePage',
-    select: 'sys.id,fields.heroImage,fields.heroImageTitle,fields.heroImageText,fields.ourServicesTitle,fields.ourServicesDescription,fields.ourServicesLinks,fields.featuredProjects,fields.whyBpTitle,fields.whyBpDescription,fields.whyBpImage,fields.whyBpLink,fields.whyBpLinkTitle,fields.featuredPostSubtitle,fields.featuredPostTitle,fields.featuredPosts',
-  });
-  const themeConfig = await client.getEntries({
-    content_type: 'themeConfig',
-    select: 'sys.id,fields.backgroundTexture',
-  });
-  const fields = homePageData.items[0].fields;
+  const data = await fetchContentfulGraphQL(`
+    query HomeAndTheme {
+      homePageCollection(limit: 1) {
+        items {
+          heroImage { url title width height }
+          heroImageTitle
+          heroImageText { json }
+          ourServicesTitle
+          ourServicesDescription { json }
+          ourServicesLinksCollection(limit: 100) {
+            items { sys { id } service servicesUrl }
+          }
+          featuredProjectsCollection(limit: 100) {
+            items {
+              sys { id }
+              projectTitle
+              shortSummary
+              industryTag
+              slug
+              thumbnailImage { url title width height }
+            }
+          }
+          whyBpTitle
+          whyBpDescription { json }
+          whyBpImage { url title width height }
+          whyBpLink {
+            __typename
+            ... on About { slug }
+          }
+          whyBpLinkTitle
+          featuredPostSubtitle
+          featuredPostTitle
+          featuredPostsCollection(limit: 100) {
+            items {
+              sys { id }
+              shortSummary
+              blogTitle
+              slug
+              date
+              thumbnailImage { url title width height }
+            }
+          }
+        }
+      }
+      themeConfigCollection(limit: 1) {
+        items { backgroundTexture { url title width height } }
+      }
+    }
+  `);
+  const fields = data.homePageCollection.items[0];
   const homeData = {
     fields: compactFields({
-      heroImage: mapAsset(fields.heroImage),
+      heroImage: mapGraphQLAsset(fields.heroImage),
       heroImageTitle: fields.heroImageTitle,
-      heroImageText: fields.heroImageText,
+      heroImageText: fields.heroImageText.json,
       ourServicesTitle: fields.ourServicesTitle,
-      ourServicesDescription: fields.ourServicesDescription,
-      ourServicesLinks: fields.ourServicesLinks.map(link => ({
+      ourServicesDescription: fields.ourServicesDescription.json,
+      ourServicesLinks: fields.ourServicesLinksCollection.items.map(link => ({
         sys: { id: link.sys.id },
         fields: compactFields({
-          servicesUrl: link.fields.servicesUrl,
-          service: link.fields.service,
+          servicesUrl: link.servicesUrl,
+          service: link.service,
         }),
       })),
-      featuredProjects: fields.featuredProjects.map(project => ({
+      featuredProjects: fields.featuredProjectsCollection.items.map(project => ({
         sys: { id: project.sys.id },
         fields: compactFields({
-          thumbnailImage: mapAsset(project.fields.thumbnailImage),
-          projectTitle: project.fields.projectTitle,
-          shortSummary: project.fields.shortSummary,
-          industry: project.fields.industry,
-          slug: project.fields.slug,
+          thumbnailImage: mapGraphQLAsset(project.thumbnailImage),
+          projectTitle: project.projectTitle,
+          shortSummary: project.shortSummary,
+          industry: project.industryTag?.join(', '),
+          slug: project.slug,
         }),
       })),
       whyBpTitle: fields.whyBpTitle,
-      whyBpDescription: fields.whyBpDescription,
-      whyBpImage: mapAsset(fields.whyBpImage),
+      whyBpDescription: fields.whyBpDescription.json,
+      whyBpImage: mapGraphQLAsset(fields.whyBpImage),
       whyBpLink: {
-        fields: compactFields({ slug: fields.whyBpLink.fields.slug }),
+        fields: compactFields({ slug: fields.whyBpLink.slug }),
       },
       whyBpLinkTitle: fields.whyBpLinkTitle,
       featuredPostSubtitle: fields.featuredPostSubtitle,
       featuredPostTitle: fields.featuredPostTitle,
-      featuredPosts: fields.featuredPosts.map(post => ({
+      featuredPosts: fields.featuredPostsCollection.items.map(post => ({
         fields: compactFields({
-          shortSummary: post.fields.shortSummary,
-          blogTitle: post.fields.blogTitle,
-          slug: post.fields.slug,
-          thumbnailImage: mapAsset(post.fields.thumbnailImage),
-          date: post.fields.date,
+          shortSummary: post.shortSummary,
+          blogTitle: post.blogTitle,
+          slug: post.slug,
+          thumbnailImage: mapGraphQLAsset(post.thumbnailImage),
+          date: post.date,
         }),
       })),
     }),
   };
   const themeData = [{
     fields: {
-      backgroundTexture: mapAsset(themeConfig.items[0].fields.backgroundTexture),
+      backgroundTexture: mapGraphQLAsset(data.themeConfigCollection.items[0].backgroundTexture),
     },
   }];
 

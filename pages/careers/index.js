@@ -1,30 +1,64 @@
-import {createClient} from 'contentful';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import Image from "next/image";
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import CareerForm from '../../components/ContactForm/CareerForm';
+import { compactFields, fetchContentfulGraphQL, mapGraphQLAsset } from '../../lib/contentfulPageData';
 
 export const getStaticProps = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  });
-
-  const res = await client.getEntries({
-    content_type: 'careers',
-    select: 'sys.id,fields.coreValues,fields.headerBackgroundImage,fields.mobileBackgroundImage,fields.pageDescription,fields.pageTitle,fields.textAndImageSections',
-  });
-  const res2 = await client.getEntries({
-    content_type: 'themeConfig',
-    select: 'sys.id,fields.backgroundTexture',
-  });
+  const data = await fetchContentfulGraphQL(`
+    query CareersAndTheme {
+      careersCollection(limit: 1) {
+        items {
+          coreValues
+          headerBackgroundImage { url title width height }
+          mobileBackgroundImage { url title width height }
+          pageDescription
+          pageTitle
+          textAndImageSectionsCollection(limit: 20) {
+            items {
+              content { json }
+              image { url title width height }
+              linkTitle
+              linkUrl
+              sectionTitle
+            }
+          }
+        }
+      }
+      themeConfigCollection(limit: 1) {
+        items { backgroundTexture { url title width height } }
+      }
+    }
+  `);
+  const career = data.careersCollection.items[0];
 
   return {
     props: {
-      careers: res.items[0],
-      themeConfig: res2.items[0]
+      careers: {
+        fields: compactFields({
+          coreValues: career.coreValues,
+          headerBackgroundImage: mapGraphQLAsset(career.headerBackgroundImage),
+          mobileBackgroundImage: mapGraphQLAsset(career.mobileBackgroundImage),
+          pageDescription: career.pageDescription,
+          pageTitle: career.pageTitle,
+          textAndImageSections: career.textAndImageSectionsCollection.items.map(section => ({
+            fields: compactFields({
+              content: section.content.json,
+              image: mapGraphQLAsset(section.image),
+              linkTitle: section.linkTitle,
+              linkUrl: section.linkUrl,
+              sectionTitle: section.sectionTitle,
+            }),
+          })),
+        }),
+      },
+      themeConfig: {
+        fields: {
+          backgroundTexture: mapGraphQLAsset(data.themeConfigCollection.items[0].backgroundTexture),
+        },
+      },
     },
     revalidate: 300,
   }

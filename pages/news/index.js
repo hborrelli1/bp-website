@@ -1,31 +1,16 @@
-import {createClient} from 'contentful';
 import TwoColumnHeaderGQL from '../../components/TwoColumnHeaderGQL/TwoColumnHeaderGQL';
 import FooterCtaGQL from '../../components/FooterCtaGQL/FooterCtaGQL';
 import Image from "next/image";
 import Link from 'next/link';
 import BlogCardGQL from '../../components/BlogCardGQL';
 import { useState } from 'react';
-import safeJsonStringify from 'safe-json-stringify';
 import moment from 'moment';
+import { fetchContentfulGraphQL } from '../../lib/contentfulPageData';
 
 // Runs at build time
 // Used to fetch data from Blog section.
 export const getStaticProps = async () => {
-  const space = process.env.CONTENTFUL_SPACE_ID;
-  const accessToken = process.env.CONTENTFUL_ACCESS_KEY;
-
-  const res = await fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${space}`,
-    {
-      method: 'POST', // GraphQL *always* uses POST requests!
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${accessToken}`, // add our access token header
-      },
-      // send the query we wrote in GraphiQL as a string
-      body: JSON.stringify({
-        // all requests start with "query: ", so we'll stringify that for convenience
-        query: `
+  const data = await fetchContentfulGraphQL(`
         {
           newsPageCollection(limit:1) {
             items {
@@ -67,18 +52,11 @@ export const getStaticProps = async () => {
             }
           }
         }
-      `,
-      }),
-    },
-  );
-
-  const data = await res.json()
-  // const data2 = await res2.json()
+      `);
 
   return {
     props: {
-    	pageData: data.data.newsPageCollection.items,
-      // featuredProjects: data2.data.projectsCollection.items,
+      pageData: data.newsPageCollection.items,
     },
   }
 }

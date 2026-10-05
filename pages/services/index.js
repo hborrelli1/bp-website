@@ -1,4 +1,3 @@
-import {createClient} from 'contentful';
 import { useState, useEffect } from 'react';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
@@ -7,85 +6,119 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import _ from 'lodash';
-import { compactFields, mapAsset } from '../../lib/contentfulPageData';
+import { compactFields, fetchContentfulGraphQL, mapGraphQLAsset } from '../../lib/contentfulPageData';
 
 const mapProjectCard = (project) => ({
   fields: compactFields({
-    projectTitle: project.fields.projectTitle,
-    slug: project.fields.slug,
-    shortSummary: project.fields.shortSummary,
-    thumbnailImage: mapAsset(project.fields.thumbnailImage),
+    projectTitle: project.projectTitle,
+    slug: project.slug,
+    shortSummary: project.shortSummary,
+    thumbnailImage: mapGraphQLAsset(project.thumbnailImage),
   }),
 });
 
 const mapService = (service) => ({
   sys: { id: service.sys.id },
   fields: compactFields({
-    service: service.fields.service,
-    servicesUrl: service.fields.servicesUrl,
-    serviceDescriptionHeading: service.fields.serviceDescriptionHeading,
-    serviceDescription: service.fields.serviceDescription,
-    mainImage: mapAsset(service.fields.mainImage),
-    features: service.fields.features.map(feature => ({ sys: { id: feature.sys.id } })),
-    serviceDescriptionHeading2: service.fields.serviceDescriptionHeading2,
-    serviceDescription2: service.fields.serviceDescription2,
-    mainImage2: mapAsset(service.fields.mainImage2),
-    features2: service.fields.features2?.map(feature => ({ sys: { id: feature.sys.id } })),
-    featuredProjectsSubtitle: service.fields.featuredProjectsSubtitle,
-    featuredProjectsSectionTitle: service.fields.featuredProjectsSectionTitle,
-    featuredProjects: service.fields.featuredProjects?.map(mapProjectCard),
+    service: service.service,
+    servicesUrl: service.servicesUrl,
+    serviceDescriptionHeading: service.serviceDescriptionHeading,
+    serviceDescription: service.serviceDescription?.json,
+    mainImage: mapGraphQLAsset(service.mainImage),
+    features: service.featuresCollection.items.map(feature => ({ sys: { id: feature.sys.id } })),
+    serviceDescriptionHeading2: service.serviceDescriptionHeading2,
+    serviceDescription2: service.serviceDescription2?.json,
+    mainImage2: mapGraphQLAsset(service.mainImage2),
+    features2: service.features2Collection.items.map(feature => ({ sys: { id: feature.sys.id } })),
+    featuredProjectsSubtitle: service.featuredProjectsSubtitle,
+    featuredProjectsSectionTitle: service.featuredProjectsSectionTitle,
+    featuredProjects: service.featuredProjectsCollection.items.map(mapProjectCard),
   }),
 });
 
 export const getStaticProps = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  });
-
-  const servicesData = await client.getEntries({
-    content_type: 'servicesPage',
-    include: 2,
-    select: 'sys.id,fields.services,fields.pageTitle,fields.pageDescription,fields.backgroundImage,fields.footerCta',
-  });
-  const themeConfig = await client.getEntries({
-    content_type: 'themeConfig',
-    select: 'sys.id,fields.backgroundTexture',
-  });
-  const iconsWithText = await client.getEntries({
-    content_type: 'iconWithText',
-    select: 'sys.id,fields.icon,fields.iconText',
-  });
-  const servicesPage = servicesData.items[0];
+  const data = await fetchContentfulGraphQL(`
+    query ServicesAndTheme {
+      servicesPageCollection(limit: 1) {
+        items {
+          pageTitle
+          pageDescription
+          backgroundImage { url title width height }
+          footerCta {
+            copy
+            ctaText
+            ctaLink
+            backgroundImage { url title width height }
+          }
+          servicesCollection(limit: 10) {
+            items {
+              sys { id }
+              service
+              servicesUrl
+              serviceDescriptionHeading
+              serviceDescription { json }
+              mainImage { url title width height }
+              featuresCollection(limit: 10) { items { sys { id } } }
+              serviceDescriptionHeading2
+              serviceDescription2 { json }
+              mainImage2 { url title width height }
+              features2Collection(limit: 10) { items { sys { id } } }
+              featuredProjectsSubtitle
+              featuredProjectsSectionTitle
+              featuredProjectsCollection(limit: 10) {
+                items {
+                  projectTitle
+                  slug
+                  shortSummary
+                  thumbnailImage { url title width height }
+                }
+              }
+            }
+          }
+        }
+      }
+      themeConfigCollection(limit: 1) {
+        items { backgroundTexture { url title width height } }
+      }
+      iconWithTextCollection(limit: 100) {
+        items {
+          sys { id }
+          icon { url title width height }
+          iconText
+        }
+      }
+    }
+  `);
+  const servicesPage = data.servicesPageCollection.items[0];
 
   return {
     props: {
       servicesPageData: {
         fields: compactFields({
-          pageTitle: servicesPage.fields.pageTitle,
-          pageDescription: servicesPage.fields.pageDescription,
-          services: servicesPage.fields.services.map(mapService),
-          backgroundImage: mapAsset(servicesPage.fields.backgroundImage),
+          pageTitle: servicesPage.pageTitle,
+          pageDescription: servicesPage.pageDescription,
+          services: servicesPage.servicesCollection.items.map(mapService),
+          backgroundImage: mapGraphQLAsset(servicesPage.backgroundImage),
           footerCta: {
             fields: compactFields({
-              copy: servicesPage.fields.footerCta.fields.copy,
-              ctaText: servicesPage.fields.footerCta.fields.ctaText,
-              ctaLink: servicesPage.fields.footerCta.fields.ctaLink,
-              backgroundImage: mapAsset(servicesPage.fields.footerCta.fields.backgroundImage),
+              copy: servicesPage.footerCta.copy,
+              ctaText: servicesPage.footerCta.ctaText,
+              ctaLink: servicesPage.footerCta.ctaLink,
+              backgroundImage: mapGraphQLAsset(servicesPage.footerCta.backgroundImage),
             }),
           },
         }),
       },
       themeConfig: {
         fields: {
-          backgroundTexture: mapAsset(themeConfig.items[0].fields.backgroundTexture),
+          backgroundTexture: mapGraphQLAsset(data.themeConfigCollection.items[0].backgroundTexture),
         },
       },
-      iconsWithText: iconsWithText.items.map(icon => ({
+      iconsWithText: data.iconWithTextCollection.items.map(icon => ({
         sys: { id: icon.sys.id },
         fields: compactFields({
-          icon: mapAsset(icon.fields.icon),
-          iconText: icon.fields.iconText,
+          icon: mapGraphQLAsset(icon.icon),
+          iconText: icon.iconText,
         }),
       })),
     },

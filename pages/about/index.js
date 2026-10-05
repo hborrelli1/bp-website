@@ -1,58 +1,55 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from "next/image";
-import {createClient} from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import styles from './about.module.scss'
 import CarouselComponent from '../../components/Carousel/CarouselComponent';
-import { compactFields, mapAsset } from '../../lib/contentfulPageData';
+import { compactFields, fetchContentfulGraphQL, mapGraphQLAsset } from '../../lib/contentfulPageData';
 
 const mapAboutData = (entry) => {
-  const { fields } = entry;
-
   return {
     fields: compactFields({
-      aboutSubTitle: fields.aboutSubTitle,
-      descriptionPhoto: mapAsset(fields.descriptionPhoto),
+      aboutSubTitle: entry.aboutSubTitle,
+      descriptionPhoto: mapGraphQLAsset(entry.descriptionPhoto),
       footerCta: {
         fields: {
-          copy: fields.footerCta.fields.copy,
-          ctaText: fields.footerCta.fields.ctaText,
-          backgroundImage: mapAsset(fields.footerCta.fields.backgroundImage),
+          copy: entry.footerCta.copy,
+          ctaText: entry.footerCta.ctaText,
+          backgroundImage: mapGraphQLAsset(entry.footerCta.backgroundImage),
         },
       },
-      headerPhoto: mapAsset(fields.headerPhoto),
-      mainDescription: fields.mainDescription,
-      mainTitle: fields.mainTitle,
-      ourTeam: fields.ourTeam.map(person => ({
+      headerPhoto: mapGraphQLAsset(entry.headerPhoto),
+      mainDescription: entry.mainDescription.json,
+      mainTitle: entry.mainTitle,
+      ourTeam: entry.ourTeamCollection.items.map(person => ({
         sys: { id: person.sys.id },
         fields: {
-          fullBioPage: person.fields.fullBioPage,
-          slug: person.fields.slug,
-          photo: mapAsset(person.fields.photo),
-          name: person.fields.name,
-          jobTitle: person.fields.jobTitle,
+          fullBioPage: person.fullBioPage,
+          slug: person.slug,
+          photo: mapGraphQLAsset(person.photo),
+          name: person.name,
+          jobTitle: person.jobTitle,
         },
       })),
-      pageTitle: fields.pageTitle,
-      qualityTitle1: fields.qualityTitle1,
-      qualityTitle2: fields.qualityTitle2,
-      qualityTitle3: fields.qualityTitle3,
-      qualityTitle4: fields.qualityTitle4,
-      qualityDescription1: fields.qualityDescription1,
-      qualityDescription2: fields.qualityDescription2,
-      qualityDescription3: fields.qualityDescription3,
-      qualityDescription4: fields.qualityDescription4,
-      shortDescription: fields.shortDescription,
-      testimonials: fields.testimonials?.map(testimonial => ({
+      pageTitle: entry.pageTitle,
+      qualityTitle1: entry.qualityTitle1,
+      qualityTitle2: entry.qualityTitle2,
+      qualityTitle3: entry.qualityTitle3,
+      qualityTitle4: entry.qualityTitle4,
+      qualityDescription1: entry.qualityDescription1.json,
+      qualityDescription2: entry.qualityDescription2.json,
+      qualityDescription3: entry.qualityDescription3.json,
+      qualityDescription4: entry.qualityDescription4.json,
+      shortDescription: entry.shortDescription.json,
+      testimonials: entry.testimonialsCollection.items.map(testimonial => ({
         sys: { id: testimonial.sys.id },
         fields: {
-          testimonial: testimonial.fields.testimonial,
-          name: testimonial.fields.name,
-          title: testimonial.fields.title,
-          projectReference: testimonial.fields.projectReference && {
-            fields: { slug: testimonial.fields.projectReference.fields.slug },
+          testimonial: testimonial.testimonial.json,
+          name: testimonial.name,
+          title: testimonial.title,
+          projectReference: testimonial.projectReference && {
+            fields: { slug: testimonial.projectReference.slug },
           },
         },
       })),
@@ -63,23 +60,47 @@ const mapAboutData = (entry) => {
 // Runs at build time
 // Used to fetch data from Blog section.
 export const getStaticProps = async () => {
-
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  });
-
-  const themeConfigData = await client.getEntries({
-    content_type: 'themeConfig',
-    select: 'sys.id,fields.backgroundTexture',
-  });
-  const aboutDataRes = await client.getEntries({
-    content_type: 'about',
-    include: 2,
-    select: 'sys.id,fields.aboutSubTitle,fields.descriptionPhoto,fields.footerCta,fields.headerPhoto,fields.mainDescription,fields.mainTitle,fields.ourTeam,fields.pageTitle,fields.qualityTitle1,fields.qualityTitle2,fields.qualityTitle3,fields.qualityTitle4,fields.qualityDescription1,fields.qualityDescription2,fields.qualityDescription3,fields.qualityDescription4,fields.shortDescription,fields.testimonials',
-  });
-  const aboutData = mapAboutData(aboutDataRes.items[0]);
-  const themeBackgroundUrl = themeConfigData.items[0].fields.backgroundTexture.fields.file.url;
+  const data = await fetchContentfulGraphQL(`
+    query AboutAndTheme {
+      aboutCollection(limit: 1) {
+        items {
+          aboutSubTitle
+          descriptionPhoto { url title width height }
+          footerCta { copy ctaText backgroundImage { url title width height } }
+          headerPhoto { url title width height }
+          mainDescription { json }
+          mainTitle
+          ourTeamCollection(limit: 30) {
+            items { sys { id } fullBioPage slug photo { url title width height } name jobTitle }
+          }
+          pageTitle
+          qualityTitle1
+          qualityTitle2
+          qualityTitle3
+          qualityTitle4
+          qualityDescription1 { json }
+          qualityDescription2 { json }
+          qualityDescription3 { json }
+          qualityDescription4 { json }
+          shortDescription { json }
+          testimonialsCollection(limit: 20) {
+            items {
+              sys { id }
+              testimonial { json }
+              name
+              title
+              projectReference { __typename ... on Projects { slug } }
+            }
+          }
+        }
+      }
+      themeConfigCollection(limit: 1) {
+        items { backgroundTexture { url } }
+      }
+    }
+  `);
+  const aboutData = mapAboutData(data.aboutCollection.items[0]);
+  const themeBackgroundUrl = data.themeConfigCollection.items[0].backgroundTexture.url.replace(/^https?:/, '');
 
   return {
     props: {
