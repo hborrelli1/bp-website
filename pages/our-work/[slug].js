@@ -4,8 +4,17 @@ import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import CarouselComponent from '../../components/Carousel/CarouselComponent';
-import safeJsonStringify from 'safe-json-stringify';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
+import { compactFields, mapAsset } from '../../lib/contentfulPageData';
+
+const mapProjectCard = (project) => ({
+  fields: compactFields({
+    projectTitle: project.fields.projectTitle,
+    slug: project.fields.slug,
+    shortSummary: project.fields.shortSummary,
+    thumbnailImage: mapAsset(project.fields.thumbnailImage),
+  }),
+});
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -33,9 +42,6 @@ export const getStaticProps = async ({ params }) => {
     'fields.slug': params.slug,
   });
 
-  const stringifiedItems = safeJsonStringify(items);
-  const data = JSON.parse(stringifiedItems);
-
   if (!items.length) {
     return {
       redirect: {
@@ -45,8 +51,33 @@ export const getStaticProps = async ({ params }) => {
     }
   }
 
+  const project = items[0];
   return {
-    props: { project: data[0]},
+    props: {
+      project: {
+        fields: compactFields({
+          client: project.fields.client,
+          cost: project.fields.cost,
+          footerCta: project.fields.footerCta && {
+            fields: compactFields({
+              copy: project.fields.footerCta.fields.copy,
+              ctaText: project.fields.footerCta.fields.ctaText,
+              ctaLink: project.fields.footerCta.fields.ctaLink,
+              backgroundImage: mapAsset(project.fields.footerCta.fields.backgroundImage),
+            }),
+          },
+          galleryImages: project.fields.galleryImages?.map(mapAsset),
+          industry: project.fields.industry,
+          location: project.fields.location,
+          projectTitle: project.fields.projectTitle,
+          size: project.fields.size,
+          slug: project.fields.slug,
+          summary: project.fields.summary,
+          specSheet: mapAsset(project.fields.specSheet),
+          featuredProjects: project.fields.featuredProjects?.map(mapProjectCard),
+        }),
+      },
+    },
     revalidate: 300,
   }
 }

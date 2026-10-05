@@ -6,7 +6,59 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import FooterCta from '../../components/FooterCta/FooterCta';
 import styles from './about.module.scss'
 import CarouselComponent from '../../components/Carousel/CarouselComponent';
-import safeJsonStringify from 'safe-json-stringify';
+import { compactFields, mapAsset } from '../../lib/contentfulPageData';
+
+const mapAboutData = (entry) => {
+  const { fields } = entry;
+
+  return {
+    fields: compactFields({
+      aboutSubTitle: fields.aboutSubTitle,
+      descriptionPhoto: mapAsset(fields.descriptionPhoto),
+      footerCta: {
+        fields: {
+          copy: fields.footerCta.fields.copy,
+          ctaText: fields.footerCta.fields.ctaText,
+          backgroundImage: mapAsset(fields.footerCta.fields.backgroundImage),
+        },
+      },
+      headerPhoto: mapAsset(fields.headerPhoto),
+      mainDescription: fields.mainDescription,
+      mainTitle: fields.mainTitle,
+      ourTeam: fields.ourTeam.map(person => ({
+        sys: { id: person.sys.id },
+        fields: {
+          fullBioPage: person.fields.fullBioPage,
+          slug: person.fields.slug,
+          photo: mapAsset(person.fields.photo),
+          name: person.fields.name,
+          jobTitle: person.fields.jobTitle,
+        },
+      })),
+      pageTitle: fields.pageTitle,
+      qualityTitle1: fields.qualityTitle1,
+      qualityTitle2: fields.qualityTitle2,
+      qualityTitle3: fields.qualityTitle3,
+      qualityTitle4: fields.qualityTitle4,
+      qualityDescription1: fields.qualityDescription1,
+      qualityDescription2: fields.qualityDescription2,
+      qualityDescription3: fields.qualityDescription3,
+      qualityDescription4: fields.qualityDescription4,
+      shortDescription: fields.shortDescription,
+      testimonials: fields.testimonials?.map(testimonial => ({
+        sys: { id: testimonial.sys.id },
+        fields: {
+          testimonial: testimonial.fields.testimonial,
+          name: testimonial.fields.name,
+          title: testimonial.fields.title,
+          projectReference: testimonial.fields.projectReference && {
+            fields: { slug: testimonial.fields.projectReference.fields.slug },
+          },
+        },
+      })),
+    }),
+  };
+};
 
 // Runs at build time
 // Used to fetch data from Blog section.
@@ -19,19 +71,19 @@ export const getStaticProps = async () => {
 
   const themeConfigData = await client.getEntries({ content_type: 'themeConfig' });
   const aboutDataRes = await client.getEntries({ content_type: 'about', include: 2 });
-  const stringifiedAboutData = safeJsonStringify(aboutDataRes);
-  const aboutData = JSON.parse(stringifiedAboutData);
+  const aboutData = mapAboutData(aboutDataRes.items[0]);
+  const themeBackgroundUrl = themeConfigData.items[0].fields.backgroundTexture.fields.file.url;
 
   return {
     props: {
-      themeConfig: themeConfigData.items,
-      aboutData: aboutData.items[0],
+      themeBackgroundUrl,
+      aboutData,
     },
     revalidate: 300,
   }
 }
 
-const About = ({themeConfig, aboutData}) => {
+const About = ({themeBackgroundUrl, aboutData}) => {
   const {
     aboutSubTitle,
     descriptionPhoto,
@@ -69,7 +121,7 @@ const About = ({themeConfig, aboutData}) => {
             </div>
           </div>
         </header>
-        <section className={styles['main-content']} style={{ backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})` }}>
+        <section className={styles['main-content']} style={{ backgroundImage: `url(https:${themeBackgroundUrl})` }}>
           <div className={styles['margin-container']}>
             <div className={styles['content-col']}>
               <h2>{mainTitle}</h2>

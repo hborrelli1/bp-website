@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Image from "next/image";
 import CarouselComponent from '../components/Carousel/CarouselComponent';
 import ThreeColumnFeaturedPosts from '../components/ThreeColumnFeaturedPosts';
-import safeJsonStringify from 'safe-json-stringify';
+import { compactFields, mapAsset } from '../lib/contentfulPageData';
 
 // Runs at build time
 // Used to fetch data from Blog section.
@@ -22,24 +22,66 @@ export const getStaticProps = async () => {
 
   const homePageData = await client.getEntries({ content_type: 'homePage' });
   const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
-  // const projects = await client.getEntries({ content_type: 'projects', limit: 10 });
-
-  const stringifiedHomePageData = safeJsonStringify(homePageData);
-  const homeData = JSON.parse(stringifiedHomePageData);
-  // const stringifiedProjectData = safeJsonStringify(projects);
-  // const projectData = JSON.parse(stringifiedProjectData);
+  const fields = homePageData.items[0].fields;
+  const homeData = {
+    fields: compactFields({
+      heroImage: mapAsset(fields.heroImage),
+      heroImageTitle: fields.heroImageTitle,
+      heroImageText: fields.heroImageText,
+      ourServicesTitle: fields.ourServicesTitle,
+      ourServicesDescription: fields.ourServicesDescription,
+      ourServicesLinks: fields.ourServicesLinks.map(link => ({
+        sys: { id: link.sys.id },
+        fields: compactFields({
+          servicesUrl: link.fields.servicesUrl,
+          service: link.fields.service,
+        }),
+      })),
+      featuredProjects: fields.featuredProjects.map(project => ({
+        sys: { id: project.sys.id },
+        fields: compactFields({
+          thumbnailImage: mapAsset(project.fields.thumbnailImage),
+          projectTitle: project.fields.projectTitle,
+          shortSummary: project.fields.shortSummary,
+          industry: project.fields.industry,
+          slug: project.fields.slug,
+        }),
+      })),
+      whyBpTitle: fields.whyBpTitle,
+      whyBpDescription: fields.whyBpDescription,
+      whyBpImage: mapAsset(fields.whyBpImage),
+      whyBpLink: {
+        fields: compactFields({ slug: fields.whyBpLink.fields.slug }),
+      },
+      whyBpLinkTitle: fields.whyBpLinkTitle,
+      featuredPostSubtitle: fields.featuredPostSubtitle,
+      featuredPostTitle: fields.featuredPostTitle,
+      featuredPosts: fields.featuredPosts.map(post => ({
+        fields: compactFields({
+          shortSummary: post.fields.shortSummary,
+          blogTitle: post.fields.blogTitle,
+          slug: post.fields.slug,
+          thumbnailImage: mapAsset(post.fields.thumbnailImage),
+          date: post.fields.date,
+        }),
+      })),
+    }),
+  };
+  const themeData = [{
+    fields: {
+      backgroundTexture: mapAsset(themeConfig.items[0].fields.backgroundTexture),
+    },
+  }];
 
   return {
     props: {
-      homePageData: homeData.items,
-      themeConfig: themeConfig.items,
-      // projects: projectData.items,
+      homePageData: [homeData],
+      themeConfig: themeData,
     },
     revalidate: 300,
   }
 }
 
-// export default function Home({homePageData, themeConfig, projects}) {
 export default function Home({homePageData, themeConfig}) {
   const {fields} = homePageData[0];
   const [navHeight, setNavHeight] = useState(60);

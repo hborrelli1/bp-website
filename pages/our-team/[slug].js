@@ -2,8 +2,17 @@ import {createClient} from 'contentful';
 import Image from "next/image";
 import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import safeJsonStringify from 'safe-json-stringify';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
+import { compactFields, mapAsset } from '../../lib/contentfulPageData';
+
+const mapProjectCard = (project) => ({
+  fields: compactFields({
+    projectTitle: project.fields.projectTitle,
+    slug: project.fields.slug,
+    shortSummary: project.fields.shortSummary,
+    thumbnailImage: mapAsset(project.fields.thumbnailImage),
+  }),
+});
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -31,9 +40,6 @@ export const getStaticProps = async ({ params }) => {
     'fields.slug': params.slug,
   });
 
-  const stringifiedItems = safeJsonStringify(items)
-  const data = JSON.parse(stringifiedItems)
-
   if (!items.length) {
     return {
       redirect: {
@@ -43,8 +49,28 @@ export const getStaticProps = async ({ params }) => {
     }
   }
 
+  const person = items[0];
   return {
-    props: { person: data[0]},
+    props: {
+      person: {
+        fields: compactFields({
+          fullBioPage: person.fields.fullBioPage,
+          certifications: person.fields.certifications,
+          email: person.fields.email,
+          jobTitle: person.fields.jobTitle,
+          leadershipBio: person.fields.leadershipBio,
+          linkedInUrl: person.fields.linkedInUrl,
+          name: person.fields.name,
+          photo: mapAsset(person.fields.photo),
+          quote1: person.fields.quote1,
+          quoteImage1: mapAsset(person.fields.quoteImage1),
+          quote2: person.fields.quote2,
+          quoteImage2: mapAsset(person.fields.quoteImage2),
+          featuredProjects: person.fields.featuredProjects?.map(mapProjectCard),
+          involvement: person.fields.involvement,
+        }),
+      },
+    },
     revalidate: 300,
   }
 }

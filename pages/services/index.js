@@ -6,8 +6,36 @@ import FooterCta from '../../components/FooterCta/FooterCta';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from "next/image";
 import { useRouter } from 'next/router';
-import safeJsonStringify from 'safe-json-stringify';
 import _ from 'lodash';
+import { compactFields, mapAsset } from '../../lib/contentfulPageData';
+
+const mapProjectCard = (project) => ({
+  fields: compactFields({
+    projectTitle: project.fields.projectTitle,
+    slug: project.fields.slug,
+    shortSummary: project.fields.shortSummary,
+    thumbnailImage: mapAsset(project.fields.thumbnailImage),
+  }),
+});
+
+const mapService = (service) => ({
+  sys: { id: service.sys.id },
+  fields: compactFields({
+    service: service.fields.service,
+    servicesUrl: service.fields.servicesUrl,
+    serviceDescriptionHeading: service.fields.serviceDescriptionHeading,
+    serviceDescription: service.fields.serviceDescription,
+    mainImage: mapAsset(service.fields.mainImage),
+    features: service.fields.features.map(feature => ({ sys: { id: feature.sys.id } })),
+    serviceDescriptionHeading2: service.fields.serviceDescriptionHeading2,
+    serviceDescription2: service.fields.serviceDescription2,
+    mainImage2: mapAsset(service.fields.mainImage2),
+    features2: service.fields.features2?.map(feature => ({ sys: { id: feature.sys.id } })),
+    featuredProjectsSubtitle: service.fields.featuredProjectsSubtitle,
+    featuredProjectsSectionTitle: service.fields.featuredProjectsSectionTitle,
+    featuredProjects: service.fields.featuredProjects?.map(mapProjectCard),
+  }),
+});
 
 export const getStaticProps = async () => {
   const client = createClient({
@@ -18,15 +46,38 @@ export const getStaticProps = async () => {
   const servicesData = await client.getEntries({ content_type: 'servicesPage', include: 2 });
   const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
   const iconsWithText = await client.getEntries({ content_type: 'iconWithText' });
-
-  const stringifiedItems = safeJsonStringify(servicesData);
-  const servicesDataItems = JSON.parse(stringifiedItems);
+  const servicesPage = servicesData.items[0];
 
   return {
     props: {
-      servicesPageData: servicesDataItems.items[0],
-      themeConfig: themeConfig.items[0],
-      iconsWithText: iconsWithText.items,
+      servicesPageData: {
+        fields: compactFields({
+          pageTitle: servicesPage.fields.pageTitle,
+          pageDescription: servicesPage.fields.pageDescription,
+          services: servicesPage.fields.services.map(mapService),
+          backgroundImage: mapAsset(servicesPage.fields.backgroundImage),
+          footerCta: {
+            fields: compactFields({
+              copy: servicesPage.fields.footerCta.fields.copy,
+              ctaText: servicesPage.fields.footerCta.fields.ctaText,
+              ctaLink: servicesPage.fields.footerCta.fields.ctaLink,
+              backgroundImage: mapAsset(servicesPage.fields.footerCta.fields.backgroundImage),
+            }),
+          },
+        }),
+      },
+      themeConfig: {
+        fields: {
+          backgroundTexture: mapAsset(themeConfig.items[0].fields.backgroundTexture),
+        },
+      },
+      iconsWithText: iconsWithText.items.map(icon => ({
+        sys: { id: icon.sys.id },
+        fields: compactFields({
+          icon: mapAsset(icon.fields.icon),
+          iconText: icon.fields.iconText,
+        }),
+      })),
     },
     revalidate: 300,
   }
