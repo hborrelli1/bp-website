@@ -12,7 +12,10 @@ const client = createClient({
 });
 
 export const getStaticPaths = async () => {
-  const res = await client.getEntries({content_type: 'blog'})
+  const res = await client.getEntries({
+    content_type: 'blog',
+    select: 'sys.id,fields.slug',
+  });
 
   const paths = res.items.map(item => {
     return {
@@ -30,6 +33,7 @@ export const getStaticProps = async ({ params }) => {
   const {items} = await client.getEntries({ 
     content_type: 'blog',
     'fields.slug': params.slug,
+    select: 'sys.id,fields.blogTitle,fields.blogContent,fields.featuredPosts,fields.thumbnailImage,fields.date',
   });
 
   const stringifiedItems = safeJsonStringify(items);

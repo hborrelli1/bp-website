@@ -43,9 +43,19 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const servicesData = await client.getEntries({ content_type: 'servicesPage', include: 2 });
-  const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
-  const iconsWithText = await client.getEntries({ content_type: 'iconWithText' });
+  const servicesData = await client.getEntries({
+    content_type: 'servicesPage',
+    include: 2,
+    select: 'sys.id,fields.services,fields.pageTitle,fields.pageDescription,fields.backgroundImage,fields.footerCta',
+  });
+  const themeConfig = await client.getEntries({
+    content_type: 'themeConfig',
+    select: 'sys.id,fields.backgroundTexture',
+  });
+  const iconsWithText = await client.getEntries({
+    content_type: 'iconWithText',
+    select: 'sys.id,fields.icon,fields.iconText',
+  });
   const servicesPage = servicesData.items[0];
 
   return {

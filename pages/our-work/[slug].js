@@ -22,7 +22,10 @@ const client = createClient({
 });
 
 export const getStaticPaths = async () => {
-  const res = await client.getEntries({content_type: 'projects'})
+  const res = await client.getEntries({
+    content_type: 'projects',
+    select: 'sys.id,fields.slug',
+  });
 
   const paths = res.items.map(item => {
     return {
@@ -40,6 +43,7 @@ export const getStaticProps = async ({ params }) => {
   const {items} = await client.getEntries({ 
     content_type: 'projects',
     'fields.slug': params.slug,
+    select: 'sys.id,fields.client,fields.cost,fields.footerCta,fields.galleryImages,fields.location,fields.projectTitle,fields.size,fields.summary,fields.specSheet,fields.featuredProjects',
   });
 
   if (!items.length) {

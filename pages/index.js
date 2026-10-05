@@ -20,8 +20,14 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const homePageData = await client.getEntries({ content_type: 'homePage' });
-  const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
+  const homePageData = await client.getEntries({
+    content_type: 'homePage',
+    select: 'sys.id,fields.heroImage,fields.heroImageTitle,fields.heroImageText,fields.ourServicesTitle,fields.ourServicesDescription,fields.ourServicesLinks,fields.featuredProjects,fields.whyBpTitle,fields.whyBpDescription,fields.whyBpImage,fields.whyBpLink,fields.whyBpLinkTitle,fields.featuredPostSubtitle,fields.featuredPostTitle,fields.featuredPosts',
+  });
+  const themeConfig = await client.getEntries({
+    content_type: 'themeConfig',
+    select: 'sys.id,fields.backgroundTexture',
+  });
   const fields = homePageData.items[0].fields;
   const homeData = {
     fields: compactFields({

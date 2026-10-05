@@ -69,8 +69,15 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const themeConfigData = await client.getEntries({ content_type: 'themeConfig' });
-  const aboutDataRes = await client.getEntries({ content_type: 'about', include: 2 });
+  const themeConfigData = await client.getEntries({
+    content_type: 'themeConfig',
+    select: 'sys.id,fields.backgroundTexture',
+  });
+  const aboutDataRes = await client.getEntries({
+    content_type: 'about',
+    include: 2,
+    select: 'sys.id,fields.aboutSubTitle,fields.descriptionPhoto,fields.footerCta,fields.headerPhoto,fields.mainDescription,fields.mainTitle,fields.ourTeam,fields.pageTitle,fields.qualityTitle1,fields.qualityTitle2,fields.qualityTitle3,fields.qualityTitle4,fields.qualityDescription1,fields.qualityDescription2,fields.qualityDescription3,fields.qualityDescription4,fields.shortDescription,fields.testimonials',
+  });
   const aboutData = mapAboutData(aboutDataRes.items[0]);
   const themeBackgroundUrl = themeConfigData.items[0].fields.backgroundTexture.fields.file.url;
 

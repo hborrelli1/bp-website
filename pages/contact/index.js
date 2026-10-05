@@ -13,8 +13,14 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const themeConfigData = await client.getEntries({ content_type: 'themeConfig' });
-  const res = await client.getEntries({ content_type: 'contactPage' });
+  const themeConfigData = await client.getEntries({
+    content_type: 'themeConfig',
+    select: 'sys.id,fields.address,fields.googleMapsLink,fields.telephoneNumber,fields.linkedInUrl',
+  });
+  const res = await client.getEntries({
+    content_type: 'contactPage',
+    select: 'sys.id,fields.featuredPosts,fields.pageDescription,fields.pageTitle,fields.backgroundImage',
+  });
 
   const stringifiedItems = safeJsonStringify(res);
   const data = JSON.parse(stringifiedItems);

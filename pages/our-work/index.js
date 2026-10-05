@@ -22,7 +22,7 @@ export const getStaticProps = async () => {
         // all requests start with "query: ", so we'll stringify that for convenience
         query: `
         {
-          ourWorkCollection(limit:10) {
+          ourWorkCollection(limit:1) {
             items {
               pageTitle
               backgroundImage {

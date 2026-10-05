@@ -53,7 +53,7 @@ export const getStaticProps = async () => {
                   url
                 }
               }
-              newsPostsCollection(where:{sys:{id_exists:true}}) {
+              newsPostsCollection(where:{sys:{id_exists:true}}, limit:100) {
                 items {
                   shortSummary
                   thumbnailImage {

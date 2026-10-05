@@ -12,8 +12,14 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const res = await client.getEntries({ content_type: 'careers' });
-  const res2 = await client.getEntries({ content_type: 'themeConfig' });
+  const res = await client.getEntries({
+    content_type: 'careers',
+    select: 'sys.id,fields.coreValues,fields.headerBackgroundImage,fields.mobileBackgroundImage,fields.pageDescription,fields.pageTitle,fields.textAndImageSections',
+  });
+  const res2 = await client.getEntries({
+    content_type: 'themeConfig',
+    select: 'sys.id,fields.backgroundTexture',
+  });
 
   return {
     props: {
