@@ -58,6 +58,7 @@ export const getStaticProps = async () => {
     props: {
       pageData: data.newsPageCollection.items,
     },
+    revalidate: 300,
   }
 }
 
