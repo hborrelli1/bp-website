@@ -20,20 +20,9 @@ const client = createClient({
 });
 
 export const getStaticPaths = async () => {
-  const res = await client.getEntries({
-    content_type: 'people',
-    select: 'sys.id,fields.slug',
-  });
-
-  const paths = res.items.map(item => {
-    return {
-      params: { slug: item.fields.slug }
-    }
-  })
-
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking',
   }
 }
 
@@ -46,10 +35,8 @@ export const getStaticProps = async ({ params }) => {
 
   if (!items.length) {
     return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      }
+      notFound: true,
+      revalidate: 300,
     }
   }
 
