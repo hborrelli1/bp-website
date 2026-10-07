@@ -18,6 +18,18 @@ function hasValidSecret(providedSecret, expectedSecret) {
   return provided.length === expected.length && timingSafeEqual(provided, expected);
 }
 
+function getPayload(body) {
+  if (typeof body !== 'string') {
+    return body;
+  }
+
+  try {
+    return JSON.parse(body);
+  } catch {
+    throw new Error('Webhook request body must be valid JSON');
+  }
+}
+
 function getSlugs(entry) {
   const slugField = entry?.fields?.slug;
   const candidates = typeof slugField === 'string'
@@ -67,14 +79,21 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'Unsupported or missing Contentful event topic' });
   }
 
-  const contentType = req.body?.sys?.contentType?.sys?.id;
+  let payload;
+  try {
+    payload = getPayload(req.body);
+  } catch (error) {
+    return res.status(400).json({ message: error.message });
+  }
+
+  const contentType = payload?.sys?.contentType?.sys?.id;
   if (contentType !== 'blog') {
     return res.status(400).json({ message: 'Unsupported Contentful content type' });
   }
 
   let slugs;
   try {
-    slugs = getSlugs(req.body);
+    slugs = getSlugs(payload);
   } catch (error) {
     return res.status(400).json({ message: error.message });
   }
