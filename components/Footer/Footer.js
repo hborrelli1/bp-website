@@ -57,16 +57,16 @@ const Footer = () => {
         </div>
         <div className={styles['footer-section']}>
           <nav>
-            <Link href="/services">Services</Link>
-            <Link href="/our-work">Our Work</Link>
-            <Link href="/about">About</Link>
-            <Link href="/careers">Careers</Link>
-            <Link href="/contact">Contact</Link>
+            <Link href="/services" prefetch={false}>Services</Link>
+            <Link href="/our-work" prefetch={false}>Our Work</Link>
+            <Link href="/about" prefetch={false}>About</Link>
+            <Link href="/careers" prefetch={false}>Careers</Link>
+            <Link href="/contact" prefetch={false}>Contact</Link>
           </nav>
           <div className={styles['form-box']}>
             <div className={styles['sub-nav']}>
-              <Link href="/news">News</Link>
-              <Link href="/privacy-policy">Privacy Policy</Link>
+              <Link href="/news" prefetch={false}>News</Link>
+              <Link href="/privacy-policy" prefetch={false}>Privacy Policy</Link>
             </div>
           </div>
         </div>

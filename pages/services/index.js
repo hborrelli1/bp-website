@@ -1,4 +1,3 @@
-import {createClient} from 'contentful';
 import { useState, useEffect } from 'react';
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
@@ -6,29 +5,124 @@ import FooterCta from '../../components/FooterCta/FooterCta';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Image from "next/image";
 import { useRouter } from 'next/router';
-import safeJsonStringify from 'safe-json-stringify';
 import _ from 'lodash';
+import { compactFields, fetchContentfulGraphQL, mapGraphQLAsset } from '../../lib/contentfulPageData';
+
+const mapProjectCard = (project) => ({
+  fields: compactFields({
+    projectTitle: project.projectTitle,
+    slug: project.slug,
+    shortSummary: project.shortSummary,
+    thumbnailImage: mapGraphQLAsset(project.thumbnailImage),
+  }),
+});
+
+const mapService = (service) => ({
+  sys: { id: service.sys.id },
+  fields: compactFields({
+    service: service.service,
+    servicesUrl: service.servicesUrl,
+    serviceDescriptionHeading: service.serviceDescriptionHeading,
+    serviceDescription: service.serviceDescription?.json,
+    mainImage: mapGraphQLAsset(service.mainImage),
+    features: service.featuresCollection.items.map(feature => ({ sys: { id: feature.sys.id } })),
+    serviceDescriptionHeading2: service.serviceDescriptionHeading2,
+    serviceDescription2: service.serviceDescription2?.json,
+    mainImage2: mapGraphQLAsset(service.mainImage2),
+    features2: service.features2Collection.items.map(feature => ({ sys: { id: feature.sys.id } })),
+    featuredProjectsSubtitle: service.featuredProjectsSubtitle,
+    featuredProjectsSectionTitle: service.featuredProjectsSectionTitle,
+    featuredProjects: service.featuredProjectsCollection.items.map(mapProjectCard),
+  }),
+});
 
 export const getStaticProps = async () => {
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  });
-
-  const servicesData = await client.getEntries({ content_type: 'servicesPage', include: 2 });
-  const themeConfig = await client.getEntries({ content_type: 'themeConfig' });
-  const iconsWithText = await client.getEntries({ content_type: 'iconWithText' });
-
-  const stringifiedItems = safeJsonStringify(servicesData);
-  const servicesDataItems = JSON.parse(stringifiedItems);
+  const data = await fetchContentfulGraphQL(`
+    query ServicesAndTheme {
+      servicesPageCollection(limit: 1) {
+        items {
+          pageTitle
+          pageDescription
+          backgroundImage { url title width height }
+          footerCta {
+            copy
+            ctaText
+            ctaLink
+            backgroundImage { url title width height }
+          }
+          servicesCollection(limit: 10) {
+            items {
+              sys { id }
+              service
+              servicesUrl
+              serviceDescriptionHeading
+              serviceDescription { json }
+              mainImage { url title width height }
+              featuresCollection(limit: 10) { items { sys { id } } }
+              serviceDescriptionHeading2
+              serviceDescription2 { json }
+              mainImage2 { url title width height }
+              features2Collection(limit: 10) { items { sys { id } } }
+              featuredProjectsSubtitle
+              featuredProjectsSectionTitle
+              featuredProjectsCollection(limit: 10) {
+                items {
+                  projectTitle
+                  slug
+                  shortSummary
+                  thumbnailImage { url title width height }
+                }
+              }
+            }
+          }
+        }
+      }
+      themeConfigCollection(limit: 1) {
+        items { backgroundTexture { url title width height } }
+      }
+      iconWithTextCollection(limit: 100) {
+        items {
+          sys { id }
+          icon { url title width height }
+          iconText
+        }
+      }
+    }
+  `);
+  const servicesPage = data.servicesPageCollection.items[0];
 
   return {
     props: {
-      servicesPageData: servicesDataItems.items[0],
-      themeConfig: themeConfig.items[0],
-      iconsWithText: iconsWithText.items,
+      servicesPageData: {
+        fields: compactFields({
+          pageTitle: servicesPage.pageTitle,
+          pageDescription: servicesPage.pageDescription,
+          services: servicesPage.servicesCollection.items.map(mapService),
+          backgroundImage: mapGraphQLAsset(servicesPage.backgroundImage),
+          footerCta: {
+            fields: compactFields({
+              copy: servicesPage.footerCta.copy,
+              ctaText: servicesPage.footerCta.ctaText,
+              ctaLink: servicesPage.footerCta.ctaLink,
+              backgroundImage: mapGraphQLAsset(servicesPage.footerCta.backgroundImage),
+            }),
+          },
+        }),
+      },
+      themeConfig: {
+        fields: {
+          backgroundTexture: mapGraphQLAsset(data.themeConfigCollection.items[0].backgroundTexture),
+        },
+      },
+      iconsWithText: data.iconWithTextCollection.items.map(icon => ({
+        sys: { id: icon.sys.id },
+        fields: compactFields({
+          icon: mapGraphQLAsset(icon.icon),
+          iconText: icon.iconText,
+        }),
+      })),
     },
-    revalidate: 1,
+    revalidate: 300,
   }
 }
 

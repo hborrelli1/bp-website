@@ -4,8 +4,17 @@ import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import CarouselComponent from '../../components/Carousel/CarouselComponent';
-import safeJsonStringify from 'safe-json-stringify';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
+import { compactFields, mapAsset } from '../../lib/contentfulPageData';
+
+const mapProjectCard = (project) => ({
+  fields: compactFields({
+    projectTitle: project.fields.projectTitle,
+    slug: project.fields.slug,
+    shortSummary: project.fields.shortSummary,
+    thumbnailImage: mapAsset(project.fields.thumbnailImage),
+  }),
+});
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -13,17 +22,9 @@ const client = createClient({
 });
 
 export const getStaticPaths = async () => {
-  const res = await client.getEntries({content_type: 'projects'})
-
-  const paths = res.items.map(item => {
-    return {
-      params: { slug: item.fields.slug }
-    }
-  })
-
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking',
   }
 }
 
@@ -31,23 +32,44 @@ export const getStaticProps = async ({ params }) => {
   const {items} = await client.getEntries({ 
     content_type: 'projects',
     'fields.slug': params.slug,
+    select: 'sys.id,fields.client,fields.cost,fields.footerCta,fields.galleryImages,fields.location,fields.projectTitle,fields.size,fields.summary,fields.specSheet,fields.featuredProjects',
   });
-
-  const stringifiedItems = safeJsonStringify(items);
-  const data = JSON.parse(stringifiedItems);
 
   if (!items.length) {
     return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      }
+      notFound: true,
+      revalidate: 300,
     }
   }
 
+  const project = items[0];
   return {
-    props: { project: data[0]},
-    revalidate: 1,
+    props: {
+      project: {
+        fields: compactFields({
+          client: project.fields.client,
+          cost: project.fields.cost,
+          footerCta: project.fields.footerCta && {
+            fields: compactFields({
+              copy: project.fields.footerCta.fields.copy,
+              ctaText: project.fields.footerCta.fields.ctaText,
+              ctaLink: project.fields.footerCta.fields.ctaLink,
+              backgroundImage: mapAsset(project.fields.footerCta.fields.backgroundImage),
+            }),
+          },
+          galleryImages: project.fields.galleryImages?.map(mapAsset),
+          industry: project.fields.industry,
+          location: project.fields.location,
+          projectTitle: project.fields.projectTitle,
+          size: project.fields.size,
+          slug: project.fields.slug,
+          summary: project.fields.summary,
+          specSheet: mapAsset(project.fields.specSheet),
+          featuredProjects: project.fields.featuredProjects?.map(mapProjectCard),
+        }),
+      },
+    },
+    revalidate: 300,
   }
 }
 

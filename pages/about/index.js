@@ -1,37 +1,117 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from "next/image";
-import {createClient} from 'contentful';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import FooterCta from '../../components/FooterCta/FooterCta';
 import styles from './about.module.scss'
 import CarouselComponent from '../../components/Carousel/CarouselComponent';
-import safeJsonStringify from 'safe-json-stringify';
+import { compactFields, fetchContentfulGraphQL, mapGraphQLAsset } from '../../lib/contentfulPageData';
+
+const mapAboutData = (entry) => {
+  return {
+    fields: compactFields({
+      aboutSubTitle: entry.aboutSubTitle,
+      descriptionPhoto: mapGraphQLAsset(entry.descriptionPhoto),
+      footerCta: {
+        fields: {
+          copy: entry.footerCta.copy,
+          ctaText: entry.footerCta.ctaText,
+          backgroundImage: mapGraphQLAsset(entry.footerCta.backgroundImage),
+        },
+      },
+      headerPhoto: mapGraphQLAsset(entry.headerPhoto),
+      mainDescription: entry.mainDescription.json,
+      mainTitle: entry.mainTitle,
+      ourTeam: entry.ourTeamCollection.items.map(person => ({
+        sys: { id: person.sys.id },
+        fields: {
+          fullBioPage: person.fullBioPage,
+          slug: person.slug,
+          photo: mapGraphQLAsset(person.photo),
+          name: person.name,
+          jobTitle: person.jobTitle,
+        },
+      })),
+      pageTitle: entry.pageTitle,
+      qualityTitle1: entry.qualityTitle1,
+      qualityTitle2: entry.qualityTitle2,
+      qualityTitle3: entry.qualityTitle3,
+      qualityTitle4: entry.qualityTitle4,
+      qualityDescription1: entry.qualityDescription1.json,
+      qualityDescription2: entry.qualityDescription2.json,
+      qualityDescription3: entry.qualityDescription3.json,
+      qualityDescription4: entry.qualityDescription4.json,
+      shortDescription: entry.shortDescription.json,
+      testimonials: entry.testimonialsCollection.items.map(testimonial => ({
+        sys: { id: testimonial.sys.id },
+        fields: {
+          testimonial: testimonial.testimonial.json,
+          name: testimonial.name,
+          title: testimonial.title,
+          projectReference: testimonial.projectReference && {
+            fields: { slug: testimonial.projectReference.slug },
+          },
+        },
+      })),
+    }),
+  };
+};
 
 // Runs at build time
 // Used to fetch data from Blog section.
 export const getStaticProps = async () => {
-
-  const client = createClient({
-    space: process.env.CONTENTFUL_SPACE_ID,
-    accessToken: process.env.CONTENTFUL_ACCESS_KEY,
-  });
-
-  const themeConfigData = await client.getEntries({ content_type: 'themeConfig' });
-  const aboutDataRes = await client.getEntries({ content_type: 'about', include: 2 });
-  const stringifiedAboutData = safeJsonStringify(aboutDataRes);
-  const aboutData = JSON.parse(stringifiedAboutData);
+  const data = await fetchContentfulGraphQL(`
+    query AboutAndTheme {
+      aboutCollection(limit: 1) {
+        items {
+          aboutSubTitle
+          descriptionPhoto { url title width height }
+          footerCta { copy ctaText backgroundImage { url title width height } }
+          headerPhoto { url title width height }
+          mainDescription { json }
+          mainTitle
+          ourTeamCollection(limit: 30) {
+            items { sys { id } fullBioPage slug photo { url title width height } name jobTitle }
+          }
+          pageTitle
+          qualityTitle1
+          qualityTitle2
+          qualityTitle3
+          qualityTitle4
+          qualityDescription1 { json }
+          qualityDescription2 { json }
+          qualityDescription3 { json }
+          qualityDescription4 { json }
+          shortDescription { json }
+          testimonialsCollection(limit: 20) {
+            items {
+              sys { id }
+              testimonial { json }
+              name
+              title
+              projectReference { __typename ... on Projects { slug } }
+            }
+          }
+        }
+      }
+      themeConfigCollection(limit: 1) {
+        items { backgroundTexture { url } }
+      }
+    }
+  `);
+  const aboutData = mapAboutData(data.aboutCollection.items[0]);
+  const themeBackgroundUrl = data.themeConfigCollection.items[0].backgroundTexture.url.replace(/^https?:/, '');
 
   return {
     props: {
-      themeConfig: themeConfigData.items,
-      aboutData: aboutData.items[0],
+      themeBackgroundUrl,
+      aboutData,
     },
-    revalidate: 1,
+    revalidate: 300,
   }
 }
 
-const About = ({themeConfig, aboutData}) => {
+const About = ({themeBackgroundUrl, aboutData}) => {
   const {
     aboutSubTitle,
     descriptionPhoto,
@@ -69,7 +149,7 @@ const About = ({themeConfig, aboutData}) => {
             </div>
           </div>
         </header>
-        <section className={styles['main-content']} style={{ backgroundImage: `url(https:${themeConfig[0].fields.backgroundTexture.fields.file.url})` }}>
+        <section className={styles['main-content']} style={{ backgroundImage: `url(https:${themeBackgroundUrl})` }}>
           <div className={styles['margin-container']}>
             <div className={styles['content-col']}>
               <h2>{mainTitle}</h2>

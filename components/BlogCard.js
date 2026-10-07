@@ -14,7 +14,7 @@ const BlogCard = ({blog, type = "news"}) => {
   const postTitle = type === "news" ? blogTitle : projectTitle;
   
   return (
-    <Link href={`/${type}/${slug}`} className='blog-card'>
+    <Link href={`/${type}/${slug}`} className='blog-card' prefetch={false}>
       <div className="img-wrap">
         <div className="img-hover-circle">
           <div className="icon">

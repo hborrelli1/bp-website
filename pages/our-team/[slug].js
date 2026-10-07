@@ -2,8 +2,17 @@ import {createClient} from 'contentful';
 import Image from "next/image";
 import Link from 'next/link';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import safeJsonStringify from 'safe-json-stringify';
 import ThreeColumnFeaturedPosts from '../../components/ThreeColumnFeaturedPosts';
+import { compactFields, mapAsset } from '../../lib/contentfulPageData';
+
+const mapProjectCard = (project) => ({
+  fields: compactFields({
+    projectTitle: project.fields.projectTitle,
+    slug: project.fields.slug,
+    shortSummary: project.fields.shortSummary,
+    thumbnailImage: mapAsset(project.fields.thumbnailImage),
+  }),
+});
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -11,17 +20,9 @@ const client = createClient({
 });
 
 export const getStaticPaths = async () => {
-  const res = await client.getEntries({content_type: 'people'})
-
-  const paths = res.items.map(item => {
-    return {
-      params: { slug: item.fields.slug }
-    }
-  })
-
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking',
   }
 }
 
@@ -29,23 +30,39 @@ export const getStaticProps = async ({ params }) => {
   const {items} = await client.getEntries({ 
     content_type: 'people',
     'fields.slug': params.slug,
+    select: 'sys.id,fields.fullBioPage,fields.certifications,fields.email,fields.jobTitle,fields.leadershipBio,fields.linkedInUrl,fields.name,fields.photo,fields.quote1,fields.quoteImage1,fields.quote2,fields.quoteImage2,fields.featuredProjects,fields.involvement',
   });
-
-  const stringifiedItems = safeJsonStringify(items)
-  const data = JSON.parse(stringifiedItems)
 
   if (!items.length) {
     return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      }
+      notFound: true,
+      revalidate: 300,
     }
   }
 
+  const person = items[0];
   return {
-    props: { person: data[0]},
-    revalidate: 1,
+    props: {
+      person: {
+        fields: compactFields({
+          fullBioPage: person.fields.fullBioPage,
+          certifications: person.fields.certifications,
+          email: person.fields.email,
+          jobTitle: person.fields.jobTitle,
+          leadershipBio: person.fields.leadershipBio,
+          linkedInUrl: person.fields.linkedInUrl,
+          name: person.fields.name,
+          photo: mapAsset(person.fields.photo),
+          quote1: person.fields.quote1,
+          quoteImage1: mapAsset(person.fields.quoteImage1),
+          quote2: person.fields.quote2,
+          quoteImage2: mapAsset(person.fields.quoteImage2),
+          featuredProjects: person.fields.featuredProjects?.map(mapProjectCard),
+          involvement: person.fields.involvement,
+        }),
+      },
+    },
+    revalidate: 300,
   }
 }
 

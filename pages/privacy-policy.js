@@ -8,13 +8,16 @@ export const getStaticProps = async () => {
     accessToken: process.env.CONTENTFUL_ACCESS_KEY,
   });
 
-  const res = await client.getEntries({ content_type: 'privacyPolicy' });
+  const res = await client.getEntries({
+    content_type: 'privacyPolicy',
+    select: 'sys.id,sys.updatedAt,fields.content,fields.pageTitle',
+  });
 
   return {
     props: {
       policyData: res.items[0],
     },
-    revalidate: 1,
+    revalidate: 300,
   }
 }
 

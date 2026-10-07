@@ -12,17 +12,9 @@ const client = createClient({
 });
 
 export const getStaticPaths = async () => {
-  const res = await client.getEntries({content_type: 'blog'})
-
-  const paths = res.items.map(item => {
-    return {
-      params: { slug: item.fields.slug }
-    }
-  })
-
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: 'blocking',
   }
 }
 
@@ -30,6 +22,7 @@ export const getStaticProps = async ({ params }) => {
   const {items} = await client.getEntries({ 
     content_type: 'blog',
     'fields.slug': params.slug,
+    select: 'sys.id,fields.blogTitle,fields.blogContent,fields.featuredPosts,fields.thumbnailImage,fields.date',
   });
 
   const stringifiedItems = safeJsonStringify(items);
@@ -37,16 +30,14 @@ export const getStaticProps = async ({ params }) => {
 
   if (!items.length) {
     return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      }
+      notFound: true,
+      revalidate: 300,
     }
   }
 
   return {
     props: { blog: data[0]},
-    revalidate: 1,
+    revalidate: 300,
   }
 }
 
