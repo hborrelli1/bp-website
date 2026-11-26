@@ -1,6 +1,6 @@
 import TwoColumnHeaderGQL from '../../components/TwoColumnHeaderGQL/TwoColumnHeaderGQL';
 import FooterCtaGQL from '../../components/FooterCtaGQL/FooterCtaGQL';
-import Image from "next/image";
+import Image from "../../components/ContentfulImage";
 import Link from 'next/link';
 import BlogCardGQL from '../../components/BlogCardGQL';
 import { useState } from 'react';

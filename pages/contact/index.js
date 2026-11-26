@@ -1,7 +1,7 @@
 import ThreeColumnFeaturedPosts from "../../components/ThreeColumnFeaturedPosts";
 import TwoColumnHeader from '../../components/TwoColumnHeader/TwoColumnHeader';
 import ContactForm from '../../components/ContactForm/ContactForm';
-import Image from "next/image";
+import Image from "../../components/ContentfulImage";
 import Link from 'next/link';
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { compactFields, fetchContentfulGraphQL, mapGraphQLAsset } from '../../lib/contentfulPageData';

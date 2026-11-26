@@ -2,7 +2,7 @@ import styles from './TwoColumnHeader.module.scss';
 import _ from 'lodash';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import Link from 'next/link';
-import Image from "next/image";
+import Image from "../ContentfulImage";
 
 const TwoColumnHeader = ({title, copy, image, contactInfo = false}) => {
 
