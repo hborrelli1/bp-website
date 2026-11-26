@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "../ContentfulImage";
 import Link from 'next/link';
 import styles from './Footer.module.scss';
 import { useEffect, useState } from 'react';

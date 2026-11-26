@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from "next/image";
+import Image from "./ContentfulImage";
 import moment from 'moment';
 import {useRouter} from 'next/router'
 
